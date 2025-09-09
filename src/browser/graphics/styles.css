@@ -1,1 +1,22 @@
-@import "tailwindcss"
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+
+    --color-bs-text: #000;
+    --color-bs-text-light: #FFF;
+
+    --color-bs-primary: #277178; /*rgba(39, 113, 120, 1)*/
+    --color-bs-primary-light: #2f858c; /* rgba(47, 133, 140, 1)*/
+
+    --color-bs-header: rgba(39, 113, 120, 0.85);
+
+     --color-bs-surface-0: #000; /* container background */
+    --color-bs-surface-2: rgba(255, 255, 255, 0.03); /*hover higlight*/
+    --color-bs-surface-3: #b1484f; /*buttons*/
+    --color-bs-surface-4: #fafafa; /*soft white*/
+
+    --color-bs-hyperlinks: #ff697e;
+}

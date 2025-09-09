@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { IntermissionLogoImage } from './IntermissionLogoImage';
+import {IntermissionLogoSocialMedia} from './IntermissionLogoSocialMedia';
 import Logo from "/src/assets/text-banner.png";
 import "../styles.css";
 
 
 export const RotatingImage = () => {
-	const [activeIndex, setActiveIndex] = useState<0 | 1>(1);
+	const [activeIndex, setActiveIndex] = useState<0 | 1 | 2>(1);
 	const [isVisible, setIsVisible] = useState(true);
 	const timeoutsRef = useRef<number[]>([]);
 
@@ -27,7 +28,7 @@ export const RotatingImage = () => {
 				// After fade completes, switch the active index and fade in
 				timeoutsRef.current.push(
 					window.setTimeout(() => {
-						setActiveIndex((prev) => (prev === 0 ? 1 : 0));
+						setActiveIndex((prev) => (prev === 0 ? 1 : prev === 1 ? 2 : 0));
 						setIsVisible(true);
 					}, FADE_MS)
 				);
@@ -53,7 +54,7 @@ export const RotatingImage = () => {
 	}, []);
 
 	return (
-		<div className="grid place-items-center">
+		<div className="grid items-center w-8/12 mx-auto">
 			{/* Layer 1: IntermissionLogoImage */}
 			<div
 				className={`col-start-1 row-start-1 transition-opacity duration-1000 ${
@@ -70,6 +71,14 @@ export const RotatingImage = () => {
 				}`}
 			>
 				<img src={Logo} alt="Logo" />
+			</div>
+
+			<div
+				className={`col-start-1 row-start-1 transition-opacity duration-1000 ${
+					activeIndex === 2 ? (isVisible ? 'opacity-100' : 'opacity-0') : 'opacity-0'
+				}`}
+			>
+				<IntermissionLogoSocialMedia />
 			</div>
 		</div>
 	);
