@@ -11,7 +11,7 @@ export default defineConfig({
     tailwindcss(),
     checker({ typescript: { tsconfigPath: './tsconfig.browser.json' } }),
     nodecg({
-      bundleName: 'nodecg-react-tailwind-template',
+      bundleName: 'rpgsu-layouts',
       graphics: './src/browser/graphics/*.tsx',
       dashboard: './src/browser/dashboard/*.tsx',
     }),

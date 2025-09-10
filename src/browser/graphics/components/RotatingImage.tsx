@@ -54,7 +54,7 @@ export const RotatingImage = () => {
 	}, []);
 
 	return (
-		<div className="grid items-center w-8/12 mx-auto">
+		<div className="grid place-items-center w-9/12 mx-auto">
 			{/* Layer 1: IntermissionLogoImage */}
 			<div
 				className={`col-start-1 row-start-1 transition-opacity duration-1000 ${
@@ -66,7 +66,7 @@ export const RotatingImage = () => {
 
 			{/* Layer 2: Static Logo image */}
 			<div
-				className={`col-start-1 row-start-1 transition-opacity duration-1000 ${
+				className={`col-start-1 w-9/12 row-start-1  transition-opacity duration-1000 ${
 					activeIndex === 1 ? (isVisible ? 'opacity-100' : 'opacity-0') : 'opacity-0'
 				}`}
 			>

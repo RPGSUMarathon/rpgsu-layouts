@@ -1,5 +1,5 @@
 {
-  "name": "nodecg-react-tailwind-template",
+  "name": "rpgsu-layouts",
   "version": "1.0.0",
   "scripts": {
     "autofix": "run-s autofix:*",

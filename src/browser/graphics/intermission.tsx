@@ -5,6 +5,7 @@ import bg_image from './img/background.png';
 import useCurrentDayLogo from './hooks/useCurrentDayLogo';
 import { Title } from './components/Title';
 import {IntermissionInfoContainer} from './components/IntermissionInfoContainer';
+import {IntermissionLogoSocialMedia} from './components/IntermissionLogoSocialMedia';
 
 
 const Intermission = () => {
@@ -12,8 +13,8 @@ const Intermission = () => {
 
   return (
     <ThemeProvider>
-      <img src={bg_image} alt="" height={1080} width={1920} className="absolute min-h-svh object-cover inset-0 bottom-auto -z-1 w-full h-auto mask-b-from-50%" />
-      <div className='text-center mt-20'>
+      <img src={bg_image} alt="" height={1080} width={1920} className="absolute min-h-svh object-cover inset-0 bottom-auto -z-1 w-full h-auto  bg-white" />
+      <div className='text-center mt-15'>
         <Title title={currentDayLogo} />
       </div>
       <RotatingImage />

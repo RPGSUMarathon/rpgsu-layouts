@@ -10,9 +10,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
         overflow: "hidden",
         color: "white",
         fontWeight: "bold",
-        fontFamily: 'Noto Serif JP',
+        fontFamily: 'Futura, "Futura PT", "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif',
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
       }}>
         {children}
       </div>

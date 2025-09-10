@@ -22,9 +22,9 @@
     "baseUrl": ".",
     "paths": {
       "speedcontrol/*": ["../../bundles/nodecg-speedcontrol/*"],
-      "@nodecg-react-tailwind-template/*": ["src/*", "src/graphics/*", "src/dashboard/*"],
-      "@nodecg-react-tailwind-template/types": ["src/types"],
-      "@nodecg-react-tailwind-template/types/*": ["src/types/*"]
+      "@rpgsu-layouts/*": ["src/*", "src/graphics/*", "src/dashboard/*"],
+      "@rpgsu-layouts/types": ["src/types"],
+      "@rpgsu-layouts/types/*": ["src/types/*"]
     }
   }
 }

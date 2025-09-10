@@ -1,5 +1,5 @@
 import { get } from './nodecg';
-import { CurrentOBSScene } from '@nodecg-react-tailwind-template/types/generated';
+import { CurrentOBSScene } from '@rpgsu-layouts/types/generated';
 
 const nodecg = get();
 

@@ -1,4 +1,4 @@
-# nodecg-react-tailwind-template
+# rpgsu-layouts
 Template for NodeCG bundles that use React and TypeScript, builds with Vite and implements TailwindCSS for easy costumization of components. An extension of Hoxi's [nodecg-react-template](https://github.com/hoXyy/nodecg-react-template) template.
 
 This bundle is aimed to quickstart the creation of NodeCG bundles for speedrunning events, so it already has some references to [Speedcontrol](https://github.com/speedcontrol/nodecg-speedcontrol).
@@ -15,7 +15,7 @@ Follow the [NodeCG Installation Guide](https://www.nodecg.dev/docs/installing/).
 Install this template in the bundles directory with
 
 ```bash
-nodecg install mbcsalmeida/nodecg-react-tailwind-template
+nodecg install mbcsalmeida/rpgsu-layouts
 ```
 
 or by cloning this repository into the bundles directory.
