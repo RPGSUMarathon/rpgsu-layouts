@@ -9,5 +9,5 @@ type Props = {
 export const DashboardThemeProvider = ({ children }: Props) => {
 
 
-  return <div>{children}</div>;
+  return <div className='flex flex-col gap-5'>{children}</div>;
 };

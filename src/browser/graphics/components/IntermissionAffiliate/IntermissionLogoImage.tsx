@@ -1,4 +1,5 @@
 import "../styles.css";
+import type { ImgHTMLAttributes } from 'react';
 import DQ from "/src/assets/DQ.png";
 import E33 from "/src/assets/e33.png";
 import FF from "/src/assets/FF.png";
@@ -7,10 +8,10 @@ import Pokemon from "/src/assets/Pokemon.png";
 import SMT from "/src/assets/smt.png";
 import Xeno from "/src/assets/xenoblade.png";
 import Yakuza from "/src/assets/yakuza.png";
-import useCurrentDayLogo from '../hooks/useCurrentDayLogo';
+import useCurrentDayLogo from '../../hooks/useCurrentDayLogo';
 
 
-export const IntermissionLogoImage = () => {
+export const IntermissionLogoImage = ({ className, ...imgProps }: ImgHTMLAttributes<HTMLImageElement>) => {
     const currentDayLogo = useCurrentDayLogo();
 
     let currentImage = "";
@@ -31,6 +32,6 @@ export const IntermissionLogoImage = () => {
   }
 
   return (
-    <img src={currentImage} alt="" />
+    <img {...imgProps} className={className} src={currentImage} alt={imgProps.alt ?? ""} />
   );
 };

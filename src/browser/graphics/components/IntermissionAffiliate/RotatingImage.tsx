@@ -5,7 +5,7 @@ import Logo from "/src/assets/text-banner.png";
 import "../styles.css";
 
 
-export const RotatingImage = () => {
+export const RotatingImage = ({ className = '' }: { className?: string }) => {
 	const [activeIndex, setActiveIndex] = useState<0 | 1 | 2>(1);
 	const [isVisible, setIsVisible] = useState(true);
 	const timeoutsRef = useRef<number[]>([]);
@@ -54,7 +54,7 @@ export const RotatingImage = () => {
 	}, []);
 
 	return (
-		<div className="grid place-items-center w-9/12 mx-auto">
+		<div className={`grid place-items-center w-9/12 mx-auto ${className}`}>
 			{/* Layer 1: IntermissionLogoImage */}
 			<div
 				className={`col-start-1 row-start-1 transition-opacity duration-1000 ${

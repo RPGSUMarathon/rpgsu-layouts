@@ -1,10 +1,10 @@
-export const IntermissionInfoContainer = () => {
+export const IntermissionInfoContainer = ({ className = '' }: { className?: string }) => {
     const game = "Kingdom Hearts: Birth By Sleep 350/2 A lot days"
     const runner = "TonyKordatos";
     const category = "Any% JSP CST BST"
 
     return (
-        <div className="border border-5 border-white grid grid-flow-row text-center w-4/12 mx-auto shadow" style={{
+        <div className={`border border-5 border-white grid grid-flow-row text-center w-4/12 mx-auto shadow ${className}`} style={{
             backgroundColor: "var(--color-bs-header)"
         }}>
             <div className="p-8 relative">

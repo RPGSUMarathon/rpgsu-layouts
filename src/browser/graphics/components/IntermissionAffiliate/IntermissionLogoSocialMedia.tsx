@@ -1,11 +1,11 @@
 import Logo from "../img/logo-text.png";
-import Twitch from "../img/svgs/twitch.png";
-import Youtube from "../img/svgs/youtube.png";
-import Bluesky from "../img/svgs/bluesky.png";
+import Twitch from "../img/icons/twitch.png";
+import Youtube from "../img/icons/youtube.png";
+import Bluesky from "../img/icons/bluesky.png";
 
 
-export const IntermissionLogoSocialMedia = () => {
-    return (<div className="text-center flex flex-col mx-auto my-10">
+export const IntermissionLogoSocialMedia = ({ className = '' }: { className?: string }) => {
+    return (<div className={`text-center flex flex-col mx-auto my-10 ${className}`}>
         <img src={Logo} alt="Logo" className="w-10/12 mx-auto" />
         <div>
             <h2 className="drop-shadow-2xl text-4xl">A home for RPG Speedruns.</h2>
