@@ -5,20 +5,126 @@
 
 :root {
 
-    --color-bs-text: #000;
-    --color-bs-text-light: #FFF;
+  --color-bs-text: #000;
+  --color-bs-text-light: #FFF;
 
-    --color-bs-primary: #277178; /*rgba(39, 113, 120, 1)*/
-    --color-bs-primary-light: #2f858c; /* rgba(47, 133, 140, 1)*/
+  --color-bs-primary: #277178;
+  /*rgba(39, 113, 120, 1)*/
+  --color-bs-primary-light: #2f858c;
+  /* rgba(47, 133, 140, 1)*/
 
-    --color-bs-header: rgba(39, 113, 120, 0.85);
+  --color-bs-header: rgba(39, 113, 120, 0.85);
 
-     --color-bs-surface-0: #000; /* container background */
-    --color-bs-surface-2: rgba(255, 255, 255, 0.03); /*hover higlight*/
-    --color-bs-surface-3: #b1484f; /*buttons*/
-    --color-bs-surface-4: #fafafa; /*soft white*/
+  --color-bs-surface-0: #000;
+  /* container background */
+  --color-bs-surface-2: rgba(255, 255, 255, 0.03);
+  /*hover higlight*/
+  --color-bs-surface-3: #b1484f;
+  /*buttons*/
+  --color-bs-surface-4: #fafafa;
+  /*soft white*/
 
-    --color-bs-hyperlinks: #ff697e;
+  --color-bs-hyperlinks: #ff697e;
 
-    background-color: black;
+  background-color: black;
+}
+
+.animated-background {
+  background-size: 400%;
+
+  -webkit-animation: animation 5s ease infinite;
+  -moz-animation: animation 5s ease infinite;
+  animation: animation 5s ease infinite;
+}
+
+@keyframes animation {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+
+.onde {
+  position: absolute;
+  width: 100%;
+  height: 500px;
+  bottom: 0;
+}
+
+
+/* Animation */
+
+.parallaxonde>use {
+  animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+
+.parallaxonde>use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+
+.parallaxonde>use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+
+.parallaxonde>use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+
+.parallaxonde>use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .onde {
+    height: 40px;
+    min-height: 40px;
+  }
+}
+
+.shine-animation {
+    animation: shine-animation 5s ease;
+    -ms-animation: shine-animation 5s ease; 
+    -webkit-animation: shine-animation 5s ease; 
+    -moz-animation: shine-animation 5s ease;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+
+@keyframes shine-animation {
+    0% {
+        -webkit-mask-image: linear-gradient(90deg, #ffffff 25%, rgba(255, 255, 255, 0.526) 50%, #ffffff 75%);
+        mask-image: linear-gradient(90deg, #ffffff 25%, rgba(255, 255, 255, 0.588) 50%, #ffffff 75%);
+        -webkit-mask-size: 800%;
+        mask-size: 800%;
+        -webkit-mask-position: 0;
+        mask-position: 0;
+    }
+
+    50% {
+        -webkit-mask-position: 120%;
+        mask-position: 120%;
+        opacity: 1;
+    }
 }

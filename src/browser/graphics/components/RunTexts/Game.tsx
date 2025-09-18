@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import useCurrentRun from '../../../hooks/useCurrentRun';
+import GameLogo from "../../img/icons/game.png";
 
 
 export const Game = () => {
@@ -7,7 +8,8 @@ export const Game = () => {
   const game = useMemo(() => currentRun?.game, [currentRun]);
 
   return (
-    <div>
+    <div className='inline-flex align-center gap-5'>
+      <img width={30} height={30} src={GameLogo} alt="Game Icon" />
       {game}
     </div>
   );

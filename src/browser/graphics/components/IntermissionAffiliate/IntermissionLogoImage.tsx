@@ -8,7 +8,9 @@ import Pokemon from "/src/assets/Pokemon.png";
 import SMT from "/src/assets/smt.png";
 import Xeno from "/src/assets/xenoblade.png";
 import Yakuza from "/src/assets/yakuza.png";
-import useCurrentDayLogo from '../../hooks/useCurrentDayLogo';
+import Saga from "/src/assets/saga.png";
+import Xenogears from "/src/assets/xenogears.png";
+import useCurrentDayLogo from '../../../hooks/useCurrentDayLogo';
 
 
 export const IntermissionLogoImage = ({ className, ...imgProps }: ImgHTMLAttributes<HTMLImageElement>) => {
@@ -16,14 +18,16 @@ export const IntermissionLogoImage = ({ className, ...imgProps }: ImgHTMLAttribu
 
     let currentImage = "";
     switch(currentDayLogo){
-        case "Day 1": currentImage = Pokemon; break;
-        case "Day 2": currentImage = DQ; break;
-        case "Day 3": currentImage = E33; break;
-        case "Day 4": currentImage = FF; break;
-        case "Day 5": currentImage = KH; break;
-        case "Day 6": currentImage = SMT; break;
-        case "Day 7": currentImage = Xeno; break;
-        case "Day 8": currentImage = Yakuza; break;
+        case "Pokemon": currentImage = Pokemon; break;
+        case "Dragon Quest": currentImage = DQ; break;
+        case "Expedition": currentImage = E33; break;
+        case "Final Fantasy": currentImage = FF; break;
+        case "Kingdom Hearts": currentImage = KH; break;
+        case "Shin Megami Tensei": currentImage = SMT; break;
+        case "Xenoblade": currentImage = Xeno; break;
+        case "Yakuza": currentImage = Yakuza; break;
+        case "Xenogears": currentImage = Xenogears; break;
+        case "Saga": currentImage = Saga; break;
 
     }
 

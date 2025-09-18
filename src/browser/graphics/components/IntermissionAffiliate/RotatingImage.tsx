@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { IntermissionLogoImage } from './IntermissionLogoImage';
 import {IntermissionLogoSocialMedia} from './IntermissionLogoSocialMedia';
+import { CrossOverLogo } from './CrossOverLogo';
 import Logo from "/src/assets/text-banner.png";
-import "../styles.css";
 
 
 export const RotatingImage = ({ className = '' }: { className?: string }) => {
@@ -57,11 +57,11 @@ export const RotatingImage = ({ className = '' }: { className?: string }) => {
 		<div className={`grid place-items-center w-9/12 mx-auto ${className}`}>
 			{/* Layer 1: IntermissionLogoImage */}
 			<div
-				className={`col-start-1 row-start-1 transition-opacity duration-1000 ${
+				className={`col-start-1 row-start-1 w-1/2 transition-opacity duration-1000 ${
 					activeIndex === 0 ? (isVisible ? 'opacity-100' : 'opacity-0') : 'opacity-0'
 				}`}
 			>
-				<IntermissionLogoImage />
+				<CrossOverLogo />
 			</div>
 
 			{/* Layer 2: Static Logo image */}

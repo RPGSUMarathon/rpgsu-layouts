@@ -17,3 +17,11 @@ export function useCategoryTextSize() {
 
   return categoryTextSize ?? '';
 }
+
+//Instead of changing the commentator text, change the number of columns
+
+export function useCommentatorColumnSize() {
+  const [commentatorColumnSize] = useReplicant<number>('commentatorColumnSize');
+
+  return commentatorColumnSize ?? -1;
+}

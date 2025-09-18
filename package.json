@@ -75,13 +75,14 @@
         "file": "intermission-logo-switcher.html",
         "name": "intermission-logo-switcher",
         "title": "Switch Intermission Logo",
-        "width": 2
+        "width": 3
       },
       {
         "file": "layout-text-size-editor.html",
         "name": "layout-text-size-editor",
         "title": "Override sizes",
-        "width": 5
+        "width": 5,
+        "workspace": "Scene Editing"
       },
       {
         "file": "camera-and-comms.html",
@@ -103,6 +104,11 @@
       },
       {
         "file": "16x9-1P.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "restream.html",
         "width": 1920,
         "height": 1080
       }

@@ -12,7 +12,7 @@ type Props = {
 export const RunnerBox = ({pronouns, name, runner, className, textSize} : Props) => {
     return (
         <div className={`w-full h-[50px] border-b-3 border-white bg-[#278178] relative flex flex-row items-center ${className ?? ''}`}>
-            {pronouns && <div className="absolute bottom-0 right-0 bg-[#000000]/70 text-white text-xs px-2 py-0.5">
+            {pronouns && <div className="absolute capitalize bottom-0 right-0 bg-[#000000]/70 text-white text-xs px-2 py-0.5">
                 {pronouns}
             </div>}
             <img src={runner? Runner : Mic} className="ml-3 h-5/6" alt="Twitch Logo" />
