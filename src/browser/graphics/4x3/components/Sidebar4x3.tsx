@@ -5,6 +5,7 @@ import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 import { useCommentatorColumnSize } from '../../../hooks/useLayoutTextSize';
+import Waves from "/src/assets/waves.png";
 
 
 export const Sidebar4x3 = () => {
@@ -20,7 +21,9 @@ export const Sidebar4x3 = () => {
     return (
         <div className={`w-[600px] h-[980px] border-r-3 border-white"`}>
             {cameraOn && <div id="CameraBox" className="w-full h-[337.5px] border-b-3 border-white" />}
-            <div className='bg-gradient-to-t from-teal-800 to-teal-600 h-full'>
+            <div className='bg-[#278178] h-full' style={{
+                    backgroundImage: `url(${Waves})`
+                }}>
                 <RunnerBox textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
                 {commentators.length > 0 ? <div className={`grid ${commentatorsColumns > 0 ? `grid-cols-${commentatorsColumns}` : "grid-cols-2"} `}>
                     {commentators.map((runner) =>

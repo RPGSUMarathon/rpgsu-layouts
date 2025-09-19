@@ -12,9 +12,9 @@ const CameraDashboard: React.FC = () => {
     const [editName, setEditName] = useState<string>('');
     const [editPronouns, setEditPronouns] = useState<string>('');
 
-    const [cameraOn, setCameraOn] = useReplicant<boolean>('cameraOn', {defaultValue: true});
-    const [commentators, setCommentators] = useReplicant<Commentator[]>('commentators', {defaultValue: []});
-    
+    const [cameraOn, setCameraOn] = useReplicant<boolean>('cameraOn', { defaultValue: true });
+    const [commentators, setCommentators] = useReplicant<Commentator[]>('commentators', { defaultValue: [] });
+
 
     const handleAddItem = (): void => {
         if (nameInput.trim() === '') return;
@@ -62,7 +62,7 @@ const CameraDashboard: React.FC = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto p-6 bg-gray-50 rounded-xl shadow-md mt-10">
+        <DashboardThemeProvider>
             {/* Camera Toggle */}
             <div className="inline-flex items-center justify-between mb-6">
                 <span className="text-lg font-semibold text-gray-700">Camera Settings</span>
@@ -75,99 +75,102 @@ const CameraDashboard: React.FC = () => {
 
                 </button>
             </div>
+            <div className="max-w-md mx-auto p-6 bg-gray-50 rounded-xl shadow-md mt-10">
 
-            {/* Name Input */}
-            <div className="flex items-center mb-6">
-                <input
-                    type="text"
-                    value={nameInput}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNameInput(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Enter name"
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <button
-                    onClick={handleAddItem}
-                    disabled={nameInput.trim() === ''}
-                    className={`p-2 rounded-r-md ${nameInput.trim() === ''
+
+                {/* Name Input */}
+                <div className="flex items-center mb-6">
+                    <input
+                        type="text"
+                        value={nameInput}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNameInput(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        placeholder="Enter name"
+                        className="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                    <button
+                        onClick={handleAddItem}
+                        disabled={nameInput.trim() === ''}
+                        className={`p-2 rounded-r-md ${nameInput.trim() === ''
                             ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                             : 'bg-blue-500 text-white hover:bg-blue-600'
-                        }`}
-                >
-                    <FiCheck size={20} />
-                </button>
-            </div>
+                            }`}
+                    >
+                        <FiCheck size={20} />
+                    </button>
+                </div>
 
-            {/* Items List */}
-            <div className="space-y-4">
-                {commentators.map((item) => (
-                    <div key={item.id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-                        {editingItem === item.id ? (
-                            // Edit Mode
-                            <div className="space-y-3">
-                                <div className="flex space-x-2">
+                {/* Items List */}
+                <div className="space-y-4">
+                    {commentators.map((item) => (
+                        <div key={item.id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                            {editingItem === item.id ? (
+                                // Edit Mode
+                                <div className="space-y-3">
+                                    <div className="flex space-x-2">
+                                        <input
+                                            type="text"
+                                            value={editName}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditName(e.target.value)}
+                                            className="flex-1 px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                        />
+                                        <button
+                                            onClick={handleSaveEdit}
+                                            className="p-1 text-green-600 hover:text-green-800"
+                                        >
+                                            <FiCheck size={18} />
+                                        </button>
+                                        <button
+                                            onClick={handleCancelEdit}
+                                            className="p-1 text-red-600 hover:text-red-800"
+                                        >
+                                            <FiX size={18} />
+                                        </button>
+                                    </div>
                                     <input
                                         type="text"
-                                        value={editName}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditName(e.target.value)}
-                                        className="flex-1 px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                        value={editPronouns}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditPronouns(e.target.value)}
+                                        placeholder="Add pronouns"
+                                        className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                                     />
-                                    <button
-                                        onClick={handleSaveEdit}
-                                        className="p-1 text-green-600 hover:text-green-800"
-                                    >
-                                        <FiCheck size={18} />
-                                    </button>
-                                    <button
-                                        onClick={handleCancelEdit}
-                                        className="p-1 text-red-600 hover:text-red-800"
-                                    >
-                                        <FiX size={18} />
-                                    </button>
                                 </div>
-                                <input
-                                    type="text"
-                                    value={editPronouns}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditPronouns(e.target.value)}
-                                    placeholder="Add pronouns"
-                                    className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                                />
-                            </div>
-                        ) : (
-                            // Display Mode
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <span className="font-medium">{item.name}</span>
-                                    {item.pronouns && (
-                                        <span className="ml-2 text-sm text-gray-500">({item.pronouns})</span>
-                                    )}
+                            ) : (
+                                // Display Mode
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <span className="font-medium">{item.name}</span>
+                                        {item.pronouns && (
+                                            <span className="ml-2 text-sm text-gray-500">({item.pronouns})</span>
+                                        )}
+                                    </div>
+                                    <div className="flex space-x-2">
+                                        <button
+                                            onClick={() => handleStartEdit(item)}
+                                            className="p-1 text-blue-600 hover:text-blue-800"
+                                        >
+                                            <FiEdit size={16} />
+                                        </button>
+                                        <button
+                                            onClick={() => handleDeleteItem(item.id)}
+                                            className="p-1 text-red-600 hover:text-red-800"
+                                        >
+                                            <FiTrash2 size={16} />
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="flex space-x-2">
-                                    <button
-                                        onClick={() => handleStartEdit(item)}
-                                        className="p-1 text-blue-600 hover:text-blue-800"
-                                    >
-                                        <FiEdit size={16} />
-                                    </button>
-                                    <button
-                                        onClick={() => handleDeleteItem(item.id)}
-                                        className="p-1 text-red-600 hover:text-red-800"
-                                    >
-                                        <FiTrash2 size={16} />
-                                    </button>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                ))}
+                            )}
+                        </div>
+                    ))}
 
-                {commentators.length === 0 && (
-                    <div className="text-center text-gray-500 py-4">
-                        No names added yet. Enter a name above to get started.
-                    </div>
-                )}
+                    {commentators.length === 0 && (
+                        <div className="text-center text-gray-500 py-4">
+                            No names added yet. Enter a name above to get started.
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
+        </DashboardThemeProvider>
     );
 };
 

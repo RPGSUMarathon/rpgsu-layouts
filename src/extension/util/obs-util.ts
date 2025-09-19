@@ -73,6 +73,15 @@ export class OBSUtility extends obsWebsocketJs {
     }
   }
 
+  async changeToEnding(){
+     try {
+      await this.changeScene(this.config.scenes?.ending ?? 'Ending');
+      commentators.value = [];
+    } catch (err) {
+      this.log.warn(`Error switching to ending ${err}`);
+    }
+  }
+
   /** Enables studio mode if it's not enabled. */
   async enableStudioMode() {
     const studioModeStatus = (await this.call('GetStudioModeEnabled')).studioModeEnabled;

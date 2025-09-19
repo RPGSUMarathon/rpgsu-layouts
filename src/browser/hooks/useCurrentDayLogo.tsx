@@ -1,9 +1,13 @@
 import { useReplicant } from '@nodecg/react-hooks';
 
-function useCurrentDayLogo() {
-  const [currentDayLogo] = useReplicant<string>('currentDayAtIntermission');
+export function useCurrentDayLogo() {
+  const [currentDayLogo] = useReplicant<string>('currentDayLogoAtIntermission');
 
   return currentDayLogo ?? '';
 }
 
-export default useCurrentDayLogo;
+export function useCurrentDay() {
+  const [currentDay] = useReplicant<number>('currentDayAtIntermission', {defaultValue: 1});
+
+  return currentDay ?? '';
+}

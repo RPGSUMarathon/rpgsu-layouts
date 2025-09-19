@@ -6,7 +6,7 @@ import { Commentator } from '@rpgsu-layouts/types/commentators';
 const nodecg = get();
 
 export const currentOBSScene = nodecg.Replicant<CurrentOBSScene>('currentOBSScene');
-export const currentDay = nodecg.Replicant<string>('currentDayAtIntermission');
+export const currentDay = nodecg.Replicant<string>('currentDayLogoAtIntermission');
 export const commentators = nodecg.Replicant<Commentator[]>('commentators', {defaultValue: []});
 
 

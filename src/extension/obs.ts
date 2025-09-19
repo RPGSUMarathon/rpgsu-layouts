@@ -19,4 +19,11 @@ if (config.enabled) {
     await obs.changeToIntermission();
     nodecg.sendMessageToBundle('changeToNextRun', 'nodecg-speedcontrol');
   });
+
+  nodecg.listenFor('switchToEnding', async () => {
+    if (obs.currentScene === config.scenes!.ending) return; // if we're already on intermission, don't do anything
+
+    await obs.changeToEnding();
+    nodecg.sendMessageToBundle('changeToNextRun', 'nodecg-speedcontrol');
+  });
 }

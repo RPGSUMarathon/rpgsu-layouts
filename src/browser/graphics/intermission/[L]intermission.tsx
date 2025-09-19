@@ -1,12 +1,13 @@
 import { render } from '../../render';
 import { ThemeProvider } from '../common/theme-provider';
 import { RotatingImage } from './components/RotatingImage';
-// import useCurrentDayLogo from '../../hooks/useCurrentDayLogo';
+import {useCurrentDay} from '../../hooks/useCurrentDayLogo';
 import { Title } from '../common/RunTexts/Title';
 import { IntermissionInfoContainer } from './components/IntermissionInfoContainer';
 
 
 const Intermission = () => {
+  const day = useCurrentDay();
 
   return (
     <ThemeProvider>
@@ -26,7 +27,7 @@ const Intermission = () => {
         </svg>
       </div>
       <div className='absolute top-5 left-5 z-10'>
-        <Title title="Day 1" />
+        <Title title={`Day ${day ? day : 1}`} />
       </div>
       <RotatingImage className='z-10' />
       <IntermissionInfoContainer className='z-10'/>

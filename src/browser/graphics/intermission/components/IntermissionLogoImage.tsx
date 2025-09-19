@@ -10,7 +10,7 @@ import Xeno from "/src/assets/xenoblade.png";
 import Yakuza from "/src/assets/yakuza.png";
 import Saga from "/src/assets/saga.png";
 import Xenogears from "/src/assets/xenogears.png";
-import useCurrentDayLogo from '../../../hooks/useCurrentDayLogo';
+import {useCurrentDayLogo} from '../../../hooks/useCurrentDayLogo';
 
 
 export const IntermissionLogoImage = ({ className, ...imgProps }: ImgHTMLAttributes<HTMLImageElement>) => {
