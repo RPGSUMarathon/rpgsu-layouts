@@ -1,5 +1,5 @@
 import obsWebsocketJs from 'obs-websocket-js';
-import { currentOBSScene } from './replicants';
+import { currentOBSScene, commentators } from './replicants';
 import { get } from './nodecg';
 import { TaggedLogger } from './tagged-logger';
 
@@ -67,6 +67,7 @@ export class OBSUtility extends obsWebsocketJs {
     try {
       await this.changeScene(this.config.scenes?.intermission ?? 'Intermission');
       await this.enableStudioMode();
+      commentators.value = [];
     } catch (err) {
       this.log.warn(`Error switching to intermission ${err}`);
     }

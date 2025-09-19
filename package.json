@@ -111,6 +111,16 @@
         "file": "restream.html",
         "width": 1920,
         "height": 1080
+      },
+      {
+        "file": "GB-1P.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "GBA-1P.html",
+        "width": 1920,
+        "height": 1080
       }
     ]
   }

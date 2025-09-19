@@ -6,11 +6,8 @@ import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 import { useCommentatorColumnSize } from '../../../hooks/useLayoutTextSize';
 
-type Props = {
-    widthSize : string;
-}
 
-export const Sidebar4x3 = ({widthSize} : Props) => {
+export const SidebarContainer = () => {
     const currentRun = useCurrentRun();
     const cameraOn = useCameraOn();
     const commentators = useCommentators();
@@ -21,7 +18,7 @@ export const Sidebar4x3 = ({widthSize} : Props) => {
     const runnerTextSize = useRunnerTextSize();
 
     return (
-        <div className={`h-[980px] border-r-3 border-white"`} style={{width: `${widthSize}px`}}>
+        <>
             {cameraOn && <div id="CameraBox" className="w-full h-[337.5px] border-b-3 border-white" />}
             <div className='bg-gradient-to-t from-teal-800 to-teal-600 h-full'>
                 <RunnerBox textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
@@ -33,6 +30,6 @@ export const Sidebar4x3 = ({widthSize} : Props) => {
                 <SidebarSocialMedia className='' />
             </div>
 
-        </div>
+        </>
     );
 }

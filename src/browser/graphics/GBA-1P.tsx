@@ -9,7 +9,7 @@ const Layout2 = () => {
   return (
     <ThemeProvider>
         <Header />
-        <Sidebar16x9 widthLength='480px'  />
+        <Sidebar16x9 widthLength='1448px'  />
     </ThemeProvider>
   );
 };

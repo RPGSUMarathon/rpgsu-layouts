@@ -13,4 +13,10 @@ if (config.enabled) {
     setTimeout(() => obs.connectToOBS(), 5000);
   });
 
+  nodecg.listenFor('switchToIntermission', async () => {
+    if (obs.currentScene === config.scenes!.intermission) return; // if we're already on intermission, don't do anything
+
+    await obs.changeToIntermission();
+    nodecg.sendMessageToBundle('changeToNextRun', 'nodecg-speedcontrol');
+  });
 }
