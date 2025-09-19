@@ -23,11 +23,11 @@ export const CrossOverLogo = ({ className }: Props) => {
     let currentImage = "";
     switch (currentDayLogo) {
         case "Pokemon": currentImage = Pokemon; break;
-        case "Dragon Quest": currentImage = DQ; break;
-        case "Expedition": currentImage = E33; break;
-        case "Final Fantasy": currentImage = FF; break;
-        case "Kingdom Hearts": currentImage = KH; break;
-        case "Shin Megami Tensei": currentImage = SMT; break;
+        case "DQ": currentImage = DQ; break;
+        case "E33": currentImage = E33; break;
+        case "FF": currentImage = FF; break;
+        case "KH": currentImage = KH; break;
+        case "SMT": currentImage = SMT; break;
         case "Xenoblade": currentImage = Xeno; break;
         case "Yakuza": currentImage = Yakuza; break;
         case "Xenogears": currentImage = Xenogears; break;

@@ -5,14 +5,17 @@ import { Timer } from '../../../../nodecg-speedcontrol/src/types/schemas/timer';
 import { useEffect, useState } from 'react';
 import useNextRun from '../hooks/useNextRun';
 import useCurrentObsScene from '../hooks/useCurrentObsScene';
+import useCurrentRun from '../hooks/useCurrentRun';
 
 const intermissionSceneName = nodecg.bundleConfig.obs.scenes?.intermission;
 
 export const App = () => {
   const currentObsScene = useCurrentObsScene();
+  const currentRun = useCurrentRun();
   const [timer] = useReplicant<Timer | undefined>('timer', {
     bundle: 'nodecg-speedcontrol',
   });
+  const [currentDay, setCurrentDay] = useReplicant<string>('currentDayAtIntermission');
   const [nextRunGameName, setNextRunGameName] = useState<string>('');
   const nextRun = useNextRun();
 
@@ -24,6 +27,7 @@ export const App = () => {
   };
 
   useEffect(() => {
+    setCurrentDay(currentRun?.customData["franchise"] ?? "");
     setNextRunGameName(getNextRunGameName());
   }, [nextRun]);
 
