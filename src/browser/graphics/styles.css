@@ -26,7 +26,7 @@
 
   --color-bs-hyperlinks: #ff697e;
 
-  background-color: black;
+  background-color: transparent;
 }
 
 .animated-background {
@@ -103,28 +103,87 @@
 }
 
 .shine-animation {
-    animation: shine-animation 5s ease;
-    -ms-animation: shine-animation 5s ease; 
-    -webkit-animation: shine-animation 5s ease; 
-    -moz-animation: shine-animation 5s ease;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+  animation: shine-animation 5s ease;
+  -ms-animation: shine-animation 5s ease;
+  -webkit-animation: shine-animation 5s ease;
+  -moz-animation: shine-animation 5s ease;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 
 @keyframes shine-animation {
-    0% {
-        -webkit-mask-image: linear-gradient(90deg, #ffffff 25%, rgba(255, 255, 255, 0.526) 50%, #ffffff 75%);
-        mask-image: linear-gradient(90deg, #ffffff 25%, rgba(255, 255, 255, 0.588) 50%, #ffffff 75%);
-        -webkit-mask-size: 800%;
-        mask-size: 800%;
-        -webkit-mask-position: 0;
-        mask-position: 0;
-    }
+  0% {
+    -webkit-mask-image: linear-gradient(90deg, #ffffff 25%, rgba(255, 255, 255, 0.526) 50%, #ffffff 75%);
+    mask-image: linear-gradient(90deg, #ffffff 25%, rgba(255, 255, 255, 0.588) 50%, #ffffff 75%);
+    -webkit-mask-size: 800%;
+    mask-size: 800%;
+    -webkit-mask-position: 0;
+    mask-position: 0;
+  }
 
-    50% {
-        -webkit-mask-position: 120%;
-        mask-position: 120%;
-        opacity: 1;
-    }
+  50% {
+    -webkit-mask-position: 120%;
+    mask-position: 120%;
+    opacity: 1;
+  }
+}
+
+.fading-div {
+  flex: 1 0 100%;
+  padding: 20px;
+}
+
+.folder1 {
+  margin-right: -100%;
+  animation: fade1 20s ease infinite;
+}
+
+@keyframes fade1 {
+  0% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  90% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.folder2 {
+  opacity: 0;
+  animation: fade2 20s ease infinite;
+}
+
+@keyframes fade2 {
+  0% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }

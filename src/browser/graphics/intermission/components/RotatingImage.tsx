@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { IntermissionLogoImage } from './IntermissionLogoImage';
 import {IntermissionLogoSocialMedia} from './IntermissionLogoSocialMedia';
 import { CrossOverLogo } from './CrossOverLogo';
 import Logo from "/src/assets/text-banner.png";

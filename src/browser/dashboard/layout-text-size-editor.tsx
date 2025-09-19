@@ -1,12 +1,10 @@
 import { render } from '../render';
 import { DashboardThemeProvider } from './components/DashboardThemeProvider';
-import { useState, useEffect } from 'react';
 import { useReplicant } from '@nodecg/react-hooks';
 
 
 
 export const LayoutTextSizeEditor = () => {
-    const [shownWarning, setShownWarning] = useState(false);
 
     const [gameTextSize, setGameTextSize] = useReplicant<string>('layoutGameTextSize');
     const [categoryTextSize, setCategoryTextSize] = useReplicant<string>('categoryTextSize');

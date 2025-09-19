@@ -1,4 +1,4 @@
-import { RunnerBox } from './RunnerBox';
+import { RunnerBox } from '../../common/RunTexts/RunnerBox';
 import { SidebarSocialMedia } from './SidebarSocialMedia';
 import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
@@ -6,11 +6,8 @@ import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 import { useCommentatorColumnSize } from '../../../hooks/useLayoutTextSize';
 
-type Props = {
-    widthSize : string;
-}
 
-export const Sidebar4x3 = ({widthSize} : Props) => {
+export const SidebarGB = () => {
     const currentRun = useCurrentRun();
     const cameraOn = useCameraOn();
     const commentators = useCommentators();
@@ -20,8 +17,17 @@ export const Sidebar4x3 = ({widthSize} : Props) => {
 
     const runnerTextSize = useRunnerTextSize();
 
+    const rules = [
+        'No healing is allowed except for free heals.',
+        'No purchases are allowed except for the water in Red',
+        'No healing is allowed except for free heals.',
+        'No healing is allowed except for free heals.',
+        'No healing is allowed except for free heals.',
+        'No healing is allowed except for free heals.'
+    ]
+
     return (
-        <div className={`h-[980px] border-r-3 border-white"`} style={{width: `${widthSize}px`}}>
+        <div className={`w-[832px] h-[980px] border-r-3 border-white"`}>
             {cameraOn && <div id="CameraBox" className="w-full h-[337.5px] border-b-3 border-white" />}
             <div className='bg-gradient-to-t from-teal-800 to-teal-600 h-full'>
                 <RunnerBox textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
@@ -30,9 +36,16 @@ export const Sidebar4x3 = ({widthSize} : Props) => {
                         <RunnerBox runner={false} className='border-r-3 border-white' pronouns={runner.pronouns} name={runner.name} />
                     )}
                 </div> : <></>}
+                <div id="#pokemon-rules" className='border-b-3 border-white py-2'>
+                    <h3 className='text-2xl px-2'>Rules:</h3>
+                    <ul className='px-10 '>
+                        {rules.map((item) =>
+                            <li className='list-disc text-xl'>{item}</li>
+                        )}
+                    </ul>
+                </div>
                 <SidebarSocialMedia className='' />
             </div>
-
         </div>
     );
 }

@@ -50,7 +50,7 @@ export const CrossOverLogo = ({ className }: Props) => {
             }}>
                 X
             </h2>
-            <img src={currentImage} className="w-full h-full object-contain" alt="Logo" />
+            <img src={currentImage} className="w-full h-full object-contain drop-shadow-white drop-shadow-xs" alt="Logo" />
         </div>
     );
 }

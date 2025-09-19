@@ -1,4 +1,4 @@
-import { RunnerBox } from './RunnerBox';
+import { RunnerBox } from '../../common/RunTexts/RunnerBox';
 import { SidebarSocialMedia } from './SidebarSocialMedia';
 import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
@@ -7,7 +7,7 @@ import useCameraOn from '../../../hooks/useCameraOn';
 import { useCommentatorColumnSize } from '../../../hooks/useLayoutTextSize';
 
 
-export const SidebarContainer = () => {
+export const Sidebar4x3 = () => {
     const currentRun = useCurrentRun();
     const cameraOn = useCameraOn();
     const commentators = useCommentators();
@@ -18,7 +18,7 @@ export const SidebarContainer = () => {
     const runnerTextSize = useRunnerTextSize();
 
     return (
-        <>
+        <div className={`w-[600px] h-[980px] border-r-3 border-white"`}>
             {cameraOn && <div id="CameraBox" className="w-full h-[337.5px] border-b-3 border-white" />}
             <div className='bg-gradient-to-t from-teal-800 to-teal-600 h-full'>
                 <RunnerBox textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
@@ -30,6 +30,6 @@ export const SidebarContainer = () => {
                 <SidebarSocialMedia className='' />
             </div>
 
-        </>
+        </div>
     );
 }

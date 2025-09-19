@@ -1,4 +1,4 @@
-import { RunnerBox } from './RunnerBox';
+import { RunnerBox } from '../../common/RunTexts/RunnerBox';
 import Twitch from "../../img/icons/twitch-color.png";
 import Youtube from "../../img/icons/youtube-color.png";
 import Bluesky from "../../img/icons/bluesky-color.png";
@@ -9,12 +9,7 @@ import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 
 
-type Props = {
-    widthLength : string;
-}
-
-
-export const Sidebar16x9 = ({widthLength} : Props) => {
+export const Sidebar16x9 = () => {
     const currentRun = useCurrentRun();
     const cameraOn = useCameraOn();
     const commentators = useCommentators();
@@ -26,7 +21,7 @@ export const Sidebar16x9 = ({widthLength} : Props) => {
 
     return (
         <div>
-            <div className={`h-[965px] border-r-3 border-white"`} style={{width: `${widthLength}px`}}>
+            <div className={`h-[965px] w-[480px] border-r-3 border-white"`}>
                 {cameraOn && <div id="CameraBox" className="w-full h-[270px] border-b-3 border-white" />}
                 <div className='bg-gradient-to-t from-teal-800 to-teal-600 h-full '>
                     <RunnerBox textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />

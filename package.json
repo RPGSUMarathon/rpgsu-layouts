@@ -93,32 +93,32 @@
     ],
     "graphics": [
       {
-        "file": "intermission.html",
+        "file": "[L]intermission.html",
         "width": 1920,
         "height": 1080
       },
       {
-        "file": "4x3-1P.html",
+        "file": "[L]4x3-1P.html",
         "width": 1920,
         "height": 1080
       },
       {
-        "file": "16x9-1P.html",
+        "file": "[L]16x9-1P.html",
         "width": 1920,
         "height": 1080
       },
       {
-        "file": "restream.html",
+        "file": "[L]restream.html",
         "width": 1920,
         "height": 1080
       },
       {
-        "file": "GB-1P.html",
+        "file": "[L]GB-1P.html",
         "width": 1920,
         "height": 1080
       },
       {
-        "file": "GBA-1P.html",
+        "file": "[L]GBA-1P.html",
         "width": 1920,
         "height": 1080
       }

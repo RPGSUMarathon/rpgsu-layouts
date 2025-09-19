@@ -1,0 +1,84 @@
+import { RunnerBox } from '../../common/RunTexts/RunnerBox';
+import Twitch from "../../img/icons/twitch-color.png";
+import Youtube from "../../img/icons/youtube-color.png";
+import Bluesky from "../../img/icons/bluesky-color.png";
+import Logo from "../../img/logo-text.png";
+import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
+import useCurrentRun from '../../../hooks/useCurrentRun';
+import useCommentators from '../../../hooks/useCommentators';
+import useCameraOn from '../../../hooks/useCameraOn';
+
+
+export const SidebarGBA = () => {
+    const currentRun = useCurrentRun();
+    const cameraOn = useCameraOn();
+    const commentators = useCommentators();
+
+    const player = currentRun?.teams[0]?.players[0];
+
+    const runnerTextSize = useRunnerTextSize();
+    const marginRatio = (commentators.length * -12) + 20;
+
+    const rules = [
+        'No healing is allowed except for free heals.',
+        'No purchases are allowed except for the water in Red',
+        'No healing is allowed except for free heals.',
+        'No healing is allowed except for free heals.',
+        'No healing is allowed except for free heals.',
+        'No healing is allowed except for free heals.'
+    ]
+
+    const half = Math.ceil(rules.length / 2);
+    const firstHalf = rules.slice(0, half);
+    const secondHalf = rules.slice(half);
+
+    return (
+        <div>
+            <div className={`h-[965px] w-[472.5px] border-r-3 border-white"`}>
+                {cameraOn && <div id="CameraBox" className="w-full h-[270px] border-b-3 border-white" />}
+                <div className='bg-gradient-to-t from-teal-800 to-teal-600 h-full '>
+                    <RunnerBox textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
+                    {commentators.length > 0 ? <div className='grid grid-cols-1'>
+                        {commentators.map((runner) =>
+                            <RunnerBox runner={false} className='border-r-3 border-white' pronouns={runner.pronouns} name={runner.name} />
+                        )}
+                    </div> : <></>}
+                    <div id="#pokemon-rules" className='border-b-3 border-white py-2 overflow-hidden'>
+                        <h3 className='text-2xl px-2'>Rules:</h3>
+                        <div className='flex px-6 '>
+                            <ul className='fading-div folder1'>
+                                {firstHalf.map((item) =>
+                                    <li className='list-disc text-lg'>{item}</li>
+                                )}
+                            </ul>
+                            <ul className='fading-div folder2'>
+                                {secondHalf.map((item) =>
+                                    <li className='list-disc text-lg'>{item}</li>
+                                )}
+                            </ul>
+                        </div>
+                    </div>
+                    <div className='flex flex-col items-center justify-center'>
+                        <img src={Logo} alt="Logo" className={`w-1/2`} style={{ marginTop: `calc(var(--spacing) * ${marginRatio})` }} />
+                        <h2 className="drop-shadow-2xl text-2xl wrap-normal">A home for RPG Speedruns.</h2>
+                    </div>
+                </div>
+            </div>
+            <div className={`absolute left-[472.5px] bottom-0 w-[1447.5px] h-[155px] bg-[#278178] flex flex-row items-center justify-center gap-25 border-t-3 border-white`}>
+                <div className="inline-flex items-center gap-5 text-4xl drop-shadow">
+                    <img width={50} height={50} src={Twitch} alt="Twitch Logo" />
+                    <span>@rpgsu</span>
+                </div>
+                <div className="inline-flex items-center gap-5 text-4xl">
+                    <img width={50} height={50} src={Youtube} alt="Youtube Logo" />
+                    <span>@rpgsumarathon</span>
+                </div>
+                <div className="inline-flex items-center gap-5 text-4xl">
+                    <img width={50} height={50} src={Bluesky} alt="Bluesky Logo" />
+                    <span>@rpgsu</span>
+                </div>
+            </div>
+        </div>
+
+    );
+}
