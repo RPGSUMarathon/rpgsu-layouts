@@ -27,7 +27,7 @@ const Intermission = () => {
         </svg>
       </div>
       <div className='absolute top-5 left-5 z-10'>
-        <Title title={`Day ${day ? day : 1}`} />
+        <Title className='text-5xl' title={`Day ${day ? day : 1}`} />
       </div>
       <RotatingImage className='z-10' />
       <IntermissionInfoContainer className='z-10'/>
