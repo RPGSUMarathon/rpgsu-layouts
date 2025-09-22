@@ -39,7 +39,7 @@ export const SidebarGBA = () => {
                 <div className='bg-[#278178] h-full ' style={{
                     backgroundImage: `url(${Waves})`
                 }}>
-                    <RunnerBox textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
+                    <RunnerBox twitch={player?.social.twitch} youtube={player?.social.youtube}  textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
                     {commentators.length > 0 ? <div className='grid grid-cols-1'>
                         {commentators.map((runner) =>
                             <RunnerBox runner={false} className='border-r-3 border-white' pronouns={runner.pronouns} name={runner.name} />
