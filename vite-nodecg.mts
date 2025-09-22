@@ -92,8 +92,8 @@ export default async ({
     typeof extension === "string"
       ? await setupExtensionBuild({ input: extension })
       : typeof extension === "object"
-      ? await setupExtensionBuild(extension)
-      : extension;
+        ? await setupExtensionBuild(extension)
+        : extension;
 
   const graphicsInputs = globbySync(graphics);
   const dashboardInputs = globbySync(dashboard);
@@ -135,9 +135,9 @@ export default async ({
         head.append(`
 					<script type="module">
 						import RefreshRuntime from '${new URL(
-              path.join(config.base, "@react-refresh"),
-              address
-            )}'
+          path.join(config.base, "@react-refresh"),
+          address
+        )}'
 						RefreshRuntime.injectIntoGlobalHook(window)
 						window.$RefreshReg$ = () => {}
 						window.$RefreshSig$ = () => (type) => type
@@ -168,11 +168,26 @@ export default async ({
         );
         const entryChunk = manifest[inputName];
 
+        // Properly handle CSS imports
         if (entryChunk?.css) {
           for (const css of entryChunk.css) {
             head.append(
               `<link rel="stylesheet" href="${path.join(config.base, css)}">`
             );
+          }
+        }
+
+        // Also check for imported CSS from other chunks
+        if (entryChunk?.imports) {
+          for (const importKey of entryChunk.imports) {
+            const importChunk = manifest[importKey];
+            if (importChunk?.css) {
+              for (const css of importChunk.css) {
+                head.append(
+                  `<link rel="stylesheet" href="${path.join(config.base, css)}">`
+                );
+              }
+            }
           }
         }
 
