@@ -6,7 +6,7 @@ type PlayerProps = {
   slot?: number;
 };
 
-export const Player = ({ style, slot = 0 }: PlayerProps) => {
+export const Player = ({ slot = 0 }: PlayerProps) => {
   const currentRun = useCurrentRun();
 
   const playerNames = useMemo(() => {

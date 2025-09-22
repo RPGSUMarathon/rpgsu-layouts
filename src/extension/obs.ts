@@ -16,14 +16,20 @@ if (config.enabled) {
   nodecg.listenFor('switchToIntermission', async () => {
     if (obs.currentScene === config.scenes!.intermission) return; // if we're already on intermission, don't do anything
 
+    console.log("Changing to intermission");
+
     await obs.changeToIntermission();
     nodecg.sendMessageToBundle('changeToNextRun', 'nodecg-speedcontrol');
+    nodecg.sendMessageToBundle('playbackStart', 'nodecg-foobar2000-controller');
   });
 
   nodecg.listenFor('switchToEnding', async () => {
     if (obs.currentScene === config.scenes!.ending) return; // if we're already on intermission, don't do anything
 
+    console.log("Changing to ending");
+
     await obs.changeToEnding();
     nodecg.sendMessageToBundle('changeToNextRun', 'nodecg-speedcontrol');
+    nodecg.sendMessageToBundle('playbackStart', 'nodecg-foobar2000-controller');
   });
 }

@@ -11,8 +11,8 @@ export const Estimate = ({ style }: EstimateProps) => {
     const currentRun = useCurrentRun();
 
     return (
-        <div className='inline-flex align-center gap-3'>
-            <img width={30} height={30} src={EstimateLogo} alt="Estimate Icon" />
+        <div className='inline-flex align-center gap-3' style={style}>
+            <img width={35} height={30} src={EstimateLogo} alt="Estimate Icon" />
 
             {currentRun && currentRun.estimate && <div>{currentRun.estimate}</div>}
         </div>

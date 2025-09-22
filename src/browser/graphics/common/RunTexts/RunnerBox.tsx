@@ -1,7 +1,6 @@
 import Mic from "../../img/icons/mic.png";
 import Runner from "../../img/icons/runner.png";
 import Twitch from "../../img/icons/twitch.png";
-import Youtube from "../../img/icons/youtube.png";
 
 type Props = {
     pronouns?: string,

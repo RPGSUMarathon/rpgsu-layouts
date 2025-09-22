@@ -13,6 +13,7 @@ export interface Configschema {
     scenes?: {
       intermission?: string;
       ending?: string;
+      finale?: string;
     };
   };
 }

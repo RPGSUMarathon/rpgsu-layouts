@@ -3,7 +3,7 @@ import { FiCamera, FiCameraOff, FiCheck, FiEdit, FiTrash2, FiX } from 'react-ico
 import { render } from '../render';
 import { DashboardThemeProvider } from './components/DashboardThemeProvider';
 import { useReplicant } from '@nodecg/react-hooks';
-import { Commentator } from '../../types/commentators';
+import { Commentator } from '../../types/generated/commentators';
 
 
 const CameraDashboard: React.FC = () => {
@@ -32,6 +32,7 @@ const CameraDashboard: React.FC = () => {
     
 
     const handleDeleteItem = (id: number): void => {
+        if(commentators == null) return;
         setCommentators(commentators.filter(item => item.id !== id));
         if (editingItem === id) {
             setEditingItem(null);
@@ -45,6 +46,7 @@ const CameraDashboard: React.FC = () => {
     };
 
     const handleSaveEdit = (): void => {
+        if(commentators == null) return;
         setCommentators(commentators.map(item =>
             item.id === editingItem
                 ? { ...item, name: editName, pronouns: editPronouns }
@@ -106,7 +108,7 @@ const CameraDashboard: React.FC = () => {
 
                 {/* Items List */}
                 <div className="space-y-4">
-                    {commentators.map((item) => (
+                    {commentators && commentators.map((item) => (
                         <div key={item.id} className="bg-[#254073]/80  p-4 rounded-lg shadow-sm border border-gray-200">
                             {editingItem === item.id ? (
                                 // Edit Mode
@@ -167,7 +169,7 @@ const CameraDashboard: React.FC = () => {
                         </div>
                     ))}
 
-                    {commentators.length === 0 && (
+                    {commentators && commentators.length === 0 && (
                         <div className="text-center text-white py-4">
                             No names added yet. Enter a name above to get started.
                         </div>

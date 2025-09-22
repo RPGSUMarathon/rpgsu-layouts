@@ -37,7 +37,7 @@
     "@nodecg/types": "^2.1.8",
     "@types/eslint__js": "^8.42.3",
     "@types/lodash": "^4.14.195",
-    "@types/node": "^24.3.0",
+    "@types/node": "^24.5.2",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^8.8.0",

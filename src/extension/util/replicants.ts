@@ -1,6 +1,6 @@
 import { get } from './nodecg';
 import { CurrentOBSScene } from '@rpgsu-layouts/types/generated';
-import { Commentator } from '@rpgsu-layouts/types/commentators';
+import { Commentator } from '../../types/generated/commentators';
 
 
 const nodecg = get();

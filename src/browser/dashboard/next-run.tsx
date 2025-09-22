@@ -19,7 +19,7 @@ export const App = () => {
     bundle: 'nodecg-speedcontrol',
   });
   const [currentDay, setCurrentDay] = useReplicant<number>('currentDayAtIntermission', {defaultValue: 1});
-    const [currentDayLogo, setCurrentDayLogo] = useReplicant<string>('currentDayLogoAtIntermission');
+    const [currentDayLogo, setCurrentDayLogo] = useReplicant<string>('currentDayLogoAtIntermission', {defaultValue: "Saga"});
   const [nextRunGameName, setNextRunGameName] = useState<string>('');
 
 
@@ -31,13 +31,14 @@ export const App = () => {
   };
 
   const advanceDate = () => {
+    console.log(`${currentDay} ${currentDayLogo}`)
     const runDay = TimeHelper.getDay(currentRun?.scheduled ?? "");
 
     setCurrentDay((runDay - 12) + 1);
   }
 
   useEffect(() => {
-    setCurrentDayLogo(currentRun?.customData["franchise"] ?? "");
+    setCurrentDayLogo(currentRun?.customData["Franchise"] ?? "");
     advanceDate();
     setNextRunGameName(getNextRunGameName());
   }, [nextRun]);

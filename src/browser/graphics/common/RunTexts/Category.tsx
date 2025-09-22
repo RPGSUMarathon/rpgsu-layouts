@@ -1,4 +1,3 @@
-import { CSSProperties } from 'react';
 import useCurrentRun from '../../../hooks/useCurrentRun';
 import CategoryLogo from "../../img/icons/category.png";
 

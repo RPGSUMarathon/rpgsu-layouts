@@ -13,7 +13,7 @@ export const IntermissionLogoSwitcher = () => {
     setCurrentDayLogo(currentDayLogo);
   }, [currentDayLogo]);
 
-  const games = ["Dragon Quest", "Xenogears", "Xenoblade", "Shin Megami Tensei", "Yakuza", "Kingdom Hearts", "Expedition", "Saga", "Final Fantasy", "Pokemon",]
+  const games = ["DQ", "Xenogears", "Xenoblade", "SMT", "Yakuza", "KH", "E33", "Saga", "FF", "Pokemon",]
   const days = [1, 2, 3, 4, 5, 6, 7];
 
   return (
