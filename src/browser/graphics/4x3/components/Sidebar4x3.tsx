@@ -6,6 +6,7 @@ import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 import { useCommentatorColumnSize } from '../../../hooks/useLayoutTextSize';
 import Waves from "/src/assets/waves.png";
+import { NoCamera } from '../../common/NoCamera';
 
 
 export const Sidebar4x3 = () => {
@@ -20,7 +21,7 @@ export const Sidebar4x3 = () => {
 
     return (
         <div className={`w-[600px] h-[980px] border-r-3 border-white"`}>
-            {cameraOn && <div id="CameraBox" className="w-full h-[337.5px] border-b-3 border-white" />}
+            {cameraOn && cameraOn ? <div id="CameraBox" className="w-full h-[337.5px] border-b-3 border-white" /> : <div className='h-[270px] border-b-3 border-white'><NoCamera /></div>}
             <div className='bg-[#278178] h-full' style={{
                     backgroundImage: `url(${Waves})`
                 }}>

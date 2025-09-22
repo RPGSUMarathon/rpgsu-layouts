@@ -139,31 +139,43 @@
   animation: fade1 20s ease infinite;
 }
 
+.folder2 {
+  opacity: 0;
+  animation: fade2 20s ease infinite;
+}
+
+.text-fade1-two{
+  animation: fade1 30s ease infinite;
+}
+
+.text-fade2-two{
+  animation: fade2 30s ease infinite;
+}
+
 @keyframes fade1 {
   0% {
     opacity: 1;
   }
 
-  40% {
+  38%{
     opacity: 1;
   }
 
-  50% {
+  40% {
     opacity: 0;
   }
 
-  90% {
+  85%{
     opacity: 0;
+  }
+
+  88% {
+    opacity: 1;
   }
 
   100% {
     opacity: 1;
   }
-}
-
-.folder2 {
-  opacity: 0;
-  animation: fade2 20s ease infinite;
 }
 
 @keyframes fade2 {
@@ -175,15 +187,15 @@
     opacity: 0;
   }
 
-  50% {
+  42% {
     opacity: 1;
   }
 
-  90% {
+  80%{
     opacity: 1;
   }
 
-  100% {
+  85% {
     opacity: 0;
   }
 }

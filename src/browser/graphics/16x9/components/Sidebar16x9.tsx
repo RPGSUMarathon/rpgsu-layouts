@@ -8,6 +8,7 @@ import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
+import { NoCamera } from '../../common/NoCamera';
 
 
 export const Sidebar16x9 = () => {
@@ -23,11 +24,11 @@ export const Sidebar16x9 = () => {
     return (
         <div>
             <div className={`h-[965px] w-[480px] border-r-3 border-white"`} >
-                {cameraOn && <div id="CameraBox" className="w-full h-[270px] border-b-3 border-white" />}
+                {cameraOn && cameraOn ? <div id="CameraBox" className="w-full h-[270px] border-b-3 border-white" /> : <div className='h-[270px] border-b-3 border-white'><NoCamera /></div>}
                 <div className='bg-[#278178] h-full ' style={{
                     backgroundImage: `url(${Waves})`
                 }}>
-                    <RunnerBox textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
+                    <RunnerBox twitch={player?.social.twitch} youtube={player?.social.youtube}  textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
                     {commentators.length > 0 ? <div className='grid grid-cols-1'>
                         {commentators.map((runner) =>
                             <RunnerBox runner={false} className='border-r-3 border-white' pronouns={runner.pronouns} name={runner.name} />

@@ -29,6 +29,8 @@ const CameraDashboard: React.FC = () => {
         setNameInput('');
     };
 
+    
+
     const handleDeleteItem = (id: number): void => {
         setCommentators(commentators.filter(item => item.id !== id));
         if (editingItem === id) {
@@ -64,8 +66,9 @@ const CameraDashboard: React.FC = () => {
     return (
         <DashboardThemeProvider>
             {/* Camera Toggle */}
-            <div className="inline-flex items-center justify-between mb-6">
-                <span className="text-lg font-semibold text-gray-700">Camera Settings</span>
+            <div className="inline-flex items-center justify-between">
+                <span className="text-lg font-semibold">Camera Settings:</span>
+                <span className='text-md'>{cameraOn? "Camera On" : "Camera Off"}</span>
                 <button
                     onClick={() => setCameraOn(!cameraOn)}
                     className={`flex items-center justify-center w-12 h-6 rounded-full transition-colors ${cameraOn ? 'bg-blue-500' : 'bg-gray-300'
@@ -75,7 +78,8 @@ const CameraDashboard: React.FC = () => {
 
                 </button>
             </div>
-            <div className="max-w-md mx-auto p-6 bg-gray-50 rounded-xl shadow-md mt-10">
+            <h2 className='text-lg font-bold'>Commentators:</h2>
+            <div className="max-w-md mx-auto w-full p-6 bg-gray-500/80 rounded-xl shadow-md">
 
 
                 {/* Name Input */}
@@ -103,7 +107,7 @@ const CameraDashboard: React.FC = () => {
                 {/* Items List */}
                 <div className="space-y-4">
                     {commentators.map((item) => (
-                        <div key={item.id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                        <div key={item.id} className="bg-[#254073]/80  p-4 rounded-lg shadow-sm border border-gray-200">
                             {editingItem === item.id ? (
                                 // Edit Mode
                                 <div className="space-y-3">
@@ -139,9 +143,9 @@ const CameraDashboard: React.FC = () => {
                                 // Display Mode
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <span className="font-medium">{item.name}</span>
+                                        <span className="font-bold">{item.name}</span>
                                         {item.pronouns && (
-                                            <span className="ml-2 text-sm text-gray-500">({item.pronouns})</span>
+                                            <span className="ml-2 text-sm text-gray-300">({item.pronouns})</span>
                                         )}
                                     </div>
                                     <div className="flex space-x-2">
@@ -164,7 +168,7 @@ const CameraDashboard: React.FC = () => {
                     ))}
 
                     {commentators.length === 0 && (
-                        <div className="text-center text-gray-500 py-4">
+                        <div className="text-center text-white py-4">
                             No names added yet. Enter a name above to get started.
                         </div>
                     )}

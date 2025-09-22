@@ -8,6 +8,7 @@ import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 import Waves from "/src/assets/waves.png";
+import { NoCamera } from '../../common/NoCamera';
 
 
 export const SidebarGBA = () => {
@@ -21,12 +22,10 @@ export const SidebarGBA = () => {
     const marginRatio = (commentators.length * -12) + 20;
 
     const rules = [
-        'No healing is allowed except for free heals.',
-        'No purchases are allowed except for the water in Red',
-        'No healing is allowed except for free heals.',
-        'No healing is allowed except for free heals.',
-        'No healing is allowed except for free heals.',
-        'No healing is allowed except for free heals.'
+        'No free healing (centers, heal houses, PCs, etc) is allowed except for unskippable heals.',
+        'No money can be spend except for a Fresh Water and 1 Safari trip in gen 1, and one Museum ticket in Gen 3.',
+        'You cannot let your entire party faint.',
+        'No glitches.'
     ]
 
     const half = Math.ceil(rules.length / 2);
@@ -36,7 +35,7 @@ export const SidebarGBA = () => {
     return (
         <div>
             <div className={`h-[965px] w-[472.5px] border-r-3 border-white"`}>
-                {cameraOn && <div id="CameraBox" className="w-full h-[270px] border-b-3 border-white" />}
+                {cameraOn && cameraOn ? <div id="CameraBox" className="w-full h-[270px] border-b-3 border-white" /> : <div className='h-[270px] border-b-3 border-white'><NoCamera /></div>}
                 <div className='bg-[#278178] h-full ' style={{
                     backgroundImage: `url(${Waves})`
                 }}>
