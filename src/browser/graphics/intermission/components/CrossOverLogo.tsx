@@ -7,8 +7,10 @@ import Pokemon from "/src/assets/Pokemon.png";
 import SMT from "/src/assets/smt.png";
 import Xeno from "/src/assets/xenoblade.png";
 import Yakuza from "/src/assets/yakuza.png";
+import Persona from "/src/assets/persona.png";
 import Saga from "/src/assets/saga.png";
 import Xenogears from "/src/assets/xenogears.png";
+import logo from "../../img/logo-text.png";
 import {useCurrentDayLogo} from '../../../hooks/useCurrentDayLogo';
 
 
@@ -32,7 +34,9 @@ export const CrossOverLogo = ({ className }: Props) => {
         case "Yakuza": currentImage = Yakuza; break;
         case "Xenogears": currentImage = Xenogears; break;
         case "Saga": currentImage = Saga; break;
-
+        case "Persona": currentImage = Persona; break;
+        default:
+            currentImage = logo; break;
     }
 
     if (!currentImage) {
@@ -40,8 +44,8 @@ export const CrossOverLogo = ({ className }: Props) => {
     }
 
     return (
-        <div className={`w-full h-full flex flex-row p-2 items-center justify-center ${className}`}>
-            <img src={Logo} className="w-full h-full object-contain p-2" alt="Logo" />
+        <div className={`w-full h-full flex flex-row p-2 items-center justify-center gap-5 ${className}`}>
+            <img src={Logo} className="h-full object-contain" alt="Logo" />
             <h2 className={`drop-shadow text-5xl font-thin ${className}`} style={{
                 WebkitTextStroke: "6px #278178",
                 paintOrder: "stroke fill",
