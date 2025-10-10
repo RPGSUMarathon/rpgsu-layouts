@@ -26,7 +26,7 @@ const Finale = () => {
             </div>
             <div className='items-center justify-center z-10'>
                 <img src={Logo} alt="Logo" className='w-[600px] m-auto' />
-                <div className='m-auto bg-black border border-white border-3 w-[1000px] h-[562.5px]'/>
+                <div className='m-auto bg-black border border-white border-3 w-[910px] h-[562.5px]'/>
                 <div className='mx-auto w-[500px] border-r-3 border-white border-t-3 border-l-3 mt-10'>
                     <RunnerBox runner={false} name={host?.teams[0]?.players[0]?.name ?? ""} pronouns={host?.teams[0]?.players[0]?.pronouns} />
                 </div>

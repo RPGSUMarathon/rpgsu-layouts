@@ -1,6 +1,6 @@
 import { useReplicant } from "@nodecg/react-hooks";
-import { RunDataArray } from 'speedcontrol/src/types'
-import { RunDataActiveRunSurrounding } from 'speedcontrol/src/types/schemas'
+import { RunDataArray } from '../../../bundles/nodecg-speedcontrol/src/types'
+import { RunDataActiveRunSurrounding } from '../../../bundles/nodecg-speedcontrol/src/types/schemas'
 
 function useNextRun() {
 	const [runDataActiveRunSurroundingRep] = useReplicant<RunDataActiveRunSurrounding>(

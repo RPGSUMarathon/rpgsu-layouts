@@ -1,7 +1,7 @@
 import { DashboardThemeProvider } from './components/DashboardThemeProvider';
 import { render } from '../render';
 import { useReplicant } from '@nodecg/react-hooks';
-import { Timer } from '../../../../nodecg-speedcontrol/src/types/schemas/timer';
+import { Timer } from '../../../bundles/nodecg-speedcontrol/src/types/schemas/timer';
 import { useEffect, useState } from 'react';
 import useNextRun from '../hooks/useNextRun';
 import useCurrentObsScene from '../hooks/useCurrentObsScene';
@@ -24,6 +24,7 @@ export const App = () => {
 
 
   const getNextRunGameName = () => {
+    console.log(`${currentDay} ${currentDayLogo}`)
     if (nextRun && nextRun.game) {
       return `${nextRun.game.slice(0, 35)}${nextRun.game.length > 35 ? '...' : ''}`;
     }
@@ -31,7 +32,6 @@ export const App = () => {
   };
 
   const advanceDate = () => {
-    console.log(`${currentDay} ${currentDayLogo}`)
     const runDay = TimeHelper.getDay(currentRun?.scheduled ?? "");
 
     setCurrentDay((runDay - 12) + 1);
@@ -54,10 +54,13 @@ export const App = () => {
           disabled={disableChange || !nextRun}
           className={`${disableChange? "bg-gray-400" : " bg-blue-500 hover:bg-blue-700/50"} rounded-lg shadow-lg  p-2`}
           onClick={() => {
+            console.log("Click");
             if (nextRunGameName == "Break") {
+              console.log("Next run is break");
               nodecg.sendMessage('switchToEnding');
             }
             else if (nextRun) {
+              console.log("Next run");
               nodecg.sendMessage('switchToIntermission');
             }
           }}>
