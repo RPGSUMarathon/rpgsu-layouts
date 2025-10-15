@@ -1,6 +1,7 @@
 import { CrossOverLogo } from '../../intermission/components/CrossOverLogo';
-import {Timer, Game, Estimate, Category} from '../RunTexts';
-import {useGameTextSize, useCategoryTextSize} from '../../../hooks/useLayoutTextSize';
+import { Timer, Game, Estimate, Category } from '../RunTexts';
+import { useGameTextSize, useCategoryTextSize } from '../../../hooks/useLayoutTextSize';
+import logo from "../../img/logo-sword.png";
 
 export const Header = () => {
     const gameTextSize = useGameTextSize();
@@ -26,9 +27,17 @@ export const Header = () => {
             <div className='w-[400px] border-r-5 border-white flex items-center justify-center text-center'>
                 <Timer className='text-7xl drop-shadow' />
             </div>
-            <div className='w-[700px] h-[115px]'>
-                <CrossOverLogo className='' />
-            </div>
+            <div className={`w-[700px] h-[115px] flex flex-row p-2 items-center justify-center gap-5 `}>
+                <img src={logo} className="h-full object-contain" alt="Logo" />
+                <h2 className={`drop-shadow text-8xl tracking-widest`} style={{
+                    WebkitTextStroke: "10px #278178",
+                    paintOrder: "stroke fill",
+                    textShadow: "0px 0px 10px #000000ff",
+                    fontFamily: "Futura PT",
+                }}>
+                    RPGSU
+                </h2>
+             </div>
         </div>
     );
 }
