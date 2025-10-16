@@ -23,6 +23,14 @@
             "intermission": {
               "type": "string",
               "default": "Intermission"
+            },
+            "ending": {
+              "type": "string",
+              "default": "Ending"
+            },
+            "finale": {
+              "type": "string",
+              "default": "Finale"
             }
           },
           "additionalProperties": false

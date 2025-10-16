@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@theme{
+    --base-primary: #278178;
+    --base-secondary: #008294;
+
+    /* Online */
+    --online-primary: #0080ab; 
+    --online-secondary: #4f78b6;
+    --online-accent: #ae5f97;
+    --online-therdiary: #866cb0;
+
+    /* Offline */
+    --offline-primary: #278178;
+    --offline-secondary: #00c9b6;
+    --offline-text: #f3eada;
+    --offline-accent: #ffa17a;
+}

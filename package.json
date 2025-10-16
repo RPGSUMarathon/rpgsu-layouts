@@ -21,11 +21,15 @@
     "@fontsource/roboto": "^5.0.3",
     "@nodecg/react-hooks": "^1.0.3",
     "@tailwindcss/vite": "^4.1.12",
+    "install": "^0.13.0",
+    "json-schema-to-typescript": "^15.0.4",
     "nodecg": "^2.6.1",
     "nodecg-types": "^1.9.0",
+    "npm": "^11.6.0",
     "obs-websocket-js": "^5.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^5.5.0",
     "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
@@ -33,7 +37,7 @@
     "@nodecg/types": "^2.1.8",
     "@types/eslint__js": "^8.42.3",
     "@types/lodash": "^4.14.195",
-    "@types/node": "^24.3.0",
+    "@types/node": "^24.5.2",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
@@ -72,12 +76,61 @@
         "file": "intermission-logo-switcher.html",
         "name": "intermission-logo-switcher",
         "title": "Switch Intermission Logo",
-        "width": 2
+        "width": 3,
+        "workspace": "Scene Editing"
+      },
+      {
+        "file": "layout-text-size-editor.html",
+        "name": "layout-text-size-editor",
+        "title": "Override sizes",
+        "width": 5,
+        "workspace": "Scene Editing"
+      },
+      {
+        "file": "camera-and-comms.html",
+        "name": "camera-and-comms",
+        "title": "Layout Information",
+        "width": 3
       }
     ],
     "graphics": [
       {
-        "file": "intermission.html",
+        "file": "[L]intermission.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "[L]4x3-1P.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "[L]16x9-1P.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "[L]restream.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "[L]ending.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "[L]finale.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "[L]GB-1P.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "[L]GBA-1P.html",
         "width": 1920,
         "height": 1080
       }

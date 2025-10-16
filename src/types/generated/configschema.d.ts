@@ -6,12 +6,14 @@
  */
 
 export interface Configschema {
-	obs: {
-		enabled: boolean;
-		url?: string;
-		password?: string;
-		scenes?: {
-			intermission?: string;
-		};
-	};
+  obs: {
+    enabled: boolean;
+    url?: string;
+    password?: string;
+    scenes?: {
+      intermission?: string;
+      ending?: string;
+      finale?: string;
+    };
+  };
 }

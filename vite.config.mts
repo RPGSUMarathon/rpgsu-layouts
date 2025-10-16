@@ -12,7 +12,7 @@ export default defineConfig({
     checker({ typescript: { tsconfigPath: './tsconfig.browser.json' } }),
     nodecg({
       bundleName: 'rpgsu-layouts',
-      graphics: './src/browser/graphics/*.tsx',
+      graphics: './src/browser/graphics/**/[L]*.tsx',
       dashboard: './src/browser/dashboard/*.tsx',
     }),
   ],
