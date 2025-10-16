@@ -1,4 +1,4 @@
-import { CrossOverLogo } from '../../intermission/components/CrossOverLogo';
+import { CrossOverLogo } from '../affiliate-event-intermission/CrossOverLogo';
 import {Timer, Game, Estimate, Category} from '../RunTexts';
 import {useGameTextSize, useCategoryTextSize} from '../../../hooks/useLayoutTextSize';
 

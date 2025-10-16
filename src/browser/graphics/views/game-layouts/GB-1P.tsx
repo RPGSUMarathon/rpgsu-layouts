@@ -1,12 +1,18 @@
-import { RunnerBox } from '../../common/RunTexts/RunnerBox';
-import { SidebarSocialMedia } from './SidebarSocialMedia';
+import { render } from '../../../render';
+import { ThemeProvider } from '../../components/theme-provider';
+import {Header} from '../../components/Header/Header';
+import Twitch from "../../img/icons/twitch.png";
+import Youtube from "../../img/icons/youtube.png";
+import Bluesky from "../../img/icons/bluesky.png";
+import Logo from "../../img/logo-text.png";
+import { RunnerBox } from '../../components/RunTexts/RunnerBox';
 import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 import { useCommentatorColumnSize } from '../../../hooks/useLayoutTextSize';
 import Waves from "/src/assets/waves.png";
-import { NoCamera } from '../../common/NoCamera';
+import { NoCamera } from '../../components/NoCamera';
 
 
 export const SidebarGB = () => {
@@ -19,12 +25,6 @@ export const SidebarGB = () => {
 
     const runnerTextSize = useRunnerTextSize();
 
-    const rules = [
-        'No free healing (centers, heal houses, PCs, etc) is allowed except for unskippable heals.',
-        'No money can be spend except for a Fresh Water and 1 Safari trip in gen 1, and one Museum ticket in Gen 3.',
-        'You cannot let your entire party faint.',
-        'No glitches.'
-    ]
 
     return (
         <div className={`w-[832px] h-[980px] border-r-3 border-white"`}>
@@ -38,16 +38,46 @@ export const SidebarGB = () => {
                         <RunnerBox runner={false} className='border-r-3 border-white' pronouns={runner.pronouns} name={runner.name} />
                     )}
                 </div> : <></>}
-                <div id="#pokemon-rules" className='border-b-3 border-white py-2 bg-[#278178]'>
-                    <h3 className='text-2xl px-2'>Rules:</h3>
-                    <ul className='px-10 '>
-                        {rules.map((item) =>
-                            <li className='list-disc text-xl'>{item}</li>
-                        )}
-                    </ul>
-                </div>
                 <SidebarSocialMedia className='' />
             </div>
         </div>
     );
 }
+
+type Props = {
+    className?: string,
+}
+
+
+export const SidebarSocialMedia = ({ className }: Props) => {
+    return (<div className={`text-center flex flex-row mx-auto my-10 items-center  ${className}`}>
+        <img src={Logo} alt="Logo" className="w-[250px] ml-15 mr-15" />
+        <div className="grid grid-flow-row">
+            <div className="inline-flex items-center gap-5 text-4xl">
+                <img src={Twitch} alt="Twitch Logo" />
+                <span>@rpgsu</span>
+            </div>
+            <div className="inline-flex items-center gap-5 text-4xl">
+                <img src={Youtube} alt="Youtube Logo" />
+                <span>@rpgsumarathon</span>
+            </div>
+            <div className="inline-flex items-center gap-5 text-4xl">
+                <img src={Bluesky} alt="Bluesky Logo" />
+                <span>@rpgsu</span>
+            </div>
+        </div>
+
+    </div>);
+}
+
+const Layout = () => {
+
+  return (
+    <ThemeProvider>
+          <Header />
+          <SidebarGB />
+        </ThemeProvider>
+  );
+};
+
+render(<Layout />);

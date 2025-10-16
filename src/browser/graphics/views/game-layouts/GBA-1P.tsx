@@ -1,4 +1,7 @@
-import { RunnerBox } from '../../common/RunTexts/RunnerBox';
+import { render } from '../../../render';
+import { ThemeProvider } from '../../components/theme-provider';
+import {Header} from '../../components/Header/Header';
+import { RunnerBox } from '../../components/RunTexts/RunnerBox';
 import Twitch from "../../img/icons/twitch-color.png";
 import Youtube from "../../img/icons/youtube-color.png";
 import Bluesky from "../../img/icons/bluesky-color.png";
@@ -8,7 +11,7 @@ import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 import Waves from "/src/assets/waves.png";
-import { NoCamera } from '../../common/NoCamera';
+import { NoCamera } from '../../components/NoCamera';
 
 
 export const SidebarGBA = () => {
@@ -84,3 +87,15 @@ export const SidebarGBA = () => {
 
     );
 }
+
+const Layout2 = () => {
+
+  return (
+    <ThemeProvider>
+        <Header />
+        <SidebarGBA />
+    </ThemeProvider>
+  );
+};
+
+render(<Layout2 />);

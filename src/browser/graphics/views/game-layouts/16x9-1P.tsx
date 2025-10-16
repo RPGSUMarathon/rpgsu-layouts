@@ -1,4 +1,7 @@
-import { RunnerBox } from '../../common/RunTexts/RunnerBox';
+import { render } from '../../../render';
+import { ThemeProvider } from '../../components/theme-provider';
+import {Header} from '../../components/Header/Header';
+import { RunnerBox } from '../../components/RunTexts/RunnerBox';
 import Twitch from "../../img/icons/twitch-color.png";
 import Youtube from "../../img/icons/youtube-color.png";
 import Bluesky from "../../img/icons/bluesky-color.png";
@@ -8,10 +11,9 @@ import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
-import { NoCamera } from '../../common/NoCamera';
+import { NoCamera } from '../../components/NoCamera';
 
-
-export const Sidebar16x9 = () => {
+const Sidebar16x9 = () => {
     const currentRun = useCurrentRun();
     const cameraOn = useCameraOn();
     const commentators = useCommentators();
@@ -58,3 +60,16 @@ export const Sidebar16x9 = () => {
 
     );
 }
+
+
+const Layout2 = () => {
+
+  return (
+    <ThemeProvider>
+        <Header />
+        <Sidebar16x9 />
+    </ThemeProvider>
+  );
+};
+
+render(<Layout2 />);

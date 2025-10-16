@@ -1,12 +1,45 @@
-import { RunnerBox } from '../../common/RunTexts/RunnerBox';
-import { SidebarSocialMedia } from './SidebarSocialMedia';
+import { render } from '../../../render';
+import { ThemeProvider } from '../../components/theme-provider';
+import { Header } from '../../components/Header/Header';
+import { RunnerBox } from '../../components/RunTexts/RunnerBox';
 import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 import { useCommentatorColumnSize } from '../../../hooks/useLayoutTextSize';
 import Waves from "/src/assets/waves.png";
-import { NoCamera } from '../../common/NoCamera';
+import { NoCamera } from '../../components/NoCamera';
+import Twitch from "../../img/icons/twitch.png";
+import Youtube from "../../img/icons/youtube.png";
+import Bluesky from "../../img/icons/bluesky.png";
+import Logo from "/src/assets/text-banner.png";
+
+
+type Props = {
+    className?: string,
+}
+
+
+const SidebarSocialMedia = ({ className }: Props) => {
+    return (<div className={`text-center flex flex-col mx-auto my-10 items-center  ${className}`}>
+        <img src={Logo} alt="Logo" />
+        <div className="grid grid-flow-row">
+            <div className="inline-flex items-center gap-5 text-4xl">
+                <img src={Twitch} alt="Twitch Logo" />
+                <span>@rpgsu</span>
+            </div>
+            <div className="inline-flex items-center gap-5 text-4xl">
+                <img src={Youtube} alt="Youtube Logo" />
+                <span>@rpgsumarathon</span>
+            </div>
+            <div className="inline-flex items-center gap-5 text-4xl">
+                <img src={Bluesky} alt="Bluesky Logo" />
+                <span>@rpgsu</span>
+            </div>
+        </div>
+
+    </div>);
+}
 
 
 export const Sidebar4x3 = () => {
@@ -37,3 +70,16 @@ export const Sidebar4x3 = () => {
         </div>
     );
 }
+
+
+const Layout = () => {
+
+  return (
+    <ThemeProvider>
+      <Header />
+      <Sidebar4x3 />
+    </ThemeProvider>
+  );
+};
+
+render(<Layout />);

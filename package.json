@@ -95,45 +95,21 @@
     ],
     "graphics": [
       {
-        "file": "[L]intermission.html",
+        "file": "intermission.html",
         "width": 1920,
-        "height": 1080
+        "height": 1020
       },
       {
-        "file": "[L]4x3-1P.html",
+        "file": "game.html",
         "width": 1920,
-        "height": 1080
+        "height": 1020
       },
       {
-        "file": "[L]16x9-1P.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "[L]restream.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "[L]ending.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "[L]finale.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "[L]GB-1P.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "[L]GBA-1P.html",
-        "width": 1920,
-        "height": 1080
-      }
+				"file": "omnibar.html",
+				"width": 1920,
+				"height": 60,
+				"singleInstance": true
+			}
     ]
   }
 }
