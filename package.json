@@ -37,7 +37,7 @@
     "@nodecg/types": "^2.1.8",
     "@types/eslint__js": "^8.42.3",
     "@types/lodash": "^4.14.195",
-    "@types/node": "^24.5.2",
+    "@types/node": "^24.8.1",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
@@ -77,6 +77,13 @@
         "name": "layout-text-size-editor",
         "title": "Override sizes",
         "width": 5,
+        "workspace": "Scene Editing"
+      },
+      {
+        "file": "game-layout-override.html",
+        "name": "game-layout-override",
+        "title": "Layout Override",
+        "width": 2,
         "workspace": "Scene Editing"
       },
       {

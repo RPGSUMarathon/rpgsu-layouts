@@ -11,7 +11,6 @@ const CameraDashboard: React.FC = () => {
     const [editingItem, setEditingItem] = useState<number | null>(null);
     const [editName, setEditName] = useState<string>('');
     const [editPronouns, setEditPronouns] = useState<string>('');
-
     const [cameraOn, setCameraOn] = useReplicant<boolean>('cameraOn', { defaultValue: true });
     const [commentators, setCommentators] = useReplicant<Commentator[]>('commentators', { defaultValue: [] });
 

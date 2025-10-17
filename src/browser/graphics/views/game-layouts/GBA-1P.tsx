@@ -42,21 +42,9 @@ export const SidebarGBA = () => {
                         <h2 className="drop-shadow-2xl text-2xl wrap-normal">A home for RPG Speedruns.</h2>
                     </div>
                 </div>
+                
             </div>
-            <div className={`absolute left-[472.5px] bottom-0 w-[1447.5px] h-[155px] bg-[#278178] flex flex-row items-center justify-center gap-25 border-t-3 border-white`}>
-                <div className="inline-flex items-center gap-5 text-4xl drop-shadow">
-                    <img width={50} height={50} src={Twitch} alt="Twitch Logo" />
-                    <span>@rpgsu</span>
-                </div>
-                <div className="inline-flex items-center gap-5 text-4xl">
-                    <img width={50} height={50} src={Youtube} alt="Youtube Logo" />
-                    <span>@rpgsumarathon</span>
-                </div>
-                <div className="inline-flex items-center gap-5 text-4xl">
-                    <img width={50} height={50} src={Bluesky} alt="Bluesky Logo" />
-                    <span>@rpgsu</span>
-                </div>
-            </div>
+            
         </div>
 
     );
