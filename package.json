@@ -73,13 +73,6 @@
         "width": 2
       },
       {
-        "file": "intermission-logo-switcher.html",
-        "name": "intermission-logo-switcher",
-        "title": "Switch Intermission Logo",
-        "width": 3,
-        "workspace": "Scene Editing"
-      },
-      {
         "file": "layout-text-size-editor.html",
         "name": "layout-text-size-editor",
         "title": "Override sizes",
@@ -105,11 +98,11 @@
         "height": 1020
       },
       {
-				"file": "omnibar.html",
-				"width": 1920,
-				"height": 60,
-				"singleInstance": true
-			}
+        "file": "omnibar.html",
+        "width": 1920,
+        "height": 60,
+        "singleInstance": true
+      }
     ]
   }
 }

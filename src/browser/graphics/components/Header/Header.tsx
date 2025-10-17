@@ -1,4 +1,3 @@
-import { CrossOverLogo } from '../affiliate-event-intermission/CrossOverLogo';
 import {Timer, Game, Estimate, Category} from '../RunTexts';
 import {useGameTextSize, useCategoryTextSize} from '../../../hooks/useLayoutTextSize';
 
@@ -25,9 +24,6 @@ export const Header = () => {
             </div>
             <div className='w-[400px] border-r-5 border-white flex items-center justify-center text-center'>
                 <Timer className='text-7xl drop-shadow' />
-            </div>
-            <div className='w-[700px] h-[115px]'>
-                <CrossOverLogo className='' />
             </div>
         </div>
     );

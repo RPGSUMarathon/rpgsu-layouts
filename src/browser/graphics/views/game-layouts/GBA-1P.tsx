@@ -1,4 +1,3 @@
-import { render } from '../../../render';
 import { ThemeProvider } from '../../components/theme-provider';
 import {Header} from '../../components/Header/Header';
 import { RunnerBox } from '../../components/RunTexts/RunnerBox';
@@ -10,7 +9,7 @@ import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
-import Waves from "/src/assets/waves.png";
+import Waves from "../../img/waves.png";
 import { NoCamera } from '../../components/NoCamera';
 
 
@@ -24,16 +23,6 @@ export const SidebarGBA = () => {
     const runnerTextSize = useRunnerTextSize();
     const marginRatio = (commentators.length * -12) + 20;
 
-    const rules = [
-        'No free healing (centers, heal houses, PCs, etc) is allowed except for unskippable heals.',
-        'No money can be spend except for a Fresh Water and 1 Safari trip in gen 1, and one Museum ticket in Gen 3.',
-        'You cannot let your entire party faint.',
-        'No glitches.'
-    ]
-
-    const half = Math.ceil(rules.length / 2);
-    const firstHalf = rules.slice(0, half);
-    const secondHalf = rules.slice(half);
 
     return (
         <div>
@@ -48,21 +37,6 @@ export const SidebarGBA = () => {
                             <RunnerBox runner={false} className='border-r-3 border-white' pronouns={runner.pronouns} name={runner.name} />
                         )}
                     </div> : <></>}
-                    <div id="#pokemon-rules" className='border-b-3 border-white py-2 overflow-hidden bg-[#278178]'>
-                        <h3 className='text-2xl px-2'>Rules:</h3>
-                        <div className='flex px-6 '>
-                            <ul className='fading-div folder1'>
-                                {firstHalf.map((item) =>
-                                    <li className='list-disc text-lg'>{item}</li>
-                                )}
-                            </ul>
-                            <ul className='fading-div folder2'>
-                                {secondHalf.map((item) =>
-                                    <li className='list-disc text-lg'>{item}</li>
-                                )}
-                            </ul>
-                        </div>
-                    </div>
                     <div className='flex flex-col items-center justify-center'>
                         <img src={Logo} alt="Logo" className={`w-1/2`} style={{ marginTop: `calc(var(--spacing) * ${marginRatio})` }} />
                         <h2 className="drop-shadow-2xl text-2xl wrap-normal">A home for RPG Speedruns.</h2>
@@ -88,7 +62,7 @@ export const SidebarGBA = () => {
     );
 }
 
-const Layout2 = () => {
+export const Lgba_1P = () => {
 
   return (
     <ThemeProvider>
@@ -97,5 +71,3 @@ const Layout2 = () => {
     </ThemeProvider>
   );
 };
-
-render(<Layout2 />);

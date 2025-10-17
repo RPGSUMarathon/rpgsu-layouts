@@ -1,4 +1,4 @@
-import Logo from "/src/assets/text-banner.png";
+import Logo from "../../img/text-banner.png";
 import DQ from "/src/assets/DQ.png";
 import E33 from "/src/assets/e33.png";
 import FF from "/src/assets/FF.png";

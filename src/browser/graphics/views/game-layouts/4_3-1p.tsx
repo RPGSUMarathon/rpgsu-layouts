@@ -1,4 +1,3 @@
-import { render } from '../../../render';
 import { ThemeProvider } from '../../components/theme-provider';
 import { Header } from '../../components/Header/Header';
 import { RunnerBox } from '../../components/RunTexts/RunnerBox';
@@ -7,12 +6,12 @@ import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 import { useCommentatorColumnSize } from '../../../hooks/useLayoutTextSize';
-import Waves from "/src/assets/waves.png";
+import Waves from "../../img/waves.png";
 import { NoCamera } from '../../components/NoCamera';
 import Twitch from "../../img/icons/twitch.png";
 import Youtube from "../../img/icons/youtube.png";
 import Bluesky from "../../img/icons/bluesky.png";
-import Logo from "/src/assets/text-banner.png";
+import Logo from "../../img/text-banner.png";
 
 
 type Props = {
@@ -72,7 +71,7 @@ export const Sidebar4x3 = () => {
 }
 
 
-const Layout = () => {
+export const L4x3_1P = () => {
 
   return (
     <ThemeProvider>
@@ -81,5 +80,3 @@ const Layout = () => {
     </ThemeProvider>
   );
 };
-
-render(<Layout />);

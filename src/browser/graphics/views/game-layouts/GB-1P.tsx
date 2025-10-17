@@ -1,4 +1,3 @@
-import { render } from '../../../render';
 import { ThemeProvider } from '../../components/theme-provider';
 import {Header} from '../../components/Header/Header';
 import Twitch from "../../img/icons/twitch.png";
@@ -11,7 +10,7 @@ import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
 import useCameraOn from '../../../hooks/useCameraOn';
 import { useCommentatorColumnSize } from '../../../hooks/useLayoutTextSize';
-import Waves from "/src/assets/waves.png";
+import Waves from "../../img/waves.png";
 import { NoCamera } from '../../components/NoCamera';
 
 
@@ -70,7 +69,7 @@ export const SidebarSocialMedia = ({ className }: Props) => {
     </div>);
 }
 
-const Layout = () => {
+export const Lgb_1P = () => {
 
   return (
     <ThemeProvider>
@@ -79,5 +78,3 @@ const Layout = () => {
         </ThemeProvider>
   );
 };
-
-render(<Layout />);

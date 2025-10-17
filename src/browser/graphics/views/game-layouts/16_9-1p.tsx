@@ -1,4 +1,3 @@
-import { render } from '../../../render';
 import { ThemeProvider } from '../../components/theme-provider';
 import {Header} from '../../components/Header/Header';
 import { RunnerBox } from '../../components/RunTexts/RunnerBox';
@@ -6,7 +5,7 @@ import Twitch from "../../img/icons/twitch-color.png";
 import Youtube from "../../img/icons/youtube-color.png";
 import Bluesky from "../../img/icons/bluesky-color.png";
 import Logo from "../../img/logo-text.png";
-import Waves from "/src/assets/waves.png";
+import Waves from "../../img/waves.png";
 import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
@@ -62,7 +61,7 @@ const Sidebar16x9 = () => {
 }
 
 
-const Layout2 = () => {
+export const L16x9_1P = () => {
 
   return (
     <ThemeProvider>
@@ -71,5 +70,3 @@ const Layout2 = () => {
     </ThemeProvider>
   );
 };
-
-render(<Layout2 />);
