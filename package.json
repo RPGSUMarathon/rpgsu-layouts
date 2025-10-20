@@ -37,7 +37,7 @@
     "@nodecg/types": "^2.1.8",
     "@types/eslint__js": "^8.42.3",
     "@types/lodash": "^4.14.195",
-    "@types/node": "^24.5.2",
+    "@types/node": "^24.8.1",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
@@ -73,17 +73,17 @@
         "width": 2
       },
       {
-        "file": "intermission-logo-switcher.html",
-        "name": "intermission-logo-switcher",
-        "title": "Switch Intermission Logo",
-        "width": 3,
-        "workspace": "Scene Editing"
-      },
-      {
         "file": "layout-text-size-editor.html",
         "name": "layout-text-size-editor",
         "title": "Override sizes",
         "width": 5,
+        "workspace": "Scene Editing"
+      },
+      {
+        "file": "game-layout-override.html",
+        "name": "game-layout-override",
+        "title": "Layout Override",
+        "width": 2,
         "workspace": "Scene Editing"
       },
       {
@@ -95,44 +95,20 @@
     ],
     "graphics": [
       {
-        "file": "[L]intermission.html",
+        "file": "intermission.html",
         "width": 1920,
-        "height": 1080
+        "height": 1020
       },
       {
-        "file": "[L]4x3-1P.html",
+        "file": "game.html",
         "width": 1920,
-        "height": 1080
+        "height": 1020
       },
       {
-        "file": "[L]16x9-1P.html",
+        "file": "omnibar.html",
         "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "[L]restream.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "[L]ending.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "[L]finale.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "[L]GB-1P.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "[L]GBA-1P.html",
-        "width": 1920,
-        "height": 1080
+        "height": 60,
+        "singleInstance": true
       }
     ]
   }

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {IntermissionLogoSocialMedia} from './IntermissionLogoSocialMedia';
 import { CrossOverLogo } from './CrossOverLogo';
-import Logo from "/src/assets/text-banner.png";
+import Logo from "../../img/text-banner.png";
 
 
 export const RotatingImage = ({ className = '' }: { className?: string }) => {

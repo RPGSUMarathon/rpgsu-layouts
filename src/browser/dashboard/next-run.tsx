@@ -12,34 +12,23 @@ const intermissionSceneName = nodecg.bundleConfig.obs.scenes?.intermission;
 
 export const App = () => {
   const currentObsScene = useCurrentObsScene();
-  const currentRun = useCurrentRun();
   const nextRun = useNextRun();
 
   const [timer] = useReplicant<Timer | undefined>('timer', {
     bundle: 'nodecg-speedcontrol',
   });
-  const [currentDay, setCurrentDay] = useReplicant<number>('currentDayAtIntermission', {defaultValue: 1});
-    const [currentDayLogo, setCurrentDayLogo] = useReplicant<string>('currentDayLogoAtIntermission', {defaultValue: "Saga"});
   const [nextRunGameName, setNextRunGameName] = useState<string>('');
 
 
   const getNextRunGameName = () => {
-    console.log(`${currentDay} ${currentDayLogo}`)
     if (nextRun && nextRun.game) {
       return `${nextRun.game.slice(0, 35)}${nextRun.game.length > 35 ? '...' : ''}`;
     }
     return 'Break';
   };
 
-  const advanceDate = () => {
-    const runDay = TimeHelper.getDay(currentRun?.scheduled ?? "");
-
-    setCurrentDay((runDay - 12) + 1);
-  }
 
   useEffect(() => {
-    setCurrentDayLogo(currentRun?.customData["Franchise"] ?? "");
-    advanceDate();
     setNextRunGameName(getNextRunGameName());
   }, [nextRun]);
 
@@ -54,13 +43,7 @@ export const App = () => {
           disabled={disableChange || !nextRun}
           className={`${disableChange? "bg-gray-400" : " bg-blue-500 hover:bg-blue-700/50"} rounded-lg shadow-lg  p-2`}
           onClick={() => {
-            console.log("Click");
-            if (nextRunGameName == "Break") {
-              console.log("Next run is break");
-              nodecg.sendMessage('switchToEnding');
-            }
-            else if (nextRun) {
-              console.log("Next run");
+            if (nextRun) {
               nodecg.sendMessage('switchToIntermission');
             }
           }}>

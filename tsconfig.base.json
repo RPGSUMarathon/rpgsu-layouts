@@ -4,7 +4,7 @@
     "target": "ES2022",
     "moduleResolution": "bundler",
     "lib": ["ES2022", "DOM", "es5", "es6", "dom", "dom.iterable"],
-    "types": [],
+    "types": ["node"],
     "sourceMap": true,
     "importHelpers": true,
     "resolveJsonModule": true,
