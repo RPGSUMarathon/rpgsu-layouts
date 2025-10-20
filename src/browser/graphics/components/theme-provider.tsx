@@ -1,7 +1,12 @@
 import { type ReactNode, Fragment } from 'react';
 import "../styles.css";
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+type Props = {
+    className?: string,
+    children: ReactNode
+}
+
+export const ThemeProvider = ({ children, className }:Props) => {
   return (
     <Fragment>
       <div style={{
@@ -13,7 +18,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
         fontFamily: 'Futura, "Futura PT", "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif',
         display: "flex",
         flexDirection: "column",
-      }}>
+        width: "1920px",
+        height: "1080px"
+      }} className={className}>
         {children}
       </div>
 
