@@ -6,7 +6,7 @@ This bundle is aimed to quickstart the creation of NodeCG bundles for speedrunni
 
 ## Getting started
 
-Make sure you have Node.JS and npm installed.
+Make sure you have Node.JS and [pnpm](https://pnpm.io/installation) installed (recommended install method for pnpm is using [corepack](https://pnpm.io/installation#using-corepack)).
 
 ### 1. Install NodeCG
 
@@ -25,13 +25,13 @@ git submodule update --init --recursive
 To install the dependencies, run
 
 ```bash
-npm i
+pnpm i
 ```
 
 ## Build the layouts
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ## Run the server locally
@@ -39,7 +39,7 @@ npm run build
 In the root folder, run
 
 ```bash
-npx nodecg start
+pnpm start
 ```
 
 and the dashboard will be running on ```http://localhost:9090``` by default. The port can be changed in the configurations.
@@ -49,13 +49,13 @@ and the dashboard will be running on ```http://localhost:9090``` by default. The
 For development purposes, you'll want to observe your changes live. In that case, run 
 
 ```bash
-npm run watch
+pnpm watch
 ```
 
 in the root folder of the layouts folder and then once again run 
 
 ```bash
-npx nodecg start
+pnpm start
 ```
 
 to launch the server.
