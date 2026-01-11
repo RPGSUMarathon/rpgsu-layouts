@@ -31,7 +31,7 @@ pnpm i
 ## Build the layouts
 
 ```bash
-pnpm run build
+pnpm build
 ```
 
 ## Run the server locally
