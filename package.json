@@ -10,9 +10,9 @@
     "build:extension": "tsc -b tsconfig.extension.json",
     "clean": "trash node_modules/.cache && trash shared/dist && trash dashboard && trash graphics && trash extension",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "prebuild": "npm run clean",
+    "prebuild": "pnpm clean",
     "schema-types": "nodecg schema-types -o src/types/generated",
-    "start": "node ../..",
+    "start": "nodecg start",
     "watch": "run-p watch:*",
     "watch:browser": "vite",
     "watch:extension": "tsc -b tsconfig.extension.json -w --preserveWatchOutput"
@@ -21,11 +21,9 @@
     "@fontsource/roboto": "^5.0.3",
     "@nodecg/react-hooks": "^1.0.3",
     "@tailwindcss/vite": "^4.1.12",
-    "install": "^0.13.0",
     "json-schema-to-typescript": "^15.0.4",
     "nodecg": "^2.6.1",
     "nodecg-types": "^1.9.0",
-    "npm": "^11.6.0",
     "obs-websocket-js": "^5.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -111,5 +109,6 @@
         "singleInstance": true
       }
     ]
-  }
+  },
+  "packageManager": "pnpm@10.28.0+sha512.05df71d1421f21399e053fde567cea34d446fa02c76571441bfc1c7956e98e363088982d940465fd34480d4d90a0668bc12362f8aa88000a64e83d0b0e47be48"
 }
