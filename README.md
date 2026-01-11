@@ -6,40 +6,56 @@ This bundle is aimed to quickstart the creation of NodeCG bundles for speedrunni
 
 ## Getting started
 
+Make sure you have Node.JS and [pnpm](https://pnpm.io/installation) installed (recommended install method for pnpm is using [corepack](https://pnpm.io/installation#using-corepack)).
+
 ### 1. Install NodeCG
 
 Follow the [NodeCG Installation Guide](https://www.nodecg.dev/docs/installing/).
 
-### 2. Install the Template
+### 2. Install the submodules
 
-Install this template in the bundles directory with
+Install the dependencies on speedcontrol and nodecg-foobar2000-plugin with
 
 ```bash
-nodecg install mbcsalmeida/rpgsu-layouts
+git submodule update --init --recursive
 ```
 
-or by cloning this repository into the bundles directory.
+## Install the files
+
+To install the dependencies, run
+
+```bash
+pnpm i
+```
+
+## Build the layouts
+
+```bash
+pnpm build
+```
 
 ## Run the server locally
 
-The server can be run with 
+In the root folder, run
 
 ```bash
-nodecg start
+pnpm start
 ```
 
-and it will be running on ```http://localhost:9090``` by default.
+and the dashboard will be running on ```http://localhost:9090``` by default. The port can be changed in the configurations.
 
-To observe live changes, run 
+## Observing live changes [Development]
+
+For development purposes, you'll want to observe your changes live. In that case, run 
 
 ```bash
-npm run watch
+pnpm watch
 ```
 
-in the bundle directory and then 
+in the root folder of the layouts folder and then once again run 
 
 ```bash
-npm run start OR nodecg start
+pnpm start
 ```
 
-to observe live changes.
+to launch the server.
