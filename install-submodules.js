@@ -1,8 +1,8 @@
-const {exec} = require('node:child_process')
+const {execSync} = require('node:child_process')
 const path = require('node:path')
 
 console.log('Installing Speedcontrol dependencies...')
-exec('pnpm i -P --ignore-scripts', {
+execSync('pnpm i -P --ignore-scripts --ignore-workspace', {
   cwd: path.join(__dirname, 'bundles/nodecg-speedcontrol')
 }, (error, stdout) => {
   console.log(stdout)
@@ -14,7 +14,7 @@ exec('pnpm i -P --ignore-scripts', {
 
 
 console.log('Installing foobar plugin dependencies...')
-exec('pnpm i --ignore-scripts', {
+execSync('pnpm i --ignore-scripts --ignore-workspace', {
   cwd: path.join(__dirname, 'bundles/nodecg-foobar2000-controller')
 }, (error, stdout) => {
   console.log(stdout)
@@ -25,7 +25,7 @@ exec('pnpm i --ignore-scripts', {
 })
 
 console.log('Building foobar plugin...')
-exec('pnpm build', {
+execSync('pnpm build', {
   cwd: path.join(__dirname, 'bundles/nodecg-foobar2000-controller')
 }, (error, stdout) => {
   console.log(stdout)
