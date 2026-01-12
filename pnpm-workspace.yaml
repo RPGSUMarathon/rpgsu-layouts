@@ -4,3 +4,6 @@ onlyBuiltDependencies:
   - "@parcel/watcher"
   - "@vaadin/vaadin-usage-statistics"
   - msgpackr-extract
+
+packages:
+  - "!bundles/**"
