@@ -11,6 +11,7 @@
     "clean": "trash node_modules/.cache && trash shared/dist && trash dashboard && trash graphics && trash extension",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "prebuild": "pnpm clean",
+    "postinstall": "node install-submodules.js",
     "schema-types": "nodecg schema-types -o src/types/generated",
     "start": "nodecg start",
     "watch": "run-p watch:*",

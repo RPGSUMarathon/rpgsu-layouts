@@ -1,0 +1,7 @@
+[submodule "bundles/nodecg-speedcontrol"]
+	path = bundles/nodecg-speedcontrol
+	url = https://github.com/speedcontrol/nodecg-speedcontrol.git
+	branch = build
+[submodule "bundles/nodecg-foobar2000-controller"]
+	path = bundles/nodecg-foobar2000-controller
+	url = https://github.com/mbcsalmeida/nodecg-foobar2000-controller.git
