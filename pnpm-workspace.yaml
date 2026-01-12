@@ -1,0 +1,6 @@
+onlyBuiltDependencies:
+  - esbuild
+  - better-sqlite3
+  - "@parcel/watcher"
+  - "@vaadin/vaadin-usage-statistics"
+  - msgpackr-extract
