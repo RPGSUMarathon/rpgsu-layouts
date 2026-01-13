@@ -1,9 +1,6 @@
 import { ThemeProvider } from '../../components/theme-provider';
 import {Header} from '../../components/Header/Header';
 import { RunnerBox } from '../../components/RunTexts/RunnerBox';
-import Twitch from "../../img/icons/twitch-color.png";
-import Youtube from "../../img/icons/youtube-color.png";
-import Bluesky from "../../img/icons/bluesky-color.png";
 import Logo from "../../img/logo-text.png";
 import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
