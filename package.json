@@ -21,6 +21,7 @@
     "@fontsource/roboto": "^5.0.3",
     "@nodecg/react-hooks": "^1.0.3",
     "@tailwindcss/vite": "^4.1.12",
+    "humanize-duration": "^3.33.2",
     "json-schema-to-typescript": "^15.0.4",
     "nodecg": "^2.6.1",
     "nodecg-types": "^1.9.0",
@@ -28,12 +29,14 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
-    "tailwindcss": "^4.1.12"
+    "tailwindcss": "^4.1.12",
+    "auto-text-size": "github:hoXyy/auto-text-size"
   },
   "devDependencies": {
     "@eslint/js": "^9.12.0",
     "@nodecg/types": "^2.1.8",
     "@types/eslint__js": "^8.42.3",
+    "@types/humanize-duration": "^3.27.4",
     "@types/lodash": "^4.14.195",
     "@types/node": "^24.8.1",
     "@types/react": "^18.0.37",
@@ -62,7 +65,7 @@
     "vite-plugin-checker": "^0.8.0"
   },
   "nodecg": {
-    "compatibleRange": "^2.0.0",
+    "compatibleRange": "^1.8.1 || ^2.0.0",
     "dashboardPanels": [
       {
         "file": "next-run.html",
