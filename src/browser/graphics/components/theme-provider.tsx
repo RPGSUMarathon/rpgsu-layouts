@@ -1,5 +1,6 @@
 import { type ReactNode, Fragment } from 'react';
 import "../styles.css";
+import background from '../img/online-background.png';
 
 type Props = {
     className?: string,
@@ -14,12 +15,12 @@ export const ThemeProvider = ({ children, className }:Props) => {
         padding: 0,
         overflow: "hidden",
         color: "white",
-        fontWeight: "bold",
-        fontFamily: 'Futura, "Futura PT", "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif',
+        fontFamily: '"Jost",sans-serif, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif',
         display: "flex",
         flexDirection: "column",
         width: "1920px",
-        height: "1080px"
+        height: "1080px",
+        backgroundImage: `url(${background})`
       }} className={className}>
         {children}
       </div>
