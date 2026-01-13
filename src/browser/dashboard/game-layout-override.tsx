@@ -2,18 +2,21 @@ import { render } from '../render';
 import { DashboardThemeProvider } from './components/DashboardThemeProvider';
 import { useReplicant } from '@nodecg/react-hooks';
 import { useState, useEffect } from 'react';
-import { LayoutInfo } from '@rpgsu-layouts/types/generated/layoutinfo';
+import { LayoutInfo } from '../../types/generated/layoutinfo';
 
 
 export const GameLayoutOverride = () => {
     const [layouts] = useReplicant<LayoutInfo[]>("gameLayouts");
+    const typedLayouts = layouts as LayoutInfo[] | undefined;
     const [currentGameLayout, setCurrentGameLayout] = useReplicant<string>("currentGameLayout");
     const [currentLayout, setCurrentLayout] = useState("");
 
     useEffect(() => {
         if (currentGameLayout) {
-            const layout = layouts?.find((item) => item.code === currentGameLayout) ?? "";
-            setCurrentLayout(layout.name);
+            const layout = typedLayouts?.find((item) => item.code === currentGameLayout);
+            if (layout) {
+                setCurrentLayout(layout.name);
+            }
         }
     }, [currentGameLayout]);
 
@@ -29,7 +32,7 @@ export const GameLayoutOverride = () => {
                     className="py-2 text-sm text-gray-700 dark:text-gray-200"
                     aria-labelledby="dropdownDefaultButton"
                 >
-                    {layouts?.map((layout) => (
+                    {typedLayouts?.map((layout) => (
                         <li key={layout.code}>
                             <button
                                 className="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
