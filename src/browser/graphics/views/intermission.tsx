@@ -33,7 +33,7 @@ type PropsContainer = {
   runData: RunData;
 }
 
-const CurrentRunContainer = ({ index, runData }: PropsContainer) => {
+const CurrentRunContainer = ({ runData }: PropsContainer) => {
   const runners = Helpers.formatPlayers(runData);
 
   return (
