@@ -5,8 +5,6 @@ import { Timer } from '../../../bundles/nodecg-speedcontrol/src/types/schemas/ti
 import { useEffect, useState } from 'react';
 import useNextRun from '../hooks/useNextRun';
 import useCurrentObsScene from '../hooks/useCurrentObsScene';
-import useCurrentRun from '../hooks/useCurrentRun';
-import TimeHelper from '../helpers';
 
 const intermissionSceneName = nodecg.bundleConfig.obs.scenes?.intermission;
 
