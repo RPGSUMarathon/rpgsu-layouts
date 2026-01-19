@@ -4,4 +4,4 @@
 	branch = build
 [submodule "bundles/nodecg-foobar2000-controller"]
 	path = bundles/nodecg-foobar2000-controller
-	url = https://github.com/mbcsalmeida/nodecg-foobar2000-controller.git
+	url = https://github.com/RPGSUMarathon/nodecg-foobar2000-controller.git
