@@ -15,7 +15,7 @@ export class OBSUtility extends obsWebsocketJs {
   constructor() {
     super();
 
-    this.currentSceneReplicant.on('change', (newVal) => {
+    this.currentSceneReplicant.on('change', (newVal: string | undefined) => {
       this.currentScene = newVal ?? '';
     });
 
