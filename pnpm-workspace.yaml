@@ -4,6 +4,7 @@ onlyBuiltDependencies:
   - "@parcel/watcher"
   - "@vaadin/vaadin-usage-statistics"
   - msgpackr-extract
+  - auto-text-size
 
 packages:
   - "!bundles/**"
