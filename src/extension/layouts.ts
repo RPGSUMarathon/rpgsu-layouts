@@ -1,8 +1,10 @@
 import { get } from './util/nodecg';
 import { LayoutInfo } from '@rpgsu-layouts/types/generated/layoutinfo';
+import {RunDataActiveRun} from '../../bundles/nodecg-speedcontrol/src/types/RunData';
+
 const nodecg = get();
 
-
+//most of this code is taken from the puwp layout switcher but adapted to work with our layouts. I left their comments
 const speedcontrolBundle = 'nodecg-speedcontrol';
 
 // A replicant that stores all the data for possible game layouts.
@@ -20,8 +22,7 @@ const defaultLayouts : LayoutInfo[] = [
 ];
 
 
-// Actual replicant in memory.
-const layouts = nodecg.Replicant<LayoutInfo[]>('gameLayouts', {
+nodecg.Replicant<LayoutInfo[]>('gameLayouts', {
     defaultValue: defaultLayouts,
     persistent: false
 });
@@ -31,8 +32,8 @@ const currentGameLayout = nodecg.Replicant<LayoutInfo>('currentGameLayout', {
     defaultValue: defaultLayouts[0]?.code,
 });
 // Listens for the current run to change, to get it's layout info.
-const runDataActiveRun = nodecg.Replicant('runDataActiveRun', speedcontrolBundle);
-runDataActiveRun.on('change', (newVal, oldVal) => {
+const runDataActiveRun = nodecg.Replicant<RunDataActiveRun>('runDataActiveRun', speedcontrolBundle);
+runDataActiveRun.on('change', (newVal: RunDataActiveRun | undefined, oldVal : RunDataActiveRun | undefined) => {
     // If the run has the same ID, we don't need to change the layout.
     // This stops the layout messing up if you force change it and *then* edit run data.
     if (newVal && oldVal && newVal.id === oldVal.id) {
@@ -42,15 +43,14 @@ runDataActiveRun.on('change', (newVal, oldVal) => {
 
     if (newVal) {
         let layoutCode;
-        if (newVal.customData && newVal.customData.layout) {
-            layoutCode = newVal.customData.layout;
+        if (newVal.customData && newVal.customData["layout"]) {
+            layoutCode = newVal.customData["layout"];
         } else {
             nodecg.log.warn("Run ID %s does not have custom data for layout", newVal.id);
             return;
         }
         if (layoutCode) {
             if (!currentGameLayout.value || layoutCode !== currentGameLayout.value.code) {
-                // setCurrentGameLayout(layoutCode);
                 currentGameLayout.value = layoutCode;
                 nodecg.log.info("Updated layout to %s", layoutCode);
             } else {
