@@ -99,8 +99,6 @@ const Intermission = () => {
 
   const upcomingRuns = useUpcomingRuns(2, (currentRun?.id ?? ""));
 
-  const text = "This is my long text thats a fun fact added at the end"
-
   return (
     <ThemeProvider className="">
       <div className='absolute h-[182px] w-[1320px] border-b-5 border-white bg-black/40 flex flex-row'>
@@ -146,8 +144,7 @@ const Intermission = () => {
         )
         }
         {currentRun && <CurrentRunContainer index={0} runData={currentRun} />}
-        {/* {currentRun?.customData["fact"] && <FunFactContainer text={currentRun?.customData["fact"]} />} */}
-        <FunFactContainer text={text} />
+        {currentRun?.customData["fact"] && <FunFactContainer text={currentRun?.customData["fact"]} />}
 
       </div>
       <Omnibar className='absolute bottom-0 z-10 ' />
