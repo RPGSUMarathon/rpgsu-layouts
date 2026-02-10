@@ -29,7 +29,7 @@ nodecg.Replicant<LayoutInfo[]>('gameLayouts', {
 
 // Current layout info stored in here. Defaults to the first one in the list above.
 const currentGameLayout = nodecg.Replicant<LayoutInfo>('currentGameLayout', {
-    defaultValue: defaultLayouts[0]?.code,
+    defaultValue: defaultLayouts[0]!,
 });
 // Listens for the current run to change, to get it's layout info.
 const runDataActiveRun = nodecg.Replicant<RunDataActiveRun>('runDataActiveRun', speedcontrolBundle);
