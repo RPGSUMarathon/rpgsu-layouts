@@ -8,7 +8,7 @@ import Youtube from "../img/icons/youtube.png";
 import Bluesky from "../img/icons/bluesky.png";
 import {
   type RunData,
-} from 'speedcontrol/src/types/schemas';
+} from '../../../../bundles/nodecg-speedcontrol/src/types/schemas';
 import { AutoTextSize } from 'auto-text-size';
 import { Helpers } from '../../helpers';
 import { timeToRun } from '../../time-to-run';
