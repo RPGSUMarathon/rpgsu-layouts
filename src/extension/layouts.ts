@@ -51,7 +51,7 @@ runDataActiveRun.on('change', (newVal: RunDataActiveRun | undefined, oldVal : Ru
         }
         if (layoutCode) {
             if (!currentGameLayout.value || layoutCode !== currentGameLayout.value.code) {
-                currentGameLayout.value = layoutCode;
+                currentGameLayout.value = newVal;
                 nodecg.log.info("Updated layout to %s", layoutCode);
             } else {
                 nodecg.log.debug("Current layout %s matches new run ID %s, not changing", layoutCode, newVal.id);
