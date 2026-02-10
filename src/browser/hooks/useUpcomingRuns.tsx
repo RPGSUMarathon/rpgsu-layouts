@@ -8,7 +8,7 @@ function useUpcomingRuns(count: number, currentRunId:string) {
     });
 
     const currentRunIndex = (runDataArrayRep ?? []).findIndex((run) => run.id === currentRunId);
-    var upcomingRuns = null;
+    let upcomingRuns = null;
     if (currentRunIndex > -1) {
        upcomingRuns = (runDataArrayRep ?? []).slice(currentRunIndex + 1, currentRunIndex + count + 1);
     }
