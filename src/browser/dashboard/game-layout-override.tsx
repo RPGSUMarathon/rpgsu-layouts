@@ -1,7 +1,7 @@
 import { render } from '../render';
 import { DashboardThemeProvider } from './components/DashboardThemeProvider';
 import { useReplicant } from '@nodecg/react-hooks';
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { LayoutInfo } from '../../types/generated/layoutinfo';
 
 
@@ -9,21 +9,12 @@ export const GameLayoutOverride = () => {
     const [layouts] = useReplicant<LayoutInfo[]>("gameLayouts");
     const typedLayouts = layouts as LayoutInfo[] | undefined;
     const [currentGameLayout, setCurrentGameLayout] = useReplicant<string>("currentGameLayout");
-    const [currentLayout, setCurrentLayout] = useState("");
-
-    useEffect(() => {
-        if (currentGameLayout) {
-            const layout = typedLayouts?.find((item) => item.code === currentGameLayout);
-            if (layout) {
-                setCurrentLayout(layout.name);
-            }
-        }
-    }, [currentGameLayout]);
+    const currentLayout = useMemo(() => typedLayouts?.find((item) => item.code === currentGameLayout), [currentGameLayout, typedLayouts]);
 
 
     return (
         <DashboardThemeProvider>
-            <h3>Selected Layout: {currentLayout}</h3>
+            <h3>Selected Layout: {currentLayout ? currentLayout.name : "No Layout Selected"}</h3>
             <div
                 id="dropdown"
                 className="z-10 h-45 overflow-y-auto bg-gray-200/80 divide-y divide-gray-100 rounded-lg shadow-sm w-55 dark:bg-gray-700"
@@ -38,7 +29,6 @@ export const GameLayoutOverride = () => {
                                 className="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                 onClick={() => {
                                     setCurrentGameLayout(layout.code);
-                                    setCurrentLayout(layout.name);
                                 }}
                             >
                                 {layout.name}
