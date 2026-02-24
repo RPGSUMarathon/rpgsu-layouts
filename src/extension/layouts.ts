@@ -19,6 +19,7 @@ const defaultLayouts : LayoutInfo[] = [
     { name: 'GBA 1 Player', code: 'gba-1p' },
     { name: 'DS 1 Player', code: 'ds-1p' },
     { name: '3DS 1 Player', code: '3ds-1p' },
+    { name: "16:9 2 Players", code: "16_9-2p"}
 ];
 
 
@@ -28,8 +29,8 @@ nodecg.Replicant<LayoutInfo[]>('gameLayouts', {
 });
 
 // Current layout info stored in here. Defaults to the first one in the list above.
-const currentGameLayout = nodecg.Replicant<LayoutInfo>('currentGameLayout', {
-    defaultValue: defaultLayouts[0]!,
+const currentGameLayout = nodecg.Replicant<string>('currentGameLayout', {
+    defaultValue: defaultLayouts[0]!.code,
 });
 // Listens for the current run to change, to get it's layout info.
 const runDataActiveRun = nodecg.Replicant<RunDataActiveRun>('runDataActiveRun', speedcontrolBundle);
@@ -50,8 +51,8 @@ runDataActiveRun.on('change', (newVal: RunDataActiveRun | undefined, oldVal : Ru
             return;
         }
         if (layoutCode) {
-            if (!currentGameLayout.value || layoutCode !== currentGameLayout.value.code) {
-                currentGameLayout.value = newVal;
+            if (!currentGameLayout.value || layoutCode !== currentGameLayout) {
+                currentGameLayout.value = layoutCode;
                 nodecg.log.info("Updated layout to %s", layoutCode);
             } else {
                 nodecg.log.debug("Current layout %s matches new run ID %s, not changing", layoutCode, newVal.id);

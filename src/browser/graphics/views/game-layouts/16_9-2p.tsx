@@ -1,0 +1,80 @@
+import { ThemeProvider } from "../../components/theme-provider";
+import { Header } from "../../components/Header/Header";
+import { RunnerBox } from "../../components/RunTexts/RunnerBox";
+import useCurrentRun from "../../../hooks/useCurrentRun";
+import useCommentators from "../../../hooks/useCommentators";
+import useCameraOn from "../../../hooks/useCameraOn";
+import { NoCamera } from "../../components/NoCamera";
+import background from "../../img/online-background.png";
+import { TeamTimer } from "../../components/RunTexts/TeamTimer";
+
+const BottomBar = () => {
+  const currentRun = useCurrentRun();
+  const cameraOn = useCameraOn();
+  const commentators = useCommentators();
+
+  const player1 = currentRun?.teams[0]?.players[0];
+  const player2 = currentRun?.teams[1]?.players[0];
+
+  return (
+    <div className="h-[374px] w-full inline-flex">
+      {/*Camera 1*/}
+      <div className="w-[498px] h-full border-white border-r-5  "></div>
+      <div
+        className="w-[924px] h-full relative"
+        style={{ backgroundImage: `url(${background})` }}
+      >
+        <div className="absolute top-0 left-0 w-[446px] border-r-5 border-white">
+          <RunnerBox
+            twitch={player1?.social.twitch}
+            youtube={player1?.social.youtube}
+            runner={true}
+            pronouns={player1?.pronouns}
+            name={player1?.name ?? ""}
+          />
+        </div>
+
+        <div className="w-[446px] absolute top-[137px] left-[239px] border-t-3 ">
+          {commentators.map((runner) => (
+            <RunnerBox
+              key={runner.id}
+              className="border-l-3 border-r-3 border-white"
+              runner={false}
+              pronouns={runner.pronouns}
+              name={runner.name}
+            />
+          ))}
+        </div>
+
+        <div className="absolute bottom-0 right-0 w-[446px] border-t-5 border-l-5 border-white">
+          <RunnerBox
+            twitch={player2?.social.twitch}
+            youtube={player2?.social.youtube}
+            runner={true}
+            pronouns={player2?.pronouns}
+            name={player2?.name ?? ""}
+          />
+        </div>
+      </div>
+      {/*Camera 2*/}
+      <div className="w-[498px] h-full border-white border-l-5 "></div>
+    </div>
+  );
+};
+
+export const L16x9_2P = () => {
+  return (
+    <ThemeProvider>
+      <Header />
+      <div className="h-[531px] w-full relative">
+        <div className="h-full w-[944px]  border-white border-r-5 border-b-5 relative">
+          <TeamTimer slot={0} classname="absolute bottom-0 right-0 mx-2" />
+        </div>
+        <div className="h-full w-[944px]  border-white border-l-5 border-b-5 absolute right-0 top-0">
+          <TeamTimer slot={1} classname="absolute bottom-0 left-0 mx-2" />
+        </div>
+      </div>
+      <BottomBar />
+    </ThemeProvider>
+  );
+};

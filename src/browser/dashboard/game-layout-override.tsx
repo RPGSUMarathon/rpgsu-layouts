@@ -8,7 +8,7 @@ import { LayoutInfo } from '../../types/generated/layoutinfo';
 export const GameLayoutOverride = () => {
     const [layouts] = useReplicant<LayoutInfo[]>("gameLayouts");
     const typedLayouts = layouts as LayoutInfo[] | undefined;
-    const [currentGameLayout, setCurrentGameLayout] = useReplicant<LayoutInfo>("currentGameLayout");
+    const [currentGameLayout, setCurrentGameLayout] = useReplicant<string>("currentGameLayout");
     const currentLayout = useMemo(() => typedLayouts?.find((item) => item.code === currentGameLayout), [currentGameLayout, typedLayouts]);
 
 
