@@ -1,27 +1,27 @@
-import { useReplicant } from '@nodecg/react-hooks';
+import { useReplicant } from "@nodecg/react-hooks";
 
 export function useGameTextSize() {
-  const [gameTextSize] = useReplicant<string>('layoutGameTextSize');
+  const [gameTextSize] = useReplicant<string>("layoutGameTextSize");
 
-  return gameTextSize ?? '';
+  return gameTextSize ?? "";
 }
 
 export function useRunnerTextSize() {
-  const [runnerTextSize] = useReplicant<string>('runnerTextSize');
+  const [runnerTextSize] = useReplicant<string>("runnerTextSize");
 
-  return runnerTextSize ?? '';
+  return runnerTextSize ?? "";
 }
 
 export function useCategoryTextSize() {
-  const [categoryTextSize] = useReplicant<string>('categoryTextSize');
+  const [categoryTextSize] = useReplicant<string>("categoryTextSize");
 
-  return categoryTextSize ?? '';
+  return categoryTextSize ?? "";
 }
 
 //Instead of changing the commentator text, change the number of columns
 
 export function useCommentatorColumnSize() {
-  const [commentatorColumnSize] = useReplicant<number>('commentatorColumnSize');
+  const [commentatorColumnSize] = useReplicant<number>("commentatorColumnSize");
 
   return commentatorColumnSize ?? -1;
 }

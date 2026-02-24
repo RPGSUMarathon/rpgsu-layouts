@@ -1,4 +1,3 @@
-
 type Props = {
   utcTimeString: string;
 };
@@ -6,10 +5,12 @@ type Props = {
 /**
  * React component example using the TimeHelper
  */
-export const TimeDisplay = ({ utcTimeString} : Props) => {
+export const TimeDisplay = ({ utcTimeString }: Props) => {
   return (
-    <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}> 
-    {utcTimeString}
+    <div
+      style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "8px" }}
+    >
+      {utcTimeString}
     </div>
   );
 };

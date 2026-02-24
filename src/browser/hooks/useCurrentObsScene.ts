@@ -1,9 +1,9 @@
-import { useReplicant } from '@nodecg/react-hooks';
+import { useReplicant } from "@nodecg/react-hooks";
 
 function useCurrentObsScene() {
-  const [currentOBSScene] = useReplicant<string>('currentOBSScene');
+  const [currentOBSScene] = useReplicant<string>("currentOBSScene");
 
-  return currentOBSScene ?? '';
+  return currentOBSScene ?? "";
 }
 
 export default useCurrentObsScene;
