@@ -37,7 +37,9 @@ export const App = () => {
           className={`${disableChange ? "bg-gray-400" : " bg-blue-500 hover:bg-blue-700/50"} rounded-lg shadow-lg  p-2`}
           onClick={() => {
             if (nextRun) {
-              nodecg.sendMessage("switchToIntermission");
+              nodecg.sendMessage("switchToIntermission").catch(() => {
+                /* empty */
+              });
             }
           }}
         >
