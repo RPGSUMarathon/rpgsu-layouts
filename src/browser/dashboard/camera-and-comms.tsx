@@ -24,7 +24,7 @@ const CameraDashboard: React.FC = () => {
             pronouns: ''
         };
 
-        setCommentators([...commentators, newItem]);
+        setCommentators([...(commentators ?? []), newItem]);
         setNameInput('');
     };
 

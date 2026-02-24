@@ -9,7 +9,7 @@ export const IntermissionInfoContainer = ({ className = '' }: { className?: stri
         .join(', ') || '';
 
     return (
-        <div className={`border border-5 border-white grid grid-flow-row text-center w-4/12 mx-auto shadow ${className}`} style={{
+        <div className={`border border-5 border-white grid grid-flow-row text-center mx-10 my-10 shadow ${className}`} style={{
             backgroundColor: "var(--color-bs-header)"
         }}>
             <div className="p-8 relative">

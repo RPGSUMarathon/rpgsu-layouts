@@ -6,7 +6,7 @@
     "lib": ["ES2022", "DOM", "es5", "es6", "dom", "dom.iterable"],
     "types": ["node"],
     "sourceMap": true,
-    "importHelpers": true,
+    "importHelpers": false,
     "resolveJsonModule": true,
     "strict": true,
     "noUnusedLocals": true,
