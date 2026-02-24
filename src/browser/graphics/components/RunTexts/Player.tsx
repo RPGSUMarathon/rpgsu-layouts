@@ -1,21 +1,21 @@
-import useCurrentRun from '../../../hooks/useCurrentRun';
-import { CSSProperties, useMemo } from 'react';
+import { type CSSProperties, useMemo } from "react";
+import useCurrentRun from "../../../hooks/useCurrentRun";
 
 type PlayerProps = {
-  style?: CSSProperties;
   slot?: number;
+  style?: CSSProperties;
 };
 
 export const Player = ({ slot = 0 }: PlayerProps) => {
   const currentRun = useCurrentRun();
 
   const playerNames = useMemo(() => {
-    if (!currentRun || currentRun.teams.length === 0) return '';
+    if (!currentRun || currentRun.teams.length === 0) return "";
 
     return (
       currentRun.teams[slot]?.players
-        .map((player) => player.social?.twitch || player.name)
-        .join(', ') || ''
+        .map((player) => player.social?.twitch ?? player.name)
+        .join(", ") ?? ""
     );
   }, [currentRun, slot]);
 

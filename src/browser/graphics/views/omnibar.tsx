@@ -1,15 +1,15 @@
-import { render } from '../../render';
+import { render } from "../../render";
 
 type Props = {
-    className?: string,
-}
+  className?: string;
+};
 
 export const Omnibar = ({ className }: Props) => {
-
   return (
-      <div className={`w-full h-[60px] ${className}`} style={{boxShadow: "0px -2px 2px rgba(0,0,0,0.1)"}}>
-
-        </div>
+    <div
+      className={`w-full h-[60px] ${className}`}
+      style={{ boxShadow: "0px -2px 2px rgba(0,0,0,0.1)" }}
+    />
   );
 };
 
