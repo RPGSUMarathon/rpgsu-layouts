@@ -21,9 +21,9 @@ type Props = {
 
 const FunFactContainer = ({ text }: Props) => {
   return (
-    <div className='mx-10 my-10 h-55 shadow-2xl inset-shadow-md inset-shadow-black border-7 border-[#375481] rounded-b-sm relative bg-[#141c2f]'>
+    <div className='mx-10 my-10 h-73 shadow-2xl inset-shadow-md inset-shadow-black border-7 border-[#375481] rounded-b-sm relative bg-[#141c2f]'>
       <span className='pl-5 pr-8 py-2 text-3xl bg-[#5775a4] absolute -top-6.25 -left-7.5 rounded-sm w-140 font-normal italic'>Did you know...</span>
-      <div className="absolute text-center flex flex-col items-center justify-center place-content-center h-46.5 top-5.5">
+      <div className="absolute text-center flex flex-col items-center justify-center place-content-center h-65 top-6">
         <><AutoTextSize className='font-light px-1' mode={'box'} minFontSizePx={18} maxFontSizePx={40}>{text}</AutoTextSize></>
       </div>
     </div>
