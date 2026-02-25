@@ -1,13 +1,11 @@
-import { render } from '../../render';
-import { ThemeProvider } from '../components/theme-provider';
-import {HeaderRestream} from '../components/Header/HeaderRestream';
-
+import { render } from "../../render";
+import { HeaderRestream } from "../components/Header/HeaderRestream";
+import { ThemeProvider } from "../components/theme-provider";
 
 const Layout3 = () => {
-
   return (
     <ThemeProvider>
-        <HeaderRestream />
+      <HeaderRestream />
     </ThemeProvider>
   );
 };

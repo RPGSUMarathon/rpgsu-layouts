@@ -1,84 +1,77 @@
-import { useEffect, useRef, useState } from 'react';
-import {IntermissionLogoSocialMedia} from './IntermissionLogoSocialMedia';
-import { CrossOverLogo } from './CrossOverLogo';
+import { useEffect, useRef, useState } from "react";
 import Logo from "../../img/text-banner.png";
+import { CrossOverLogo } from "./CrossOverLogo";
+import { IntermissionLogoSocialMedia } from "./IntermissionLogoSocialMedia";
 
+export const RotatingImage = ({ className = "" }: { className?: string }) => {
+  const [activeIndex, setActiveIndex] = useState<0 | 1 | 2>(1);
+  const [isVisible, setIsVisible] = useState(true);
+  const activeIndexRef = useRef<0 | 1 | 2>(1);
 
-export const RotatingImage = ({ className = '' }: { className?: string }) => {
-	const [activeIndex, setActiveIndex] = useState<0 | 1 | 2>(1);
-	const [isVisible, setIsVisible] = useState(true);
-	const timeoutsRef = useRef<number[]>([]);
+  const FADE_MS = 1000;
+  const DISPLAY_MS = 15000;
 
-	useEffect(() => {
-		const FADE_MS = 1000; // fade in/out duration
-		const DISPLAY_MS = 15000; // time fully visible before fade out
+  useEffect(() => {
+    const cycle = () => {
+      setIsVisible(false);
 
-		// Clear any existing timeouts when effect re-runs/unmounts
-		timeoutsRef.current.forEach((id) => window.clearTimeout(id));
-		timeoutsRef.current = [];
+      setTimeout(() => {
+        const next =
+          activeIndexRef.current === 0
+            ? 1
+            : activeIndexRef.current === 1
+              ? 2
+              : 0;
+        activeIndexRef.current = next as 0 | 1 | 2;
+        setActiveIndex(next as 0 | 1 | 2);
+        setIsVisible(true);
+      }, FADE_MS);
+    };
 
-		// Ensure we start visible
-		setIsVisible(true);
+    const intervalId = window.setInterval(cycle, DISPLAY_MS + FADE_MS);
 
-		// After DISPLAY_MS, start fade out
-		timeoutsRef.current.push(
-			window.setTimeout(() => {
-				setIsVisible(false);
-				// After fade completes, switch the active index and fade in
-				timeoutsRef.current.push(
-					window.setTimeout(() => {
-						setActiveIndex((prev) => (prev === 0 ? 1 : prev === 1 ? 2 : 0));
-						setIsVisible(true);
-					}, FADE_MS)
-				);
-			}, DISPLAY_MS)
-		);
+    return () => window.clearInterval(intervalId);
+  }, []); // runs once only
 
-		return () => {
-			timeoutsRef.current.forEach((id) => window.clearTimeout(id));
-			timeoutsRef.current = [];
-		};
-	}, [activeIndex]);
+  return (
+    <div className={`grid place-items-center w-9/12 mx-auto ${className}`}>
+      {/* Layer 1: IntermissionLogoImage */}
+      <div
+        className={`col-start-1 row-start-1 w-1/2 transition-opacity duration-1000 ${
+          activeIndex === 0
+            ? isVisible
+              ? "opacity-100"
+              : "opacity-0"
+            : "opacity-0"
+        }`}
+      >
+        <CrossOverLogo />
+      </div>
 
-	// If the intermission logo is not present initially (e.g., replicant not ready),
-	// start by showing the static text banner so something is visible.
-	useEffect(() => {
-		// Run once on mount
-		const img = new Image();
-		img.src = Logo;
-		img.onload = () => {
-			// If nothing rendered yet (both layers at opacity-0), ensure one is visible
-			setIsVisible(true);
-		};
-	}, []);
+      {/* Layer 2: Static Logo image */}
+      <div
+        className={`col-start-1 w-9/12 row-start-1  transition-opacity duration-1000 ${
+          activeIndex === 1
+            ? isVisible
+              ? "opacity-100"
+              : "opacity-0"
+            : "opacity-0"
+        }`}
+      >
+        <img src={Logo} alt="Logo" />
+      </div>
 
-	return (
-		<div className={`grid place-items-center w-9/12 mx-auto ${className}`}>
-			{/* Layer 1: IntermissionLogoImage */}
-			<div
-				className={`col-start-1 row-start-1 w-1/2 transition-opacity duration-1000 ${
-					activeIndex === 0 ? (isVisible ? 'opacity-100' : 'opacity-0') : 'opacity-0'
-				}`}
-			>
-				<CrossOverLogo />
-			</div>
-
-			{/* Layer 2: Static Logo image */}
-			<div
-				className={`col-start-1 w-9/12 row-start-1  transition-opacity duration-1000 ${
-					activeIndex === 1 ? (isVisible ? 'opacity-100' : 'opacity-0') : 'opacity-0'
-				}`}
-			>
-				<img src={Logo} alt="Logo" />
-			</div>
-
-			<div
-				className={`col-start-1 row-start-1 transition-opacity duration-1000 ${
-					activeIndex === 2 ? (isVisible ? 'opacity-100' : 'opacity-0') : 'opacity-0'
-				}`}
-			>
-				<IntermissionLogoSocialMedia />
-			</div>
-		</div>
-	);
-}
+      <div
+        className={`col-start-1 row-start-1 transition-opacity duration-1000 ${
+          activeIndex === 2
+            ? isVisible
+              ? "opacity-100"
+              : "opacity-0"
+            : "opacity-0"
+        }`}
+      >
+        <IntermissionLogoSocialMedia />
+      </div>
+    </div>
+  );
+};

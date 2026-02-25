@@ -1,9 +1,9 @@
-import { useReplicant } from '@nodecg/react-hooks';
+import { useReplicant } from "@nodecg/react-hooks";
 
 function useCameraOn() {
-  const [cameraOn] = useReplicant<boolean>('cameraOn');
+  const [cameraOn] = useReplicant<boolean>("cameraOn");
 
-  return cameraOn ?? '';
+  return cameraOn ?? "";
 }
 
 export default useCameraOn;

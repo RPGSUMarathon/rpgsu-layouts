@@ -1,9 +1,8 @@
-import { useReplicant } from '@nodecg/react-hooks';
-import { Commentator } from '../../types/generated/commentators';
-
+import { useReplicant } from "@nodecg/react-hooks";
+import { Commentator } from "../../types/generated/commentators";
 
 function useCommentators() {
-  const [commentators] = useReplicant<Commentator[]>('commentators');
+  const [commentators] = useReplicant<Commentator[]>("commentators");
 
   return commentators ?? [];
 }

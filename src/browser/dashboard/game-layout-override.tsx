@@ -1,9 +1,8 @@
-import { render } from '../render';
-import { DashboardThemeProvider } from './components/DashboardThemeProvider';
-import { useReplicant } from '@nodecg/react-hooks';
-import { useMemo } from 'react';
-import { LayoutInfo } from '../../types/generated/layoutinfo';
-
+import { useReplicant } from "@nodecg/react-hooks";
+import { useMemo } from "react";
+import { type LayoutInfo } from "../../types/generated/layoutinfo";
+import { render } from "../render";
+import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
 
 export const GameLayoutOverride = () => {
     const [layouts] = useReplicant<LayoutInfo[]>("gameLayouts");
@@ -12,34 +11,36 @@ export const GameLayoutOverride = () => {
     const currentLayout = useMemo(() => typedLayouts?.find((item) => item.code === currentGameLayout), [currentGameLayout, typedLayouts]);
 
 
-    return (
-        <DashboardThemeProvider>
-            <h3>Selected Layout: {currentLayout ? currentLayout.name : "No Layout Selected"}</h3>
-            <div
-                id="dropdown"
-                className="z-10 h-45 overflow-y-auto bg-gray-200/80 divide-y divide-gray-100 rounded-lg shadow-sm w-55 dark:bg-gray-700"
-            >
-                <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownDefaultButton"
-                >
-                    {typedLayouts?.map((layout) => (
-                        <li key={layout.code}>
-                            <button
-                                className="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                onClick={() => {
-                                    setCurrentGameLayout(layout.code);
-                                }}
-                            >
-                                {layout.name}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </DashboardThemeProvider>
-    );
+  return (
+    <DashboardThemeProvider>
+      <h3>
+        Selected Layout:{" "}
+        {currentLayout ? currentLayout.name : "No Layout Selected"}
+      </h3>
+      <div
+        id="dropdown"
+        className="z-10 h-45 overflow-y-auto bg-gray-200/80 divide-y divide-gray-100 rounded-lg shadow-sm w-55 dark:bg-gray-700"
+      >
+        <ul
+          className="py-2 text-sm text-gray-700 dark:text-gray-200"
+          aria-labelledby="dropdownDefaultButton"
+        >
+          {typedLayouts?.map((layout) => (
+            <li key={layout.code}>
+              <button
+                className="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                onClick={() => {
+                  setCurrentGameLayout(layout.code);
+                }}
+              >
+                {layout.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </DashboardThemeProvider>
+  );
 };
 
-
-render(<GameLayoutOverride />)
+render(<GameLayoutOverride />);
