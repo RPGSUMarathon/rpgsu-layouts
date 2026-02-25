@@ -1,11 +1,12 @@
 import { ThemeProvider } from '../../components/theme-provider';
 import {Header} from '../../components/Header/Header';
 import { RunnerBox } from '../../components/RunTexts/RunnerBox';
+import { Omnibar } from '../../views/omnibar';
 import Twitch from "../../img/icons/twitch-color.png";
 import Youtube from "../../img/icons/youtube-color.png";
 import Bluesky from "../../img/icons/bluesky-color.png";
 import Logo from "../../img/logo-text.png";
-import Waves from "../../img/waves.png";
+import Background from "../../img/online-background.png";
 import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
@@ -20,43 +21,29 @@ const Sidebar16x9 = () => {
     const player = currentRun?.teams[0]?.players[0];
 
     const runnerTextSize = useRunnerTextSize();
-    const marginRatio = (commentators.length * -12) + 70;
+    // const marginRatio = (commentators.length * -12) + 70;
 
-    return (
-        <div>
-            <div className={`h-[965px] w-[480px] border-r-3 border-white"`} >
-                {cameraOn && cameraOn ? <div id="CameraBox" className="w-full h-[270px] border-b-3 border-white" /> : <div className='h-[270px] border-b-3 border-white'><NoCamera /></div>}
-                <div className='bg-[#278178] h-full ' style={{
-                    backgroundImage: `url(${Waves})`
-                }}>
-                    <RunnerBox twitch={player?.social.twitch} youtube={player?.social.youtube}  textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
-                    {commentators.length > 0 ? <div className='grid grid-cols-1'>
+   return (
+        <div className={'flex h-[900px] w-[1920px]'} style={{backgroundImage: `url(${Background})`}}>
+            <div className={`flex-none w-[450px] h-full border-r-10 border-white`}>
+                {cameraOn && cameraOn ? <div id="CameraBox" className="w-full aspect-4/3 border-b-10 border-white bg-black" /> : <div className='h-[270px] border-b-3 border-white'><NoCamera /></div>}
+                <div className='h-full'>
+                    <RunnerBox twitch={player?.social.twitch} youtube={player?.social.youtube} textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
+                    {commentators.length > 0 ? <div className={'flex-1 w-full'}>
                         {commentators.map((runner) =>
-                            <RunnerBox runner={false} className='border-r-3 border-white' pronouns={runner.pronouns} name={runner.name} />
+                            <RunnerBox runner={false} className='flex-none' pronouns={runner.pronouns} name={runner.name} />
                         )}
                     </div> : <></>}
-                    <div className='flex flex-col items-center justify-center' >
-                        <img src={Logo} alt="Logo" className={`w-1/2`} style={{ marginTop: `calc(var(--spacing) * ${marginRatio})` }} />
-                        <h2 className="drop-shadow-2xl text-2xl wrap-normal">A home for RPG Speedruns.</h2>
-                    </div>
+                    {/* <SidebarSocialMedia className='' /> */}
                 </div>
             </div>
-            <div className={`absolute left-[480px] bottom-0 w-[1440px] h-[155px] bg-[#278178] flex flex-row items-center justify-center gap-25 border-t-3 border-white`} >
-                <div className="inline-flex items-center gap-5 text-4xl drop-shadow">
-                    <img width={50} height={50} src={Twitch} alt="Twitch Logo" />
-                    <span>@rpgsu</span>
+            <div className={'flex-1'}>
+                <div className={'flex-none w-full aspect-video bg-black'}>
                 </div>
-                <div className="inline-flex items-center gap-5 text-4xl">
-                    <img width={50} height={50} src={Youtube} alt="Youtube Logo" />
-                    <span>@rpgsumarathon</span>
-                </div>
-                <div className="inline-flex items-center gap-5 text-4xl">
-                    <img width={50} height={50} src={Bluesky} alt="Bluesky Logo" />
-                    <span>@rpgsu</span>
+                <div className={'flex-1 border-t-10 border-t-white'}>           
                 </div>
             </div>
         </div>
-
     );
 }
 
@@ -67,6 +54,7 @@ export const L16x9_1P = () => {
     <ThemeProvider>
         <Header />
         <Sidebar16x9 />
+        <Omnibar />
     </ThemeProvider>
   );
 };
