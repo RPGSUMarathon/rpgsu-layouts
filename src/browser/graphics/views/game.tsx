@@ -8,7 +8,9 @@ const layoutMap: Record<string, React.FC> = {
   "16_9-1p": Layouts.L16x9_1P,
   "gb-1p": Layouts.Lgb_1P,
   "gba-1p": Layouts.Lgba_1P,
-  "16_9-2p": Layouts.L16x9_2P,
+  "3ds-1p": Layouts.L3ds_1P,
+  "ds-1p": Layouts.Lds_1P
+  "16_9-2p": Layouts.L16x9_2P
 };
 
 export function DynamicLayout({ layoutKey }: { layoutKey: string }) {
