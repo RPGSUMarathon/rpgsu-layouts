@@ -26,7 +26,7 @@ export const Sidebar = () => {
           </div>
         )}
         <div
-          className="h-140.5"
+          className="h-138.25"
           style={{ backgroundImage: `url(${Background})` }}
         >
           <RunnerBox
