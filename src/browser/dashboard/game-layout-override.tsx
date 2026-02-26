@@ -5,11 +5,14 @@ import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
 
 export const GameLayoutOverride = () => {
-    const [layouts] = useReplicant<LayoutInfo[]>("gameLayouts");
-    const typedLayouts = layouts as LayoutInfo[] | undefined;
-    const [currentGameLayout, setCurrentGameLayout] = useReplicant<string>("currentGameLayout");
-    const currentLayout = useMemo(() => typedLayouts?.find((item) => item.code === currentGameLayout), [currentGameLayout, typedLayouts]);
-
+  const [layouts] = useReplicant<LayoutInfo[]>("gameLayouts");
+  const typedLayouts = layouts as LayoutInfo[] | undefined;
+  const [currentGameLayout, setCurrentGameLayout] =
+    useReplicant<string>("currentGameLayout");
+  const currentLayout = useMemo(
+    () => typedLayouts?.find((item) => item.code === currentGameLayout),
+    [currentGameLayout, typedLayouts],
+  );
 
   return (
     <DashboardThemeProvider>

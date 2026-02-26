@@ -1,5 +1,6 @@
 import { useReplicant } from "@nodecg/react-hooks";
 import { AutoTextSize } from "auto-text-size";
+import { useEffect, useMemo, useState } from "react";
 import { type NowPlaying } from "../../../../bundles/nodecg-foobar2000-controller/src/types/nowPlaying";
 import { type RunData } from "../../../../bundles/nodecg-speedcontrol/src/types/schemas";
 import { Helpers } from "../../helpers";
@@ -12,7 +13,6 @@ import Bluesky from "../img/icons/bluesky.png";
 import Youtube from "../img/icons/youtube.png";
 import Logo from "../img/online-logo.png";
 import { Omnibar } from "./omnibar";
-import { useEffect, useMemo, useState } from "react";
 
 const FunFactContainer = ({ text }: { text: string }) => {
   const facts: string[] = useMemo(() => {
@@ -27,23 +27,32 @@ const FunFactContainer = ({ text }: { text: string }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-    useEffect(() => {
+  useEffect(() => {
     if (facts.length <= 1) return;
 
     const interval = setInterval(() => {
       setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % facts.length);
-      }, 500); 
-    }, 13000); 
+      }, 500);
+    }, 13000);
 
     return () => clearInterval(interval);
   }, [facts]);
 
   return (
-        <div className='mx-10 my-10 h-73 shadow-2xl inset-shadow-md inset-shadow-black border-7 border-[#375481] rounded-b-sm relative bg-[#141c2f]'>
-      <span className='pl-5 pr-8 py-2 text-3xl bg-[#5775a4] absolute -top-6.25 -left-7.5 rounded-sm w-140 font-normal italic'>Did you know...</span>
+    <div className="mx-10 my-10 h-73 shadow-2xl inset-shadow-md inset-shadow-black border-7 border-[#375481] rounded-b-sm relative bg-[#141c2f]">
+      <span className="pl-5 pr-8 py-2 text-3xl bg-[#5775a4] absolute -top-6.25 -left-7.5 rounded-sm w-140 font-normal italic">
+        Did you know...
+      </span>
       <div className="absolute text-center flex flex-col items-center justify-center place-content-center h-65 top-6">
-        <><AutoTextSize className='font-light px-1' mode={'box'} minFontSizePx={18} maxFontSizePx={40}>{facts[currentIndex]}</AutoTextSize></>
+        <AutoTextSize
+          className="font-light px-1"
+          mode="box"
+          minFontSizePx={18}
+          maxFontSizePx={40}
+        >
+          {facts[currentIndex]}
+        </AutoTextSize>
       </div>
     </div>
   );

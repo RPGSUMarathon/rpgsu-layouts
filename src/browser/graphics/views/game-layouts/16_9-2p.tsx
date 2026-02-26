@@ -1,12 +1,12 @@
-import { ThemeProvider } from "../../components/theme-provider";
-import { Header } from "../../components/Header/Header";
-import { RunnerBox } from "../../components/RunTexts/RunnerBox";
-import useCurrentRun from "../../../hooks/useCurrentRun";
-import useCommentators from "../../../hooks/useCommentators";
 import useCameraOn from "../../../hooks/useCameraOn";
+import useCommentators from "../../../hooks/useCommentators";
+import useCurrentRun from "../../../hooks/useCurrentRun";
+import { Header } from "../../components/Header/Header";
 import { NoCamera } from "../../components/NoCamera";
-import background from "../../img/online-background.png";
+import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import { TeamTimer } from "../../components/RunTexts/TeamTimer";
+import { ThemeProvider } from "../../components/theme-provider";
+import background from "../../img/online-background.png";
 
 const BottomBar = () => {
   const currentRun = useCurrentRun();
@@ -20,13 +20,13 @@ const BottomBar = () => {
     <div className="h-[374px] w-full inline-flex">
       {/*Camera 1*/}
       {cameraOn && cameraOn ? (
-        <div className="w-[498px] h-full border-white border-r-5"></div>
+        <div className="w-[498px] h-full border-white border-r-5" />
       ) : (
         <div className="w-[498px] h-full border-white border-r-5">
           <NoCamera />
         </div>
       )}
-      
+
       <div
         className="w-[924px] h-full relative"
         style={{ backgroundImage: `url(${background})` }}
@@ -35,7 +35,7 @@ const BottomBar = () => {
           <RunnerBox
             twitch={player1?.social.twitch}
             youtube={player1?.social.youtube}
-            runner={true}
+            runner
             pronouns={player1?.pronouns}
             name={player1?.name ?? ""}
           />
@@ -57,7 +57,7 @@ const BottomBar = () => {
           <RunnerBox
             twitch={player2?.social.twitch}
             youtube={player2?.social.youtube}
-            runner={true}
+            runner
             pronouns={player2?.pronouns}
             name={player2?.name ?? ""}
           />
@@ -65,7 +65,7 @@ const BottomBar = () => {
       </div>
       {/*Camera 2*/}
       {cameraOn && cameraOn ? (
-        <div className="w-[498px] h-full border-white border-l-5 "></div>
+        <div className="w-[498px] h-full border-white border-l-5 " />
       ) : (
         <div className="w-[498px] h-full border-white border-l-5">
           <NoCamera />
