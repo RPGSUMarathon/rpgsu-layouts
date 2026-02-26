@@ -1,7 +1,7 @@
 import { ThemeProvider } from '../../components/theme-provider';
 import { Header } from '../../components/Header/Header';
 import { RunnerBox } from '../../components/RunTexts/RunnerBox';
-import { Omnibar } from '../../views/omnibar';
+import { Omnibar } from '../omnibar';
 import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
 import useCurrentRun from '../../../hooks/useCurrentRun';
 import useCommentators from '../../../hooks/useCommentators';
@@ -16,8 +16,9 @@ import Logo from "../../img/text-banner.png"; */
 
 
 type Props = {
-  className?: string;
-};
+    className?: string,
+}
+
 
 /* Currently Unused
  
@@ -43,77 +44,48 @@ const SidebarSocialMedia = ({ className }: Props) => {
 } */
 
 
-export const Center4x3 = () => {
+export const Center5x3 = () => {
     const currentRun = useCurrentRun();
     const cameraOn = useCameraOn();
     const commentators = useCommentators();
 
     const player = currentRun?.teams[0]?.players[0];
 
-  const player = currentRun?.teams[0]?.players[0];
+    const runnerTextSize = useRunnerTextSize();
 
     return (
         <div className={'flex h-[900px]'} style={{backgroundImage: `url(${Background})`}}>
-            <div className={`flex-none w-[450px] h-full border-r-10 border-white`}>
+            <div className={`flex-none w-[420px] h-full border-r-10 border-white`}>
                 {cameraOn && cameraOn ? <div id="CameraBox" className="w-full aspect-4/3 border-b-10 border-white bg-black" /> : <div className='h-[270px] border-b-3 border-white'><NoCamera /></div>}
-                <div className='h-full'>
+                <div className='flex-none'>
                     <RunnerBox twitch={player?.social.twitch} youtube={player?.social.youtube} textSize={runnerTextSize} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
-                    {commentators.length > 0 ? <div className={'flex-1 w-full'}>
+                    {commentators.length > 0 ? <div className={'flex-1 h-[234px] w-full'}>
                         {commentators.map((runner) =>
                             <RunnerBox runner={false} className='flex-none' pronouns={runner.pronouns} name={runner.name} />
                         )}
                     </div> : <></>}
                     {/* <SidebarSocialMedia className='' /> */}
                 </div>
+                <div className='aspect-4/3 border-t-10 bg-black'>
+                </div>
             </div>
-            <div className={'flex-none h-full aspect-4/3 bg-black'}>
+            <div className={'flex-none h-full aspect-5/3 bg-black'}>
             </div>
             <div className={'flex-1 border-l-10 border-l-white'}>           
             </div>
         </div>
-      )}
-      <div
-        className="bg-[#278178] h-full"
-        style={{
-          backgroundImage: `url(${Waves})`,
-        }}
-      >
-        <RunnerBox
-          twitch={player?.social.twitch}
-          youtube={player?.social.youtube}
-          textSize={runnerTextSize}
-          runner
-          pronouns={player?.pronouns}
-          name={player?.name ?? ""}
-        />
-        {commentators.length > 0 && (
-          <div
-            className={`grid ${commentatorsColumns > 0 ? `grid-cols-${commentatorsColumns}` : "grid-cols-2"} `}
-          >
-            {commentators.map((runner) => (
-              <RunnerBox
-                key={runner.name}
-                runner={false}
-                className="border-r-3 border-white"
-                pronouns={runner.pronouns}
-                name={runner.name}
-              />
-            ))}
-          </div>
-        )}
-        <SidebarSocialMedia className="" />
-      </div>
-    </div>
-  );
-};
+    );
+}
 
 
 
-export const L4x3_1P = () => {
+
+export const L3ds_1P = () => {
+
   return (
     <ThemeProvider>
       <Header />
-      <Center4x3 /> 
+      <Center5x3 /> 
       <Omnibar />
     </ThemeProvider>
   );
