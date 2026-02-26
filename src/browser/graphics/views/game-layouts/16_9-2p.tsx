@@ -19,7 +19,14 @@ const BottomBar = () => {
   return (
     <div className="h-[374px] w-full inline-flex">
       {/*Camera 1*/}
-      <div className="w-[498px] h-full border-white border-r-5  "></div>
+      {cameraOn && cameraOn ? (
+        <div className="w-[498px] h-full border-white border-r-5"></div>
+      ) : (
+        <div className="w-[498px] h-full border-white border-r-5">
+          <NoCamera />
+        </div>
+      )}
+      
       <div
         className="w-[924px] h-full relative"
         style={{ backgroundImage: `url(${background})` }}
@@ -57,7 +64,13 @@ const BottomBar = () => {
         </div>
       </div>
       {/*Camera 2*/}
-      <div className="w-[498px] h-full border-white border-l-5 "></div>
+      {cameraOn && cameraOn ? (
+        <div className="w-[498px] h-full border-white border-l-5 "></div>
+      ) : (
+        <div className="w-[498px] h-full border-white border-l-5">
+          <NoCamera />
+        </div>
+      )}
     </div>
   );
 };
