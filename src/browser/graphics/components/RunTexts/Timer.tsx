@@ -33,7 +33,7 @@ export const Timer = ({ style, className }: TimerProps) => {
     >
       {timer && (
         <div
-          className={`${className} ${timer.state === "finished" ? "shine-animation" : ""}`}
+          className={`${className} ${timer.state === "finished" && "shine-animation"}`}
           style={{ color: timerColors[timer.state], transition: "color 0.5s" }}
         >
           {timer.time}

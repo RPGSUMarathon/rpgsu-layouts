@@ -35,7 +35,7 @@ export const Center3DS = () => {
             pronouns={player?.pronouns}
             name={player?.name ?? ""}
           />
-          {commentators.length > 0 ? (
+          {commentators.length > 0 && (
             <div className="flex-1 h-47.5 w-full">
               {commentators.map((runner) => (
                 <RunnerBox
@@ -43,11 +43,10 @@ export const Center3DS = () => {
                   className="flex-none"
                   pronouns={runner.pronouns}
                   name={runner.name}
+                  key={runner.id}
                 />
               ))}
             </div>
-          ) : (
-            <></>
           )}
         </div>
       </div>
