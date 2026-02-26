@@ -4,7 +4,6 @@ import { RunnerBox } from '../../components/RunTexts/RunnerBox';
 import { Omnibar } from '../../views/omnibar';
 import Twitch from "../../img/icons/twitch-color.png";
 import Youtube from "../../img/icons/youtube-color.png";
-import Bluesky from "../../img/icons/bluesky-color.png";
 import Logo from "../../img/logo-text.png";
 import Background from "../../img/online-background.png";
 import { useRunnerTextSize } from '../../../hooks/useLayoutTextSize';
@@ -14,11 +13,11 @@ import useCameraOn from '../../../hooks/useCameraOn';
 import { NoCamera } from '../../components/NoCamera';
 
 const Sidebar16x9 = () => {
-    const currentRun = useCurrentRun();
-    const cameraOn = useCameraOn();
-    const commentators = useCommentators();
+  const currentRun = useCurrentRun();
+  const cameraOn = useCameraOn();
+  const commentators = useCommentators();
 
-    const player = currentRun?.teams[0]?.players[0];
+  const player = currentRun?.teams[0]?.players[0];
 
     const runnerTextSize = useRunnerTextSize();
     // const marginRatio = (commentators.length * -12) + 70;
@@ -43,13 +42,24 @@ const Sidebar16x9 = () => {
                 <div className={'flex-1 border-t-10 border-t-white'}>           
                 </div>
             </div>
+          )}
+          <div className="flex flex-col items-center justify-center">
+            <img
+              src={Logo}
+              alt="Logo"
+              className="w-1/2"
+              style={{ marginTop: `calc(var(--spacing) * ${marginRatio})` }}
+            />
+            <h2 className="drop-shadow-2xl text-2xl wrap-normal">
+              A home for RPG Speedruns.
+            </h2>
+          </div>
         </div>
     );
 }
 
 
 export const L16x9_1P = () => {
-
   return (
     <ThemeProvider>
         <Header />

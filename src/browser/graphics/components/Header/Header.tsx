@@ -7,8 +7,8 @@ import Logo from "../../img/text-banner.png";
 import OnlineLongLogo from "../../img/base-long-online-logo.png";
 
 export const Header = () => {
-    const gameTextSize = useGameTextSize();
-    const categoryTextSize = useCategoryTextSize();
+  const gameTextSize = useGameTextSize();
+  const categoryTextSize = useCategoryTextSize();
 
     return (
         <div className='w-full h-[130px] border-b-10 border-white flex flex-row bg-gradient-to-b from-teal-800 to-teal-700'>
@@ -47,5 +47,20 @@ export const Header = () => {
                 </div>
             </div>
         </div>
-    );
-}
+        <div className="h-1/2 flex flex-row items-center">
+          <span
+            className={`h-full min-w-1/2 p-3 border-r-5 border-white text-white font-medium break-words wrap-normal ${categoryTextSize ? `text-${categoryTextSize}` : "text-3xl"}`}
+          >
+            <Category />
+          </span>
+          <span className="h-full p-3 border-white mx-auto text-3xl break-words wrap-normal">
+            <Estimate />
+          </span>
+        </div>
+      </div>
+      <div className="w-[400px] border-r-5 border-white flex items-center justify-center text-center">
+        <Timer className="text-7xl drop-shadow" />
+      </div>
+    </div>
+  );
+};

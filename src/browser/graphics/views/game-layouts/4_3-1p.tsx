@@ -16,9 +16,8 @@ import Logo from "../../img/text-banner.png"; */
 
 
 type Props = {
-    className?: string,
-}
-
+  className?: string;
+};
 
 /* Currently Unused
  
@@ -51,7 +50,7 @@ export const Center4x3 = () => {
 
     const player = currentRun?.teams[0]?.players[0];
 
-    const runnerTextSize = useRunnerTextSize();
+  const player = currentRun?.teams[0]?.players[0];
 
     return (
         <div className={'flex h-[900px]'} style={{backgroundImage: `url(${Background})`}}>
@@ -72,14 +71,45 @@ export const Center4x3 = () => {
             <div className={'flex-1 border-l-10 border-l-white'}>           
             </div>
         </div>
-    );
-}
-
+      )}
+      <div
+        className="bg-[#278178] h-full"
+        style={{
+          backgroundImage: `url(${Waves})`,
+        }}
+      >
+        <RunnerBox
+          twitch={player?.social.twitch}
+          youtube={player?.social.youtube}
+          textSize={runnerTextSize}
+          runner
+          pronouns={player?.pronouns}
+          name={player?.name ?? ""}
+        />
+        {commentators.length > 0 && (
+          <div
+            className={`grid ${commentatorsColumns > 0 ? `grid-cols-${commentatorsColumns}` : "grid-cols-2"} `}
+          >
+            {commentators.map((runner) => (
+              <RunnerBox
+                key={runner.name}
+                runner={false}
+                className="border-r-3 border-white"
+                pronouns={runner.pronouns}
+                name={runner.name}
+              />
+            ))}
+          </div>
+        )}
+        <SidebarSocialMedia className="" />
+      </div>
+    </div>
+  );
+};
 
 
 
 export const L4x3_1P = () => {
-
   return (
     <ThemeProvider>
       <Header />

@@ -1,22 +1,31 @@
-import { type ReactNode, Fragment } from 'react';
+import { type ReactNode } from "react";
 import "../styles.css";
+import background from "../img/online-background.png";
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+type Props = {
+  children: ReactNode;
+  className?: string;
+};
+
+export const ThemeProvider = ({ children, className }: Props) => {
   return (
-    <Fragment>
-      <div style={{
+    <div
+      style={{
         margin: 0,
         padding: 0,
         overflow: "hidden",
         color: "white",
-        fontWeight: "bold",
-        fontFamily: 'Futura, "Futura PT", "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif',
+        fontFamily:
+          '"Jost",sans-serif, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif',
         display: "flex",
         flexDirection: "column",
-      }}>
-        {children}
-      </div>
-
-    </Fragment>
+        width: "1920px",
+        height: "1080px",
+        backgroundImage: `url(${background})`,
+      }}
+      className={className}
+    >
+      {children}
+    </div>
   );
 };

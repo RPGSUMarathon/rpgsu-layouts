@@ -147,3 +147,5 @@ assets/*
 cfg/*
 
 vite.config.mts.*
+
+.DS_Store

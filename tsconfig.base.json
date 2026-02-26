@@ -3,10 +3,19 @@
     "module": "ES2022",
     "target": "ES2022",
     "moduleResolution": "bundler",
-    "lib": ["ES2022", "DOM", "es5", "es6", "dom", "dom.iterable"],
-    "types": ["node"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "es5",
+      "es6",
+      "dom",
+      "dom.iterable"
+    ],
+    "types": [
+      "node"
+    ],
     "sourceMap": true,
-    "importHelpers": true,
+    "importHelpers": false,
     "resolveJsonModule": true,
     "strict": true,
     "noUnusedLocals": true,
@@ -15,16 +24,26 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": false, // TODO: enable this
-    "noPropertyAccessFromIndexSignature": true,
+    "noPropertyAccessFromIndexSignature": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "speedcontrol/*": ["../../bundles/nodecg-speedcontrol/*"],
-      "@rpgsu-layouts/*": ["src/*", "src/graphics/*", "src/dashboard/*"],
-      "@rpgsu-layouts/types": ["src/types"],
-      "@rpgsu-layouts/types/*": ["src/types/*"]
+      "speedcontrol/*": [
+        "../../bundles/nodecg-speedcontrol/*"
+      ],
+      "@rpgsu-layouts/*": [
+        "src/*",
+        "src/graphics/*",
+        "src/dashboard/*"
+      ],
+      "@rpgsu-layouts/types": [
+        "src/types"
+      ],
+      "@rpgsu-layouts/types/*": [
+        "src/types/*"
+      ]
     }
   }
 }

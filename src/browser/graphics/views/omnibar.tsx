@@ -1,8 +1,16 @@
-export const Omnibar = () => {
+import { render } from "../../render";
 
-    return (
-        <div className='w-full h-[50px] flex flex-row bg-white'>
+type Props = {
+  className?: string;
+};
 
-        </div>
-    );
-}
+export const Omnibar = ({ className }: Props) => {
+  return (
+    <div
+      className={`w-full h-[60px] ${className}`}
+      style={{ boxShadow: "0px -2px 2px rgba(0,0,0,0.1)" }}
+    />
+  );
+};
+
+render(<Omnibar />);

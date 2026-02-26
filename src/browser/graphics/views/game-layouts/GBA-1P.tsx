@@ -15,11 +15,9 @@ import { NoCamera } from '../../components/NoCamera';
 
 
 export const SidebarGBA = () => {
-    const currentRun = useCurrentRun();
-    const cameraOn = useCameraOn();
-    const commentators = useCommentators();
-
-    const player = currentRun?.teams[0]?.players[0];
+  const currentRun = useCurrentRun();
+  const cameraOn = useCameraOn();
+  const commentators = useCommentators();
 
     const runnerTextSize = useRunnerTextSize();
 
@@ -46,7 +44,6 @@ export const SidebarGBA = () => {
 }
 
 export const Lgba_1P = () => {
-
   return (
     <ThemeProvider>
         <Header />
