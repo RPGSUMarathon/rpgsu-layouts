@@ -18,8 +18,8 @@ const player = currentRun?.teams[0]?.players[0];
 return (
 <div className={'flex h-[890px]'}>
     <div className={`flex flex-col w-112.5 h-full border-r-5 border-white`}>
-        {cameraOn && cameraOn ? <div id="CameraBox" className="w-full aspect-4/3 border-b-5 border-white" /> : <div className='h-[270px] border-b-3 border-white'><NoCamera /></div>}
-        <div className='h-full' style={{backgroundImage: `url(${Background})`}}>
+        {cameraOn && cameraOn ? <div id="CameraBox" className="w-full h-84.25  border-b-5 border-white" /> : <div className='h-84.25  border-b-5 border-white'><NoCamera /></div>}
+        <div className='h-140.5' style={{backgroundImage: `url(${Background})`}}>
             <RunnerBox twitch={player?.social.twitch} youtube={player?.social.youtube} runner={true} pronouns={player?.pronouns} name={player?.name ?? ""} />
             {commentators.length > 0 ? <div className={'flex-1 w-full'}>
                 {commentators.map((runner) =>
