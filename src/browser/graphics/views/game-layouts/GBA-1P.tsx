@@ -1,16 +1,18 @@
 import { Header } from "../../components/Header/Header";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ThemeProvider } from "../../components/theme-provider";
-import { Omnibar } from "../../views/omnibar";
 import Background from "../../img/online-background.png";
+import { Omnibar } from "../../views/omnibar";
 
 export const SidebarGBA = () => {
   return (
     <div className="flex h-[900px]">
       <Sidebar />
       <div className="flex-none h-full aspect-3/2 " />
-      <div className="flex-1 border-l-10 border-l-white" 
-        style={{ backgroundImage: `url(${Background})` }} />
+      <div
+        className="flex-1 border-l-10 border-l-white"
+        style={{ backgroundImage: `url(${Background})` }}
+      />
     </div>
   );
 };

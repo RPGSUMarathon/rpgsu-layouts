@@ -7,7 +7,6 @@ import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import { ThemeProvider } from "../../components/theme-provider";
 import Background from "../../img/online-background.png";
 
-
 export const Center3DS = () => {
   const currentRun = useCurrentRun();
   const cameraOn = useCameraOn();
@@ -16,9 +15,7 @@ export const Center3DS = () => {
   const player = currentRun?.teams[0]?.players[0];
 
   return (
-    <div
-      className="flex h-222.5"
-    >
+    <div className="flex h-222.5">
       <div className="flex-none w-112.5 h-full border-r-5 border-white">
         {cameraOn && cameraOn ? (
           <div
@@ -59,7 +56,6 @@ export const Center3DS = () => {
     </div>
   );
 };
-
 
 export const L3ds_1P = () => {
   return (

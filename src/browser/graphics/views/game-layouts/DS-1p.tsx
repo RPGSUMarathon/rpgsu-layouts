@@ -7,7 +7,6 @@ import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import { ThemeProvider } from "../../components/theme-provider";
 import Background from "../../img/online-background.png";
 
-
 export const CenterDS = () => {
   const currentRun = useCurrentRun();
   const cameraOn = useCameraOn();
@@ -16,9 +15,7 @@ export const CenterDS = () => {
   const player = currentRun?.teams[0]?.players[0];
 
   return (
-    <div
-      className="flex h-222.5"
-    >
+    <div className="flex h-222.5">
       <div className="flex-none w-112.5 h-full border-r-5 border-white">
         {cameraOn && cameraOn ? (
           <div
@@ -56,7 +53,10 @@ export const CenterDS = () => {
       </div>
       <div className="h-84.25 absolute w-112.5 bottom-[60px] left-0 border-t-5 " />
       <div className="flex-none h-full aspect-4/3 " />
-      <div className="flex-1 border-l-5 border-l-white" style={{ backgroundImage: `url(${Background})` }}/>
+      <div
+        className="flex-1 border-l-5 border-l-white"
+        style={{ backgroundImage: `url(${Background})` }}
+      />
     </div>
   );
 };
