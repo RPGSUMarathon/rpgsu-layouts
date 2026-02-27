@@ -3,7 +3,6 @@ import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ThemeProvider } from "../../components/theme-provider";
 import Background from "../../img/online-background.png";
 
-
 const SidebarGBA = () => {
   return (
     <div className="flex h-225">

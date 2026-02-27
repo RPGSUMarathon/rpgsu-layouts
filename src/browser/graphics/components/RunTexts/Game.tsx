@@ -8,7 +8,13 @@ export const Game = () => {
 
   return (
     <div className="h-full w-175  inline-flex align-center gap-5 auto-text-size-override font-medium">
-      <AutoTextSize className="pl-3" as="span" mode="oneline" minFontSizePx={26} maxFontSizePx={34}>
+      <AutoTextSize
+        className="pl-3"
+        as="span"
+        mode="oneline"
+        minFontSizePx={26}
+        maxFontSizePx={34}
+      >
         {game}
       </AutoTextSize>
     </div>

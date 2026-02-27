@@ -1,4 +1,4 @@
-import { CSSProperties, type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 import "../styles.css";
 type Props = {
   children: ReactNode;
@@ -20,7 +20,7 @@ export const ThemeProvider = ({ children, className, style }: Props) => {
         flexDirection: "column",
         width: "1920px",
         height: "1080px",
-        ...style
+        ...style,
       }}
       className={className}
     >
