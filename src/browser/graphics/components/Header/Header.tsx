@@ -12,11 +12,11 @@ export const Header = () => {
         </div>
         <div className="h-1/2 flex flex-row items-center">
           <span
-            className={`h-full min-w-1/2 border-r-5 border-white text-white `}
+            className={`h-full w-114.25  border-r-5 border-white text-white `}
           >
             <Category />
           </span>
-          <span className="h-full  border-white min-w-1/2">
+          <span className="h-full  border-white w-71.25">
             <Estimate />
           </span>
         </div>
@@ -24,10 +24,10 @@ export const Header = () => {
       <div className="h-full w-112.5 border-r-5 border-white ">
         <Timer className="font-bold drop-shadow" />
       </div>
-      <div className="flex max-w-95 pl-15">
+      <div className="flex max-w-95 pl-15 p-1">
         <img src={OnlineLongLogo} alt="OnlineLongLogo" />
       </div>
-      <div className="flex-1 text-2xl font-bold">
+      <div className="flex-1 text-2xl font-bold p-1">
         <div className="flex items-center gap-5">
           <span>Follow us on Social Media!</span>
         </div>
