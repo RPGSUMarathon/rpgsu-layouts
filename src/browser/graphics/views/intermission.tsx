@@ -13,7 +13,6 @@ import Bluesky from "../img/icons/bluesky.png";
 import Youtube from "../img/icons/youtube.png";
 import Background from "../img/online-background.png";
 import Logo from "../img/online-logo.png";
-import { Omnibar } from "./omnibar";
 
 const FunFactContainer = ({ text }: { text: string }) => {
   const facts: string[] = useMemo(() => {
@@ -154,14 +153,39 @@ const UpcomingRunContainer = ({ index, runData }: PropsContainer) => {
   );
 };
 
+const MusicPlayerContainer = () => {
+  const [player] = useReplicant<NowPlaying>("nowPlaying", {
+    bundle: "nodecg-foobar2000-controller",
+  });
+
+  return (<div className="h-full w-117 text-center place-content-center ">
+          <div className="w-full h-1.5 bg-[#5775a4]" />
+          <div className="bg-[#141c2f] py-1">
+            <span
+              className="text-3xl font-bold"
+              style={{ textShadow: "0px 0px 5px #08DFF7" }}
+            >
+              Now Playing
+            </span>
+          </div>
+          <div className="bg-[#3f4d67] h-12.5 px-2 w-full font-bold auto-text-size-override">
+            <AutoTextSize mode="oneline" minFontSizePx={18} maxFontSizePx={28}>
+              {player && player.album}
+            </AutoTextSize>
+          </div>
+          <div className="bg-[#141c2f] h-12.5 px-2 w-full font-bold auto-text-size-override">
+            <AutoTextSize mode="oneline" minFontSizePx={18} maxFontSizePx={26}>
+              {player && player.title}
+            </AutoTextSize>
+          </div>
+          <div className="w-full h-1.5 bg-[#5775a4]" />
+        </div>)
+}
+
 const Intermission = () => {
   const currentRun = useCurrentRun();
 
   const upcomingRuns = useUpcomingRuns(2, currentRun?.id ?? "");
-
-  const [player] = useReplicant<NowPlaying>("nowPlaying", {
-    bundle: "nodecg-foobar2000-controller",
-  });
 
   return (
     <ThemeProvider
@@ -186,28 +210,7 @@ const Intermission = () => {
         </div>
 
         {/* Music*/}
-        <div className="h-full w-117 text-center place-content-center ">
-          <div className="w-full h-1.5 bg-[#5775a4]" />
-          <div className="bg-[#141c2f] py-1">
-            <span
-              className="text-3xl font-bold"
-              style={{ textShadow: "0px 0px 5px #08DFF7" }}
-            >
-              Now Playing
-            </span>
-          </div>
-          <div className="bg-[#3f4d67] h-12.5 px-2 w-full font-bold auto-text-size-override">
-            <AutoTextSize mode="oneline" minFontSizePx={18} maxFontSizePx={28}>
-              {player && player.album}
-            </AutoTextSize>
-          </div>
-          <div className="bg-[#141c2f] h-12.5 px-2 w-full font-bold auto-text-size-override">
-            <AutoTextSize mode="oneline" minFontSizePx={18} maxFontSizePx={26}>
-              {player && player.title}
-            </AutoTextSize>
-          </div>
-          <div className="w-full h-1.5 bg-[#5775a4]" />
-        </div>
+        <MusicPlayerContainer />
       </div>
 
       {/* Image Animation */}
@@ -231,7 +234,6 @@ const Intermission = () => {
           <FunFactContainer text={currentRun?.customData.fact} />
         )}
       </div>
-      <Omnibar className="absolute bottom-0 z-10 " />
     </ThemeProvider>
   );
 };
