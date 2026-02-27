@@ -2,9 +2,9 @@ import { Header } from "../../components/Header/Header";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ThemeProvider } from "../../components/theme-provider";
 import Background from "../../img/online-background.png";
-import { Omnibar } from "../../views/omnibar";
 
-export const SidebarGBA = () => {
+
+const SidebarGBA = () => {
   return (
     <div className="flex h-[900px]">
       <Sidebar />
@@ -22,7 +22,6 @@ export const Lgba_1P = () => {
     <ThemeProvider>
       <Header />
       <SidebarGBA />
-      <Omnibar />
     </ThemeProvider>
   );
 };

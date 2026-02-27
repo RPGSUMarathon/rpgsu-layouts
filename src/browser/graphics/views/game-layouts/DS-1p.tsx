@@ -7,7 +7,7 @@ import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import { ThemeProvider } from "../../components/theme-provider";
 import Background from "../../img/online-background.png";
 
-export const CenterDS = () => {
+const CenterDS = () => {
   const currentRun = useCurrentRun();
   const cameraOn = useCameraOn();
   const commentators = useCommentators();
