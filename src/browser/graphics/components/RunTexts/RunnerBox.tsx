@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
+import Bluesky from "../../img/icons/bluesky.png";
 import Mic from "../../img/icons/mic.png";
 import Runner from "../../img/icons/runner.png";
 import Twitch from "../../img/icons/twitch.png";
 import Youtube from "../../img/icons/youtube.png";
-import Bluesky from "../../img/icons/bluesky.png";
 
 type Props = {
+  bluesky?: string;
   className?: string;
   name: string;
   pronouns?: string;
@@ -13,7 +14,6 @@ type Props = {
   textSize?: string;
   twitch?: string;
   youtube?: string;
-  bluesky?: string;
 };
 
 export const RunnerBox = ({
@@ -33,7 +33,9 @@ export const RunnerBox = ({
 
     items.push({
       key: "name",
-      content: <span className="drop-shadow-xs drop-shadow-black ml-6">{name}</span>,
+      content: (
+        <span className="drop-shadow-xs drop-shadow-black ml-6">{name}</span>
+      ),
     });
 
     if (twitch) {
@@ -41,7 +43,11 @@ export const RunnerBox = ({
         key: "twitch",
         content: (
           <>
-            <img className="h-6 ml-2 drop-shadow-xs drop-shadow-black" src={Twitch} alt="Twitch" />
+            <img
+              className="h-6 ml-2 drop-shadow-xs drop-shadow-black"
+              src={Twitch}
+              alt="Twitch"
+            />
             <span className="drop-shadow-xs drop-shadow-black">{twitch}</span>
           </>
         ),
@@ -53,7 +59,11 @@ export const RunnerBox = ({
         key: "youtube",
         content: (
           <>
-            <img className="h-6 ml-2  drop-shadow-xs drop-shadow-black" src={Youtube} alt="YouTube" />
+            <img
+              className="h-6 ml-2  drop-shadow-xs drop-shadow-black"
+              src={Youtube}
+              alt="YouTube"
+            />
             <span className="drop-shadow-xs drop-shadow-black">{youtube}</span>
           </>
         ),
@@ -65,8 +75,12 @@ export const RunnerBox = ({
         key: "bluesky",
         content: (
           <>
-            <img className="h-6 ml-2  drop-shadow-xs drop-shadow-black" src={Bluesky} alt="Bluesky" />
-            <span>{bluesky}</span>
+            <img
+              className="h-6 ml-2  drop-shadow-xs drop-shadow-black"
+              src={Bluesky}
+              alt="Bluesky"
+            />
+            <span className="drop-shadow-xs drop-shadow-black">{bluesky}</span>
           </>
         ),
       });
@@ -80,13 +94,13 @@ export const RunnerBox = ({
 
     const interval = setInterval(() => {
       if ("startViewTransition" in document) {
-        (document as any).startViewTransition(() => {
+        (document as Document).startViewTransition(() => {
           setIndex((prev) => (prev + 1) % slides.length);
         });
       } else {
         setIndex((prev) => (prev + 1) % slides.length);
       }
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [slides.length]);
@@ -101,11 +115,7 @@ export const RunnerBox = ({
         </div>
       )}
 
-      <img
-        src={runner ? Runner : Mic}
-        className="ml-3 h-5/6"
-        alt="Icon"
-      />
+      <img src={runner ? Runner : Mic} className="ml-3 h-5/6" alt="Icon" />
 
       <div
         className={`absolute left-14 top-1.25 flex items-center gap-2 text-white drop-shadow ${

@@ -49,6 +49,8 @@ const BottomBar = () => {
               runner={false}
               pronouns={runner.pronouns}
               name={runner.name}
+              twitch={runner.twitch}
+              bluesky={runner.bluesky}
             />
           ))}
         </div>

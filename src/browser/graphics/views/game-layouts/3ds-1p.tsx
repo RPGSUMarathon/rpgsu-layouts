@@ -44,6 +44,8 @@ export const Center3DS = () => {
                   pronouns={runner.pronouns}
                   name={runner.name}
                   key={runner.id}
+                  twitch={runner.twitch}
+                  bluesky={runner.bluesky}
                 />
               ))}
             </div>

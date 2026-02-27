@@ -41,10 +41,11 @@ export const Sidebar = () => {
               {commentators.map((runner) => (
                 <RunnerBox
                   runner={false}
-                  className="flex-none"
                   pronouns={runner.pronouns}
                   name={runner.name}
                   key={runner.id}
+                  twitch={runner.twitch}
+                  bluesky={runner.bluesky}
                 />
               ))}
             </div>
