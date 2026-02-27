@@ -66,13 +66,6 @@
         "width": 2
       },
       {
-        "file": "layout-text-size-editor.html",
-        "name": "layout-text-size-editor",
-        "title": "Override sizes",
-        "width": 5,
-        "workspace": "Scene Editing"
-      },
-      {
         "file": "game-layout-override.html",
         "name": "game-layout-override",
         "title": "Layout Override",

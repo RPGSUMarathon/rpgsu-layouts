@@ -5,8 +5,8 @@ import { Category, Estimate, Game, Timer } from "../RunTexts";
 
 export const Header = () => {
   return (
-    <div className="w-full h-32.5 border-b-5 border-white flex flex-row bg-gradient-to-b from-teal-800 to-teal-700">
-      <div className="flex-none w-[735px] h-[130px] border-r-5 border-white">
+    <div className="w-full h-32.5 border-b-5 border-white flex flex-row bg-linear-to-b from-teal-800 to-teal-700">
+      <div className="flex-none w-183.75 h-32.5 border-r-5 border-white">
         <div className="h-1/2 border-b-2 border-white ">
           <Game />
         </div>
@@ -21,10 +21,10 @@ export const Header = () => {
           </span>
         </div>
       </div>
-      <div className="h-full w-[450px] border-r-5 border-white ">
+      <div className="h-full w-112.5 border-r-5 border-white ">
         <Timer className="font-bold drop-shadow" />
       </div>
-      <div className="flex max-w-[380px] pl-[60px]">
+      <div className="flex max-w-95 pl-15">
         <img src={OnlineLongLogo} alt="OnlineLongLogo" />
       </div>
       <div className="flex-1 text-2xl font-bold">

@@ -13,7 +13,7 @@ export const Sidebar = () => {
   const player = currentRun?.teams[0]?.players[0];
 
   return (
-    <div className="flex h-[890px]">
+    <div className="flex h-222.5">
       <div className="flex flex-col w-112.5 h-full border-r-5 border-white">
         {cameraOn && cameraOn ? (
           <div

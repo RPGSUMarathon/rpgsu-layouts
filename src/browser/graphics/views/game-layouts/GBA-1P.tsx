@@ -6,7 +6,7 @@ import Background from "../../img/online-background.png";
 
 const SidebarGBA = () => {
   return (
-    <div className="flex h-[900px]">
+    <div className="flex h-225">
       <Sidebar />
       <div className="flex-none h-full aspect-3/2 " />
       <div
