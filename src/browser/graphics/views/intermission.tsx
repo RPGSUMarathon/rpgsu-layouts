@@ -13,6 +13,8 @@ import Bluesky from "../img/icons/bluesky.png";
 import Youtube from "../img/icons/youtube.png";
 import Logo from "../img/online-logo.png";
 import { Omnibar } from "./omnibar";
+import Background from "../img/online-background.png";
+
 
 const FunFactContainer = ({ text }: { text: string }) => {
   const facts: string[] = useMemo(() => {
@@ -163,7 +165,8 @@ const Intermission = () => {
   });
 
   return (
-    <ThemeProvider className="">
+    <ThemeProvider className="" 
+          style={{ backgroundImage: `url(${Background})` }}>
       <div className="absolute h-45.5 w-330 border-b-5 border-white bg-black/40 flex flex-row">
         {/* This div is all the info that we'll rotate/fade in and out */}
         <div className="h-full w-213 border-r-5 border-white flex flex-row text-center">
