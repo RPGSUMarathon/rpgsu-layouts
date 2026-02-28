@@ -83,6 +83,13 @@
         "name": "tech-setup-checklist",
         "title": "Checklist",
         "width": 3
+      },
+      {
+        "file": "flashing-lights-warning.html",
+        "name": "lashing-lights-warning",
+        "title": "Flashing Lights Warning",
+        "width": 2,
+        "workspace": "Scene Editing"
       }
     ],
     "graphics": [
