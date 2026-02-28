@@ -19,18 +19,18 @@ export function DynamicLayout({ layoutKey }: { layoutKey: string }) {
 }
 
 const FlashingLightsWarning = () => {
-  return(
+  return (
     <div className="z-10 absolute flex top-[415px] left-0 w-[450px] h-12.5 bg-red-900 border border-white border-3 justify-center items-center">
       <span className="font-bold text-2xl">WARNING: FLASHING LIGHTS</span>
     </div>
-  )
-}
+  );
+};
 
 const App = () => {
   const [gameLayout] = useReplicant<string>("currentGameLayout");
   const [flashWarningOn] = useReplicant<boolean>("flashWarningOn", {
-        defaultValue: false,
-      });
+    defaultValue: false,
+  });
 
   return (
     <ThemeProvider>
