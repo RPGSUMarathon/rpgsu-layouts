@@ -1,7 +1,6 @@
 import { Header } from "../../components/Header/Header";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ThemeProvider } from "../../components/theme-provider";
-import Background from "../../img/online-background.png";
 
 const Sidebar16x9 = () => {
   return (
@@ -11,7 +10,6 @@ const Sidebar16x9 = () => {
         <div className=" w-full aspect-video" />
         <div
           className="border-t-5 border-t-white w-full h-[70px]"
-          style={{ backgroundImage: `url(${Background})` }}
         />
       </div>
     </div>

@@ -2,7 +2,6 @@ import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
 import useCurrentRun from "../../../hooks/useCurrentRun";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
-import Background from "../../img/online-background.png";
 import { NoCamera } from "../NoCamera";
 
 export const Sidebar = () => {
@@ -27,7 +26,6 @@ export const Sidebar = () => {
         )}
         <div
           className="h-138.25"
-          style={{ backgroundImage: `url(${Background})` }}
         >
           <RunnerBox
             twitch={player?.social.twitch}
