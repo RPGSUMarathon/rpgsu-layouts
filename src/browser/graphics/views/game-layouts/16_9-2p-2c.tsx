@@ -17,21 +17,21 @@ const BottomBar = () => {
   const player2 = currentRun?.teams[1]?.players[0];
 
   return (
-    <div className="h-[374px] w-full inline-flex">
+    <div className="h-93.5 w-full inline-flex">
       {/*Camera 1*/}
       {cameraOn && cameraOn ? (
-        <div className="w-[498px] h-full border-white border-r-5" />
+        <div className="w-124.5 h-full border-white border-r-5" />
       ) : (
-        <div className="w-[498px] h-full border-white border-r-5">
+        <div className="w-124.5 h-full border-white border-r-5">
           <NoCamera />
         </div>
       )}
 
       <div
-        className="w-[924px] h-full relative"
+        className="w-231 h-full relative"
         style={{ backgroundImage: `url(${background})` }}
       >
-        <div className="absolute top-0 left-0 w-[446px] border-r-5 border-white">
+        <div className="absolute top-0 left-0 w-111.5 border-r-5 border-white">
           <RunnerBox
             twitch={player1?.social.twitch}
             youtube={player1?.social.youtube}
@@ -41,11 +41,11 @@ const BottomBar = () => {
           />
         </div>
 
-        <div className="w-[446px] absolute top-[137px] left-[239px] border-t-3 ">
+        <div className="w-111.5 absolute top-34.25 left-59.75 ">
           {commentators.map((runner) => (
             <RunnerBox
               key={runner.id}
-              className="border-l-3 border-r-3 border-white"
+              className="border-l-3 border-r-3 border-t-3 border-white"
               runner={false}
               pronouns={runner.pronouns}
               name={runner.name}
@@ -55,7 +55,7 @@ const BottomBar = () => {
           ))}
         </div>
 
-        <div className="absolute bottom-0 right-0 w-[446px] border-t-5 border-l-5 border-white">
+        <div className="absolute bottom-0 right-0 w-111.5 border-t-5 border-l-5 border-white">
           <RunnerBox
             twitch={player2?.social.twitch}
             youtube={player2?.social.youtube}
@@ -67,9 +67,9 @@ const BottomBar = () => {
       </div>
       {/*Camera 2*/}
       {cameraOn && cameraOn ? (
-        <div className="w-[498px] h-full border-white border-l-5 " />
+        <div className="w-124.5 h-full border-white border-l-5 " />
       ) : (
-        <div className="w-[498px] h-full border-white border-l-5">
+        <div className="w-124.5 h-full border-white border-l-5">
           <NoCamera />
         </div>
       )}
@@ -77,7 +77,7 @@ const BottomBar = () => {
   );
 };
 
-export const L16x9_2P = () => {
+export const L16x9_2P_2C = () => {
   return (
     <ThemeProvider>
       <Header />

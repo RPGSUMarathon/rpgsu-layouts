@@ -19,7 +19,7 @@ const defaultLayouts: LayoutInfo[] = [
   { name: "GBA 1 Player", code: "gba-1p" },
   { name: "DS 1 Player", code: "ds-1p" },
   { name: "3DS 1 Player", code: "3ds-1p" },
-  { name: "16:9 2 Players", code: "16_9-2p" },
+  { name: "16:9 2 Players", code: "16_9-2p-2c" },
 ];
 
 nodecg.Replicant<LayoutInfo[]>("gameLayouts", {
