@@ -1,3 +1,4 @@
+import { Alert, Button, Stack } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
 import { type RunData } from "bundles/nodecg-speedcontrol/src/types";
 import { useMemo } from "react";
@@ -16,7 +17,7 @@ const getNextRunGameName = (run?: RunData) => {
   return "Break";
 };
 
-export const App = () => {
+export const NextRun = () => {
   const currentObsScene = useCurrentObsScene();
   const nextRun = useNextRun();
 
@@ -31,10 +32,11 @@ export const App = () => {
 
   return (
     <DashboardThemeProvider>
-      <div className="flex flex-col gap-2">
-        <button
+      <Stack spacing={2}>
+        <Button
+          variant="contained"
+          fullWidth
           disabled={disableChange ?? !nextRun}
-          className={`${disableChange ? "bg-gray-400" : " bg-blue-500 hover:bg-blue-700/50"} rounded-lg shadow-lg  p-2`}
           onClick={() => {
             if (nextRun) {
               nodecg.sendMessage("switchToIntermission").catch(() => {
@@ -46,22 +48,19 @@ export const App = () => {
           <span>
             {nextRun ? (nextRunGameName ?? "No next runs") : "No added runs"}
           </span>
-        </button>
+        </Button>
         {disableChange && (
-          <div
-            className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4"
-            role="alert"
-          >
+          <Alert variant="filled" severity="error">
             <p className="font-bold">Be Warned</p>
             <h2>
               You cannot change the game right now. Will be available once run
               ends.
             </h2>
-          </div>
+          </Alert>
         )}
-      </div>
+      </Stack>
     </DashboardThemeProvider>
   );
 };
 
-render(<App />);
+render(<NextRun />);
