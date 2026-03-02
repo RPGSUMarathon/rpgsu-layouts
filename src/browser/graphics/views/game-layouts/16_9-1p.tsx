@@ -8,9 +8,7 @@ const Sidebar16x9 = () => {
       <Sidebar />
       <div className="flex flex-col h-full w-370">
         <div className=" w-full aspect-video" />
-        <div
-          className="border-t-5 border-t-white w-full h-[70px]"
-        />
+        <div className="border-t-5 border-t-white w-full h-[70px]" />
       </div>
     </div>
   );

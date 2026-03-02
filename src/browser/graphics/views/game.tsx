@@ -16,7 +16,7 @@ const layoutMap: Record<string, React.FC> = {
 const flashWarningPosition: Record<string, string> = {
   "4_3-1p": "top-[415px] left-0 w-112.5",
   "16_9-2p-2c": "left-[498px] w-[924px] top-[730px]",
-}
+};
 
 export function DynamicLayout({ layoutKey }: { layoutKey: string }) {
   const LayoutComponent = layoutMap[layoutKey] ?? Layouts.L4x3_1P;
@@ -24,10 +24,13 @@ export function DynamicLayout({ layoutKey }: { layoutKey: string }) {
 }
 
 const FlashingLightsWarning = ({ layoutKey }: { layoutKey: string }) => {
-  const position = flashWarningPosition[layoutKey] ?? flashWarningPosition["4_3-1p"];
+  const position =
+    flashWarningPosition[layoutKey] ?? flashWarningPosition["4_3-1p"];
 
   return (
-    <div className={`z-10 absolute flex ${position}  h-12.5 bg-red-900 border-white border-3 justify-center items-center`}>
+    <div
+      className={`z-10 absolute flex ${position}  h-12.5 bg-red-900 border-white border-3 justify-center items-center`}
+    >
       <span className="font-bold text-2xl">WARNING: FLASHING LIGHTS</span>
     </div>
   );
@@ -42,7 +45,9 @@ const App = () => {
   return (
     <ThemeProvider>
       <DynamicLayout layoutKey={gameLayout ?? "16_9-1p"} />
-      {flashWarningOn && <FlashingLightsWarning layoutKey={gameLayout ?? "4_3-1p"} />}
+      {flashWarningOn && (
+        <FlashingLightsWarning layoutKey={gameLayout ?? "4_3-1p"} />
+      )}
     </ThemeProvider>
   );
 };

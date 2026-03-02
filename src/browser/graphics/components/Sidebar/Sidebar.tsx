@@ -24,9 +24,7 @@ export const Sidebar = () => {
             <NoCamera />
           </div>
         )}
-        <div
-          className="h-138.25"
-        >
+        <div className="h-138.25">
           <RunnerBox
             twitch={player?.social.twitch}
             youtube={player?.social.youtube}

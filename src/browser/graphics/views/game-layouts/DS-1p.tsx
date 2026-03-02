@@ -52,13 +52,9 @@ const CenterDS = () => {
         </div>
       </div>
       <div className="h-84.25 absolute w-112.5 bottom-15 left-0 border-t-5 " />
-      <div
-        className="flex-1 border-r-5 border-l-white"
-      />
+      <div className="flex-1 border-r-5 border-l-white" />
       <div className="flex-none h-full aspect-4/3 " />
-      <div
-        className="flex-1 border-l-5 border-l-white"
-      />
+      <div className="flex-1 border-l-5 border-l-white" />
     </div>
   );
 };

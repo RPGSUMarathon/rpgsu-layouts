@@ -6,11 +6,9 @@ const SidebarGBA = () => {
   return (
     <div className="flex h-225">
       <Sidebar />
-      
+
       <div className="flex-none h-full aspect-3/2 " />
-      <div
-        className="flex-1 border-l-5 border-l-white"
-      />
+      <div className="flex-1 border-l-5 border-l-white" />
     </div>
   );
 };
