@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useCurrentRun from "../hooks/useCurrentRun";
 import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
-import useCurrentRun from "../hooks/useCurrentRun";
 
-export const TechSetupChecklist = () => {
-  const currentRun = useCurrentRun();
-
+const Checklist = () => {
   const checklist = [
     "Run a 3 minute ad",
     "*Coming Up* run matches with run being set up",
@@ -18,17 +16,11 @@ export const TechSetupChecklist = () => {
     "Transition to the run",
   ];
 
-  const [checkedItems, setCheckedItems] = useState(
-    checklist.map(() => false)
-  );
-
-  useEffect(() => {
-    setCheckedItems(checklist.map(() => false));
-  }, [currentRun]);
+  const [checkedItems, setCheckedItems] = useState(checklist.map(() => false));
 
   const toggleItem = (index: number) => {
     setCheckedItems((prev) =>
-      prev.map((item, i) => (i === index ? !item : item))
+      prev.map((item, i) => (i === index ? !item : item)),
     );
   };
 
@@ -51,6 +43,12 @@ export const TechSetupChecklist = () => {
       ))}
     </DashboardThemeProvider>
   );
+};
+
+const TechSetupChecklist = () => {
+  const currentRun = useCurrentRun();
+
+  return <Checklist key={currentRun?.id ?? "no-run"} />;
 };
 
 render(<TechSetupChecklist />);
