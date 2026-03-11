@@ -1,3 +1,4 @@
+import { Button, ButtonGroup, Stack } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
 import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
@@ -29,73 +30,83 @@ export const LayoutTextSizeEditor = () => {
 
   return (
     <DashboardThemeProvider>
-      <button
-        onClick={() => {
-          setGameTextSize("3xl");
-          setCategoryTextSize("3xl");
-          setRunnerTextSize("2xl");
-          setCommentatorColumnSize(-1);
-        }}
-        className="bg-blue-300 hover:bg-gray-400 text-gray-800 font-bold uppercase py-2 px-4"
-      >
-        Reset
-      </button>
-      <h3 className="font-bold">Edit Game Title Size:</h3>
-      <div className="inline-flex">
-        {textSizes.map((size, index) => (
-          <button
-            key={`game-${size}`}
-            onClick={() => {
-              setGameTextSize(size);
-            }}
-            className={`${gameTextSize === size ? "bg-blue-200" : "bg-gray-300"} hover:bg-gray-400 text-gray-800 font-bold uppercase py-2 px-4 ${index === 0 ? "rounded-l" : index === textSizes.length - 1 ? "rounded-r" : ""}`}
-          >
-            {size}
-          </button>
-        ))}
-      </div>
-      <h3 className="font-bold">Edit Category Title Size:</h3>
-      <div className="inline-flex">
-        {textSizes.map((size, index) => (
-          <button
-            key={`category-${size}`}
-            onClick={() => {
-              setCategoryTextSize(size);
-            }}
-            className={`${categoryTextSize === size ? "bg-blue-200" : "bg-gray-300"} hover:bg-gray-400 text-gray-800 font-bold uppercase py-2 px-4 ${index === 0 ? "rounded-l" : index === textSizes.length - 1 ? "rounded-r" : ""}`}
-          >
-            {size}
-          </button>
-        ))}
-      </div>
-      <h3 className="font-bold">Edit Runner Title Size:</h3>
-      <div className="inline-flex">
-        {textSizes.map((size, index) => (
-          <button
-            key={`runner-${size}`}
-            onClick={() => {
-              setRunnerTextSize(size);
-            }}
-            className={`${runnerTextSize === size ? "bg-blue-200" : "bg-gray-300"} hover:bg-gray-400 text-gray-800 font-bold uppercase py-2 px-4 ${index === 0 ? "rounded-l" : index === textSizes.length - 1 ? "rounded-r" : ""}`}
-          >
-            {size}
-          </button>
-        ))}
-      </div>
-      <h3 className="font-bold">Edit Commentator Column:</h3>
-      <div className="inline-flex">
-        {columnNumbers.map((size, index) => (
-          <button
-            key={`commentator-${size}`}
-            onClick={() => {
-              setCommentatorColumnSize(size);
-            }}
-            className={`${commentatorColumnSize === size ? "bg-blue-200" : "bg-gray-300"} hover:bg-gray-400 text-gray-800 font-bold uppercase py-2 px-4 ${index === 0 ? "rounded-l" : index === columnNumbers.length - 1 ? "rounded-r" : ""}`}
-          >
-            {size}
-          </button>
-        ))}
-      </div>
+      <Stack spacing={1}>
+        <Button
+          onClick={() => {
+            setGameTextSize("3xl");
+            setCategoryTextSize("3xl");
+            setRunnerTextSize("2xl");
+            setCommentatorColumnSize(-1);
+          }}
+          variant="contained"
+        >
+          Reset
+        </Button>
+        <h3 className="font-bold">Edit Game Title Size:</h3>
+        <div className="inline-flex">
+          <ButtonGroup variant="contained">
+            {textSizes.map((size) => (
+              <Button
+                key={`game-${size}`}
+                onClick={() => {
+                  setGameTextSize(size);
+                }}
+                color={gameTextSize === size ? "success" : undefined}
+              >
+                {size}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </div>
+        <h3 className="font-bold">Edit Category Title Size:</h3>
+        <div className="inline-flex">
+          <ButtonGroup variant="contained">
+            {textSizes.map((size) => (
+              <Button
+                key={`category-${size}`}
+                onClick={() => {
+                  setCategoryTextSize(size);
+                }}
+                color={categoryTextSize === size ? "success" : undefined}
+              >
+                {size}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </div>
+        <h3 className="font-bold">Edit Runner Title Size:</h3>
+        <div className="inline-flex">
+          <ButtonGroup variant="contained">
+            {textSizes.map((size) => (
+              <Button
+                key={`runner-${size}`}
+                onClick={() => {
+                  setRunnerTextSize(size);
+                }}
+                color={runnerTextSize === size ? "success" : undefined}
+              >
+                {size}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </div>
+        <h3 className="font-bold">Edit Commentator Column:</h3>
+        <div className="inline-flex">
+          <ButtonGroup variant="contained">
+            {columnNumbers.map((size) => (
+              <Button
+                key={`commentator-${size}`}
+                onClick={() => {
+                  setCommentatorColumnSize(size);
+                }}
+                color={commentatorColumnSize === size ? "success" : undefined}
+              >
+                {size}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </div>
+      </Stack>
     </DashboardThemeProvider>
   );
 };

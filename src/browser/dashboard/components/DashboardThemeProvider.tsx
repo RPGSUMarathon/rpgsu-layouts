@@ -11,5 +11,6 @@ type Props = {
 
 export const DashboardThemeProvider = ({ children }: Props) => {
   const theme = createTheme({ palette: { mode: "dark" } });
+
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };

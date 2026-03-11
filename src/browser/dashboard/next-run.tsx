@@ -1,4 +1,4 @@
-import { Alert, Button, Stack } from "@mui/material";
+import { Alert, Button, Stack, styled } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
 import { type RunData } from "bundles/nodecg-speedcontrol/src/types";
 import { useMemo } from "react";
@@ -16,6 +16,10 @@ const getNextRunGameName = (run?: RunData) => {
   }
   return "Break";
 };
+
+const Paragraph = styled("p")(({ theme }) => ({
+  ...theme.typography.button,
+}));
 
 export const NextRun = () => {
   const currentObsScene = useCurrentObsScene();
@@ -51,7 +55,7 @@ export const NextRun = () => {
         </Button>
         {disableChange && (
           <Alert variant="filled" severity="error">
-            <p className="font-bold">Be Warned</p>
+            <Paragraph>Be Warned</Paragraph>
             <h2>
               You cannot change the game right now. Will be available once run
               ends.
