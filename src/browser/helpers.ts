@@ -1,4 +1,4 @@
-import { RunData } from "../../bundles/nodecg-speedcontrol/src/types";
+import { RunData } from "speedcontrol/src/types";
 
 export class Helpers {
   public static formatPlayers(run: RunData) {

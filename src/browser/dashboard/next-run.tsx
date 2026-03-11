@@ -1,7 +1,7 @@
 import { useReplicant } from "@nodecg/react-hooks";
-import { type RunData } from "bundles/nodecg-speedcontrol/src/types";
 import { useMemo } from "react";
-import { type Timer } from "../../../bundles/nodecg-speedcontrol/src/types/schemas/timer";
+import { type RunData } from "speedcontrol/src/types";
+import { type Timer } from "speedcontrol/src/types/schemas";
 import useCurrentObsScene from "../hooks/useCurrentObsScene";
 import useNextRun from "../hooks/useNextRun";
 import { render } from "../render";
