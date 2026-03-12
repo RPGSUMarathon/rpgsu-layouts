@@ -1,8 +1,8 @@
 import { useReplicant } from "@nodecg/react-hooks";
 import { AutoTextSize } from "auto-text-size";
+import { type NowPlaying } from "foobar2000-controller/src/types/nowPlaying";
 import { useEffect, useMemo, useState } from "react";
-import { type NowPlaying } from "../../../../bundles/nodecg-foobar2000-controller/src/types/nowPlaying";
-import { type RunData } from "../../../../bundles/nodecg-speedcontrol/src/types/schemas";
+import { type RunData } from "speedcontrol/src/types/schemas";
 import { Helpers } from "../../helpers";
 import useCurrentRun from "../../hooks/useCurrentRun";
 import useUpcomingRuns from "../../hooks/useUpcomingRuns";

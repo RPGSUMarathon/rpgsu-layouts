@@ -1,5 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
-import { RunDataArray } from "../../../bundles/nodecg-speedcontrol/src/types";
+import { RunDataArray } from "speedcontrol/src/types";
 
 function useUpcomingRuns(count: number, currentRunId: string) {
   const [runDataArrayRep] = useReplicant<RunDataArray>("runDataArray", {
