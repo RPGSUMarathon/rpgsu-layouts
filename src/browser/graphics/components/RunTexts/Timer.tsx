@@ -1,6 +1,6 @@
 import { useReplicant } from "@nodecg/react-hooks";
 import { type CSSProperties } from "react";
-import { type Timer as TimerType } from "../../../../../bundles/nodecg-speedcontrol/src/types/schemas/timer";
+import { type Timer as TimerType } from "speedcontrol/src/types/schemas";
 
 type TimerProps = {
   className?: string;

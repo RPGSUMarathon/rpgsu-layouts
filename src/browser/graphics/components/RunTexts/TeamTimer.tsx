@@ -1,5 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
-import { type Timer as TimerType } from "../../../../../bundles/nodecg-speedcontrol/src/types/schemas/timer";
+import { type Timer as TimerType } from "speedcontrol/src/types/schemas/timer";
 import useCurrentRun from "../../../hooks/useCurrentRun";
 
 type TimerProps = {

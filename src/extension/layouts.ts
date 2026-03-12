@@ -1,5 +1,5 @@
 import { type LayoutInfo } from "@rpgsu-layouts/types/generated/layoutinfo";
-import { type RunDataActiveRun } from "../../bundles/nodecg-speedcontrol/src/types/RunData";
+import { type RunDataActiveRun } from "speedcontrol/src/types/RunData";
 import { get } from "./util/nodecg";
 
 const nodecg = get();

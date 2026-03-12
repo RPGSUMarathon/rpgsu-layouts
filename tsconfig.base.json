@@ -31,7 +31,10 @@
     "baseUrl": ".",
     "paths": {
       "speedcontrol/*": [
-        "../../bundles/nodecg-speedcontrol/*"
+        "bundles/nodecg-speedcontrol/*"
+      ],
+      "foobar2000-controller/*": [
+        "bundles/nodecg-foobar2000-controller/*"
       ],
       "@rpgsu-layouts/*": [
         "src/*",
