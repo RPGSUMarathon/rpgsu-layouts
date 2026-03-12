@@ -66,13 +66,6 @@
         "width": 2
       },
       {
-        "file": "layout-text-size-editor.html",
-        "name": "layout-text-size-editor",
-        "title": "Override sizes",
-        "width": 5,
-        "workspace": "Scene Editing"
-      },
-      {
         "file": "game-layout-override.html",
         "name": "game-layout-override",
         "title": "Layout Override",
@@ -84,6 +77,19 @@
         "name": "camera-and-comms",
         "title": "Layout Information",
         "width": 3
+      },
+      {
+        "file": "tech-setup-checklist.html",
+        "name": "tech-setup-checklist",
+        "title": "Checklist",
+        "width": 3
+      },
+      {
+        "file": "flashing-lights-warning.html",
+        "name": "lashing-lights-warning",
+        "title": "Flashing Lights Warning",
+        "width": 2,
+        "workspace": "Scene Editing"
       }
     ],
     "graphics": [

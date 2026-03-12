@@ -10,6 +10,8 @@ import {
   FiX,
 } from "react-icons/fi";
 import { type Commentator } from "../../types/generated/commentators";
+import Bluesky from "../graphics/img/icons/bluesky.png";
+import Twitch from "../graphics/img/icons/twitch.png";
 import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
 
@@ -21,6 +23,8 @@ const CameraDashboard: React.FC = () => {
   const [cameraOn, setCameraOn] = useReplicant<boolean>("cameraOn", {
     defaultValue: true,
   });
+  const [editTwitch, setEditTwitch] = useState<string>("");
+  const [editBluesky, setEditBluesky] = useState<string>("");
   const [commentators, setCommentators] = useReplicant<Commentator[]>(
     "commentators",
     { defaultValue: [] },
@@ -33,6 +37,8 @@ const CameraDashboard: React.FC = () => {
       id: Date.now(),
       name: nameInput,
       pronouns: "",
+      twitch: "",
+      bluesky: "",
     };
 
     setCommentators([...(commentators ?? []), newItem]);
@@ -50,18 +56,30 @@ const CameraDashboard: React.FC = () => {
   const handleStartEdit = (item: Commentator): void => {
     setEditingItem(item.id);
     setEditName(item.name);
-    setEditPronouns(item.pronouns);
+    setEditPronouns(item.pronouns ?? "");
+    setEditTwitch(item.twitch ?? "");
+    setEditBluesky(item.bluesky ?? "");
   };
 
   const handleSaveEdit = (): void => {
     if (commentators == null) return;
+
     setCommentators(
       commentators.map((item) =>
         item.id === editingItem
-          ? { ...item, name: editName, pronouns: editPronouns }
+          ? {
+              ...item,
+              name: editName,
+              pronouns: editPronouns,
+              twitch: editTwitch.trim(),
+              bluesky: editBluesky.trim(),
+            }
           : item,
       ),
     );
+
+    console.log(commentators);
+
     setEditingItem(null);
   };
 
@@ -117,7 +135,6 @@ const CameraDashboard: React.FC = () => {
           </button>
         </div>
 
-        {/* Items List */}
         <div className="space-y-4">
           {commentators &&
             commentators.map((item) => (
@@ -132,9 +149,7 @@ const CameraDashboard: React.FC = () => {
                       <input
                         type="text"
                         value={editName}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setEditName(e.target.value)
-                        }
+                        onChange={(e) => setEditName(e.target.value)}
                         className="flex-1 px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                       />
                       <button
@@ -150,25 +165,46 @@ const CameraDashboard: React.FC = () => {
                         <FiX size={18} />
                       </button>
                     </div>
+
                     <input
                       type="text"
                       value={editPronouns}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setEditPronouns(e.target.value)
-                      }
-                      placeholder="Add pronouns"
+                      onChange={(e) => setEditPronouns(e.target.value)}
+                      placeholder="Pronouns"
                       className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    />
+
+                    <input
+                      type="text"
+                      value={editTwitch}
+                      onChange={(e) => setEditTwitch(e.target.value)}
+                      placeholder="Twitch (username only)"
+                      className={`w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-1 `}
+                    />
+
+                    <input
+                      type="text"
+                      value={editBluesky}
+                      onChange={(e) => setEditBluesky(e.target.value)}
+                      placeholder="Bluesky (username only)"
+                      className={`w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-1 `}
                     />
                   </div>
                 ) : (
                   // Display Mode
                   <div className="flex items-center justify-between">
-                    <div>
+                    <div className="inline-flex gap-2 items-center">
                       <span className="font-bold">{item.name}</span>
                       {item.pronouns && (
                         <span className="ml-2 text-sm text-gray-300">
                           ({item.pronouns})
                         </span>
+                      )}
+                      {item.twitch && (
+                        <img className="h-4 " src={Twitch} alt="Twitch" />
+                      )}
+                      {item.bluesky && (
+                        <img className="h-4 " src={Bluesky} alt="Bluesky" />
                       )}
                     </div>
                     <div className="flex space-x-2">

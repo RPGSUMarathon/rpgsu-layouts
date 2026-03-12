@@ -1,36 +1,44 @@
-import {
-  useCategoryTextSize,
-  useGameTextSize,
-} from "../../../hooks/useLayoutTextSize";
+import OnlineLongLogo from "../../img/base-long-online-logo.png";
+import Bluesky from "../../img/icons/bluesky.png";
+import Youtube from "../../img/icons/youtube.png";
 import { Category, Estimate, Game, Timer } from "../RunTexts";
 
 export const Header = () => {
-  const gameTextSize = useGameTextSize();
-  const categoryTextSize = useCategoryTextSize();
-
   return (
-    <div className="w-full h-[115px] border-b-3 border-white flex flex-row bg-gradient-to-b from-teal-800 to-teal-700">
-      <div className="w-[820px] h-[115px] border-r-5 border-white">
-        <div className="h-1/2 border-b-2 border-white p-2">
-          <span
-            className={`mt-1 drop-shadow text-white font-medium break-words wrap-normal ${gameTextSize ? `text-${gameTextSize}` : "text-3xl"}`}
-          >
-            <Game />
-          </span>
+    <div className="w-full h-32.5 border-b-5 border-white flex flex-row bg-linear-to-b from-teal-800 to-teal-700">
+      <div className="flex-none w-183.75 h-32.5 border-r-5 border-white">
+        <div className="h-1/2 border-b-2 border-white ">
+          <Game />
         </div>
         <div className="h-1/2 flex flex-row items-center">
           <span
-            className={`h-full min-w-1/2 p-3 border-r-5 border-white text-white font-medium break-words wrap-normal ${categoryTextSize ? `text-${categoryTextSize}` : "text-3xl"}`}
+            className={`h-full w-114.25  border-r-5 border-white text-white `}
           >
             <Category />
           </span>
-          <span className="h-full p-3 border-white mx-auto text-3xl break-words wrap-normal">
+          <span className="h-full  border-white w-71.25">
             <Estimate />
           </span>
         </div>
       </div>
-      <div className="w-[400px] border-r-5 border-white flex items-center justify-center text-center">
-        <Timer className="text-7xl drop-shadow" />
+      <div className="h-full w-112.5 border-r-5 border-white ">
+        <Timer className="font-bold drop-shadow" />
+      </div>
+      <div className="flex max-w-95 pl-15 p-1">
+        <img src={OnlineLongLogo} alt="OnlineLongLogo" />
+      </div>
+      <div className="flex-1 text-2xl font-bold p-1">
+        <div className="flex items-center gap-5">
+          <span>Follow us on Social Media!</span>
+        </div>
+        <div className="flex items-center gap-5">
+          <img className="h-10" src={Youtube} alt="Youtube Logo" />
+          <span>@rpgsumarathon</span>
+        </div>
+        <div className="flex items-center gap-5">
+          <img className="h-10" src={Bluesky} alt="Bluesky Logo" />
+          <span>@rpgsu</span>
+        </div>
       </div>
     </div>
   );
