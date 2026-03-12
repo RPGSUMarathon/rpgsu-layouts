@@ -1,13 +1,12 @@
-import { type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 import "../styles.css";
-import background from "../img/online-background.png";
-
 type Props = {
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
 };
 
-export const ThemeProvider = ({ children, className }: Props) => {
+export const ThemeProvider = ({ children, className, style }: Props) => {
   return (
     <div
       style={{
@@ -21,7 +20,7 @@ export const ThemeProvider = ({ children, className }: Props) => {
         flexDirection: "column",
         width: "1920px",
         height: "1080px",
-        backgroundImage: `url(${background})`,
+        ...style,
       }}
       className={className}
     >

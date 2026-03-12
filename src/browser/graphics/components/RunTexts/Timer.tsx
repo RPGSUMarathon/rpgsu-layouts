@@ -23,16 +23,17 @@ export const Timer = ({ style, className }: TimerProps) => {
     <div
       style={{
         display: "flex",
-        textAlign: "center",
-        fontSize: "40px",
+        alignItems: "center",
         justifyContent: "center",
         textShadow: "0px 0px 5px #000000ff",
+        height: "100%",
+        fontSize: "85px",
         ...style,
       }}
     >
       {timer && (
         <div
-          className={`${className} ${timer.state === "finished" ? "shine-animation" : ""}`}
+          className={`${className} ${timer.state === "finished" && "shine-animation"}`}
           style={{ color: timerColors[timer.state], transition: "color 0.5s" }}
         >
           {timer.time}

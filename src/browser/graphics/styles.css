@@ -214,3 +214,27 @@ clip-path: polygon(0% 0%, 88% 0, 100% 51%, 88% 100%, 0% 100%);
   align-items: center !important;
   justify-content: center;
 }
+
+::view-transition-old(runner-content),
+::view-transition-new(runner-content) {
+  animation-duration: 500ms;
+  animation-timing-function: ease;
+}
+
+::view-transition-old(runner-content) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(runner-content) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
