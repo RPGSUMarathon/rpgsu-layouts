@@ -85,7 +85,7 @@ runDataActiveRun.on(
         );
       }
     } else {
-      nodecg.log.error("No layout found for run ID %s", newVal!.id);
+      nodecg.log.error("No layout found for current run");
     }
   },
 );
