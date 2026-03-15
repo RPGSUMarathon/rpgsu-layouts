@@ -38,9 +38,6 @@ importers:
       nodecg:
         specifier: ^2.6.1
         version: 2.6.4(a7a8c7866ab9b19332760d8de1e24528)
-      nodecg-types:
-        specifier: ^1.9.0
-        version: 1.9.0
       obs-websocket-js:
         specifier: ^5.0.6
         version: 5.0.7
@@ -60,9 +57,6 @@ importers:
         specifier: ^4.1.12
         version: 4.1.18
     devDependencies:
-      '@nodecg/types':
-        specifier: ^2.1.8
-        version: 2.6.4(a7a8c7866ab9b19332760d8de1e24528)
       '@rpgsu/lint-config':
         specifier: ^1.0.1
         version: 1.0.1(@types/eslint@9.6.1)(jiti@2.6.1)(typescript@5.9.3)
@@ -1547,26 +1541,17 @@ packages:
   '@types/createjs-lib@0.0.33':
     resolution: {integrity: sha512-mvK1sn2qSyGPwctg/MsjAP5m3/TBx83eB0hcEdZ6UqpuzQqCUWpVyyQddqkbAsKRpMECK0s7JosYXoTtIuNbhw==}
 
-  '@types/engine.io@3.1.10':
-    resolution: {integrity: sha512-tmuKBF+q3h0nZ075osSKJ55nmvL5lWDjU8+QS/8XZT1YQ4xrxNSW3wXbjeMs8RugGxVpHAEnf9kXiRf7G94acw==}
-
   '@types/eslint@9.6.1':
     resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
-  '@types/express-serve-static-core@4.19.8':
-    resolution: {integrity: sha512-02S5fmqeoKzVZCHPZid4b8JH2eM5HzQLZWN2FohQEy/0eXTq8VXZfSN6Pcr3F6N9R/vNrj7cpgbhjie6m/1tCA==}
-
   '@types/express-serve-static-core@5.1.1':
     resolution: {integrity: sha512-v4zIMr/cX7/d2BpAEX3KNKL/JrT1s43s96lLvvdTmza1oEvDudCqK9aF/djc/SWgy8Yh0h30TZx5VpzqFCxk5A==}
 
   '@types/express-session@1.18.2':
     resolution: {integrity: sha512-k+I0BxwVXsnEU2hV77cCobC08kIsn4y44C3gC0b46uxZVMaXA04lSPgRLR/bSL2w0t0ShJiG8o4jPzRG/nscFg==}
-
-  '@types/express@4.17.25':
-    resolution: {integrity: sha512-dVd04UKsfpINUnK0yBoYHDF3xu7xVH4BuDotC/xGuycx4CgbP48X/KF/586bcObxT0HENHXEU8Nqtu6NR+eKhw==}
 
   '@types/express@5.0.6':
     resolution: {integrity: sha512-sKYVuV7Sv9fbPIt/442koC7+IIwK5olP1KWeD88e/idgoJqDm3JV/YUiPwkoKK92ylff2MGxSz1CSjsXelx0YA==}
@@ -1586,17 +1571,11 @@ packages:
   '@types/lru-cache@4.1.3':
     resolution: {integrity: sha512-QjCOmf5kYwekcsfEKhcEHMK8/SvgnneuSDXFERBuC/DPca2KJIO/gpChTsVb35BoWLBpEAJWz1GFVEArSdtKtw==}
 
-  '@types/mime@1.3.5':
-    resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
-
   '@types/minimist@1.2.5':
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
 
   '@types/multer@1.4.13':
     resolution: {integrity: sha512-bhhdtPw7JqCiEfC9Jimx5LqX9BDIPJEh2q/fQ4bqbBPtyEZYr3cvF22NwG0DmPZNYA0CAf2CnqDB4KIGGpJcaw==}
-
-  '@types/node@16.18.126':
-    resolution: {integrity: sha512-OTcgaiwfGFBKacvfwuHzzn1KLxH/er8mluiy8/uM3sGXHaRe73RrSIj01jow9t4kJEW633Ov+cOexXeiApTyAw==}
 
   '@types/node@20.19.28':
     resolution: {integrity: sha512-VyKBr25BuFDzBFCK5sUM6ZXiWfqgCTwTAOK8qzGV/m9FCirXYDlmczJ+d5dXBAQALGCdRRdbteKYfJ84NGEusw==}
@@ -1638,27 +1617,11 @@ packages:
   '@types/react@18.3.27':
     resolution: {integrity: sha512-cisd7gxkzjBKU2GgdYrTdtQx1SORymWyaAFhaxQPK9bYO9ot3Y5OikQRvY0VYQtvwjeQnizCINJAenh/V7MK2w==}
 
-  '@types/send@0.17.6':
-    resolution: {integrity: sha512-Uqt8rPBE8SY0RK8JB1EzVOIZ32uqy8HwdxCnoCOsYrvnswqmFZ/k+9Ikidlk/ImhsdvBsloHbAlewb2IEBV/Og==}
-
   '@types/send@1.2.1':
     resolution: {integrity: sha512-arsCikDvlU99zl1g69TcAB3mzZPpxgw0UQnaHeC1Nwb015xp8bknZv5rIfri9xTOcMuaVgvabfIRA7PSZVuZIQ==}
 
-  '@types/serve-static@1.15.10':
-    resolution: {integrity: sha512-tRs1dB+g8Itk72rlSI2ZrW6vZg0YrLI81iQSTkMmOqnqCaNr/8Ek4VwWcN5vZgCYWbg/JJSGBlUaYGAOP73qBw==}
-
   '@types/serve-static@2.2.0':
     resolution: {integrity: sha512-8mam4H1NHLtu7nmtalF7eyBH14QyOASmcxHhSfEoRyr0nP/YdoesEtU+uSRvMe96TW/HPTtkoKqQLl53N7UXMQ==}
-
-  '@types/socket.io-client@1.4.36':
-    resolution: {integrity: sha512-ZJWjtFBeBy1kRSYpVbeGYTElf6BqPQUkXDlHHD4k/42byCN5Rh027f4yARHCink9sKAkbtGZXEAmR0ZCnc2/Ag==}
-
-  '@types/socket.io-parser@3.0.0':
-    resolution: {integrity: sha512-Ry/rbTE6HQNL9eu3LpL1Ocup5VexXu1bSSGlSho/IR5LuRc8YvxwSNJ3JxqTltVJEATLbZkMQETSbxfKNgp4Ew==}
-    deprecated: This is a stub types definition. socket.io-parser provides its own type definitions, so you do not need this installed.
-
-  '@types/socket.io@2.1.13':
-    resolution: {integrity: sha512-JRgH3nCgsWel4OPANkhH8TelpXvacAJ9VeryjuqCDiaVDMpLysd6sbt0dr6Z15pqH3p2YpOT3T1C5vQ+O/7uyg==}
 
   '@types/soundjs@0.6.31':
     resolution: {integrity: sha512-5bditJi7P1YbRIRa1UFxIr+8vKJYEc6nTZb5NL0647rWGqGf8Ih4GD+0aDWteWIG17EXPw+VTOQE/8LHitnn4A==}
@@ -3603,9 +3566,6 @@ packages:
     resolution: {integrity: sha512-RcoE8PhtivBz1dtKDmgBh3MTozckwymcPr9UC1oiagYMlDLoTvLC1Bqssef5h+rNNK/aBeVB33leySFEQWNbjQ==}
     engines: {node: ^18.17.0 || ^20.9.0 || ^22.11.0}
     hasBin: true
-
-  nodecg-types@1.9.0:
-    resolution: {integrity: sha512-1pMrvN5ZJvAFj0LyixNoxkFpvFYd4qeANkJ24Aviqdf5FUnWXoX3ocrf3whyUVuRzUfOqAGGiAmp38TUO70+7A==}
 
   nodecg@2.6.4:
     resolution: {integrity: sha512-bGpYCtoH0viuV/gPBMxKabjYSlsjO0rSdqVP2BMNrH1qqGJMV1pwiXNU5JJBd83TA5QheMhvzFPcMY1jiGvJiw==}
@@ -6749,10 +6709,6 @@ snapshots:
 
   '@types/createjs-lib@0.0.33': {}
 
-  '@types/engine.io@3.1.10':
-    dependencies:
-      '@types/node': 24.10.7
-
   '@types/eslint@9.6.1':
     dependencies:
       '@types/estree': 1.0.8
@@ -6760,13 +6716,6 @@ snapshots:
     optional: true
 
   '@types/estree@1.0.8': {}
-
-  '@types/express-serve-static-core@4.19.8':
-    dependencies:
-      '@types/node': 24.10.7
-      '@types/qs': 6.14.0
-      '@types/range-parser': 1.2.7
-      '@types/send': 1.2.1
 
   '@types/express-serve-static-core@5.1.1':
     dependencies:
@@ -6778,13 +6727,6 @@ snapshots:
   '@types/express-session@1.18.2':
     dependencies:
       '@types/express': 5.0.6
-
-  '@types/express@4.17.25':
-    dependencies:
-      '@types/body-parser': 1.19.6
-      '@types/express-serve-static-core': 4.19.8
-      '@types/qs': 6.14.0
-      '@types/serve-static': 1.15.10
 
   '@types/express@5.0.6':
     dependencies:
@@ -6802,15 +6744,11 @@ snapshots:
 
   '@types/lru-cache@4.1.3': {}
 
-  '@types/mime@1.3.5': {}
-
   '@types/minimist@1.2.5': {}
 
   '@types/multer@1.4.13':
     dependencies:
       '@types/express': 5.0.6
-
-  '@types/node@16.18.126': {}
 
   '@types/node@20.19.28':
     dependencies:
@@ -6851,41 +6789,14 @@ snapshots:
       '@types/prop-types': 15.7.15
       csstype: 3.2.3
 
-  '@types/send@0.17.6':
-    dependencies:
-      '@types/mime': 1.3.5
-      '@types/node': 24.10.7
-
   '@types/send@1.2.1':
     dependencies:
       '@types/node': 24.10.7
-
-  '@types/serve-static@1.15.10':
-    dependencies:
-      '@types/http-errors': 2.0.5
-      '@types/node': 24.10.7
-      '@types/send': 0.17.6
 
   '@types/serve-static@2.2.0':
     dependencies:
       '@types/http-errors': 2.0.5
       '@types/node': 24.10.7
-
-  '@types/socket.io-client@1.4.36': {}
-
-  '@types/socket.io-parser@3.0.0':
-    dependencies:
-      socket.io-parser: 4.2.5
-    transitivePeerDependencies:
-      - supports-color
-
-  '@types/socket.io@2.1.13':
-    dependencies:
-      '@types/engine.io': 3.1.10
-      '@types/node': 24.10.7
-      '@types/socket.io-parser': 3.0.0
-    transitivePeerDependencies:
-      - supports-color
 
   '@types/soundjs@0.6.31':
     dependencies:
@@ -9119,16 +9030,6 @@ snapshots:
       tar: 7.5.2
     transitivePeerDependencies:
       - '@types/node'
-
-  nodecg-types@1.9.0:
-    dependencies:
-      '@types/express': 4.17.25
-      '@types/node': 16.18.126
-      '@types/socket.io': 2.1.13
-      '@types/socket.io-client': 1.4.36
-      '@types/soundjs': 0.6.31
-    transitivePeerDependencies:
-      - supports-color
 
   nodecg@2.6.4(a7a8c7866ab9b19332760d8de1e24528):
     dependencies:
