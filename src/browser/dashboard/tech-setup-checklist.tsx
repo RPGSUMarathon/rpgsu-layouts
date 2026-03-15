@@ -1,3 +1,4 @@
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { useState } from "react";
 import useCurrentRun from "../hooks/useCurrentRun";
 import { render } from "../render";
@@ -26,21 +27,16 @@ const Checklist = () => {
 
   return (
     <DashboardThemeProvider>
-      {checklist.map((item, index) => (
-        <li key={item} className="w-full list-none">
-          <div className="flex items-center ps-3">
-            <input
-              type="checkbox"
-              checked={checkedItems[index]}
-              onChange={() => toggleItem(index)}
-              className="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft"
-            />
-            <label className="w-full ms-1 text-sm font-medium text-heading">
-              {item}
-            </label>
-          </div>
-        </li>
-      ))}
+      <FormGroup>
+        {checklist.map((item, index) => (
+          <FormControlLabel
+            key={item}
+            control={<Checkbox checked={checkedItems[index]} />}
+            onChange={() => toggleItem(index)}
+            label={item}
+          />
+        ))}
+      </FormGroup>
     </DashboardThemeProvider>
   );
 };

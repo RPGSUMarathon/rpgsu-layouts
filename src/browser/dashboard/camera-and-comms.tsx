@@ -1,4 +1,15 @@
 import type React from "react";
+import {
+  Button,
+  Divider,
+  Grid,
+  List,
+  ListItem,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
 import { useState } from "react";
 import {
@@ -95,144 +106,176 @@ const CameraDashboard: React.FC = () => {
 
   return (
     <DashboardThemeProvider>
-      {/* Camera Toggle */}
-      <div className="inline-flex items-center justify-between">
-        <span className="text-lg font-semibold">Camera Settings:</span>
-        <span className="text-md">{cameraOn ? "Camera On" : "Camera Off"}</span>
-        <button
-          onClick={() => setCameraOn(!cameraOn)}
-          className={`flex items-center justify-center w-12 h-6 rounded-full transition-colors ${
-            cameraOn ? "bg-blue-500" : "bg-gray-300"
-          }`}
-        >
-          {cameraOn ? <FiCamera /> : <FiCameraOff />}
-        </button>
-      </div>
-      <h2 className="text-lg font-bold">Commentators:</h2>
-      <div className="max-w-md mx-auto w-full p-6 bg-gray-500/80 rounded-xl shadow-md">
-        {/* Name Input */}
-        <div className="flex items-center mb-6">
-          <input
-            type="text"
-            value={nameInput}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setNameInput(e.target.value)
-            }
-            onKeyDown={handleKeyPress}
-            placeholder="Enter name"
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-          <button
-            onClick={handleAddItem}
-            disabled={nameInput.trim() === ""}
-            className={`p-2 rounded-r-md ${
-              nameInput.trim() === ""
-                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                : "bg-blue-500 text-white hover:bg-blue-600"
-            }`}
+      <Stack spacing={2}>
+        {/* Camera Toggle */}
+        <div className="inline-flex items-center justify-between">
+          <span className="text-lg font-semibold">Camera Settings:</span>
+          <span className="text-md">
+            {cameraOn ? "Camera On" : "Camera Off"}
+          </span>
+          <Button
+            onClick={() => setCameraOn(!cameraOn)}
+            color={cameraOn ? "success" : undefined}
+            variant="contained"
           >
-            <FiCheck size={20} />
-          </button>
+            {cameraOn ? <FiCamera /> : <FiCameraOff />}
+          </Button>
         </div>
+        <Divider />
+        <h2 className="text-lg font-bold">Commentators:</h2>
+        <Paper elevation={2} sx={{ p: 2 }}>
+          <Stack spacing={2}>
+            <Grid
+              container
+              spacing={2}
+              direction="row"
+              sx={{ justifyContent: "space-between" }}
+            >
+              <Grid>
+                <TextField
+                  fullWidth
+                  placeholder="Enter name"
+                  label="Commentator name"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNameInput(e.target.value);
+                  }}
+                  onKeyDown={handleKeyPress}
+                />
+              </Grid>
+              <Grid>
+                <Button
+                  variant="contained"
+                  sx={{ height: "100%" }}
+                  disabled={nameInput.trim() === ""}
+                  onClick={handleAddItem}
+                >
+                  <FiCheck size={24} />
+                </Button>
+              </Grid>
+            </Grid>
+            <Divider>CURRENT COMMENTATORS</Divider>
+            <List>
+              {commentators &&
+                commentators.map((commentator) => (
+                  <ListItem key={commentator.id}>
+                    <Paper
+                      variant="outlined"
+                      sx={{ width: "100%", padding: "15px" }}
+                    >
+                      {editingItem === commentator.id ? (
+                        <Stack spacing={2}>
+                          <Grid container spacing={2}>
+                            <Grid>
+                              <TextField
+                                placeholder="Edit name"
+                                label="Commentator name"
+                                value={editName}
+                                onChange={(e) => setEditName(e.target.value)}
+                              />
+                            </Grid>
+                            <Grid>
+                              <Stack spacing={1}>
+                                <Button
+                                  onClick={handleSaveEdit}
+                                  variant="contained"
+                                >
+                                  <FiCheck />
+                                </Button>
 
-        <div className="space-y-4">
-          {commentators &&
-            commentators.map((item) => (
-              <div
-                key={item.id}
-                className="bg-[#254073]/80  p-4 rounded-lg shadow-sm border border-gray-200"
-              >
-                {editingItem === item.id ? (
-                  // Edit Mode
-                  <div className="space-y-3">
-                    <div className="flex space-x-2">
-                      <input
-                        type="text"
-                        value={editName}
-                        onChange={(e) => setEditName(e.target.value)}
-                        className="flex-1 px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                      />
-                      <button
-                        onClick={handleSaveEdit}
-                        className="p-1 text-green-600 hover:text-green-800"
-                      >
-                        <FiCheck size={18} />
-                      </button>
-                      <button
-                        onClick={handleCancelEdit}
-                        className="p-1 text-red-600 hover:text-red-800"
-                      >
-                        <FiX size={18} />
-                      </button>
-                    </div>
-
-                    <input
-                      type="text"
-                      value={editPronouns}
-                      onChange={(e) => setEditPronouns(e.target.value)}
-                      placeholder="Pronouns"
-                      className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    />
-
-                    <input
-                      type="text"
-                      value={editTwitch}
-                      onChange={(e) => setEditTwitch(e.target.value)}
-                      placeholder="Twitch (username only)"
-                      className={`w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-1 `}
-                    />
-
-                    <input
-                      type="text"
-                      value={editBluesky}
-                      onChange={(e) => setEditBluesky(e.target.value)}
-                      placeholder="Bluesky (username only)"
-                      className={`w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-1 `}
-                    />
-                  </div>
-                ) : (
-                  // Display Mode
-                  <div className="flex items-center justify-between">
-                    <div className="inline-flex gap-2 items-center">
-                      <span className="font-bold">{item.name}</span>
-                      {item.pronouns && (
-                        <span className="ml-2 text-sm text-gray-300">
-                          ({item.pronouns})
-                        </span>
+                                <Button
+                                  onClick={handleCancelEdit}
+                                  variant="contained"
+                                >
+                                  <FiX />
+                                </Button>
+                              </Stack>
+                            </Grid>
+                          </Grid>
+                          <TextField
+                            value={editPronouns}
+                            onChange={(e) => setEditPronouns(e.target.value)}
+                            label="Pronouns"
+                          />
+                          <TextField
+                            value={editTwitch}
+                            onChange={(e) => setEditTwitch(e.target.value)}
+                            label="Twitch"
+                          />
+                          <TextField
+                            value={editBluesky}
+                            onChange={(e) => setEditBluesky(e.target.value)}
+                            label="Bluesky"
+                          />
+                        </Stack>
+                      ) : (
+                        <Grid
+                          container
+                          direction="row"
+                          sx={{ justifyContent: "space-between" }}
+                          spacing={2}
+                        >
+                          <Grid>
+                            <Stack spacing={1}>
+                              <div>
+                                {commentator.name}{" "}
+                                <Typography
+                                  color="textDisabled"
+                                  component="span"
+                                >
+                                  ({commentator.pronouns})
+                                </Typography>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  gap: "8px",
+                                }}
+                              >
+                                {commentator.twitch && (
+                                  <img
+                                    className="h-4"
+                                    src={Twitch}
+                                    alt="Twitch"
+                                  />
+                                )}
+                                {commentator.bluesky && (
+                                  <img
+                                    className="h-4"
+                                    src={Bluesky}
+                                    alt="Bluesky"
+                                  />
+                                )}
+                              </div>
+                            </Stack>
+                          </Grid>
+                          <Grid container gap={2}>
+                            <Grid>
+                              <Button
+                                variant="contained"
+                                onClick={() => handleStartEdit(commentator)}
+                              >
+                                <FiEdit />
+                              </Button>
+                            </Grid>
+                            <Grid>
+                              <Button
+                                onClick={() => handleDeleteItem(commentator.id)}
+                                variant="contained"
+                              >
+                                <FiTrash2 />
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </Grid>
                       )}
-                      {item.twitch && (
-                        <img className="h-4 " src={Twitch} alt="Twitch" />
-                      )}
-                      {item.bluesky && (
-                        <img className="h-4 " src={Bluesky} alt="Bluesky" />
-                      )}
-                    </div>
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={() => handleStartEdit(item)}
-                        className="p-1 text-blue-600 hover:text-blue-800"
-                      >
-                        <FiEdit size={16} />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteItem(item.id)}
-                        className="p-1 text-red-600 hover:text-red-800"
-                      >
-                        <FiTrash2 size={16} />
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-
-          {commentators && commentators.length === 0 && (
-            <div className="text-center text-white py-4">
-              No names added yet. Enter a name above to get started.
-            </div>
-          )}
-        </div>
-      </div>
+                    </Paper>
+                  </ListItem>
+                ))}
+            </List>
+          </Stack>
+        </Paper>
+      </Stack>
     </DashboardThemeProvider>
   );
 };

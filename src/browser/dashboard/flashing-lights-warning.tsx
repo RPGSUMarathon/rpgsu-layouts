@@ -1,4 +1,5 @@
-import { useReplicant } from "@nodecg/react-hooks/use-replicant";
+import { FormControlLabel, FormGroup, Switch } from "@mui/material";
+import { useReplicant } from "@nodecg/react-hooks";
 import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
 
@@ -13,17 +14,19 @@ const FlashingLightsWarning = () => {
   return (
     <DashboardThemeProvider>
       <div className="inline-flex items-center justify-between">
-        <span className="text-lg font-semibold">
-          Turn on flashing lights warning:{" "}
-        </span>
-        <button
-          onClick={() => setFlashWarningOn(!flashWarningOn)}
-          className={`flex items-center justify-center w-12 h-6 rounded-full transition-colors ${
-            flashWarningOn ? "bg-red-600" : "bg-gray-300"
-          }`}
-        >
-          <span className="text-md">{flashWarningOn ? "On" : "Off"}</span>
-        </button>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={flashWarningOn ?? false}
+                onChange={(e) => {
+                  setFlashWarningOn(e.target.checked);
+                }}
+              />
+            }
+            label="Turn on flashing lights warning"
+          />
+        </FormGroup>
       </div>
     </DashboardThemeProvider>
   );
