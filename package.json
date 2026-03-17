@@ -113,8 +113,7 @@
       {
         "file": "omnibar.html",
         "width": 1920,
-        "height": 60,
-        "singleInstance": true
+        "height": 60
       }
     ]
   },
