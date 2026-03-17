@@ -5,7 +5,6 @@ import { Header } from "../../components/Header/Header";
 import { NoCamera } from "../../components/NoCamera";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import { ThemeProvider } from "../../components/theme-provider";
-import Background from "../../img/online-background.png";
 
 export const Center3DS = () => {
   const currentRun = useCurrentRun();
@@ -27,7 +26,7 @@ export const Center3DS = () => {
             <NoCamera />
           </div>
         )}
-        <div className="h-54" style={{ backgroundImage: `url(${Background})` }}>
+        <div className="h-54">
           <RunnerBox
             twitch={player?.social.twitch}
             youtube={player?.social.youtube}

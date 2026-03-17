@@ -6,7 +6,6 @@ import { NoCamera } from "../../components/NoCamera";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import { TeamTimer } from "../../components/RunTexts/TeamTimer";
 import { ThemeProvider } from "../../components/theme-provider";
-import background from "../../img/online-background.png";
 
 const BottomBar = () => {
   const currentRun = useCurrentRun();
@@ -27,10 +26,7 @@ const BottomBar = () => {
         </div>
       )}
 
-      <div
-        className="w-231 h-full relative"
-        style={{ backgroundImage: `url(${background})` }}
-      >
+      <div className="w-231 h-full relative">
         <div className="absolute top-0 left-0 w-111.5 border-r-5 border-white">
           <RunnerBox
             twitch={player1?.social.twitch}
