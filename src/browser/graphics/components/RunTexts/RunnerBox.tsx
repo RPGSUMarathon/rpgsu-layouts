@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import Bluesky from "../../img/icons/bluesky.png";
-import Mic from "../../img/icons/mic.png";
-import Runner from "../../img/icons/runner.png";
 import Twitch from "../../img/icons/twitch.png";
 import Youtube from "../../img/icons/youtube.png";
 
@@ -19,7 +17,6 @@ type Props = {
 export const RunnerBox = ({
   pronouns,
   name,
-  runner,
   className,
   textSize,
   twitch,
@@ -114,10 +111,6 @@ export const RunnerBox = ({
           {pronouns}
         </div>
       )}
-
-      {/* <img src={runner ? Runner : Mic} className="ml-3 h-5/6" alt="Icon" /> */}
-
-      {/* <div className="ml-3 h-5/6"></div> */}
 
       <div
         className={`absolute left-14 top-1.25 flex items-center gap-2 text-white drop-shadow ${
