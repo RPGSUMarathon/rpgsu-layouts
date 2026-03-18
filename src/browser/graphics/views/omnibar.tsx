@@ -1,6 +1,9 @@
 import { render } from "../../render";
-import { OmnibarDateTime } from "../components/Omnibar/DateTime";
-import { OmnibarLogo } from "../components/Omnibar/Logo";
+import {
+  OmnibarDateTime,
+  OmnibarLogo,
+  OmnibarTicker,
+} from "../components/Omnibar";
 import { ThemeProvider } from "../components/theme-provider";
 
 export const Omnibar = () => {
@@ -11,7 +14,8 @@ export const Omnibar = () => {
         style={{ boxShadow: "0px -2px 2px rgba(0,0,0,0.1)" }}
       >
         <OmnibarLogo className="flex-none" />
-        <OmnibarDateTime className="mt-2" />
+        <OmnibarTicker className="flex-1 px-2" />
+        <OmnibarDateTime className="mt-1.5" />
       </div>
     </ThemeProvider>
   );

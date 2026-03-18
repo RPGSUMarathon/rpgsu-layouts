@@ -21,7 +21,10 @@ export const OmnibarDateTime = ({ className }: { className?: string }) => {
   }, []);
 
   return (
-    <div className={`h-full flex flex-col text-right font-bold ${className}`}>
+    <div
+      id="omnibar-date-time"
+      className={`h-full flex flex-col text-right font-bold ${className}`}
+    >
       <span id="omnibar-time">{time}</span>
       <span id="omnibar-date">{date}</span>
     </div>
