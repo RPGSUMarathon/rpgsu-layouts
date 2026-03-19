@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import Bluesky from "../../img/icons/bluesky.png";
-import Mic from "../../img/icons/mic.png";
-import Runner from "../../img/icons/runner.png";
 import Twitch from "../../img/icons/twitch.png";
 import Youtube from "../../img/icons/youtube.png";
 
@@ -19,7 +17,6 @@ type Props = {
 export const RunnerBox = ({
   pronouns,
   name,
-  runner,
   className,
   textSize,
   twitch,
@@ -107,15 +104,13 @@ export const RunnerBox = ({
 
   return (
     <div
-      className={`w-full h-12.5 border-b-3 border-white bg-[#278178] relative flex items-center ${className ?? ""}`}
+      className={`w-full h-12.5 border-b-3 border-white  relative flex items-center ${className ?? ""}`}
     >
       {pronouns && (
         <div className="absolute capitalize bottom-0 right-0 bg-black/70 text-white text-xs px-2 py-0.5">
           {pronouns}
         </div>
       )}
-
-      <img src={runner ? Runner : Mic} className="ml-3 h-5/6" alt="Icon" />
 
       <div
         className={`absolute left-14 top-1.25 flex items-center gap-2 text-white drop-shadow ${
