@@ -1,29 +1,13 @@
-import type { OmnibarTickerElements } from "@rpgsu-layouts/types";
+import type { OmnibarTickerElement } from "@rpgsu-layouts/types";
 import { useReplicant } from "@nodecg/react-hooks";
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { OmnibarGenericMessage } from "./Ticker/GenericMessage";
 
 export const OmnibarTicker = ({ className }: { className?: string }) => {
-  // const [tickerElements] = useReplicant<OmnibarTickerElements[]>(
-  //   "ticker-elements",
-  //   { bundle: "rpgsu-layouts", defaultValue: [] },
-  // );
-
-  const tickerElements: OmnibarTickerElements[] = useMemo(
-    () => [
-      {
-        type: "generic-message",
-        message: "test1",
-        timeout: 5000,
-      },
-      {
-        type: "generic-message",
-        message: "test2",
-        timeout: 5000,
-      },
-    ],
-    [],
+  const [tickerElements] = useReplicant<OmnibarTickerElement[]>(
+    "ticker-elements",
+    { bundle: "rpgsu-layouts", defaultValue: [] },
   );
 
   const [currentComponentIndex, setCurrentComponentIndex] = useState(0);

@@ -1,12 +1,15 @@
-type GenericMessage = {
+export type GenericMessage = {
   type: "generic-message";
   message: string;
 };
 
-type NextRun = {
+export type NextRun = {
   type: "next-run";
 };
 
-export type OmnibarTickerElements = (GenericMessage | NextRun) & {
-  timeout: number;
-};
+export type OmnibarTickerElement = { id: string } & (
+  | GenericMessage
+  | NextRun
+) & {
+    timeout: number;
+  };

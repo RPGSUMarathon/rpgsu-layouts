@@ -36,7 +36,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
     "react-is": "18.2.0",
-    "tailwindcss": "^4.1.12"
+    "tailwindcss": "^4.1.12",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@rpgsu/lint-config": "^1.0.1",
@@ -98,6 +99,12 @@
         "title": "Flashing Lights Warning",
         "width": 2,
         "workspace": "Scene Editing"
+      },
+      {
+        "file": "omnibar-config.html",
+        "name": "omnibar-config",
+        "title": "Omnibar Config",
+        "width": 3
       }
     ],
     "graphics": [
