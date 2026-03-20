@@ -25,7 +25,7 @@ export const OmnibarGenericMessage = ({
   return (
     <div
       id="generic-message"
-      className={`font-semibold text-4xl h-full ${className}`}
+      className={`text-4xl h-full text-center ${className}`}
       dangerouslySetInnerHTML={{ __html: message }}
     />
   );

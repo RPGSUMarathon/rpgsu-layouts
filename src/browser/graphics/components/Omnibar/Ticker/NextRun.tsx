@@ -59,11 +59,11 @@ export function NextRun({
           const timeToRun = timeToRunFunc(nextRun);
           if (timeToRun.length > 0) {
             setMsg(
-              `Next run in <span class="text-[#278178]">${timeToRun}</span> - ${nextRun.customData.gameShort ?? nextRun.game} ${nextRun.category} by <span class="text-[#278178]">${Helpers.formatPlayers(nextRun)}</span>`,
+              `Next run <span class="text-[#bbeee8ff] font-bold">${timeToRun}</span> - ${nextRun.customData.gameShort ?? nextRun.game} ${nextRun.category} by <span class="text-[#bbeee8ff] font-bold">${Helpers.formatPlayers(nextRun)}</span>`,
             );
           } else {
             setMsg(
-              `Next run - ${nextRun.customData.gameShort ?? nextRun.game} ${nextRun.category} by <span class="text-[#278178]">${Helpers.formatPlayers(nextRun)}</span>`,
+              `Next run - ${nextRun.customData.gameShort ?? nextRun.game} ${nextRun.category} by <span class="text-[#bbeee8ff] font-bold">${Helpers.formatPlayers(nextRun)}</span>`,
             );
           }
         } else {
@@ -128,29 +128,16 @@ export function NextRun({
   return (
     <div
       ref={localContainerRef}
-      style={{
-        width: "100%",
-        overflow: "hidden",
-        position: "relative",
-        whiteSpace: "nowrap",
-        textAlign: "left",
-        minWidth: "100%",
-        maxWidth: "100%",
-      }}
+      className="text-left min-w-full max-w-full w-full overflow-hidden relative whitespace-nowrap"
     >
       <motion.div
         ref={textRef}
-        style={{
-          display: "inline-block",
-          verticalAlign: "top",
-          fontSize: "34px",
-          lineHeight: 1.1,
-          whiteSpace: "nowrap",
-        }}
+        className="text-4xl inline-block align-top whitespace-nowrap"
+        initial={{ x: 30 }}
         animate={
           scrollDistance > 0
             ? {
-                x: [30, 30, -scrollDistance - 30, -scrollDistance - 30],
+                x: [0, 0, -scrollDistance, -scrollDistance],
               }
             : {}
         }

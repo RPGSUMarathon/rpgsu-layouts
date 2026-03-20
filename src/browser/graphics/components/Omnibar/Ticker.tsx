@@ -12,6 +12,7 @@ export const OmnibarTicker = ({ className }: { className?: string }) => {
   );
 
   const [currentComponentIndex, setCurrentComponentIndex] = useState(0);
+
   const indexRef = useRef(0);
 
   const tickerContainerRef = useRef(null);
@@ -34,7 +35,7 @@ export const OmnibarTicker = ({ className }: { className?: string }) => {
   return (
     <div
       id="omnibar-ticker"
-      className={`h-full flex flex-row flex-1 justify-center content-center items-center overflow-hidden ${className}`}
+      className={`h-full mx-2 flex flex-row flex-1 justify-center content-center items-center overflow-hidden ${className}`}
       ref={tickerContainerRef}
     >
       <AnimatePresence mode="wait">
@@ -44,6 +45,7 @@ export const OmnibarTicker = ({ className }: { className?: string }) => {
           animate={{ y: 0 }}
           exit={{ y: "-100%" }}
           transition={{ duration: 0.5 }}
+          className="block w-full"
         >
           {currentElement?.type === "generic-message" && (
             <OmnibarGenericMessage
