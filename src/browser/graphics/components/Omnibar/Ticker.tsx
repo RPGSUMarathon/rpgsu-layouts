@@ -3,15 +3,18 @@ import { useReplicant } from "@nodecg/react-hooks";
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { OmnibarGenericMessage } from "./Ticker/GenericMessage";
+import { NextRun } from "./Ticker/NextRun";
 
 export const OmnibarTicker = ({ className }: { className?: string }) => {
   const [tickerElements] = useReplicant<OmnibarTickerElement[]>(
-    "ticker-elements",
+    "tickerElements",
     { bundle: "rpgsu-layouts", defaultValue: [] },
   );
 
   const [currentComponentIndex, setCurrentComponentIndex] = useState(0);
   const indexRef = useRef(0);
+
+  const tickerContainerRef = useRef(null);
 
   const showNextElement = useCallback(() => {
     const elements = tickerElements ?? [];
@@ -32,6 +35,7 @@ export const OmnibarTicker = ({ className }: { className?: string }) => {
     <div
       id="omnibar-ticker"
       className={`h-full flex flex-row flex-1 justify-center content-center items-center overflow-hidden ${className}`}
+      ref={tickerContainerRef}
     >
       <AnimatePresence mode="wait">
         <motion.span
@@ -49,7 +53,13 @@ export const OmnibarTicker = ({ className }: { className?: string }) => {
               timeout={currentElement.timeout}
             />
           )}
-          {currentElement?.type === "next-run" && <span />}
+          {currentElement?.type === "next-run" && (
+            <NextRun
+              onEnd={showNextElement}
+              timeout={currentElement.timeout}
+              containerRef={tickerContainerRef}
+            />
+          )}
         </motion.span>
       </AnimatePresence>
     </div>

@@ -27,8 +27,8 @@ importers:
         specifier: ^4.1.12
         version: 4.1.18(vite@7.3.1(@types/node@24.10.7)(jiti@2.6.1)(lightningcss@1.30.2)(sugarss@5.0.1(postcss@8.5.6)))
       auto-text-size:
-        specifier: github:hoXyy/auto-text-size
-        version: https://codeload.github.com/hoXyy/auto-text-size/tar.gz/6672c048105e2407bad5c1af705142876ffcd401(react@18.3.1)
+        specifier: ^0.2.3
+        version: 0.2.3(react@18.3.1)
       humanize-duration:
         specifier: ^3.33.2
         version: 3.33.2
@@ -1935,9 +1935,8 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  auto-text-size@https://codeload.github.com/hoXyy/auto-text-size/tar.gz/6672c048105e2407bad5c1af705142876ffcd401:
-    resolution: {tarball: https://codeload.github.com/hoXyy/auto-text-size/tar.gz/6672c048105e2407bad5c1af705142876ffcd401}
-    version: 0.2.1
+  auto-text-size@0.2.3:
+    resolution: {integrity: sha512-OycpKD8n5jxnNaOiAJoNr3BkBsxRzHHhFQk15rgsOYq+O9lsMSPLbVN7ZibxjTwT7bl6Y5jawOtZJxRWaoxdcQ==}
     peerDependencies:
       react: '*'
 
@@ -7250,7 +7249,7 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  auto-text-size@https://codeload.github.com/hoXyy/auto-text-size/tar.gz/6672c048105e2407bad5c1af705142876ffcd401(react@18.3.1):
+  auto-text-size@0.2.3(react@18.3.1):
     dependencies:
       react: 18.3.1
 

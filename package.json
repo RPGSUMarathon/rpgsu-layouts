@@ -25,7 +25,7 @@
     "@mui/material": "^7.3.8",
     "@nodecg/react-hooks": "^1.0.3",
     "@tailwindcss/vite": "^4.1.12",
-    "auto-text-size": "github:hoXyy/auto-text-size",
+    "auto-text-size": "^0.2.3",
     "humanize-duration": "^3.33.2",
     "json-schema-to-typescript": "^15.0.4",
     "luxon": "^3.7.2",
