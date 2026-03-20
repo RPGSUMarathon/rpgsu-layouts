@@ -122,6 +122,14 @@ const OmnibarConfig = () => {
     setTickerElements(localTickerElements);
   }, [localTickerElements, setTickerElements]);
 
+  const removeElement = (id: string) => {
+    const elementsWithoutRemoved = [...localTickerElements].filter(
+      (element) => element.id !== id,
+    );
+
+    setLocalTickerElements(elementsWithoutRemoved);
+  };
+
   useEffect(() => {
     if (typeof tickerElements === "undefined") return;
 
@@ -238,7 +246,11 @@ const OmnibarConfig = () => {
             </Grid>
             <Grid>
               <Tooltip title="Delete">
-                <Button sx={{ height: "100%" }} variant="contained">
+                <Button
+                  sx={{ height: "100%" }}
+                  variant="contained"
+                  onClick={() => removeElement(element.id)}
+                >
                   <FiTrash />
                 </Button>
               </Tooltip>
