@@ -12,4 +12,5 @@ export type OmnibarTickerElement = { id: string } & (
   | NextRun
 ) & {
     timeout: number;
+    hideOnCountdown: boolean;
   };

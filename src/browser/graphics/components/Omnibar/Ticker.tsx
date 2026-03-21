@@ -1,15 +1,21 @@
-import type { OmnibarTickerElement } from "@rpgsu-layouts/types";
 import { useReplicant } from "@nodecg/react-hooks";
+import {
+  type CurrentOBSScene,
+  type OmnibarTickerElement,
+} from "@rpgsu-layouts/types";
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { OmnibarGenericMessage } from "./Ticker/GenericMessage";
 import { NextRun } from "./Ticker/NextRun";
+
+const { scenes } = nodecg.bundleConfig.obs;
 
 export const OmnibarTicker = ({ className }: { className?: string }) => {
   const [tickerElements] = useReplicant<OmnibarTickerElement[]>(
     "tickerElements",
     { bundle: "rpgsu-layouts", defaultValue: [] },
   );
+  const [currentOBSScene] = useReplicant<CurrentOBSScene>("currentOBSScene");
 
   const [currentComponentIndex, setCurrentComponentIndex] = useState(0);
 
@@ -21,10 +27,20 @@ export const OmnibarTicker = ({ className }: { className?: string }) => {
     const elements = tickerElements ?? [];
     if (!elements.length) return;
 
-    const nextIndex = indexRef.current % elements.length;
-    indexRef.current = nextIndex + 1;
-    setCurrentComponentIndex(nextIndex);
-  }, [tickerElements]);
+    const visibleElements = elements.filter((el) => {
+      const isHidden =
+        (el.hideOnCountdown ?? false) && currentOBSScene === scenes?.countdown;
+      return !isHidden;
+    });
+
+    if (!visibleElements.length) return;
+
+    const visibleIndex = indexRef.current % visibleElements.length;
+    const nextElement = visibleElements[visibleIndex]!;
+    const originalIndex = elements.indexOf(nextElement);
+    indexRef.current = visibleIndex + 1;
+    setCurrentComponentIndex(originalIndex);
+  }, [tickerElements, currentOBSScene]);
 
   useEffect(() => {
     showNextElement();

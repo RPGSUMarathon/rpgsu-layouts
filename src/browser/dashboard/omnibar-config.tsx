@@ -1,7 +1,10 @@
 import {
   Button,
+  Checkbox,
   Divider,
   FormControl,
+  FormControlLabel,
+  FormGroup,
   Grid,
   InputLabel,
   MenuItem,
@@ -60,6 +63,8 @@ const OmnibarConfig = () => {
     useState<string>("1000");
   const [newGenericMessageText, setNewGenericMessageText] =
     useState<GenericMessage["message"]>("");
+  const [newTickerElementHideOnCountdown, setNewTickerElementHideOnCountdown] =
+    useState<OmnibarTickerElement["hideOnCountdown"]>(false);
 
   const saveNewElement = useCallback(() => {
     if (newTickerElementType === "generic-message") {
@@ -68,6 +73,7 @@ const OmnibarConfig = () => {
         type: newTickerElementType,
         message: newGenericMessageText,
         timeout: parseInt(newTickerElementTimeout),
+        hideOnCountdown: newTickerElementHideOnCountdown,
       };
 
       setLocalTickerElements([...localTickerElements, newTickerElement]);
@@ -78,6 +84,7 @@ const OmnibarConfig = () => {
         id: uuidv4(),
         type: newTickerElementType,
         timeout: parseInt(newTickerElementTimeout),
+        hideOnCountdown: newTickerElementHideOnCountdown,
       };
 
       setLocalTickerElements([...localTickerElements, newTickerElement]);
@@ -88,10 +95,12 @@ const OmnibarConfig = () => {
     setNewTickerElementType("generic-message");
     setNewGenericMessageText("");
     setNewTickerElementTimeout("1000");
+    setNewTickerElementHideOnCountdown(false);
   }, [
     newTickerElementTimeout,
     newTickerElementType,
     newGenericMessageText,
+    newTickerElementHideOnCountdown,
     localTickerElements,
   ]);
 
@@ -109,6 +118,13 @@ const OmnibarConfig = () => {
   const handleNewElementTimeout = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       setNewTickerElementTimeout(event.target.value);
+    },
+    [],
+  );
+
+  const handleNewElementHideOnCountdownChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setNewTickerElementHideOnCountdown(event.target.checked);
     },
     [],
   );
@@ -209,6 +225,19 @@ const OmnibarConfig = () => {
               }
             />
 
+            {/** Hide on countdown */}
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={newTickerElementHideOnCountdown}
+                    onChange={handleNewElementHideOnCountdownChange}
+                  />
+                }
+                label="Hide on countdown"
+              />
+            </FormGroup>
+
             <Button
               variant="contained"
               disabled={!timeoutOnlyIncludesNumbers}
@@ -242,6 +271,9 @@ const OmnibarConfig = () => {
                 )}
                 <span>
                   <b>Length: </b> {element.timeout} ms
+                </span>
+                <span>
+                  <b>Hide on countdown: </b> {String(element.hideOnCountdown)}
                 </span>
               </Stack>
             </Grid>
