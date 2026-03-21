@@ -16,7 +16,7 @@ const BottomBar = () => {
   const player2 = currentRun?.teams[1]?.players[0];
 
   return (
-    <div className="h-93.5 w-full inline-flex">
+    <div className="h-90.5 w-full inline-flex">
       {/*Camera 1*/}
       {cameraOn && cameraOn ? (
         <div className="w-124.5 h-full border-white border-r-5" />
