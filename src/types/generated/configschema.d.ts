@@ -12,6 +12,7 @@ export interface Configschema {
 		url?: string;
 		password?: string;
 		scenes?: {
+			countdown?: string;
 			intermission?: string;
 			ending?: string;
 			finale?: string;

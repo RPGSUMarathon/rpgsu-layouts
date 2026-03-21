@@ -20,6 +20,10 @@
         "scenes": {
           "type": "object",
           "properties": {
+            "countdown": {
+              "type": "string",
+              "default": "Countdown"
+            },
             "intermission": {
               "type": "string",
               "default": "Intermission"
