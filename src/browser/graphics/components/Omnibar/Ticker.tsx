@@ -49,7 +49,7 @@ export const OmnibarTicker = ({ className }: { className?: string }) => {
         >
           {currentElement?.type === "generic-message" && (
             <OmnibarGenericMessage
-              className="self-center"
+              containerRef={tickerContainerRef}
               message={currentElement.message}
               onEnd={showNextElement}
               timeout={currentElement.timeout}

@@ -1,32 +1,123 @@
-import { useEffect } from "react";
+import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+
+interface Props {
+  timeout: number;
+  message: string;
+  onEnd: () => void;
+  onScrollingNeeded?: (needsScrolling: boolean) => void;
+  containerRef: React.RefObject<HTMLDivElement>;
+}
 
 export const OmnibarGenericMessage = ({
   message,
-  className,
+  containerRef,
   timeout,
   onEnd,
-}: {
-  className?: string;
-  message: string;
-  onEnd: () => void;
-  timeout: number;
-}) => {
-  useEffect(() => {
-    console.log("GenericMessage: Mounted");
+  onScrollingNeeded,
+}: Props) => {
+  const [scrollDistance, setScrollDistance] = useState(0);
 
-    const endTimeout = setTimeout(() => {
-      console.log("GenericMessage: End");
+  const resizeObserverRef = useRef<ResizeObserver>();
+  const textRef = useRef<HTMLDivElement>(null);
+  const localContainerRef = useRef<HTMLDivElement>(null);
+  const exitTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const [scrollMeasured, setScrollMeasured] = useState(false);
+
+  const TOTAL_DISPLAY_TIME = 20;
+  const START_PAUSE = 1;
+  const SCROLL_DURATION = 18;
+
+  useEffect(() => {
+    onScrollingNeeded?.(scrollDistance > 0);
+  }, [scrollDistance, onScrollingNeeded]);
+
+  // For non-scrolling case only: exit after `timeout` ms once scroll is measured.
+  useEffect(() => {
+    if (!scrollMeasured) {
+      return;
+    }
+
+    // Scrolling case is handled by onAnimationComplete instead.
+    if (scrollDistance > 0) {
+      return;
+    }
+
+    clearTimeout(exitTimeoutRef.current);
+    exitTimeoutRef.current = setTimeout(() => {
       onEnd();
     }, timeout);
 
-    return () => clearTimeout(endTimeout);
-  }, [onEnd, timeout]);
+    return () => {
+      clearTimeout(exitTimeoutRef.current);
+    };
+  }, [scrollMeasured, scrollDistance, timeout, onEnd]);
+
+  useEffect(() => {
+    const updateScrollDistance = () => {
+      if (textRef.current && localContainerRef.current) {
+        const textWidth = textRef.current.scrollWidth;
+        const containerWidth =
+          containerRef.current?.clientWidth ??
+          localContainerRef.current.clientWidth;
+
+        if (textWidth > containerWidth) {
+          setScrollDistance(textWidth - (containerWidth - 60));
+        } else {
+          setScrollDistance(0);
+        }
+      }
+      setScrollMeasured(true);
+    };
+
+    resizeObserverRef.current = new ResizeObserver(updateScrollDistance);
+    if (textRef.current) {
+      resizeObserverRef.current.observe(textRef.current);
+    }
+
+    updateScrollDistance();
+
+    return () => {
+      resizeObserverRef.current?.disconnect();
+    };
+  }, [message, containerRef]);
 
   return (
     <div
-      id="generic-message"
-      className={`text-4xl h-full text-center ${className}`}
-      dangerouslySetInnerHTML={{ __html: message }}
-    />
+      ref={localContainerRef}
+      className="text-left min-w-full max-w-full w-full overflow-hidden relative whitespace-nowrap"
+    >
+      <motion.div
+        ref={textRef}
+        className="text-4xl inline-block align-top whitespace-nowrap"
+        animate={
+          scrollDistance > 0
+            ? {
+                x: [0, 0, -scrollDistance, -scrollDistance],
+              }
+            : {}
+        }
+        transition={
+          scrollDistance > 0
+            ? {
+                ease: "linear",
+                duration: TOTAL_DISPLAY_TIME,
+                times: [
+                  0,
+                  START_PAUSE / TOTAL_DISPLAY_TIME,
+                  (START_PAUSE + SCROLL_DURATION) / TOTAL_DISPLAY_TIME,
+                  1,
+                ],
+              }
+            : {}
+        }
+        onAnimationComplete={() => {
+          if (scrollDistance > 0) {
+            onEnd();
+          }
+        }}
+        dangerouslySetInnerHTML={{ __html: message }}
+      />
+    </div>
   );
 };

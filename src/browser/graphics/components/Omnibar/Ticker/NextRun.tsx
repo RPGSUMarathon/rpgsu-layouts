@@ -133,7 +133,6 @@ export function NextRun({
       <motion.div
         ref={textRef}
         className="text-4xl inline-block align-top whitespace-nowrap"
-        initial={{ x: 30 }}
         animate={
           scrollDistance > 0
             ? {
