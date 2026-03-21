@@ -6,15 +6,4 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface Configschema {
-	obs: {
-		enabled: boolean;
-		url?: string;
-		password?: string;
-		scenes?: {
-			intermission?: string;
-			ending?: string;
-			finale?: string;
-		};
-	};
-}
+export type CountdownRunning = boolean;
