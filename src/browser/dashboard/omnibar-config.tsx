@@ -192,6 +192,7 @@ const OmnibarConfig = () => {
                 label="Message"
                 value={newGenericMessageText}
                 onChange={handleNewMessageText}
+                helperText="Any text in this field will be used as direct HTML for the message. This means you can give classes to specific part of the message if required."
               />
             )}
 
