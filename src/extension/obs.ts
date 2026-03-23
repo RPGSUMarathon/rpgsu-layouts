@@ -28,18 +28,4 @@ if (config.enabled) {
       );
     });
   });
-
-  nodecg.listenFor("switchToEnding", () => {
-    if (obs.currentScene === config.scenes!.ending) return;
-
-    console.log("Changing to ending");
-
-    void obs.changeToEnding().then(() => {
-      nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
-      nodecg.sendMessageToBundle(
-        "playbackStart",
-        "nodecg-foobar2000-controller",
-      );
-    });
-  });
 }
