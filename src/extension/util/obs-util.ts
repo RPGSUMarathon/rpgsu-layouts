@@ -8,6 +8,7 @@ const nodecg = get();
 export class OBSUtility extends obsWebsocketJs {
   config = nodecg.bundleConfig.obs;
   connected = false;
+  isRecording = false;
   currentScene = "";
   private currentSceneReplicant = currentOBSScene;
   log = new TaggedLogger("obs");
@@ -30,7 +31,6 @@ export class OBSUtility extends obsWebsocketJs {
         data.sceneName === (this.config.scenes?.game ?? "Game") ||
         data.sceneName === (this.config.scenes?.game2p ?? "Game-2p")
       ) {
-        console.log("Starting recording...");
         void this.startRecording();
       }
 
@@ -95,7 +95,10 @@ export class OBSUtility extends obsWebsocketJs {
 
   async startRecording() {
     try {
+      if (this.isRecording) return;
       await this.call("StartRecord");
+      this.isRecording = true;
+      console.log("Starting recording...");
     } catch (err) {
       this.log.warn(`Could not start recording ${err}`);
       throw err;
@@ -104,9 +107,12 @@ export class OBSUtility extends obsWebsocketJs {
 
   async stopRecording() {
     try {
+      if (!this.isRecording) return;
       await this.call("StopRecord");
+      this.isRecording = false;
+      console.log("Stopping recording...");
     } catch (err) {
-      this.log.warn(`Could not start recording ${err}`);
+      this.log.warn(`Could not stop recording ${err}`);
       throw err;
     }
   }
