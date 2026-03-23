@@ -102,6 +102,13 @@
         "workspace": "Scene Editing"
       },
       {
+        "file": "background-toggle.html",
+        "name": "background-toggle",
+        "title": "Background Toggle",
+        "width": 2,
+        "workspace": "Scene Editing"
+      },
+      {
         "file": "omnibar-config.html",
         "name": "omnibar-config",
         "title": "Omnibar Config",
