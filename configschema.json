@@ -28,13 +28,13 @@
               "type": "string",
               "default": "Intermission"
             },
-            "ending": {
+            "game": {
               "type": "string",
-              "default": "Ending"
+              "default": "Game"
             },
-            "finale": {
+            "game2p": {
               "type": "string",
-              "default": "Finale"
+              "default": "Game-2p"
             }
           },
           "additionalProperties": false
