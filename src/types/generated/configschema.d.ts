@@ -14,8 +14,8 @@ export interface Configschema {
 		scenes?: {
 			countdown?: string;
 			intermission?: string;
-			ending?: string;
-			finale?: string;
+			game?: string;
+			game2p?: string;
 		};
 	};
 }
