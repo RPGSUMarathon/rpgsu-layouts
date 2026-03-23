@@ -37,7 +37,8 @@ const BottomBar = () => {
           backgroundImage: backgroundToggleOn
             ? `url(${backgroundImage})`
             : "none",
-        }}>
+        }}
+      >
         <div className="absolute top-0 left-0 w-111.5 border-r-5 border-white">
           <RunnerBox
             twitch={player1?.social.twitch}
