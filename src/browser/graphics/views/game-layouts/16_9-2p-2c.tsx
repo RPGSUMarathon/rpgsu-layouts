@@ -1,3 +1,4 @@
+import { useReplicant } from "@nodecg/react-hooks";
 import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
 import useCurrentRun from "../../../hooks/useCurrentRun";
@@ -6,11 +7,15 @@ import { NoCamera } from "../../components/NoCamera";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import { TeamTimer } from "../../components/RunTexts/TeamTimer";
 import { ThemeProvider } from "../../components/theme-provider";
+import backgroundImage from "../../img/online-background.png";
 
 const BottomBar = () => {
   const currentRun = useCurrentRun();
   const cameraOn = useCameraOn();
   const commentators = useCommentators();
+  const [backgroundToggleOn] = useReplicant<boolean>("backgroundToggleOn", {
+    defaultValue: false,
+  });
 
   const player1 = currentRun?.teams[0]?.players[0];
   const player2 = currentRun?.teams[1]?.players[0];
@@ -26,7 +31,13 @@ const BottomBar = () => {
         </div>
       )}
 
-      <div className="w-231 h-full relative">
+      <div
+        className="w-231 h-full relative"
+        style={{
+          backgroundImage: backgroundToggleOn
+            ? `url(${backgroundImage})`
+            : "none",
+        }}>
         <div className="absolute top-0 left-0 w-111.5 border-r-5 border-white">
           <RunnerBox
             twitch={player1?.social.twitch}

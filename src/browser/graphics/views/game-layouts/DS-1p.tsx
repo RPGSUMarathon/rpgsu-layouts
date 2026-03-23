@@ -1,3 +1,4 @@
+import { useReplicant } from "@nodecg/react-hooks";
 import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
 import useCurrentRun from "../../../hooks/useCurrentRun";
@@ -5,11 +6,15 @@ import { Header } from "../../components/Header/Header";
 import { NoCamera } from "../../components/NoCamera";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import { ThemeProvider } from "../../components/theme-provider";
+import backgroundImage from "../../img/online-background.png";
 
 const CenterDS = () => {
   const currentRun = useCurrentRun();
   const cameraOn = useCameraOn();
   const commentators = useCommentators();
+  const [backgroundToggleOn] = useReplicant<boolean>("backgroundToggleOn", {
+    defaultValue: false,
+  });
 
   const player = currentRun?.teams[0]?.players[0];
 
@@ -26,7 +31,14 @@ const CenterDS = () => {
             <NoCamera />
           </div>
         )}
-        <div className="h-54">
+        <div
+          className="h-54"
+          style={{
+            backgroundImage: backgroundToggleOn
+              ? `url(${backgroundImage})`
+              : "none",
+          }}
+        >
           <RunnerBox
             twitch={player?.social.twitch}
             youtube={player?.social.youtube}
@@ -52,9 +64,23 @@ const CenterDS = () => {
         </div>
       </div>
       <div className="h-84.25 absolute w-112.5 bottom-15 left-0 border-t-5 " />
-      <div className="flex-1 border-r-5 border-l-white" />
+      <div
+        className="flex-1 border-r-5 border-l-white"
+        style={{
+          backgroundImage: backgroundToggleOn
+            ? `url(${backgroundImage})`
+            : "none",
+        }}
+      />
       <div className="flex-none h-full aspect-4/3 " />
-      <div className="flex-1 border-l-5 border-l-white" />
+      <div
+        className="flex-1 border-l-5 border-l-white"
+        style={{
+          backgroundImage: backgroundToggleOn
+            ? `url(${backgroundImage})`
+            : "none",
+        }}
+      />
     </div>
   );
 };
