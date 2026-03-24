@@ -10,6 +10,9 @@ const BackgroundToggle = () => {
       defaultValue: false,
     },
   );
+  const [iconToggleOn, setIconToggle] = useReplicant<boolean>("iconToggleOn", {
+    defaultValue: false,
+  });
 
   return (
     <DashboardThemeProvider>
@@ -25,6 +28,17 @@ const BackgroundToggle = () => {
               />
             }
             label="Toggle transparency on the background in the game scenes."
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={iconToggleOn ?? false}
+                onChange={(e) => {
+                  setIconToggle(e.target.checked);
+                }}
+              />
+            }
+            label="Toggle icons in the runner/commentators box."
           />
         </FormGroup>
       </div>
