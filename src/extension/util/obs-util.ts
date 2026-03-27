@@ -8,6 +8,7 @@ const nodecg = get();
 export class OBSUtility extends obsWebsocketJs {
   config = nodecg.bundleConfig.obs;
   connected = false;
+  isRecording = false;
   currentScene = "";
   private currentSceneReplicant = currentOBSScene;
   log = new TaggedLogger("obs");
@@ -25,6 +26,13 @@ export class OBSUtility extends obsWebsocketJs {
 
     this.on("CurrentProgramSceneChanged", (data) => {
       if (data.sceneName === this.currentScene) return;
+
+      if (
+        data.sceneName === (this.config.scenes?.game ?? "Game") ||
+        data.sceneName === (this.config.scenes?.game2p ?? "Game-2p")
+      ) {
+        void this.startRecording();
+      }
 
       this.currentSceneReplicant.value = data.sceneName;
     });
@@ -69,18 +77,10 @@ export class OBSUtility extends obsWebsocketJs {
         this.config.scenes?.intermission ?? "Intermission",
       );
       await this.enableStudioMode();
+      await this.stopRecording();
       commentators.value = [];
     } catch (err) {
       this.log.warn(`Error switching to intermission ${err}`);
-    }
-  }
-
-  async changeToEnding() {
-    try {
-      await this.changeScene(this.config.scenes?.ending ?? "Ending");
-      commentators.value = [];
-    } catch (err) {
-      this.log.warn(`Error switching to ending ${err}`);
     }
   }
 
@@ -90,6 +90,30 @@ export class OBSUtility extends obsWebsocketJs {
       .studioModeEnabled;
     if (!studioModeStatus) {
       await this.call("SetStudioModeEnabled", { studioModeEnabled: true });
+    }
+  }
+
+  async startRecording() {
+    try {
+      if (this.isRecording) return;
+      await this.call("StartRecord");
+      this.isRecording = true;
+      console.log("Starting recording...");
+    } catch (err) {
+      this.log.warn(`Could not start recording ${err}`);
+      throw err;
+    }
+  }
+
+  async stopRecording() {
+    try {
+      if (!this.isRecording) return;
+      await this.call("StopRecord");
+      this.isRecording = false;
+      console.log("Stopping recording...");
+    } catch (err) {
+      this.log.warn(`Could not stop recording ${err}`);
+      throw err;
     }
   }
 }
