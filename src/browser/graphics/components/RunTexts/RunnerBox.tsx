@@ -1,5 +1,8 @@
+import { useReplicant } from "@nodecg/react-hooks";
 import { useEffect, useMemo, useState } from "react";
 import Bluesky from "../../img/icons/bluesky.png";
+import MicIcon from "../../img/icons/mic.png";
+import RunnerIcon from "../../img/icons/runner.png";
 import Twitch from "../../img/icons/twitch.png";
 import Youtube from "../../img/icons/youtube.png";
 
@@ -20,10 +23,14 @@ export const RunnerBox = ({
   className,
   textSize,
   twitch,
+  runner,
   youtube,
   bluesky,
 }: Props) => {
   const [index, setIndex] = useState(0);
+  const [iconToggleOn] = useReplicant<boolean>("iconToggleOn", {
+    defaultValue: false,
+  });
 
   const slides = useMemo(() => {
     const items = [];
@@ -110,6 +117,14 @@ export const RunnerBox = ({
         <div className="absolute capitalize bottom-0 right-0 bg-black/70 text-white text-xs px-2 py-0.5">
           {pronouns}
         </div>
+      )}
+
+      {iconToggleOn && (
+        <img
+          src={runner ? RunnerIcon : MicIcon}
+          className="ml-3 h-5/6"
+          alt="Icon"
+        />
       )}
 
       <div

@@ -14,8 +14,8 @@ const layoutMap: Record<string, React.FC> = {
 };
 
 const flashWarningPosition: Record<string, string> = {
-  "4_3-1p": "top-[415px] left-0 w-112.5",
-  "16_9-2p-2c": "left-[498px] w-[924px] top-[730px]",
+  "4_3-1p": "top-[415px] left-0 w-112.5 border-t-4 border-b-3 border-r-4",
+  "16_9-2p-2c": "left-[498px] w-[924px] top-[730px] border-t-3 border-b-3",
 };
 
 export function DynamicLayout({ layoutKey }: { layoutKey: string }) {
@@ -29,7 +29,7 @@ const FlashingLightsWarning = ({ layoutKey }: { layoutKey: string }) => {
 
   return (
     <div
-      className={`z-10 absolute flex ${position}  h-12.5 bg-red-900 border-white border-3 justify-center items-center`}
+      className={`z-10 absolute flex ${position}  h-12.5 bg-red-900 border-white justify-center items-center`}
     >
       <span className="font-bold text-2xl">WARNING: FLASHING LIGHTS</span>
     </div>
