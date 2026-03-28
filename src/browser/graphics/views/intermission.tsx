@@ -24,20 +24,26 @@ const FunFactContainer = ({ text }: { text: string }) => {
       return [];
     }
   }, [text]);
+  const factsLength = useMemo(() => facts.length, [facts]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrentIndex(0);
+  }, [facts]);
 
   useEffect(() => {
     if (facts.length <= 1) return;
 
     const interval = setInterval(() => {
       setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % facts.length);
+        setCurrentIndex((prev) => (prev + 1) % factsLength);
       }, 500);
     }, 13000);
 
     return () => clearInterval(interval);
-  }, [facts]);
+  }, [facts, factsLength]);
 
   return (
     <div className="mx-10 my-10 h-73 shadow-2xl inset-shadow-md inset-shadow-black border-7 border-[#375481] rounded-b-sm relative bg-[#141c2f]">
@@ -233,7 +239,10 @@ const Intermission = () => {
         )}
         {currentRun && <CurrentRunContainer index={0} runData={currentRun} />}
         {currentRun?.customData.fact && (
-          <FunFactContainer text={currentRun?.customData.fact} />
+          <FunFactContainer
+            key={currentRun.id}
+            text={currentRun?.customData.fact}
+          />
         )}
       </div>
     </ThemeProvider>
