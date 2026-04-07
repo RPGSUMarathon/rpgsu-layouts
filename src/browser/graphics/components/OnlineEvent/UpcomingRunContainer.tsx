@@ -1,6 +1,6 @@
-import { Helpers } from "@rpgsu-layouts/browser/helpers";
-import { timeToRun } from "@rpgsu-layouts/browser/time-to-run";
 import { AutoTextSize } from "auto-text-size";
+import { Helpers } from "../../../helpers";
+import { timeToRun } from "../../../time-to-run";
 
 export const UpcomingRunContainer = ({ index, runData }: RunPropsContainer) => {
   const time = timeToRun(runData);

@@ -238,3 +238,74 @@ clip-path: polygon(0% 0%, 88% 0, 100% 51%, 88% 100%, 0% 100%);
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+
+.box2-inverted{
+background: #2f2f2f;
+  color: #e0e0e0;
+
+  border: 2px solid #000;
+
+  box-shadow:
+  inset -1px 1px 0 #cfcfcf,
+  inset 1px -1px 0 #1a1a1a,
+  inset -2px 2px 0 #7a7a7a,
+  inset 2px -2px 0 #000;
+}
+
+.box2 {
+  background: #2f2f2f;
+  color: #e0e0e0;
+
+  border: 2px solid #000;
+
+  box-shadow:
+    inset 1px 1px 0 #cfcfcf,
+    inset -1px -1px 0 #1a1a1a,
+    inset 2px 2px 0 #7a7a7a,
+    inset -2px -2px 0 #000;
+}
+
+        .ridge-inner {
+  position: relative;
+  box-shadow:
+    inset 1px 1px 0 #cfcfcf,   /* highlight */
+    inset -1px -1px 0 #000,    /* deep shadow */
+    inset 2px 2px 0 #7a7a7a,   /* mid highlight */
+    inset -2px -2px 0 #1a1a1a; /* mid shadow */
+}
+
+        .ridge-inner-dark {
+  position: relative;
+  box-shadow:
+    inset 1px 1px 0 #514a4a,   /* highlight */
+    inset -1px -1px 0 #000,    /* deep shadow */
+    inset 2px 2px 0 #7a7a7a,   /* mid highlight */
+    inset -2px -2px 0 #1a1a1a; /* mid shadow */
+}
+
+@keyframes redGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.8));
+  }
+}
+
+.glow-red {
+  animation: redGlow 3s ease-in-out infinite;
+}
+
+@keyframes blueGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgb(80, 87, 134));
+  }
+}
+
+.glow-blue {
+  animation: blueGlow 3s ease-in-out infinite;
+}
