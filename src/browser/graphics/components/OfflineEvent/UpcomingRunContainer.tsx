@@ -9,13 +9,13 @@ export const UpcomingRunContainer = ({ index, runData }: RunPropsContainer) => {
 
   return (
     <div className="h-[125px] relative bg-[#6e7c9c] flex flex-row box2">
-      <div className="w-[200px] h-full flex flex-col">
-        <h2 className="ridge-inner">{time}</h2>
+      <div className="w-[200px] h-full flex flex-col text-center">
+        <h2 className="ridge-inner text-2xl">{time}</h2>
         <div className="place-content-center ridge-inner h-full w-full">
           {index % 2 === 0 ? (
             <img src={logoText} width="80px" className="glow-blue mx-auto" />
           ) : (
-            <img src={logoText} width="80px" className="glow-blue mx-auto" />
+            <img src={logoText} width="80px" className="grayscale blur-[1px] mx-auto" />
           )}
         </div>
       </div>
