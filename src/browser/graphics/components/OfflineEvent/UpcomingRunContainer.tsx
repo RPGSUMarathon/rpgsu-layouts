@@ -1,3 +1,4 @@
+import { type RunPropsContainer } from "@rpgsu-layouts/types/custom/intermission-elements";
 import { AutoTextSize } from "auto-text-size";
 import { Helpers } from "../../../helpers";
 import { timeToRun } from "../../../time-to-run";
@@ -15,7 +16,11 @@ export const UpcomingRunContainer = ({ index, runData }: RunPropsContainer) => {
           {index % 2 === 0 ? (
             <img src={logoText} width="80px" className="glow-blue mx-auto" />
           ) : (
-            <img src={logoText} width="80px" className="grayscale blur-[1px] mx-auto" />
+            <img
+              src={logoText}
+              width="80px"
+              className="grayscale blur-[1px] mx-auto"
+            />
           )}
         </div>
       </div>

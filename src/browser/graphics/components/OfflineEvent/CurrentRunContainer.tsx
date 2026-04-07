@@ -1,3 +1,4 @@
+import { type RunPropsContainer } from "@rpgsu-layouts/types/custom/intermission-elements";
 import { AutoTextSize } from "auto-text-size";
 import { Helpers } from "../../../helpers";
 import logoText from "../../img/logo-text.png";
