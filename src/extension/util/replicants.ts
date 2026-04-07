@@ -1,5 +1,5 @@
+import { type Commentator } from "@rpgsu-layouts/types/custom/commentators";
 import { type CurrentOBSScene } from "@rpgsu-layouts/types/generated";
-import { type Commentator } from "../../types/generated/commentators";
 import { get } from "./nodecg";
 
 const nodecg = get();

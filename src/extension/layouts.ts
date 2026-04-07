@@ -1,4 +1,4 @@
-import { type LayoutInfo } from "@rpgsu-layouts/types/generated/layoutinfo";
+import { type LayoutInfo } from "@rpgsu-layouts/types/custom/layoutinfo";
 import { type RunDataActiveRun } from "speedcontrol/src/types/RunData";
 import { get } from "./util/nodecg";
 
