@@ -1,5 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
-import { Commentator } from "../../types/generated/commentators";
+import { Commentator } from "../../types/custom/commentators";
 
 function useCommentators() {
   const [commentators] = useReplicant<Commentator[]>("commentators");
