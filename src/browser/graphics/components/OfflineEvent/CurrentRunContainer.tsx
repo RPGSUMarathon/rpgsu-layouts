@@ -7,7 +7,7 @@ export const RunContainer = ({ runData }: RunPropsContainer) => {
   const runners = Helpers.formatPlayers(runData);
 
   return (
-    <div className="h-62.5 relative bg-[#6e7c9c] flex flex-row box2">
+    <div className="h-62.5 relative !bg-offline-world1 flex flex-row box2">
       <div className="w-[200px] h-full flex flex-col text-center">
         <h2 className="ridge-inner text-3xl">Soon...</h2>
         <div className="place-content-center ridge-inner h-full w-full">

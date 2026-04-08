@@ -3,6 +3,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@theme{
+  --color-offline-main: #80babf;
+
+  --color-offline-omnibar: #2a3434;
+
+  --color-offline-world1: #739c6e;
+  --color-offline-world1-dark: #53765b;
+  --color-offline-world1-background: #765553;
+
+  --color-offline-world2: #6e9c9c;
+  --color-offline-world2-dark: #537675;
+  --color-offline-world2-background: #2a3434;
+
+  --color-offline-world3: #9c6e6e;
+  --color-offline-world3-dark: #765353;
+  --color-offline-world3-background: #342a2a;
+
+  --color-offline-world4: #9c946e;
+  --color-offline-world4-dark: #767453;
+  --color-offline-world4-background: #34342a;
+}
 
 
 :root {
@@ -29,6 +50,7 @@
   --color-bs-hyperlinks: #ff697e;
 
   background-color: transparent;
+
 }
 
 .animated-background {
@@ -241,8 +263,6 @@ clip-path: polygon(0% 0%, 88% 0, 100% 51%, 88% 100%, 0% 100%);
 
 
 .box2-inverted{
-background: #2f2f2f;
-  color: #e0e0e0;
 
   border: 2px solid #000;
 
@@ -254,9 +274,6 @@ background: #2f2f2f;
 }
 
 .box2 {
-  background: #2f2f2f;
-  color: #e0e0e0;
-
   border: 2px solid #000;
 
   box-shadow:
@@ -266,7 +283,7 @@ background: #2f2f2f;
     inset -2px -2px 0 #000;
 }
 
-        .ridge-inner {
+.ridge-inner {
   position: relative;
   box-shadow:
     inset 1px 1px 0 #cfcfcf,   /* highlight */
@@ -275,7 +292,7 @@ background: #2f2f2f;
     inset -2px -2px 0 #1a1a1a; /* mid shadow */
 }
 
-        .ridge-inner-dark {
+.ridge-inner-dark {
   position: relative;
   box-shadow:
     inset 1px 1px 0 #514a4a,   /* highlight */
@@ -302,10 +319,11 @@ background: #2f2f2f;
     filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0));
   }
   50% {
-    filter: drop-shadow(0 0 8px rgb(80, 87, 134));
+    filter: drop-shadow(0 0 8px rgba(140, 205, 216, 0.875));
   }
 }
 
 .glow-blue {
   animation: blueGlow 3s ease-in-out infinite;
 }
+
