@@ -6,23 +6,69 @@
 @theme{
   --color-offline-main: #80babf;
 
-  --color-offline-omnibar: #2a3434;
+  --color-offline-info: #ddebe4;
+
+  --color-offline-omnibar: #242a35;
+
+  --color-offline-donations: #113640;
+  --color-offline-donations-light: #322878;
 
   --color-offline-world1: #739c6e;
   --color-offline-world1-dark: #53765b;
-  --color-offline-world1-background: #765553;
+  --color-offline-world1-background: #334738;
+  --color-offline-world1-panel-dark: #1a2b24;
+  --color-offline-world1-panel-light: #455749;
+
 
   --color-offline-world2: #6e9c9c;
   --color-offline-world2-dark: #537675;
   --color-offline-world2-background: #2a3434;
+  --color-offline-world2-panel-dark: #828fa3;
+  --color-offline-world2-panel-light: #dee1e1;
 
-  --color-offline-world3: #9c6e6e;
-  --color-offline-world3-dark: #765353;
+  --color-offline-world3: #a02e32;
+  --color-offline-world3-dark: #752426;
   --color-offline-world3-background: #342a2a;
+  --color-offline-world3-panel-dark: #641912;
+  --color-offline-world3-panel-light: #f79f5c;
 
-  --color-offline-world4: #9c946e;
-  --color-offline-world4-dark: #767453;
+  --color-offline-world4: #a58a4d;
+  --color-offline-world4-dark: #796538;
   --color-offline-world4-background: #34342a;
+  --color-offline-world4-panel-dark: #2a2e3e;
+  --color-offline-world4-panel-light: #5e6c85;
+}
+
+[data-world="1"] {
+  --color-world-main: var(--color-offline-world1);
+  --color-world-dark: var(--color-offline-world1-dark);
+  --color-world-bg: var(--color-offline-world1-background);
+  --color-panel-dark: var(--color-offline-world1-panel-dark);
+  --color-panel-light: var(--color-offline-world1-panel-light);
+}
+
+[data-world="2"] {
+  --color-world-main: var(--color-offline-world2);
+  --color-world-dark: var(--color-offline-world2-dark);
+  --color-world-bg: var(--color-offline-world2-background);
+    --color-panel-dark: var(--color-offline-world2-panel-dark);
+  --color-panel-light: var(--color-offline-world2-panel-light);
+}
+
+[data-world="3"] {
+  --color-world-main: var(--color-offline-world3);
+  --color-world-dark: var(--color-offline-world3-dark);
+  --color-world-bg: var(--color-offline-world3-background);
+    --color-panel-dark: var(--color-offline-world3-panel-dark);
+  --color-panel-light: var(--color-offline-world3-panel-light);
+}
+
+[data-world="4"] {
+  --color-world-main: var(--color-offline-world4);
+  --color-world-dark: var(--color-offline-world4-dark);
+  --color-world-bg: var(--color-offline-world4-background);
+    --color-panel-dark: var(--color-offline-world4-panel-dark);
+  --color-panel-light: var(--color-offline-world4-panel-light);
 }
 
 
@@ -49,6 +95,9 @@
 
   --color-bs-hyperlinks: #ff697e;
 
+  --color-bs-music: #3F4D67;
+  --color-bs-music-dark: #161B31;
+  
   background-color: transparent;
 
 }

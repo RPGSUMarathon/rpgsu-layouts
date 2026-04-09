@@ -4,11 +4,18 @@ type Props = {
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
+  world?: number;
 };
 
-export const ThemeProvider = ({ children, className, style }: Props) => {
+export const ThemeProvider = ({
+  children,
+  className,
+  style,
+  world = 1,
+}: Props) => {
   return (
     <div
+      data-world={world}
       style={{
         margin: 0,
         padding: 0,

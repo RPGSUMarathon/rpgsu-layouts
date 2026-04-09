@@ -96,8 +96,15 @@
       },
       {
         "file": "flashing-lights-warning.html",
-        "name": "lashing-lights-warning",
+        "name": "flashing-lights-warning",
         "title": "Flashing Lights Warning",
+        "width": 2,
+        "workspace": "Scene Editing"
+      },
+      {
+        "file": "current-world-override.html",
+        "name": "current-world-override",
+        "title": "Current World Override",
         "width": 2,
         "workspace": "Scene Editing"
       },
