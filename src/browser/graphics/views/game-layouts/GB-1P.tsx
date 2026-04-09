@@ -2,7 +2,7 @@ import { useReplicant } from "@nodecg/react-hooks";
 import { Header } from "../../components/Header/Header";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ThemeProvider } from "../../components/theme-provider";
-import backgroundImage from "../../img/online-background.png";
+import backgroundImage from "../../img/offline2026/offline-background.png";
 
 const SidebarGB = () => {
   const [backgroundToggleOn] = useReplicant<boolean>("backgroundToggleOn", {

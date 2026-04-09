@@ -7,7 +7,7 @@ import { NoCamera } from "../../components/NoCamera";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import { TeamTimer } from "../../components/RunTexts/TeamTimer";
 import { ThemeProvider } from "../../components/theme-provider";
-import backgroundImage from "../../img/online-background.png";
+import backgroundImage from "../../img/offline2026/offline-background.png";
 
 const BottomBar = () => {
   const currentRun = useCurrentRun();

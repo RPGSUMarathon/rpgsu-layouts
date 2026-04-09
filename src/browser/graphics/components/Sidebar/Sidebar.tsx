@@ -3,7 +3,7 @@ import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
 import useCurrentRun from "../../../hooks/useCurrentRun";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
-import backgroundImage from "../../img/online-background.png";
+import backgroundImage from "../../img/offline2026/offline-background.png";
 import { NoCamera } from "../NoCamera";
 
 export const Sidebar = () => {
