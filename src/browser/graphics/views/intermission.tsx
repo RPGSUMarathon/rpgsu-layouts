@@ -1,3 +1,4 @@
+import { useReplicant } from "@nodecg/react-hooks";
 import useCommentators from "../../../browser/hooks/useCommentators";
 import useCurrentRun from "../../hooks/useCurrentRun";
 import useUpcomingRuns from "../../hooks/useUpcomingRuns";
@@ -14,18 +15,21 @@ const Intermission = () => {
   const commentators = useCommentators();
   const upcomingRuns = useUpcomingRuns(2, currentRun?.id ?? "");
 
+  const [world] = useReplicant<number>("currentWorld", {
+    defaultValue: 1,
+  });
+
   const exampleDonation =
     "Thank you guys so much for putting together an RPG event, it's really cool and and Im very grateful to be part of it and Im expressing it through this very long message.";
 
   return (
-    <ThemeProvider className="" style={{ backgroundImage: `` }}>
+    <ThemeProvider world={world} className="" style={{ backgroundImage: `` }}>
       <div className="flex flex-row">
-        <div className="w-[395px] h-[520px] bg-offline-world1-dark box2" />
+        <div className="w-[395px] h-[520px] bg-(--color-panel-dark) box2" />
         <div className="w-[1490px] h-[520px]  relative">
-          <div className="absolute w-full h-[30px] bg-offline-world1-dark box2" />
-          <div className="absolute w-full h-[30px] bg-offline-world1-dark box2 bottom-0" />
+          <div className="absolute w-full h-[30px] bg-(--color-panel-dark) box2" />
         </div>
-        <div className="w-[395px] h-[520px] bg-offline-world1-dark box2-inverted" />
+        <div className="w-[395px] h-[520px] bg-(--color-panel-dark) box2-inverted" />
       </div>
       <div className="bottom-[60px] h-[500px] w-full absolute flex flex-row bg-black space-x-1 ">
         <div className="h-full w-[500px] space-y-1 ">

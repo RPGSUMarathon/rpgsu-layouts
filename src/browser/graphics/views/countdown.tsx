@@ -3,7 +3,7 @@ import { type Countdown } from "@rpgsu-layouts/types";
 import { render } from "../../render";
 import { ThemeProvider } from "../components/theme-provider";
 import Logo from "../img/base-online-logo.png";
-import Background from "../img/online-background.png";
+import Background from "../img/offline2026/offline-background.png";
 
 export const CountdownView = () => {
   const [countdown] = useReplicant<Countdown>("countdown");

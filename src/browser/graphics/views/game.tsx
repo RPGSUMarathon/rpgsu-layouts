@@ -41,9 +41,12 @@ const App = () => {
   const [flashWarningOn] = useReplicant<boolean>("flashWarningOn", {
     defaultValue: false,
   });
+  const [world] = useReplicant<number>("currentWorld", {
+    defaultValue: 1,
+  });
 
   return (
-    <ThemeProvider>
+    <ThemeProvider world={world}>
       <DynamicLayout layoutKey={gameLayout ?? "16_9-1p"} />
       {flashWarningOn && (
         <FlashingLightsWarning layoutKey={gameLayout ?? "4_3-1p"} />

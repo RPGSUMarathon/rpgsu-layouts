@@ -1,11 +1,11 @@
-import OnlineLongLogo from "../../img/base-long-online-logo.png";
+import OnlineLongLogo from "../../img/online2026/base-long-online-logo.png";
 import Bluesky from "../../img/icons/bluesky.png";
 import Youtube from "../../img/icons/youtube.png";
 import { Category, Estimate, Game, Timer } from "../RunTexts";
 
 export const Header = () => {
   return (
-    <div className="w-full h-32.5 border-b-5 border-white flex flex-row bg-linear-to-b from-teal-800 to-teal-700">
+    <div className="w-full h-32.5 border-b-5 border-white flex flex-row bg-linear-to-b bg-(--color-world-main)">
       <div className="flex-none w-183.75 h-32.5 border-r-5 border-white">
         <div className="h-1/2 border-b-2 border-white ">
           <Game />

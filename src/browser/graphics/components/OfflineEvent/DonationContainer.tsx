@@ -5,7 +5,7 @@ export const DonationContainer = ({ name, amount, message }: DonationProps) => {
   return (
     <div className="w-full flex flex-col">
       <div className="flex w-full">
-        <div className="flex-1 flex auto-text-size-override ridge-inner">
+        <div className="flex-1 flex auto-text-size-override ridge-inner bg-(--color-world-dark)">
           <AutoTextSize
             mode="oneline"
             minFontSizePx={10}
@@ -15,7 +15,7 @@ export const DonationContainer = ({ name, amount, message }: DonationProps) => {
             {name}
           </AutoTextSize>
         </div>
-        <div className="flex-1 flex auto-text-size-override ridge-inner">
+        <div className="flex-1 flex auto-text-size-override ridge-inner bg-(--color-world-main)">
           <AutoTextSize
             mode="oneline"
             minFontSizePx={12}
@@ -26,7 +26,7 @@ export const DonationContainer = ({ name, amount, message }: DonationProps) => {
           </AutoTextSize>
         </div>
       </div>
-      <div className="w-full ridge-inner">
+      <div className="w-full ridge-inner bg-(--color-world-bg)">
         <AutoTextSize
           className="font-light px-1 "
           mode="box"
