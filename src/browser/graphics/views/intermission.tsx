@@ -15,8 +15,8 @@ const Intermission = () => {
   const commentators = useCommentators();
   const upcomingRuns = useUpcomingRuns(2, currentRun?.id ?? "");
 
-  const [world] = useReplicant<number>("currentWorld", {
-    defaultValue: 1,
+  const [world] = useReplicant<string>("currentWorld", {
+    defaultValue: "1",
   });
 
   const exampleDonation =

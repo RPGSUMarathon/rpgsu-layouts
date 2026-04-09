@@ -1,7 +1,8 @@
 import { type RunPropsContainer } from "@rpgsu-layouts/types/custom/intermission-elements";
 import { AutoTextSize } from "auto-text-size";
 import { Helpers } from "../../../helpers";
-import logoText from "../../img/logo-text.png";
+import { BossIcon } from "./BossIcon";
+
 
 export const RunContainer = ({ runData }: RunPropsContainer) => {
   const runners = Helpers.formatPlayers(runData);
@@ -11,7 +12,7 @@ export const RunContainer = ({ runData }: RunPropsContainer) => {
       <div className="w-[200px] h-full flex flex-col text-center">
         <h2 className="ridge-inner text-3xl">Soon...</h2>
         <div className="place-content-center ridge-inner h-full w-full">
-          <img src={logoText} width="120px" className="glow-red mx-auto" />
+          <BossIcon classname="glow-red" width="120px" />
         </div>
       </div>
 

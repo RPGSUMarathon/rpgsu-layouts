@@ -2,7 +2,8 @@ import { type RunPropsContainer } from "@rpgsu-layouts/types/custom/intermission
 import { AutoTextSize } from "auto-text-size";
 import { Helpers } from "../../../helpers";
 import { timeToRun } from "../../../time-to-run";
-import logoText from "../../img/logo-text.png";
+import Boss from "../../img/offline2026/icons/DesertBoss.png";
+import { BossIcon } from "./BossIcon";
 
 export const UpcomingRunContainer = ({ index, runData }: RunPropsContainer) => {
   const time = timeToRun(runData);
@@ -14,13 +15,9 @@ export const UpcomingRunContainer = ({ index, runData }: RunPropsContainer) => {
         <h2 className="ridge-inner text-2xl">{time}</h2>
         <div className="place-content-center ridge-inner h-full w-full">
           {index % 2 === 0 ? (
-            <img src={logoText} width="80px" className="glow-blue mx-auto" />
+            <BossIcon classname="glow-blue" width="80px" />
           ) : (
-            <img
-              src={logoText}
-              width="80px"
-              className="grayscale blur-[1px] mx-auto"
-            />
+            <BossIcon classname="grayscale blur-[1px]" width="60px" />
           )}
         </div>
       </div>

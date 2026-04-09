@@ -4,14 +4,14 @@ type Props = {
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
-  world?: number;
+  world?: string;
 };
 
 export const ThemeProvider = ({
   children,
   className,
   style,
-  world = 1,
+  world = "1",
 }: Props) => {
   return (
     <div
