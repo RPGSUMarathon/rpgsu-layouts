@@ -3,6 +3,7 @@ import useCommentators from "../../../browser/hooks/useCommentators";
 import useCurrentRun from "../../hooks/useCurrentRun";
 import useUpcomingRuns from "../../hooks/useUpcomingRuns";
 import { render } from "../../render";
+import { BossCounterContainer } from "../components/OfflineEvent/BossCounterContainer";
 import { RunContainer } from "../components/OfflineEvent/CurrentRunContainer";
 import { DonationContainer } from "../components/OfflineEvent/DonationContainer";
 import { IntermissionInfoContainer } from "../components/OfflineEvent/IntermissionInfoContainer";
@@ -26,8 +27,9 @@ const Intermission = () => {
     <ThemeProvider world={world} className="" style={{ backgroundImage: `` }}>
       <div className="flex flex-row">
         <div className="w-[395px] h-[520px] bg-(--color-panel-dark) box2" />
-        <div className="w-[1490px] h-[520px]  relative">
-          <div className="absolute w-full h-[30px] bg-(--color-panel-dark) box2" />
+        <div className="w-[1490px] h-[520px] flex flex-col">
+          <div className="w-full h-[30px] bg-(--color-panel-dark) box2" />
+          <BossCounterContainer currentRunId={currentRun?.id ?? "No ID"} />
         </div>
         <div className="w-[395px] h-[520px] bg-(--color-panel-dark) box2-inverted" />
       </div>
