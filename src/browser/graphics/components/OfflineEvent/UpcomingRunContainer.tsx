@@ -2,7 +2,6 @@ import { type RunPropsContainer } from "@rpgsu-layouts/types/custom/intermission
 import { AutoTextSize } from "auto-text-size";
 import { Helpers } from "../../../helpers";
 import { timeToRun } from "../../../time-to-run";
-import Boss from "../../img/offline2026/icons/DesertBoss.png";
 import { BossIcon } from "./BossIcon";
 
 export const UpcomingRunContainer = ({ index, runData }: RunPropsContainer) => {
