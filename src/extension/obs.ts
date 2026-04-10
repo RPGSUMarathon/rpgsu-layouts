@@ -1,5 +1,6 @@
 import { get } from "./util/nodecg";
 import { OBSUtility } from "./util/obs-util";
+import { bossDefeatedAnimation } from "./util/replicants";
 
 const nodecg = get();
 const obs = new OBSUtility();
@@ -26,6 +27,25 @@ if (config.enabled) {
         "playbackStart",
         "nodecg-foobar2000-controller",
       );
+    });
+  });
+
+  nodecg.listenFor("switchToIntermissionWithAnimation", () => {
+    if (obs.currentScene === config.scenes!.intermission) return;
+
+    console.log("Changing to intermission with animation");
+
+    void obs.changeToIntermission().then(() => {
+      // nodecg.sendMessageToBundle(
+      //   "playbackStart",
+      //   "nodecg-foobar2000-controller",
+      // );
+      bossDefeatedAnimation.value = true;
+
+      setTimeout(() => {
+        bossDefeatedAnimation.value = false;
+        nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
+      }, 2000);
     });
   });
 }

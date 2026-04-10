@@ -1,6 +1,6 @@
 import { Alert, Button, Stack, styled } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { type RunData } from "speedcontrol/src/types";
 import { type Timer } from "speedcontrol/src/types/schemas";
 import useCurrentObsScene from "../hooks/useCurrentObsScene";
@@ -28,11 +28,17 @@ export const NextRun = () => {
   const [timer] = useReplicant<Timer | undefined>("timer", {
     bundle: "nodecg-speedcontrol",
   });
+  const [_, setWorld] = useReplicant<string>("currentWorld", {
+    defaultValue: "1",
+  });
+
   const nextRunGameName = useMemo(() => getNextRunGameName(nextRun), [nextRun]);
 
   const disableChange =
     (timer && ["running", "paused"].includes(timer.state)) ??
     currentObsScene === intermissionSceneName;
+
+  const [transitioning, setTransitioning] = useState(false);
 
   return (
     <DashboardThemeProvider>
@@ -40,18 +46,32 @@ export const NextRun = () => {
         <Button
           variant="contained"
           fullWidth
-          disabled={disableChange ?? !nextRun}
+          disabled={(disableChange || transitioning) ?? !nextRun}
           onClick={() => {
+            if (nextRunGameName.includes("World")) {
+              setWorld(nextRun?.customData.world ?? "1");
+            }
             if (nextRun) {
-              nodecg.sendMessage("switchToIntermission").catch(() => {
-                /* empty */
-              });
+              setTransitioning(true);
+              nodecg
+                .sendMessage("switchToIntermissionWithAnimation")
+                .then(() => {
+                  console.log("Returned massage");
+                  setTransitioning(false);
+                })
+                .catch(() => {
+                  /* empty */
+                });
             }
           }}
         >
-          <span>
-            {nextRun ? (nextRunGameName ?? "No next runs") : "No added runs"}
-          </span>
+          {transitioning ? (
+            <span> Transitioning...</span>
+          ) : (
+            <span>
+              {nextRun ? (nextRunGameName ?? "No next runs") : "No added runs"}
+            </span>
+          )}
         </Button>
         {disableChange && (
           <Alert variant="filled" severity="error">

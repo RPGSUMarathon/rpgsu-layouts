@@ -10,3 +10,7 @@ export const currentOBSScene =
 export const commentators = nodecg.Replicant<Commentator[]>("commentators", {
   defaultValue: [],
 });
+
+export const bossDefeatedAnimation = nodecg.Replicant<boolean>(
+  "bossDefeatedAnimation",
+);

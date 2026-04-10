@@ -379,3 +379,62 @@ clip-path: polygon(0% 0%, 88% 0, 100% 51%, 88% 100%, 0% 100%);
   animation: blueGlow 3s ease-in-out infinite;
 }
 
+@keyframes bossFadeOut {
+  0% {
+    opacity: 1;
+    filter: none;
+    transform: scale(1);
+  }
+
+  40% {
+    filter: brightness(2) blur(2px);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes dustRise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(1);
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(1.5);
+  }
+}
+
+@keyframes bossFlash {
+  0% { filter: brightness(1); }
+  10% { filter: brightness(4); }
+  100% { filter: brightness(1); }
+}
+
+.boss-defeat {
+  animation:
+    bossFlash 1.0s ease-out,
+    bossFadeOut 2.8s ease-out forwards;
+}
+
+/* Dust layer */
+.boss-defeat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+  radial-gradient(circle, rgba(255,255,255,0.6) 2px, transparent 3px);
+  background-size: 6px 6px;
+
+  animation: dustRise 2.8s ease-out forwards;
+}
