@@ -17,9 +17,9 @@ export const Sidebar = () => {
   const player = currentRun?.teams[0]?.players[0];
 
   return (
-    <div className="flex h-222.5">
+    <div className="flex h-222.5 theme-border-box bg-(--color-world-bg)">
       <div
-        className="flex flex-col w-112.5 h-full border-r-5 border-white"
+        className="flex flex-col w-112.5 h-full  theme-border-r"
         style={{
           backgroundImage: backgroundToggleOn
             ? `url(${backgroundImage})`
@@ -29,10 +29,10 @@ export const Sidebar = () => {
         {cameraOn && cameraOn ? (
           <div
             id="CameraBox"
-            className="w-full h-84.25  border-b-5 border-white"
+            className="w-full h-84.25 theme-border-box  theme-border-b"
           />
         ) : (
-          <div className="h-84.25  border-b-5 border-white">
+          <div className="h-84.25 theme-border-box theme-border-b">
             <NoCamera />
           </div>
         )}

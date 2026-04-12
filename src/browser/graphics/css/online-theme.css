@@ -1,0 +1,31 @@
+[data-theme="online"] .theme-border-b {
+  border-bottom: 5px solid white;
+}
+
+[data-theme="online"] .theme-border-t {
+  border-top: 5px solid white;
+}
+
+[data-theme="online"] .theme-border-r {
+  border-right: 5px solid white;
+}
+
+
+[data-theme="online"] .theme-border-l {
+  border-left: 5px solid white;
+}
+
+[data-theme="online"] .theme-border {
+  border: 5px solid white;
+}
+
+[data-theme="online"] .theme-border-flash-side {
+  border-right: 4px solid white;
+  border-bottom: 3px solid white;
+  border-top: 4px solid white;
+}
+
+[data-theme="online"] .theme-border-flash-middle {
+  border-bottom: 3px solid white;
+  border-top: 3px solid white;
+}

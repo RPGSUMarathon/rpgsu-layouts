@@ -1,7 +1,6 @@
 import { useReplicant } from "@nodecg/react-hooks";
 import { Header } from "../../components/Header/Header";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
-import { ThemeProvider } from "../../components/theme-provider";
 import backgroundImage from "../../img/offline2026/offline-background.png";
 
 const SidebarGBA = () => {
@@ -15,7 +14,7 @@ const SidebarGBA = () => {
 
       <div className="flex-none h-full aspect-3/2 " />
       <div
-        className="flex-1 border-l-5 border-l-white"
+        className="flex-1 theme-border-l"
         style={{
           backgroundImage: backgroundToggleOn
             ? `url(${backgroundImage})`
@@ -28,9 +27,9 @@ const SidebarGBA = () => {
 
 export const Lgba_1P = () => {
   return (
-    <ThemeProvider>
+    <>
       <Header />
       <SidebarGBA />
-    </ThemeProvider>
+    </>
   );
 };

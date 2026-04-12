@@ -5,7 +5,6 @@ import useCurrentRun from "../../../hooks/useCurrentRun";
 import { Header } from "../../components/Header/Header";
 import { NoCamera } from "../../components/NoCamera";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
-import { ThemeProvider } from "../../components/theme-provider";
 import backgroundImage from "../../img/offline2026/offline-background.png";
 
 const CenterDS = () => {
@@ -20,19 +19,16 @@ const CenterDS = () => {
 
   return (
     <div className="flex h-222.5">
-      <div className="flex-none w-112.5 h-full border-r-5 border-white">
+      <div className="flex-none w-112.5 h-full theme-border-r theme-border-box">
         {cameraOn && cameraOn ? (
-          <div
-            id="CameraBox"
-            className="w-full h-84.25 border-b-5 border-white"
-          />
+          <div id="CameraBox" className="w-full h-84.25 theme-border-b" />
         ) : (
-          <div className="h-84.25  border-b-5 border-white">
+          <div className="h-84.25 theme-border-b">
             <NoCamera />
           </div>
         )}
         <div
-          className="h-54"
+          className="h-54 bg-(--color-world-bg)"
           style={{
             backgroundImage: backgroundToggleOn
               ? `url(${backgroundImage})`
@@ -63,18 +59,18 @@ const CenterDS = () => {
           )}
         </div>
       </div>
-      <div className="h-84.25 absolute w-112.5 bottom-15 left-0 border-t-5 " />
+      <div className="h-84.25 absolute w-112.5 bottom-15 left-0 theme-border-t theme-border-box" />
       <div
-        className="flex-1 border-r-5 border-l-white"
+        className="flex-1 theme-border-r theme-border-box bg-(--color-panel-light)"
         style={{
           backgroundImage: backgroundToggleOn
             ? `url(${backgroundImage})`
             : "none",
         }}
       />
-      <div className="flex-none h-full aspect-4/3 " />
+      <div className="flex-none h-full aspect-4/3 theme-border-box" />
       <div
-        className="flex-1 border-l-5 border-l-white"
+        className="flex-1 theme-border-l theme-border-box bg-(--color-panel-light)"
         style={{
           backgroundImage: backgroundToggleOn
             ? `url(${backgroundImage})`
@@ -87,9 +83,9 @@ const CenterDS = () => {
 
 export const Lds_1P = () => {
   return (
-    <ThemeProvider>
+    <>
       <Header />
       <CenterDS />
-    </ThemeProvider>
+    </>
   );
 };

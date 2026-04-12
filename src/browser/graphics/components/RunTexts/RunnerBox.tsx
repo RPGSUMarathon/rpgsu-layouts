@@ -111,7 +111,7 @@ export const RunnerBox = ({
 
   return (
     <div
-      className={`w-full h-12.5 border-b-3 border-white  relative flex items-center ${className ?? ""}`}
+      className={`w-full h-12.5 theme-border-box theme-border-b bg-(--color-world-main) relative flex items-center ${className ?? ""}`}
     >
       {pronouns && (
         <div className="absolute capitalize bottom-0 right-0 bg-black/70 text-white text-xs px-2 py-0.5">

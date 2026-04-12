@@ -1,9 +1,13 @@
 import { type CSSProperties, type ReactNode } from "react";
+import "../css/offline-theme.css";
+import "../css/online-theme.css";
 import "../styles.css";
+
 type Props = {
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
+  theme: string;
   world?: string;
 };
 
@@ -12,10 +16,12 @@ export const ThemeProvider = ({
   className,
   style,
   world = "1",
+  theme,
 }: Props) => {
   return (
     <div
       data-world={world}
+      data-theme={theme}
       style={{
         margin: 0,
         padding: 0,
