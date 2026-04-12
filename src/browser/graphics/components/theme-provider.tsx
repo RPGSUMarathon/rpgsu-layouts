@@ -2,6 +2,7 @@ import { type CSSProperties, type ReactNode } from "react";
 import "../css/offline-theme.css";
 import "../css/online-theme.css";
 import "../styles.css";
+import "../css/animations.css";
 
 type Props = {
   children: ReactNode;
