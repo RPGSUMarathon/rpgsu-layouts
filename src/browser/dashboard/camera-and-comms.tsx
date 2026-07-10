@@ -79,12 +79,12 @@ const CameraDashboard: React.FC = () => {
       commentators.map((item) =>
         item.id === editingItem
           ? {
-            ...item,
-            name: editName,
-            pronouns: editPronouns,
-            twitch: editTwitch.trim(),
-            bluesky: editBluesky.trim(),
-          }
+              ...item,
+              name: editName,
+              pronouns: editPronouns,
+              twitch: editTwitch.trim(),
+              bluesky: editBluesky.trim(),
+            }
           : item,
       ),
     );

@@ -2,14 +2,14 @@ import { useReplicant } from "@nodecg/react-hooks";
 import { type Countdown } from "@rpgsu-layouts/types";
 import { render } from "../../render";
 import { ThemeProvider } from "../components/theme-provider";
-import Logo from "../img/base-online-logo.png";
 import Background from "../img/offline2026/offline-background.png";
+import Logo from "../img/online2026/base-online-logo.png";
 
 export const CountdownView = () => {
   const [countdown] = useReplicant<Countdown>("countdown");
 
   return (
-    <ThemeProvider style={{ background: `url(${Background})` }}>
+    <ThemeProvider theme="offline" style={{ background: `url(${Background})` }}>
       <div className="w-full flex flex-col text-center align-center gap-10">
         <div className="w-full text-center flex flex-row align-center justify-center">
           <img className="w-1/3" src={Logo} />

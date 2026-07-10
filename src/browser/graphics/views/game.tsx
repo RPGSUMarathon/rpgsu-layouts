@@ -14,8 +14,10 @@ const layoutMap: Record<string, React.FC> = {
 };
 
 const flashWarningPosition: Record<string, string> = {
-  "4_3-1p": "top-[415px] left-0 w-112.5 theme-border-flash-side theme-border-box",
-  "16_9-2p-2c": "left-[498px] w-[924px] top-[730px] theme-border-flash-middle theme-border-box",
+  "4_3-1p":
+    "top-[415px] left-0 w-112.5 theme-border-flash-side theme-border-box",
+  "16_9-2p-2c":
+    "left-[498px] w-[924px] top-[730px] theme-border-flash-middle theme-border-box",
 };
 
 export function DynamicLayout({ layoutKey }: { layoutKey: string }) {

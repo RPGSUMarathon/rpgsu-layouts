@@ -1,5 +1,4 @@
 import ILGALogo from "../../img/offline2026/ilga-full-logo.png";
-import Logo from "../../img/offline2026/offline26_logo.png";
 
 export const IntermissionInfoContainer = () => {
   return (

@@ -4,7 +4,7 @@ import { ThemeProvider } from "../components/theme-provider";
 
 const Layout3 = () => {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme="offline">
       <HeaderRestream />
     </ThemeProvider>
   );

@@ -16,15 +16,20 @@ const Intermission = () => {
   const commentators = useCommentators();
   const upcomingRuns = useUpcomingRuns(2, currentRun?.id ?? "");
 
-  const [world] = useReplicant<string>("currentWorld", {
-    defaultValue: "1",
+  const [world] = useReplicant<number>("currentWorld", {
+    defaultValue: 1,
   });
 
   const exampleDonation =
     "Thank you guys so much for putting together an RPG event, it's really cool and and Im very grateful to be part of it and Im expressing it through this very long message.";
 
   return (
-    <ThemeProvider world={world} className="" style={{ backgroundImage: `` }}>
+    <ThemeProvider
+      theme="offline"
+      world={world}
+      className=""
+      style={{ backgroundImage: `` }}
+    >
       <div className="flex flex-row">
         <div className="w-[395px] h-[520px] bg-(--color-panel-dark) box2" />
         <div className="w-[1490px] h-[520px] flex flex-col">

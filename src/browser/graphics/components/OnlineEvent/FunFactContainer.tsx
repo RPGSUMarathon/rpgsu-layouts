@@ -1,7 +1,6 @@
 import { AutoTextSize } from "auto-text-size";
 import { useEffect, useMemo, useState } from "react";
 
-
 export const FunFactContainer = ({ text }: { text: string }) => {
   const facts: string[] = useMemo(() => {
     if (!text) return [];
