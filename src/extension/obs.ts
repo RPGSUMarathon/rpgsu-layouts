@@ -40,12 +40,14 @@ if (config.enabled) {
       //   "playbackStart",
       //   "nodecg-foobar2000-controller",
       // );
-      bossDefeatedAnimation.value = true;
-
       setTimeout(() => {
-        bossDefeatedAnimation.value = false;
-        nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
-      }, 2000);
+        bossDefeatedAnimation.value = true;
+
+        setTimeout(() => {
+          bossDefeatedAnimation.value = false;
+          nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
+        }, 2000);
+      }, 8000);
     });
   });
 }

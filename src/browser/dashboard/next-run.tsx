@@ -1,6 +1,6 @@
 import { Alert, Button, Stack, styled } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { type RunData } from "speedcontrol/src/types";
 import { type Timer } from "speedcontrol/src/types/schemas";
 import useCurrentObsScene from "../hooks/useCurrentObsScene";
@@ -38,40 +38,25 @@ export const NextRun = () => {
     (timer && ["running", "paused"].includes(timer.state)) ??
     currentObsScene === intermissionSceneName;
 
-  const [transitioning, setTransitioning] = useState(false);
-
   return (
     <DashboardThemeProvider>
       <Stack spacing={2}>
         <Button
           variant="contained"
           fullWidth
-          disabled={(disableChange || transitioning) ?? !nextRun}
+          disabled={disableChange ?? !nextRun}
           onClick={() => {
             if (nextRunGameName.includes("World")) {
               setWorld(nextRun?.customData.world ?? "1");
             }
             if (nextRun) {
-              setTransitioning(true);
-              nodecg
-                .sendMessage("switchToIntermissionWithAnimation")
-                .then(() => {
-                  console.log("Returned massage");
-                  setTransitioning(false);
-                })
-                .catch(() => {
-                  /* empty */
-                });
+              nodecg.sendMessage("switchToIntermissionWithAnimation");
             }
           }}
         >
-          {transitioning ? (
-            <span> Transitioning...</span>
-          ) : (
-            <span>
-              {nextRun ? (nextRunGameName ?? "No next runs") : "No added runs"}
-            </span>
-          )}
+          <span>
+            {nextRun ? (nextRunGameName ?? "No next runs") : "No added runs"}
+          </span>
         </Button>
         {disableChange && (
           <Alert variant="filled" severity="error">

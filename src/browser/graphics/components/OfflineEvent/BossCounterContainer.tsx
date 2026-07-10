@@ -17,6 +17,12 @@ export const BossCounterContainer = ({
   const [world] = useReplicant<string>("currentWorld", {
     defaultValue: "1",
   });
+  const [bossDefeatedAnimation] = useReplicant<boolean>(
+    "bossDefeatedAnimation",
+    {
+      defaultValue: false,
+    },
+  );
 
   let currentImage = "";
   switch (world) {
@@ -43,8 +49,13 @@ export const BossCounterContainer = ({
   return (
     <div className="justify-center mt-2 grid grid-flow-col-dense  ">
       {runsThisWorld &&
-        runsThisWorld.map((run) => (
-          <img key={run.id} src={currentImage} width="70px" className="" />
+        runsThisWorld.map((run, index) => (
+          <img
+            key={run.id}
+            src={currentImage}
+            width="70px"
+            className={`${bossDefeatedAnimation && index === 0 ? "boss-defeat" : ""}`}
+          />
         ))}
     </div>
   );
