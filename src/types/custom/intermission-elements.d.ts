@@ -6,5 +6,5 @@ export type RunPropsContainer = {
 export type DonationProps = {
   name: string;
   amount: string;
-  message: string;
+  message?: string;
 };

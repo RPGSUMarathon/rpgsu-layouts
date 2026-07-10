@@ -26,16 +26,20 @@ export const DonationContainer = ({ name, amount, message }: DonationProps) => {
           </AutoTextSize>
         </div>
       </div>
-      <div className="w-full ridge-inner bg-(--color-world-bg)">
-        <AutoTextSize
-          className="font-light px-1 "
-          mode="box"
-          minFontSizePx={18}
-          maxFontSizePx={34}
-        >
-          {message}
-        </AutoTextSize>
-      </div>
+      {message != null ? (
+        <div className="w-full ridge-inner bg-(--color-world-bg)">
+          <AutoTextSize
+            className="font-light px-1 "
+            mode="box"
+            minFontSizePx={18}
+            maxFontSizePx={34}
+          >
+            {message}
+          </AutoTextSize>
+        </div>
+      ) : (
+        <div />
+      )}
     </div>
   );
 };
