@@ -16,8 +16,8 @@ const Intermission = () => {
   const commentators = useCommentators();
   const upcomingRuns = useUpcomingRuns(2, currentRun?.id ?? "");
 
-  const [world] = useReplicant<number>("currentWorld", {
-    defaultValue: 1,
+  const [world] = useReplicant<string>("currentWorld", {
+    defaultValue: "1",
   });
 
   const exampleDonation =
@@ -48,13 +48,17 @@ const Intermission = () => {
           {upcomingRuns && upcomingRuns.length > 0 && (
             <>
               {upcomingRuns.map((run, index) => {
-                return (
-                  <UpcomingRunContainer
-                    key={run.id}
-                    index={index}
-                    runData={run}
-                  />
-                );
+                if ((run?.customData.world ?? "1") === "Cutscene") {
+                  return <div key={run.id}>Next World</div>;
+                } else {
+                  return (
+                    <UpcomingRunContainer
+                      key={run.id}
+                      index={index}
+                      runData={run}
+                    />
+                  );
+                }
               })}
             </>
           )}

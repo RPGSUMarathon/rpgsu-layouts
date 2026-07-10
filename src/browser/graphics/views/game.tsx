@@ -43,8 +43,8 @@ const App = () => {
   const [flashWarningOn] = useReplicant<boolean>("flashWarningOn", {
     defaultValue: false,
   });
-  const [world] = useReplicant<number>("currentWorld", {
-    defaultValue: 1,
+  const [world] = useReplicant<string>("currentWorld", {
+    defaultValue: "1",
   });
 
   return (

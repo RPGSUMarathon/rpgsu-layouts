@@ -28,7 +28,7 @@ export const NextRun = () => {
   const [timer] = useReplicant<Timer | undefined>("timer", {
     bundle: "nodecg-speedcontrol",
   });
-  const [_, setWorld] = useReplicant<string>("currentWorld", {
+  const [world, setWorld] = useReplicant<string>("currentWorld", {
     defaultValue: "1",
   });
 
@@ -46,11 +46,14 @@ export const NextRun = () => {
           fullWidth
           disabled={disableChange ?? !nextRun}
           onClick={() => {
-            if (nextRunGameName.includes("World")) {
+            if ((nextRun?.customData.layout ?? "1").includes("Cutscene")) {
+              void nodecg.sendMessage(
+                "switchToNextWorld",
+                nextRun?.customData.layout,
+              );
               setWorld(nextRun?.customData.world ?? "1");
-            }
-            if (nextRun) {
-              nodecg.sendMessage("switchToIntermissionWithAnimation");
+            } else if (nextRun) {
+              void nodecg.sendMessage("switchToIntermissionWithAnimation");
             }
           }}
         >

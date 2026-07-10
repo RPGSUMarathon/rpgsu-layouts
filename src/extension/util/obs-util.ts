@@ -71,6 +71,21 @@ export class OBSUtility extends obsWebsocketJs {
     }
   }
 
+  /**
+   * Change to this OBS scene.
+   * @param cutscene Name of cutscene to be played
+   */
+  async changeToNextWorld(cutscene: string) {
+    try {
+      await this.call("SetCurrentProgramScene", {
+        sceneName: cutscene,
+      });
+    } catch (err) {
+      this.log.warn(`Cannot change OBS scene [${cutscene}]: ${err}`);
+      throw err;
+    }
+  }
+
   /** Switches current scene to intermission and enables studio mode if disabled. */
   async changeToIntermission() {
     try {

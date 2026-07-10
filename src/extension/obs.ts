@@ -50,4 +50,18 @@ if (config.enabled) {
       }, 8000);
     });
   });
+
+  nodecg.listenFor("switchToNextWorld", (value) => {
+    console.log(`Changing to cutscene for World ${value}.`);
+
+    void obs.changeToNextWorld(value).then(() => {
+      //Needs to advance twice, once to skip the world, other to go to the run. Probably smarter way to do this lol
+      nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
+      nodecg.sendMessageToBundle(
+        "playbackStart",
+        "nodecg-foobar2000-controller",
+      );
+      nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
+    });
+  });
 }

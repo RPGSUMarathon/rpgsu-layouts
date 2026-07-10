@@ -9,14 +9,14 @@ type Props = {
   className?: string;
   style?: CSSProperties;
   theme: string;
-  world?: number;
+  world?: string;
 };
 
 export const ThemeProvider = ({
   children,
   className,
   style,
-  world = 1,
+  world = "1",
   theme,
 }: Props) => {
   return (
