@@ -50,6 +50,7 @@ export class OBSUtility extends obsWebsocketJs {
       .then(() => {
         this.log.info("Connected to OBS!");
         this.connected = true;
+        this.checkIfRecording();
       })
       .catch((err) => {
         this.log.warn("OBS connection error.");
@@ -90,6 +91,15 @@ export class OBSUtility extends obsWebsocketJs {
       .studioModeEnabled;
     if (!studioModeStatus) {
       await this.call("SetStudioModeEnabled", { studioModeEnabled: true });
+    }
+  }
+
+  async checkIfRecording() {
+    try {
+      const { outputActive } = await this.call("GetRecordStatus");
+      this.isRecording = outputActive;
+    } catch (err) {
+      console.log(`Could not detect recording status ${err}`);
     }
   }
 
