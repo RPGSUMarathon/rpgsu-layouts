@@ -35,6 +35,10 @@
             "game2p": {
               "type": "string",
               "default": "Game-2p"
+            },
+            "cutscene": {
+              "type": "string",
+              "default": "Cutscene"
             }
           },
           "additionalProperties": false
