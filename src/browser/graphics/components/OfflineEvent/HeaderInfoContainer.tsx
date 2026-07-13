@@ -4,7 +4,7 @@ import Logo from "../../img/offline2026/offline26_logo.png";
 
 export const HeaderInfoContainer = () => {
   return (
-    <div className="flex w-full h-full justify-around top-0 absolute -z-1">
+    <div className="flex w-full h-full justify-around top-0 absolute">
       <div className="">
         <img src={Logo} width={220} alt="RPGSU Event Logo" />
       </div>
