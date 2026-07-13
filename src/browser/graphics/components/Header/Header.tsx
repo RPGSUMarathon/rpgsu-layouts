@@ -13,7 +13,6 @@ export const Header = () => {
       data: {
         name: "sioneus",
         amount: "90€",
-        message: exampleDonation,
       },
     });
 

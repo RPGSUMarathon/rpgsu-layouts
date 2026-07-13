@@ -3,7 +3,7 @@ import { AutoTextSize } from "auto-text-size";
 
 export const GameDonationContainer = ({ data }) => {
   return (
-    <div className="flex flex-col m-auto">
+    <div className="flex flex-col m-auto w-full">
       <div className="h-[35px] auto-text-size-override bg-(--color-world-dark)">
         <AutoTextSize
           mode="oneline"
@@ -26,8 +26,8 @@ export const GameDonationContainer = ({ data }) => {
           </AutoTextSize>
         </div>
       ) : (
-        <div className="text-italic w-full text-2xl h-[85px] bg-(--color-world-dark)">
-          Thank you for your donation!
+        <div className="text-italic w-full text-2xl h-[85px] flex items-center justify-center bg-(--color-world-dark)">
+          RPGSU thanks you for your donation!
         </div>
       )}
     </div>
