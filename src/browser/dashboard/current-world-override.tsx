@@ -2,10 +2,10 @@ import { useReplicant } from "@nodecg/react-hooks";
 import { render } from "../render";
 
 const worlds = [
-  { id: "1", label: "Forest World" },
-  { id: "2", label: "Snow World" },
-  { id: "3", label: "Volcano World" },
-  { id: "4", label: "Desert World" },
+  { id: "1", label: "Forest" },
+  { id: "2", label: "Snow" },
+  { id: "3", label: "Volcano" },
+  { id: "4", label: "Desert" },
 ];
 
 export const WorldSwitcher = () => {
@@ -18,7 +18,10 @@ export const WorldSwitcher = () => {
       {worlds.map((w) => (
         <button
           key={w.id}
-          onClick={() => setWorld(w.id)}
+          onClick={() => {
+            setWorld(w.id);
+            void nodecg.sendMessage("overrideWorld", w.label);
+          }}
           className={`
             px-4 py-2 font-bold text-sm
             ridge-inner

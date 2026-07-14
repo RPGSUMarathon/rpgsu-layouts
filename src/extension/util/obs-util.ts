@@ -73,6 +73,30 @@ export class OBSUtility extends obsWebsocketJs {
 
   /**
    * Change to this OBS scene.
+   * @param sceneName Name of the scene.
+   */
+  async changeSource(sceneName: string, sourceName: string): Promise<void> {
+    try {
+      const { sceneItemId } = await this.call("GetSceneItemId", {
+        sceneName,
+        sourceName,
+      });
+
+      console.log(`scene item id ${sceneItemId}.`);
+
+      await this.call("SetSceneItemEnabled", {
+        sceneName,
+        sceneItemId,
+        sceneItemEnabled: true,
+      });
+    } catch (err) {
+      this.log.warn(`Cannot change OBS source [${sourceName}]: ${err}`);
+      throw err;
+    }
+  }
+
+  /**
+   * Change to this OBS scene.
    * @param cutscene Name of cutscene to be played
    */
   async changeToNextWorld(cutscene: string) {

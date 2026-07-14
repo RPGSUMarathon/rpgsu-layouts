@@ -6,6 +6,13 @@ const nodecg = get();
 const obs = new OBSUtility();
 const config = nodecg.bundleConfig.obs;
 
+const worlds = [
+  { id: "1", label: "Forest" },
+  { id: "2", label: "Snow" },
+  { id: "3", label: "Volcano" },
+  { id: "4", label: "Desert" },
+];
+
 if (config.enabled) {
   obs.connectToOBS();
 
@@ -63,5 +70,10 @@ if (config.enabled) {
       );
       nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
     });
+  });
+
+  nodecg.listenFor("overrideWorld", (value) => {
+    console.log(`Overriding World to ${value}.`);
+    void obs.changeSource("Animation", value);
   });
 }
