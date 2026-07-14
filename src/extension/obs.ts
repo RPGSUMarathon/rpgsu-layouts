@@ -61,6 +61,9 @@ if (config.enabled) {
   nodecg.listenFor("switchToNextWorld", (value) => {
     console.log(`Changing to cutscene for World ${value}.`);
 
+    //Updating animation - if somehow the array returns an invalid world, it *will* crash the layouts
+    void obs.changeSource("Animation", worlds[value]?.label ?? "Forest");
+
     void obs.changeToNextWorld(value).then(() => {
       //Needs to advance twice, once to skip the world, other to go to the run. Probably smarter way to do this lol
       nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
