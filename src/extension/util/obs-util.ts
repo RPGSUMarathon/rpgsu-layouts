@@ -165,4 +165,33 @@ export class OBSUtility extends obsWebsocketJs {
       throw err;
     }
   }
+
+  async updateSourcePosition(
+    positionX: number,
+    positionY: number,
+    width: number,
+    height: number,
+  ) {
+    try {
+      const { sceneItemId } = await this.call("GetSceneItemId", {
+        sceneName: "Game",
+        sourceName: "Capture",
+      });
+
+      await this.call("SetSceneItemTransform", {
+        sceneName: "Game",
+        sceneItemId,
+        sceneItemTransform: {
+          positionX: positionX,
+          positionY: positionY,
+          boundsType: "OBS_BOUNDS_STRETCH",
+          boundsWidth: width,
+          boundsHeight: height,
+        },
+      });
+    } catch (err) {
+      this.log.warn(`Cannot change OBS scene [${name}]: ${err}`);
+      throw err;
+    }
+  }
 }

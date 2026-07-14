@@ -79,4 +79,8 @@ if (config.enabled) {
     console.log(`Overriding World to ${value}.`);
     void obs.changeSource("Animation", value);
   });
+
+  nodecg.listenFor("updateSourcePosition", (value) => {
+    void obs.updateSourcePosition(591.5, 130, 1187, 890);
+  });
 }

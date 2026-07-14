@@ -42,6 +42,7 @@ export const GameLayoutOverride = () => {
               <ListItemButton
                 onClick={() => {
                   setCurrentGameLayout(layout.code);
+                  void nodecg.sendMessage("updateSourcePosition", layout.code);
                 }}
               >
                 <ListItemText primary={layout.name} />
