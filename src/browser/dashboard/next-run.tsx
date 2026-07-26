@@ -28,7 +28,7 @@ export const NextRun = () => {
   const [timer] = useReplicant<Timer | undefined>("timer", {
     bundle: "nodecg-speedcontrol",
   });
-  const [world, setWorld] = useReplicant<string>("currentWorld", {
+  const [_, setWorld] = useReplicant<string>("currentWorld", {
     defaultValue: "1",
   });
 

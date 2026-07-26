@@ -1,7 +1,11 @@
 import { type DonationProps } from "@rpgsu-layouts/types/custom/intermission-elements";
 import { AutoTextSize } from "auto-text-size";
 
-export const GameDonationContainer = ({ data }) => {
+export type GameDonationContainerProps = {
+  data: DonationProps;
+};
+
+export const GameDonationContainer = ({ data }: GameDonationContainerProps) => {
   return (
     <div className="flex flex-col m-auto w-full">
       <div className="h-[35px] auto-text-size-override bg-(--color-world-dark)">

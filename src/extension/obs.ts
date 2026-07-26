@@ -80,7 +80,14 @@ if (config.enabled) {
     void obs.changeSource("Animation", value);
   });
 
+  /**
+   @todo: Update Source Position
+    Will move the game source (and th camera if applied) to the correct position depending on the layout.
+    Also reset the cropping.
+  **/
+
   nodecg.listenFor("updateSourcePosition", (value) => {
+    console.log(`Next layout ${value}`);
     void obs.updateSourcePosition(591.5, 130, 1187, 890);
   });
 }

@@ -2,8 +2,13 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import ILGALogo from "../../img/offline2026/ilga-full-logo.png";
 
+/**
+   @todo: Intermissino Info Container
+   Rotate with different info. Can be static?
+**/
+
 export const IntermissionInfoContainer = () => {
-  const [currentComponentIndex, setCurrentComponentIndex] = useState(0);
+  const [currentComponentIndex] = useState(0);
 
   return (
     <div className="ridge-inner w-full h-[290px] bg-(--color-offline-info) place-content-center p-5">
