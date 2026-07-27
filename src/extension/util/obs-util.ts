@@ -28,13 +28,6 @@ export class OBSUtility extends obsWebsocketJs {
     this.on("CurrentProgramSceneChanged", (data) => {
       if (data.sceneName === this.currentScene) return;
 
-      if (
-        data.sceneName === (this.config.scenes?.game ?? "Game") ||
-        data.sceneName === (this.config.scenes?.game2p ?? "Game-2p")
-      ) {
-        void this.startRecording();
-      }
-
       this.currentSceneReplicant.value = data.sceneName;
     });
   }
@@ -51,7 +44,7 @@ export class OBSUtility extends obsWebsocketJs {
       .then(() => {
         this.log.info("Connected to OBS!");
         this.connected = true;
-        this.checkIfRecording();
+        void this.checkIfRecording();
       })
       .catch((err) => {
         this.log.warn("OBS connection error.");
@@ -122,6 +115,16 @@ export class OBSUtility extends obsWebsocketJs {
       commentators.value = [];
     } catch (err) {
       this.log.warn(`Error switching to intermission ${err}`);
+    }
+  }
+
+  async changeToGame() {
+    try {
+      await this.changeScene(this.config.scenes?.game ?? "Game");
+      await this.startRecording();
+      commentators.value = [];
+    } catch (err) {
+      this.log.warn(`Error switching to game ${err}`);
     }
   }
 

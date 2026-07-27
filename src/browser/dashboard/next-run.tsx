@@ -57,9 +57,17 @@ export const NextRun = () => {
             }
           }}
         >
-          <span>
-            {nextRun ? (nextRunGameName ?? "No next runs") : "No added runs"}
-          </span>
+          <span>Switch to Intermission</span>
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          disabled={disableChange ?? !nextRun}
+          onClick={() => {
+            void nodecg.sendMessage("switchToGame");
+          }}
+        >
+          <span>Switch to Game</span>
         </Button>
         {disableChange && (
           <Alert variant="filled" severity="error">

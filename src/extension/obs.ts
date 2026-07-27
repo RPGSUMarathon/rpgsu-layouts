@@ -133,6 +133,20 @@ if (config.enabled) {
     });
   });
 
+  nodecg.listenFor("switchToGame", () => {
+    if (obs.currentScene === config.scenes!.game) return;
+
+    console.log("Changing to game");
+
+    void obs.changeToGame().then(() => {
+      nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
+      nodecg.sendMessageToBundle(
+        "playbackStop",
+        "nodecg-foobar2000-controller",
+      );
+    });
+  });
+
   nodecg.listenFor("switchToIntermissionWithAnimation", () => {
     if (obs.currentScene === config.scenes!.intermission) return;
 
