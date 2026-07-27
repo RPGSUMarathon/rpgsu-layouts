@@ -1,3 +1,4 @@
+import { type SourcePosition } from "@rpgsu-layouts/types";
 import obsWebsocketJs from "obs-websocket-js";
 import { get } from "./nodecg";
 import { commentators, currentOBSScene } from "./replicants";
@@ -166,19 +167,20 @@ export class OBSUtility extends obsWebsocketJs {
     }
   }
 
-  async updateSourcePosition(
-    positionX: number,
-    positionY: number,
-    width: number,
-    height: number,
-  ) {
+  async updateSourcePosition({
+    name,
+    positionX,
+    positionY,
+    width,
+    height,
+  }: SourcePosition) {
     try {
       const { sceneItemId } = await this.call("GetSceneItemId", {
         sceneName: "Game",
-        sourceName: "Capture",
+        sourceName: name,
       });
 
-      await this.call("SetSceneItemTransform", {
+      void this.call("SetSceneItemTransform", {
         sceneName: "Game",
         sceneItemId,
         sceneItemTransform: {

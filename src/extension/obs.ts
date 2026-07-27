@@ -1,3 +1,4 @@
+import { type LayoutGamePosition } from "@rpgsu-layouts/types/custom/layoutinfo";
 import { get } from "./util/nodecg";
 import { OBSUtility } from "./util/obs-util";
 import { bossDefeatedAnimation } from "./util/replicants";
@@ -11,6 +12,101 @@ const worlds = [
   { id: "2", label: "Snow" },
   { id: "3", label: "Volcano" },
   { id: "4", label: "Desert" },
+];
+
+const sourcePos: LayoutGamePosition[] = [
+  {
+    layout: "4_3-1p",
+    screenNumber: 1,
+    position: [
+      {
+        name: "Capture",
+        positionX: 591.5,
+        positionY: 130,
+        width: 1187,
+        height: 890,
+      },
+    ],
+  },
+  {
+    layout: "16_9-1p",
+    screenNumber: 1,
+    position: [
+      {
+        name: "Capture",
+        positionX: 450,
+        positionY: 130,
+        width: 1470,
+        height: 890,
+      },
+    ],
+  },
+  {
+    layout: "gb-1p",
+    screenNumber: 1,
+    position: [
+      {
+        name: "Capture",
+        positionX: 740,
+        positionY: 130,
+        width: 890,
+        height: 890,
+      },
+    ],
+  },
+  {
+    layout: "gba-1p",
+    screenNumber: 1,
+    position: [
+      {
+        name: "Capture",
+        positionX: 517.5,
+        positionY: 130,
+        width: 1335,
+        height: 890,
+      },
+    ],
+  },
+  {
+    layout: "ds-1p",
+    screenNumber: 2,
+    position: [
+      {
+        name: "Capture",
+        positionX: 591.5,
+        positionY: 130,
+        width: 1187,
+        height: 890,
+      },
+      {
+        name: "Capture-2",
+        positionX: 0,
+        positionY: 683,
+        width: 450,
+        height: 337.5,
+      },
+    ],
+  },
+  {
+    layout: "3ds-1p",
+    screenNumber: 2,
+    position: [
+      {
+        name: "Capture",
+        positionX: 450,
+        positionY: 130,
+        width: 1470,
+        height: 890,
+      },
+      {
+        name: "Capture-2",
+        positionX: 0,
+        positionY: 683,
+        width: 450,
+        height: 337.5,
+      },
+    ],
+  },
 ];
 
 if (config.enabled) {
@@ -88,6 +184,11 @@ if (config.enabled) {
 
   nodecg.listenFor("updateSourcePosition", (value) => {
     console.log(`Next layout ${value}`);
-    void obs.updateSourcePosition(591.5, 130, 1187, 890);
+    const layoutGamePosition = sourcePos.find((lgp) => lgp.layout === value);
+    if (layoutGamePosition != null) {
+      for (let i = 0; i < layoutGamePosition.screenNumber; i++) {
+        void obs.updateSourcePosition(layoutGamePosition!.position[i]!);
+      }
+    }
   });
 }
