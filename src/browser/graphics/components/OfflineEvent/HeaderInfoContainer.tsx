@@ -1,14 +1,14 @@
 import Bluesky from "../../img/icons/bluesky.png";
 import Youtube from "../../img/icons/youtube.png";
-import Logo from "../../img/offline2026/offline26_logo.png";
+import Logo from "../../img/text-banner.png";
 
 export const HeaderInfoContainer = () => {
   return (
     <div className="flex w-full h-full justify-around top-0 absolute">
       <div className="">
-        <img src={Logo} width={220} alt="RPGSU Event Logo" />
+        <img src={Logo} width={370} alt="RPGSU Event Logo" />
       </div>
-      <div className="text-2xl font-bold p-1 ">
+      <div className="text-2xl font-bold  ">
         <div className="flex items-center gap-5">
           <span>Follow us on Social Media!</span>
         </div>
