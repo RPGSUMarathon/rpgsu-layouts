@@ -14,7 +14,7 @@ export const Header = () => {
       },
     });
 
-  nodecg.listenFor("notifyDonation", (value) => {
+  nodecg.listenFor("notifyDonation", () => {
     console.log("received message for notification");
     notify();
   });

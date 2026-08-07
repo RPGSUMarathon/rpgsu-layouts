@@ -1,4 +1,3 @@
-import Fletcher from "../../../img/fletcher.png";
 import Zutphen from "../../../img/zutphen.png";
 
 export const LocationContainer = () => {

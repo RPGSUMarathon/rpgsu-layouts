@@ -28,7 +28,7 @@ export const IntermissionInfoContainer = () => {
     }, 15000);
 
     return () => clearInterval(interval);
-  }, [infoElements.length]);
+  }, []);
 
   return (
     <div

@@ -46,6 +46,7 @@ export const NextRun = () => {
           fullWidth
           disabled={disableChange ?? !nextRun}
           onClick={() => {
+            console.log(`Next Game: ${nextRunGameName}`);
             if ((nextRun?.customData.layout ?? "1").includes("Cutscene")) {
               void nodecg.sendMessage(
                 "switchToNextWorld",
