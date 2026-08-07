@@ -117,6 +117,13 @@
         "workspace": "Scene Editing"
       },
       {
+        "file": "test-component.html",
+        "name": "test-component",
+        "title": "Test",
+        "width": 2,
+        "workspace": "Scene Editing"
+      },
+      {
         "file": "omnibar-config.html",
         "name": "omnibar-config",
         "title": "Omnibar Config",
