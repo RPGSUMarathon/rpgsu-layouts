@@ -213,6 +213,11 @@ export class OBSUtility extends obsWebsocketJs {
           boundsType: "OBS_BOUNDS_STRETCH",
           boundsWidth: width,
           boundsHeight: height,
+          cropTop: 0,
+          cropLeft: 0,
+          cropRight: 0,
+          cropBottom: 0,
+          cropToBounds: true,
         },
       });
     } catch (err) {

@@ -192,12 +192,6 @@ if (config.enabled) {
     });
   });
 
-  /**
-   @todo: Update Source Position
-    Will move the game source (and th camera if applied) to the correct position depending on the layout.
-    Also reset the cropping.
-  **/
-
   nodecg.listenFor("updateSourcePosition", (value) => {
     console.log(`Next layout ${value}`);
     const layoutGamePosition = sourcePos.find((lgp) => lgp.layout === value);
