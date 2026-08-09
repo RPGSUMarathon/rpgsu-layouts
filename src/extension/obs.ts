@@ -166,6 +166,11 @@ if (config.enabled) {
     void obs.changeSource("Animation", worlds[value]?.label ?? "Forest", true);
 
     void obs.changeToNextWorld(value).then(() => {
+      worlds.forEach((world) => {
+        if (world.label !== value) {
+          void obs.changeSource("Animation", world.label, false);
+        }
+      });
       //Needs to advance twice, once to skip the world, other to go to the run. Probably smarter way to do this lol
       nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
       nodecg.sendMessageToBundle(
