@@ -163,7 +163,7 @@ if (config.enabled) {
     console.log(`Changing to cutscene for World ${value}.`);
 
     //Updating animation - if somehow the array returns an invalid world, it *will* crash the layouts
-    void obs.changeSource("Animation", worlds[value]?.label ?? "Forest");
+    void obs.changeSource("Animation", worlds[value]?.label ?? "Forest", true);
 
     void obs.changeToNextWorld(value).then(() => {
       //Needs to advance twice, once to skip the world, other to go to the run. Probably smarter way to do this lol
@@ -178,7 +178,13 @@ if (config.enabled) {
 
   nodecg.listenFor("overrideWorld", (value) => {
     console.log(`Overriding World to ${value}.`);
-    void obs.changeSource("Animation", value);
+    void obs.changeSource("Animation", value, true);
+
+    worlds.forEach((world) => {
+      if (world.label !== value) {
+        void obs.changeSource("Animation", world.label, false);
+      }
+    });
   });
 
   /**

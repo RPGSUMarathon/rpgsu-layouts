@@ -81,10 +81,16 @@ export class OBSUtility extends obsWebsocketJs {
   }
 
   /**
-   * Change to this OBS scene.
+   * Toggle visibility on this obs source
    * @param sceneName Name of the scene.
+   * @param sourceName Name of the source.
+   * @param visible State of visibility
    */
-  async changeSource(sceneName: string, sourceName: string): Promise<void> {
+  async changeSource(
+    sceneName: string,
+    sourceName: string,
+    visible: boolean,
+  ): Promise<void> {
     try {
       const { sceneItemId } = await this.call("GetSceneItemId", {
         sceneName,
@@ -96,7 +102,7 @@ export class OBSUtility extends obsWebsocketJs {
       await this.call("SetSceneItemEnabled", {
         sceneName,
         sceneItemId,
-        sceneItemEnabled: true,
+        sceneItemEnabled: visible,
       });
     } catch (err) {
       this.log.warn(`Cannot change OBS source [${sourceName}]: ${err}`);
