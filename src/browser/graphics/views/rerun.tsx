@@ -1,6 +1,5 @@
 import { render } from "../../render";
 import { ThemeProvider } from "../components/theme-provider";
-import Logo from "../img/offline2026/offline26_logo.png";
 
 export const Rerun = () => {
   return (
