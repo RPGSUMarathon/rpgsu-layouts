@@ -1,7 +1,11 @@
 import { type SourcePosition } from "@rpgsu-layouts/types";
 import obsWebsocketJs from "obs-websocket-js";
 import { get } from "./nodecg";
-import { commentators, currentOBSScene } from "./replicants";
+import {
+  bossDefeatedAnimation,
+  commentators,
+  currentOBSScene,
+} from "./replicants";
 import { TaggedLogger } from "./tagged-logger";
 
 const nodecg = get();
@@ -29,6 +33,17 @@ export class OBSUtility extends obsWebsocketJs {
       if (data.sceneName === this.currentScene) return;
 
       this.currentSceneReplicant.value = data.sceneName;
+    });
+
+    this.on("SceneTransitionVideoEnded", (data) => {
+      if (data.transitionName === "ToIntermission") {
+        bossDefeatedAnimation.value = true;
+
+        setTimeout(() => {
+          bossDefeatedAnimation.value = false;
+          nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
+        }, 2000);
+      }
     });
   }
 
