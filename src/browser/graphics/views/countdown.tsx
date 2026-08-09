@@ -15,8 +15,12 @@ export const CountdownView = () => {
           <img className="w-1/2" src={Logo} />
         </div>
         <div>
-          <div className="text-5xl font-semibold text-shadow-md text-shadow-black">Stream starting in: </div>
-          <div className="text-9xl font-bold text-shadow-md text-shadow-black">{countdown?.formatted}</div>
+          <div className="text-5xl font-semibold text-shadow-md text-shadow-black">
+            Stream starting in:{" "}
+          </div>
+          <div className="text-9xl font-bold text-shadow-md text-shadow-black">
+            {countdown?.formatted}
+          </div>
         </div>
       </div>
     </ThemeProvider>

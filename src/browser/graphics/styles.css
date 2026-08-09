@@ -228,3 +228,15 @@ clip-path: polygon(0% 0%, 88% 0, 100% 51%, 88% 100%, 0% 100%);
     inset 2px 2px 0 #7a7a7a,   /* mid highlight */
     inset -2px -2px 0 #1a1a1a; /* mid shadow */
 }
+
+.rerun-div{
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to bottom right, #fff 0%, #fff 50%, green 50%, green 100%);
+}
+
+.engraved{
+  color: #c3dbda;
+  font-size:72px;
+  text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
+}
