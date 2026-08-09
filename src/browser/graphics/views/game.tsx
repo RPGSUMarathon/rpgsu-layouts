@@ -1,5 +1,7 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { toast, ToastContainer } from "react-toastify";
 import { render } from "../../render";
+import { GameDonationContainer } from "../components/OfflineEvent/GameDonationContainer";
 import { ThemeProvider } from "../components/theme-provider";
 import * as Layouts from "./game-layouts/index";
 
@@ -47,8 +49,26 @@ const App = () => {
     defaultValue: "1",
   });
 
+  const notify = () => {
+    console.log("notify");
+    toast(GameDonationContainer, {
+      data: {
+        name: "sioneus",
+        amount: "90€",
+      },
+    });
+  };
+
+  nodecg.listenFor("notifyDonation", () => {
+    console.log("received message for notification");
+    notify();
+  });
+
   return (
     <ThemeProvider world={world} theme="offline">
+      <div>
+        <ToastContainer autoClose={10000} limit={1} />
+      </div>
       <DynamicLayout layoutKey={gameLayout ?? "16_9-1p"} />
       {flashWarningOn && (
         <FlashingLightsWarning layoutKey={gameLayout ?? "4_3-1p"} />

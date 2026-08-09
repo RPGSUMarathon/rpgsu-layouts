@@ -1,24 +1,8 @@
-// import { useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import { GameDonationContainer } from "../OfflineEvent/GameDonationContainer";
 import { HeaderInfoContainer } from "../OfflineEvent/HeaderInfoContainer";
 import { Category, Estimate, Game, Timer } from "../RunTexts";
 import "../../css/toastify.css";
 
 export const Header = () => {
-  const notify = () =>
-    toast(GameDonationContainer, {
-      data: {
-        name: "sioneus",
-        amount: "90€",
-      },
-    });
-
-  nodecg.listenFor("notifyDonation", () => {
-    console.log("received message for notification");
-    notify();
-  });
-
   return (
     <div className="w-full h-32.5 theme-border-b flex flex-row bg-linear-to-b bg-(--color-world-dark)">
       <div className="flex-none w-183.75 h-32.5 theme-border-r">
@@ -40,7 +24,6 @@ export const Header = () => {
         <Timer className="font-bold drop-shadow" />
       </div>
       <div className="flex-1 theme-border-box relative">
-        <ToastContainer autoClose={10000} limit={1} />
         <HeaderInfoContainer />
       </div>
     </div>
