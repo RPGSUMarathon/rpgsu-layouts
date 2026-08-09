@@ -12,9 +12,9 @@ const SidebarGBA = () => {
     <div className="flex h-225">
       <Sidebar />
 
-      <div className="flex-none h-full aspect-3/2 " />
+      <div className="flex-none h-full aspect-3/2 theme-border-box" />
       <div
-        className="flex-1 theme-border-l"
+        className="flex-1 theme-border-l theme-border-box bg-(--color-panel-light)"
         style={{
           backgroundImage: backgroundToggleOn
             ? `url(${backgroundImage})`

@@ -1,7 +1,6 @@
 import { type LayoutGamePosition } from "@rpgsu-layouts/types/custom/layoutinfo";
 import { get } from "./util/nodecg";
 import { OBSUtility } from "./util/obs-util";
-import { bossDefeatedAnimation } from "./util/replicants";
 
 const nodecg = get();
 const obs = new OBSUtility();
@@ -21,10 +20,10 @@ const sourcePos: LayoutGamePosition[] = [
     position: [
       {
         name: "Capture",
-        positionX: 591.5,
-        positionY: 130,
-        width: 1187,
-        height: 890,
+        positionX: 599,
+        positionY: 135,
+        width: 1179,
+        height: 883,
       },
     ],
   },
@@ -34,10 +33,10 @@ const sourcePos: LayoutGamePosition[] = [
     position: [
       {
         name: "Capture",
-        positionX: 450,
-        positionY: 130,
-        width: 1470,
-        height: 890,
+        positionX: 459,
+        positionY: 135,
+        width: 1461,
+        height: 818,
       },
     ],
   },
@@ -47,10 +46,10 @@ const sourcePos: LayoutGamePosition[] = [
     position: [
       {
         name: "Capture",
-        positionX: 740,
-        positionY: 130,
-        width: 890,
-        height: 890,
+        positionX: 742,
+        positionY: 135,
+        width: 893,
+        height: 885,
       },
     ],
   },
@@ -60,10 +59,10 @@ const sourcePos: LayoutGamePosition[] = [
     position: [
       {
         name: "Capture",
-        positionX: 517.5,
-        positionY: 130,
-        width: 1335,
-        height: 890,
+        positionX: 459,
+        positionY: 135,
+        width: 1343,
+        height: 885,
       },
     ],
   },
@@ -73,17 +72,17 @@ const sourcePos: LayoutGamePosition[] = [
     position: [
       {
         name: "Capture",
-        positionX: 591.5,
-        positionY: 130,
-        width: 1187,
-        height: 890,
+        positionX: 597,
+        positionY: 135,
+        width: 1179,
+        height: 883,
       },
       {
         name: "Capture-2",
         positionX: 0,
-        positionY: 683,
+        positionY: 688,
         width: 450,
-        height: 337.5,
+        height: 333,
       },
     ],
   },
@@ -93,17 +92,17 @@ const sourcePos: LayoutGamePosition[] = [
     position: [
       {
         name: "Capture",
-        positionX: 450,
-        positionY: 130,
-        width: 1470,
-        height: 890,
+        positionX: 455,
+        positionY: 135,
+        width: 1466,
+        height: 885,
       },
       {
         name: "Capture-2",
         positionX: 0,
-        positionY: 683,
+        positionY: 688,
         width: 450,
-        height: 337.5,
+        height: 333,
       },
     ],
   },
