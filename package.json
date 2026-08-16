@@ -116,9 +116,9 @@
         "workspace": "Scene Editing"
       },
       {
-        "file": "test-component.html",
-        "name": "test-component",
-        "title": "Test",
+        "file": "extension-component.html",
+        "name": "extension-component",
+        "title": "Extension Code Component",
         "width": 2,
         "workspace": "Scene Editing"
       },
