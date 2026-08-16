@@ -49,3 +49,13 @@ export const UpcomingRunContainer = ({ index, runData }: RunPropsContainer) => {
     </div>
   );
 };
+
+export const UpcomingCutsceneContainer = () => {
+  return (
+    <div className="h-[125px] flex items-center justify-center">
+      <div className="bg-(--color-panel-dark) glow-blue flex flex-row box2 text-center w-1/2 items-center justify-center">
+        <span className="text-5xl p-3">Cutscene</span>
+      </div>
+    </div>
+  );
+};

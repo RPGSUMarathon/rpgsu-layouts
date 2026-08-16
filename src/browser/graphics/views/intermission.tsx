@@ -8,7 +8,7 @@ import { RunContainer } from "../components/OfflineEvent/CurrentRunContainer";
 import { DonationContainer } from "../components/OfflineEvent/DonationContainer";
 import { IntermissionInfoContainer } from "../components/OfflineEvent/IntermissionInfoContainer";
 import { MusicPlayerContainer } from "../components/OfflineEvent/MusicPlayerContainer";
-import { UpcomingRunContainer } from "../components/OfflineEvent/UpcomingRunContainer";
+import { UpcomingCutsceneContainer, UpcomingRunContainer } from "../components/OfflineEvent/UpcomingRunContainer";
 import { ThemeProvider } from "../components/theme-provider";
 
 const Intermission = () => {
@@ -50,8 +50,8 @@ const Intermission = () => {
           {upcomingRuns && upcomingRuns.length > 0 && (
             <>
               {upcomingRuns.map((run, index) => {
-                if ((run?.customData.world ?? "1") === "Cutscene") {
-                  return <div key={run.id}>Next World</div>;
+                if ((run?.customData.layout ?? "1").includes("Cutscene")) {
+                  return <UpcomingCutsceneContainer key={run.id} />;
                 } else {
                   return (
                     <UpcomingRunContainer

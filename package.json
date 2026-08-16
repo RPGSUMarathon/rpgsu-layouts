@@ -99,8 +99,7 @@
         "file": "flashing-lights-warning.html",
         "name": "flashing-lights-warning",
         "title": "Flashing Lights Warning",
-        "width": 2,
-        "workspace": "Scene Editing"
+        "width": 2
       },
       {
         "file": "current-world-override.html",
@@ -127,13 +126,15 @@
         "file": "omnibar-config.html",
         "name": "omnibar-config",
         "title": "Omnibar Config",
-        "width": 3
+        "width": 3,
+        "workspace": "Scene Editing"
       },
       {
         "file": "countdown.html",
         "name": "countdown",
         "title": "Countdown",
-        "width": 3
+        "width": 3,
+        "workspace": "Scene Editing"
       }
     ],
     "graphics": [

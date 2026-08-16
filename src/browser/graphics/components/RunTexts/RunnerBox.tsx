@@ -1,6 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useMemo, useState } from "react";
 import Bluesky from "../../img/icons/bluesky.png";
 import MicIcon from "../../img/icons/mic.png";
 import RunnerIcon from "../../img/icons/runner.png";

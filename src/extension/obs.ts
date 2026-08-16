@@ -201,4 +201,15 @@ if (config.enabled) {
       }
     }
   });
+
+  nodecg.listenFor("resetCameraPosition", () => {
+    console.log(`Resetting camera position.`);
+    void obs.updateSourcePosition({
+      name: "Camera",
+      positionX: 5,
+      positionY: 133,
+      width: 445,
+      height: 333,
+    });
+  });
 }
