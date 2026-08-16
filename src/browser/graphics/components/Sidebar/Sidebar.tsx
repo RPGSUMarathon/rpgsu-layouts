@@ -1,4 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { useEffect, useState } from "react";
 import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
 import useCurrentRun from "../../../hooks/useCurrentRun";
@@ -13,6 +14,21 @@ export const Sidebar = () => {
   const [backgroundToggleOn] = useReplicant<boolean>("backgroundToggleOn", {
     defaultValue: false,
   });
+  const [runnerBoxContentIndex, setRunnerBoxContentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if ("startViewTransition" in document) {
+        (document as Document).startViewTransition(() => {
+          setRunnerBoxContentIndex((prev) => (prev + 1) % 2);
+        });
+      } else {
+        setRunnerBoxContentIndex((prev) => (prev + 1) % 2);
+      }
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const player = currentRun?.teams[0]?.players[0];
 
@@ -43,6 +59,7 @@ export const Sidebar = () => {
             runner
             pronouns={player?.pronouns}
             name={player?.name ?? ""}
+            visibleListItem={runnerBoxContentIndex}
           />
           {commentators.length > 0 && (
             <div className="flex-1 w-full">
@@ -54,6 +71,7 @@ export const Sidebar = () => {
                   key={runner.id}
                   twitch={runner.twitch}
                   bluesky={runner.bluesky}
+                  visibleListItem={runnerBoxContentIndex}
                 />
               ))}
             </div>
