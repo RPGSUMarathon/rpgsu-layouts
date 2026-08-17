@@ -55,6 +55,8 @@ const App = () => {
       data: {
         name: "sioneus",
         amount: "90€",
+        message:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum sapien ut nisi accumsan vehicula. Nam sollicitudin neque enim, eget massa nunc. ",
       },
     });
   };
@@ -67,7 +69,7 @@ const App = () => {
   return (
     <ThemeProvider world={world} theme="offline">
       <div>
-        <ToastContainer autoClose={10000} limit={1} />
+        <ToastContainer autoClose={12000} limit={1} />
       </div>
       <DynamicLayout layoutKey={gameLayout ?? "16_9-1p"} />
       {flashWarningOn && (

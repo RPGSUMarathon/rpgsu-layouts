@@ -21,8 +21,7 @@ const Intermission = () => {
   });
 
   const exampleDonation =
-    "Thank you guys so much for putting together an RPG event, it's really cool and and Im very grateful to be part of it and Im expressing it through this very long message.";
-
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum sapien ut nisi accumsan vehicula. Nam sollicitudin neque enim, eget massa nunc. ";
   return (
     <ThemeProvider
       theme="offline"

@@ -31,7 +31,7 @@ export const DonationContainer = ({ name, amount, message }: DonationProps) => {
           <AutoTextSize
             className="font-light px-1 "
             mode="box"
-            minFontSizePx={18}
+            minFontSizePx={22}
             maxFontSizePx={34}
           >
             {message}
