@@ -8,7 +8,10 @@ import { RunContainer } from "../components/OfflineEvent/CurrentRunContainer";
 import { DonationContainer } from "../components/OfflineEvent/DonationContainer";
 import { IntermissionInfoContainer } from "../components/OfflineEvent/IntermissionInfoContainer";
 import { MusicPlayerContainer } from "../components/OfflineEvent/MusicPlayerContainer";
-import { UpcomingCutsceneContainer, UpcomingRunContainer } from "../components/OfflineEvent/UpcomingRunContainer";
+import {
+  UpcomingCutsceneContainer,
+  UpcomingRunContainer,
+} from "../components/OfflineEvent/UpcomingRunContainer";
 import { ThemeProvider } from "../components/theme-provider";
 
 const Intermission = () => {

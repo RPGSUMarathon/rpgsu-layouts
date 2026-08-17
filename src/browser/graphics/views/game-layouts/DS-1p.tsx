@@ -17,8 +17,6 @@ const CenterDS = () => {
   });
   const [runnerBoxContentIndex, setRunnerBoxContentIndex] = useState(0);
 
-
-
   useEffect(() => {
     const interval = setInterval(() => {
       if ("startViewTransition" in document) {
