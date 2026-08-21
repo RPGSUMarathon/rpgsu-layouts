@@ -1,4 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { useEffect, useState } from "react";
 import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
 import useCurrentRun from "../../../hooks/useCurrentRun";
@@ -15,6 +16,21 @@ const BottomBar = () => {
   const [backgroundToggleOn] = useReplicant<boolean>("backgroundToggleOn", {
     defaultValue: false,
   });
+  const [runnerBoxContentIndex, setRunnerBoxContentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if ("startViewTransition" in document) {
+        (document as Document).startViewTransition(() => {
+          setRunnerBoxContentIndex((prev) => (prev + 1) % 2);
+        });
+      } else {
+        setRunnerBoxContentIndex((prev) => (prev + 1) % 2);
+      }
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const player1 = currentRun?.teams[0]?.players[0];
   const player2 = currentRun?.teams[1]?.players[0];
@@ -45,6 +61,7 @@ const BottomBar = () => {
             runner
             pronouns={player1?.pronouns}
             name={player1?.name ?? ""}
+            visibleListItem={runnerBoxContentIndex}
           />
         </div>
 
@@ -58,6 +75,7 @@ const BottomBar = () => {
               name={runner.name}
               twitch={runner.twitch}
               bluesky={runner.bluesky}
+              visibleListItem={runnerBoxContentIndex}
             />
           ))}
         </div>
@@ -69,6 +87,7 @@ const BottomBar = () => {
             runner
             pronouns={player2?.pronouns}
             name={player2?.name ?? ""}
+            visibleListItem={0}
           />
         </div>
       </div>
