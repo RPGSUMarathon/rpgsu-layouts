@@ -6,6 +6,7 @@ import useCurrentRun from "../../../hooks/useCurrentRun";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import backgroundImage from "../../img/offline2026/offline-background.png";
 import { NoCamera } from "../NoCamera";
+import Logo from "../../img/logo-intermission.png"
 
 export const Sidebar = () => {
   const currentRun = useCurrentRun();
@@ -33,7 +34,10 @@ export const Sidebar = () => {
   const player = currentRun?.teams[0]?.players[0];
 
   return (
-    <div className="flex h-222.5 theme-border-box bg-(--color-world-bg)">
+    <div className="flex h-222.5 theme-border-box bg-(--color-world-bg)/90">
+      <div className="absolute bottom-[100px] left-[70px]">
+        <img src={Logo} />
+      </div>
       <div
         className="flex flex-col w-112.5 h-full  theme-border-r"
         style={{

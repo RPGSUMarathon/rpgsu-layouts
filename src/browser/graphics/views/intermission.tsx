@@ -13,6 +13,7 @@ import {
   UpcomingRunContainer,
 } from "../components/OfflineEvent/UpcomingRunContainer";
 import { ThemeProvider } from "../components/theme-provider";
+import Logo from "../img/logo-intermission.png"
 
 const Intermission = () => {
   const currentRun = useCurrentRun();
@@ -32,6 +33,9 @@ const Intermission = () => {
       className=""
       style={{ backgroundImage: `` }}
     >
+      <div className="absolute top-0 left-0">
+        <img src={Logo} />
+      </div>
       <div className="flex flex-row">
         <div className="w-full h-[520px] flex flex-col">
           <BossCounterContainer currentRunId={currentRun?.id ?? "No ID"} />
