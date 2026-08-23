@@ -5,19 +5,32 @@ import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
 
 const Checklist = () => {
-  const checklist = [
-    "Run a 3 minute ad",
-    "*Coming Up* run matches with run being set up",
-    "Move runners and commentators to the LIVE channel",
-    "Add commentators names, twitch/social media accounts and pronouns, if relevant",
-    "Check that the runner is live",
+  // const onlineChecklist = [
+  //   "Run a 3 minute ad",
+  //   "*Coming Up* run matches with run being set up",
+  //   "Move runners and commentators to the LIVE channel",
+  //   "Add commentators names, twitch/social media accounts and pronouns, if relevant",
+  //   "Check that the runner is live",
+  //   "Check cropping",
+  //   "Balance audio",
+  //   "Update Twitch commands",
+  //   "Transition to the run",
+  // ];
+
+  const offlineChecklist = [
+    "Welcome runner and setup console/PC game",
+    "Distribute the headsets",
+    "Coming Up run matches with run being set up.",
+    "Add commentators names, twitch/social media accounts and pronouns.",
     "Check cropping",
     "Balance audio",
     "Update Twitch commands",
     "Transition to the run",
   ];
 
-  const [checkedItems, setCheckedItems] = useState(checklist.map(() => false));
+  const [checkedItems, setCheckedItems] = useState(
+    offlineChecklist.map(() => false),
+  );
 
   const toggleItem = (index: number) => {
     setCheckedItems((prev) =>
@@ -28,7 +41,7 @@ const Checklist = () => {
   return (
     <DashboardThemeProvider>
       <FormGroup>
-        {checklist.map((item, index) => (
+        {offlineChecklist.map((item, index) => (
           <FormControlLabel
             key={item}
             control={<Checkbox checked={checkedItems[index]} />}
