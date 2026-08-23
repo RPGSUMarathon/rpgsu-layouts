@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { type RunData } from "speedcontrol/src/types";
 import { type Timer } from "speedcontrol/src/types/schemas";
 import useCurrentObsScene from "../hooks/useCurrentObsScene";
+import useCurrentRun from "../hooks/useCurrentRun";
 import useNextRun from "../hooks/useNextRun";
 import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
@@ -23,16 +24,20 @@ const Paragraph = styled("p")(({ theme }) => ({
 
 export const NextRun = () => {
   const currentObsScene = useCurrentObsScene();
+  const currentRun = useCurrentRun();
   const nextRun = useNextRun();
 
   const [timer] = useReplicant<Timer | undefined>("timer", {
     bundle: "nodecg-speedcontrol",
   });
-  const [_, setWorld] = useReplicant<string>("currentWorld", {
+  const [currentWorld, setWorld] = useReplicant<string>("currentWorld", {
     defaultValue: "1",
   });
 
   const nextRunGameName = useMemo(() => getNextRunGameName(nextRun), [nextRun]);
+
+  const currentRunIsCutscene =
+    (currentRun?.customData?.layout ?? "").includes("Cutscene") ?? false;
 
   const disableChange =
     (timer && ["running", "paused"].includes(timer.state)) ??
@@ -41,34 +46,67 @@ export const NextRun = () => {
   return (
     <DashboardThemeProvider>
       <Stack spacing={2}>
+        <h2>Current Scene: {currentObsScene}</h2>
         <Button
           variant="contained"
           fullWidth
-          disabled={disableChange ?? !nextRun}
+          disabled={!nextRun}
           onClick={() => {
-            console.log(`Next Game: ${nextRunGameName}`);
-            if ((nextRun?.customData.layout ?? "1").includes("Cutscene")) {
-              void nodecg.sendMessage(
-                "switchToNextWorld",
-                nextRun?.customData.layout,
-              );
-              setWorld(nextRun?.customData.world ?? "1");
-            } else if (nextRun) {
+            if (nextRun) {
               void nodecg.sendMessage("switchToIntermissionWithAnimation");
             }
           }}
         >
-          <span>Switch to Intermission</span>
+          <span>Transition to Intermission</span>
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          disabled={(disableChange || currentRunIsCutscene) ?? !nextRun}
+          onClick={() => {
+            void nodecg.sendMessage("switchToGame");
+          }}
+        >
+          <span>Transition to Game</span>
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          disabled={
+            (disableChange ||
+              !currentRunIsCutscene ||
+              currentObsScene.includes("Cutscene")) ??
+            !nextRun
+          }
+          onClick={() => {
+            console.log(nextRun?.customData?.layout);
+            if (currentRun?.customData?.layout != null) {
+              void nodecg.sendMessage(
+                "switchToCutscene",
+                currentRun?.customData?.layout,
+              );
+
+              if (currentWorld !== (nextRun?.customData?.world ?? "1")) {
+                setWorld(nextRun?.customData?.world ?? "1");
+                void nodecg.sendMessage(
+                  "switchToNextWorld",
+                  nextRun?.customData?.world,
+                );
+              }
+            }
+          }}
+        >
+          <span>Transition to Cutscene</span>
         </Button>
         <Button
           variant="contained"
           fullWidth
           disabled={disableChange ?? !nextRun}
           onClick={() => {
-            void nodecg.sendMessage("switchToGame");
+            void nodecg.sendMessage("switchToTechIssues");
           }}
         >
-          <span>Switch to Game</span>
+          <span>Transition to Tech Issues</span>
         </Button>
         {disableChange && (
           <Alert variant="filled" severity="error">

@@ -138,11 +138,10 @@ if (config.enabled) {
     console.log("Changing to game");
 
     void obs.changeToGame().then(() => {
-      nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
-      nodecg.sendMessageToBundle(
-        "playbackStop",
-        "nodecg-foobar2000-controller",
-      );
+      // nodecg.sendMessageToBundle(
+      //   "playbackStop",
+      //   "nodecg-foobar2000-controller",
+      // );
     });
   });
 
@@ -152,6 +151,7 @@ if (config.enabled) {
     console.log("Changing to intermission with animation");
 
     void obs.changeToIntermission().then(() => {
+      nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
       // nodecg.sendMessageToBundle(
       //   "playbackStart",
       //   "nodecg-foobar2000-controller",
@@ -159,25 +159,26 @@ if (config.enabled) {
     });
   });
 
+  nodecg.listenFor("switchToCutscene", (value) => {
+    console.log(`Changing to cutscene ${value}.`);
+    void obs.changeScene(value);
+  });
+
+  nodecg.listenFor("switchToTechIssues", () => {
+    void obs.changeScene("Tech Issues");
+  });
+
   nodecg.listenFor("switchToNextWorld", (value) => {
-    console.log(`Changing to cutscene for World ${value}.`);
+    const nextWorld = worlds.find((world) => world.id === value);
 
-    //Updating animation - if somehow the array returns an invalid world, it *will* crash the layouts
-    void obs.changeSource("Animation", worlds[value]?.label ?? "Forest", true);
+    console.log(`Changing to World ${value}: ${nextWorld?.label}.`);
 
-    void obs.changeToNextWorld(value).then(() => {
-      worlds.forEach((world) => {
-        if (world.label !== value) {
-          void obs.changeSource("Animation", world.label, false);
-        }
-      });
-      //Needs to advance twice, once to skip the world, other to go to the run. Probably smarter way to do this lol
-      nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
-      nodecg.sendMessageToBundle(
-        "playbackStart",
-        "nodecg-foobar2000-controller",
-      );
-      nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
+    void obs.changeSource("Animation", nextWorld?.label ?? "Forest", true);
+
+    worlds.forEach((world) => {
+      if (world.label !== value) {
+        void obs.changeSource("Animation", world.label, false);
+      }
     });
   });
 
