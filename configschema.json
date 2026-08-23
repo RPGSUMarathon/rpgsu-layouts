@@ -39,6 +39,10 @@
             "cutscene": {
               "type": "string",
               "default": "Cutscene"
+            },
+            "techissues": {
+              "type": "string",
+              "default": "Tech Issues"
             }
           },
           "additionalProperties": false

@@ -1,7 +1,5 @@
 import { Alert, Button, Stack, styled } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
-import { useMemo } from "react";
-import { type RunData } from "speedcontrol/src/types";
 import { type Timer } from "speedcontrol/src/types/schemas";
 import useCurrentObsScene from "../hooks/useCurrentObsScene";
 import useCurrentRun from "../hooks/useCurrentRun";
@@ -10,13 +8,8 @@ import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
 
 const intermissionSceneName = nodecg.bundleConfig.obs.scenes?.intermission;
-
-const getNextRunGameName = (run?: RunData) => {
-  if (run && run.game) {
-    return `${run.game.slice(0, 35)}${run.game.length > 35 ? "..." : ""}`;
-  }
-  return "Break";
-};
+const cutsceneSceneName = nodecg.bundleConfig.obs.scenes?.cutscene;
+const gameSceneName = nodecg.bundleConfig.obs.scenes?.game;
 
 const Paragraph = styled("p")(({ theme }) => ({
   ...theme.typography.button,
@@ -34,8 +27,6 @@ export const NextRun = () => {
     defaultValue: "1",
   });
 
-  const nextRunGameName = useMemo(() => getNextRunGameName(nextRun), [nextRun]);
-
   const currentRunIsCutscene =
     (currentRun?.customData?.layout ?? "").includes("Cutscene") ?? false;
 
@@ -47,10 +38,35 @@ export const NextRun = () => {
     <DashboardThemeProvider>
       <Stack spacing={2}>
         <h2>Current Scene: {currentObsScene}</h2>
+        <details>
+          <summary>
+            <i>Explanation</i>
+          </summary>
+          <p>
+            All the transition buttons are deactivated when the timer is
+            ongoing.
+          </p>
+          <p>
+            To Intermission is deactivated when in the intermission screen and
+            To Game is deactivated when in the game screen
+          </p>
+          <p>
+            When the next run is a cutscene, only the cutscene button is
+            activated. This changes to the correct cutscene automatically. Once
+            in that scene, all the other buttons become active again.
+          </p>
+          <p>Emergency transition to Tech Issues is active at all times.</p>
+        </details>
         <Button
           variant="contained"
           fullWidth
-          disabled={!nextRun}
+          disabled={
+            disableChange ||
+            (currentRunIsCutscene &&
+              !currentObsScene.includes(cutsceneSceneName ?? "")) ||
+            currentObsScene === intermissionSceneName ||
+            !nextRun
+          }
           onClick={() => {
             if (nextRun) {
               void nodecg.sendMessage("switchToIntermissionWithAnimation");
@@ -62,7 +78,11 @@ export const NextRun = () => {
         <Button
           variant="contained"
           fullWidth
-          disabled={(disableChange || currentRunIsCutscene) ?? !nextRun}
+          disabled={
+            currentObsScene === gameSceneName ||
+            (currentRunIsCutscene &&
+              !currentObsScene.includes(cutsceneSceneName ?? ""))
+          }
           onClick={() => {
             void nodecg.sendMessage("switchToGame");
           }}
@@ -75,7 +95,7 @@ export const NextRun = () => {
           disabled={
             (disableChange ||
               !currentRunIsCutscene ||
-              currentObsScene.includes("Cutscene")) ??
+              currentObsScene.includes(cutsceneSceneName ?? "")) ??
             !nextRun
           }
           onClick={() => {
@@ -101,7 +121,6 @@ export const NextRun = () => {
         <Button
           variant="contained"
           fullWidth
-          disabled={disableChange ?? !nextRun}
           onClick={() => {
             void nodecg.sendMessage("switchToTechIssues");
           }}

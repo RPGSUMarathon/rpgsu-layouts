@@ -42,7 +42,7 @@ const Intermission = () => {
           <IntermissionInfoContainer />
           <MusicPlayerContainer />
         </div>
-        <div className="h-full w-[892px] flex flex-col ">
+        <div className="h-full w-[892px] flex flex-col bg-(--color-world-bg)">
           {currentRun && <RunContainer index={0} runData={currentRun} />}
           {upcomingRuns && upcomingRuns.length > 0 && (
             <>

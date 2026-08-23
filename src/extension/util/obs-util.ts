@@ -30,8 +30,6 @@ export class OBSUtility extends obsWebsocketJs {
     });
 
     this.on("CurrentProgramSceneChanged", (data) => {
-      if (data.sceneName === this.currentScene) return;
-
       this.currentSceneReplicant.value = data.sceneName;
     });
 
