@@ -26,19 +26,20 @@ const channelNameToId = Object.entries(channelIdToName).reduce(
 );
 
 if (config?.enabled) {
+  const settings = {
+    type: "udp4",
+    open: {
+      host: "0.0.0.0",
+      port: 41234,
+      exclusive: true,
+    },
+    send: {
+      host: config.address,
+      port: config.port,
+    },
+  };
   const osc = new OSC({
-    plugin: new OSC.DatagramPlugin({
-      type: "udp4",
-      open: {
-        host: "0.0.0.0",
-        port: 41235,
-        exclusive: true,
-      },
-      send: {
-        host: config.address,
-        port: config.port,
-      },
-    }),
+    plugin: new OSC.DatagramPlugin(settings),
   });
 
   log.info(`Connecting to Mixer`);
@@ -49,22 +50,18 @@ if (config?.enabled) {
     osc!.send(xinfo);
   });
 
-  osc.on("error", (message: any) => {
+  osc.on("error", (message: never) => {
     log.error(message);
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   osc.on("/xinfo", function (message: any) {
     log.info(`Connected to mixer: ${message.args}`);
   });
 
-  nodecg.listenFor("testmute", () => {
-    log.info(`Heard message. Muting now`);
-    onIntermission();
-  });
-
   function muteChannel(channelName: string, mute: boolean) {
     const channelId = channelNameToId[channelName];
-    if (channelId == undefined) {
+    if (channelId === undefined) {
       log.error(`Can't find channel ${channelName}`);
       return;
     }
@@ -107,4 +104,10 @@ if (config?.enabled) {
     }
     muteChannel("Playlist", true);
   }
+
+  nodecg.listenFor("testmute", () => {
+    log.info(`Heard message. Muting now`);
+    onIntermission();
+    onGame();
+  });
 }
