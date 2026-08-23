@@ -39,7 +39,8 @@
     "react-is": "18.2.0",
     "react-toastify": "^11.1.0",
     "tailwindcss": "^4.1.12",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "osc-js": "2.4.1"
   },
   "devDependencies": {
     "@rpgsu/lint-config": "^1.0.1",
