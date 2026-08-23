@@ -69,6 +69,7 @@ runDataActiveRun.on(
           layoutCode !== currentGameLayout.value
         ) {
           currentGameLayout.value = layoutCode;
+          nodecg.sendMessage("updateSourcePosition", layoutCode);
           nodecg.log.info("Updated layout to %s", layoutCode);
         } else {
           nodecg.log.debug(

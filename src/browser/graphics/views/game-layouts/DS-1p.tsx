@@ -44,7 +44,7 @@ const CenterDS = () => {
           </div>
         )}
         <div
-          className="h-54 bg-(--color-world-bg)"
+          className="h-54 bg-(--color-world-bg)/90"
           style={{
             backgroundImage: backgroundToggleOn
               ? `url(${backgroundImage})`
