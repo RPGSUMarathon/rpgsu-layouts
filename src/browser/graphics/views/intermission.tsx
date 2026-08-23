@@ -33,14 +33,9 @@ const Intermission = () => {
       style={{ backgroundImage: `` }}
     >
       <div className="flex flex-row">
-        <div className="w-[395px] h-[520px] bg-(--color-panel-dark) box2" />
-        <div className="w-[1490px] h-[520px] flex flex-col">
-          <div className="w-full h-[50px] bg-(--color-panel-dark) box2 text-center">
-            <span className="engraved">RPGSU OFFLINE 2026</span>
-          </div>
+        <div className="w-full h-[520px] flex flex-col">
           <BossCounterContainer currentRunId={currentRun?.id ?? "No ID"} />
         </div>
-        <div className="w-[395px] h-[520px] bg-(--color-panel-dark) box2-inverted" />
       </div>
       <div className="bottom-[60px] h-[500px] w-full absolute flex flex-row bg-black space-x-1 ">
         <div className="h-full w-[500px] space-y-1 ">
