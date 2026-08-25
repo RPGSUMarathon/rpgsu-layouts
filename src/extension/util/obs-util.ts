@@ -36,15 +36,17 @@ export class OBSUtility extends obsWebsocketJs {
     this.on("SceneTransitionVideoEnded", (data) => {
       //The boss defeated fade animation plays after a run is done, i.e a boss. When a cutscene finishes playing, it goes back to intermission, triggering the same stinger, but we don't want the animation to play on the boss counter.
       if (data.transitionName === "ToIntermission") {
-        if(!this.currentScene.includes("Cutscene")){
+        if (!this.currentScene.includes("Cutscene")) {
           bossDefeatedAnimation.value = true;
 
           setTimeout(() => {
             bossDefeatedAnimation.value = false;
-            nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
+            nodecg.sendMessageToBundle(
+              "changeToNextRun",
+              "nodecg-speedcontrol",
+            );
           }, 1700);
-        }
-        else{
+        } else {
           nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
         }
       }

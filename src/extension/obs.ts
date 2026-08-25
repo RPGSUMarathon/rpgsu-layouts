@@ -163,20 +163,44 @@ if (config.enabled) {
     void obs.changeScene(value);
 
     // Ary and Elly walking animation is replaced for fighting scene
-    if(value === "Cutscene 6"){
-      void obs.changeSource("Characters Animation", "Ary, Elly and Sumio", true);
-      void obs.changeSource("Characters Animation", "Ary and Elly Walking Left", false);
-      void obs.changeSource("Characters Animation", "Ary and Cat Elly Running", false);
+    if (value === "Cutscene 6") {
+      void obs.changeSource(
+        "Characters Animation",
+        "Ary, Elly and Sumio",
+        true,
+      );
+      void obs.changeSource(
+        "Characters Animation",
+        "Ary and Elly Walking Left",
+        false,
+      );
+      void obs.changeSource(
+        "Characters Animation",
+        "Ary and Cat Elly Running",
+        false,
+      );
 
       void obs.changeSource("Animation", "Desert", false);
       void obs.changeSource("Animation", "Fight", true);
     }
 
     // Ary and Elly walking animation is replaced for walking back
-    if(value === "Cutscene 7"){
-      void obs.changeSource("Characters Animation", "Ary, Elly and Sumio", false);
-      void obs.changeSource("Characters Animation", "Ary and Elly Walking Left", true);
-      void obs.changeSource("Characters Animation", "Ary and Cat Elly Running", false);
+    if (value === "Cutscene 7") {
+      void obs.changeSource(
+        "Characters Animation",
+        "Ary, Elly and Sumio",
+        false,
+      );
+      void obs.changeSource(
+        "Characters Animation",
+        "Ary and Elly Walking Left",
+        true,
+      );
+      void obs.changeSource(
+        "Characters Animation",
+        "Ary and Cat Elly Running",
+        false,
+      );
 
       void obs.changeSource("Animation", "Fight", false);
       void obs.changeSource("Animation", "Desert Reversed", true);
@@ -189,7 +213,7 @@ if (config.enabled) {
         "playbackStart",
         "nodecg-foobar2000-controller",
       );
-    });;
+    });
   });
 
   nodecg.listenFor("switchToNextWorld", (value) => {
@@ -199,12 +223,20 @@ if (config.enabled) {
 
     void obs.changeSource("Animation", nextWorld?.label ?? "Forest", true);
 
-    void obs.changeSource("Tech Issues", nextWorld?.tiName ?? "Forest TI", true);
+    void obs.changeSource(
+      "Tech Issues",
+      nextWorld?.tiName ?? "Forest TI",
+      true,
+    );
 
     worlds.forEach((world) => {
       if (world.label !== nextWorld?.label) {
         void obs.changeSource("Animation", world.label, false);
-        void obs.changeSource("Tech Issues", world.tiName ?? "Forest TI", false);
+        void obs.changeSource(
+          "Tech Issues",
+          world.tiName ?? "Forest TI",
+          false,
+        );
       }
     });
   });

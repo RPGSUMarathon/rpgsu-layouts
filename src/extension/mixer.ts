@@ -105,9 +105,13 @@ if (config?.enabled) {
     muteChannel("Playlist", true);
   }
 
-  nodecg.listenFor("testmute", () => {
-    log.info(`Heard message. Muting now`);
+  nodecg.listenFor("switchToIntermissionWithAnimation", () => {
+    log.info(`Muting channels going into intermission`);
     onIntermission();
+  });
+
+  nodecg.listenFor("switchToGame", () => {
+    log.info(`Unmuting channels going into game`);
     onGame();
   });
 }
