@@ -136,6 +136,12 @@
         "title": "Countdown",
         "width": 3,
         "workspace": "Scene Editing"
+      },
+      {
+        "file": "timestamps.html",
+        "name": "timestamps",
+        "title": "Timestamps",
+        "width": 2
       }
     ],
     "graphics": [
