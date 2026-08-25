@@ -1,4 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { motion } from "motion/react";
 import useCommentators from "../../../browser/hooks/useCommentators";
 import useCurrentRun from "../../hooks/useCurrentRun";
 import useUpcomingRuns from "../../hooks/useUpcomingRuns";
@@ -13,7 +14,7 @@ import {
   UpcomingRunContainer,
 } from "../components/OfflineEvent/UpcomingRunContainer";
 import { ThemeProvider } from "../components/theme-provider";
-import Logo from "../img/logo-intermission.png"
+import Logo from "../img/logo-intermission.png";
 
 const Intermission = () => {
   const currentRun = useCurrentRun();
@@ -72,12 +73,24 @@ const Intermission = () => {
             {commentators.length > 0 && (
               <div className="w-full space-y-2 px-3 overflow-y-hidden">
                 {commentators.map((runner) => (
-                  <DonationContainer
+                  <motion.div
                     key={runner.id}
-                    name={runner.name}
-                    amount="9999"
-                    message={exampleDonation}
-                  />
+                    layout
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      layout: { duration: 0.3 },
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 20,
+                    }}
+                  >
+                    <DonationContainer
+                      name={runner.name}
+                      amount="9999"
+                      message={exampleDonation}
+                    />
+                  </motion.div>
                 ))}
               </div>
             )}
