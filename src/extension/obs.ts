@@ -132,12 +132,12 @@ if (config.enabled) {
     });
   });
 
-  nodecg.listenFor("switchToGame", () => {
+  nodecg.listenFor("switchToGame", (value) => {
     if (obs.currentScene === config.scenes!.game) return;
 
     console.log("Changing to game");
 
-    void obs.changeToGame().then(() => {
+    void obs.changeToGame(value).then(() => {
       // nodecg.sendMessageToBundle(
       //   "playbackStop",
       //   "nodecg-foobar2000-controller",

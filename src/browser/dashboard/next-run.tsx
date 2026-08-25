@@ -1,6 +1,7 @@
 import { Alert, Button, Stack, styled } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
 import { type Timer } from "speedcontrol/src/types/schemas";
+import { Helpers } from "../helpers";
 import useCurrentObsScene from "../hooks/useCurrentObsScene";
 import useCurrentRun from "../hooks/useCurrentRun";
 import useNextRun from "../hooks/useNextRun";
@@ -118,12 +119,18 @@ export const NextRun = () => {
               !currentObsScene.includes(cutsceneSceneName ?? ""))
           }
           onClick={() => {
-            onAddStartTimestamp(
-              currentRun?.id ?? "",
-              currentRun?.game ?? "",
-              Date.now(),
-            );
-            void nodecg.sendMessage("switchToGame");
+            if (currentRun) {
+              onAddStartTimestamp(
+                currentRun.id ?? "",
+                currentRun.game ?? "",
+                Date.now(),
+              );
+              const runnerName = Helpers.formatPlayers(currentRun);
+              void nodecg.sendMessage(
+                "switchToGame",
+                `${currentRun?.game} by ${runnerName}`,
+              );
+            }
           }}
         >
           <span>Transition to Game</span>

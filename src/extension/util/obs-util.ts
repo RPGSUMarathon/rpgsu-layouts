@@ -129,10 +129,11 @@ export class OBSUtility extends obsWebsocketJs {
     }
   }
 
-  async changeToGame() {
+  async changeToGame(recordingName: string) {
     try {
       await this.changeScene(this.config.scenes?.game ?? "Game");
-      await this.startRecording();
+
+      await this.startRecording(recordingName);
       commentators.value = [];
     } catch (err) {
       this.log.warn(`Error switching to game ${err}`);
@@ -157,9 +158,17 @@ export class OBSUtility extends obsWebsocketJs {
     }
   }
 
-  async startRecording() {
+  async startRecording(recordingName: string) {
     try {
       if (this.isRecording) return;
+      const filename = `RPGSU Offline 2026 - ${recordingName} - %CCYY-%MM-%DD_%hh-%mm-%ss`;
+
+      await this.call("SetProfileParameter", {
+        parameterCategory: "Output",
+        parameterName: "FilenameFormatting",
+        parameterValue: filename,
+      });
+
       await this.call("StartRecord");
       this.isRecording = true;
       console.log("Starting recording...");
