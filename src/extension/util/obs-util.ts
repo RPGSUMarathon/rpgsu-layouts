@@ -122,7 +122,6 @@ export class OBSUtility extends obsWebsocketJs {
       await this.changeScene(
         this.config.scenes?.intermission ?? "Intermission",
       );
-      await this.enableStudioMode();
       await this.stopRecording();
       commentators.value = [];
     } catch (err) {

@@ -26,6 +26,9 @@ export const NextRun = () => {
   const [currentWorld, setWorld] = useReplicant<string>("currentWorld", {
     defaultValue: "1",
   });
+  const [timestamps, setTimestamps] = useReplicant<Timestamp[]>("timestamps", {
+    defaultValue: [],
+  });
 
   const currentRunIsCutscene =
     (currentRun?.customData?.layout ?? "").includes("Cutscene") ?? false;
@@ -33,6 +36,36 @@ export const NextRun = () => {
   const disableChange =
     (timer && ["running", "paused"].includes(timer.state)) ??
     currentObsScene === intermissionSceneName;
+
+  const onAddStartTimestamp = (id: string, name: string, start: number) => {
+    const current = timestamps ?? [];
+    const previous = current[current.length - 1];
+
+    const timestamp: Timestamp = {
+      id,
+      name,
+      start,
+      end: null,
+      setup: previous?.end != null ? start - previous.end : null,
+    };
+
+    console.log(timestamp);
+
+    setTimestamps([...current, timestamp]);
+  };
+
+  const onAddEndTimestamp = (id: string, end: number) => {
+    const newTimestamps = (timestamps ?? []).map((timestamp) =>
+      timestamp.id === id
+        ? {
+            ...timestamp,
+            end,
+          }
+        : timestamp,
+    );
+
+    setTimestamps(newTimestamps);
+  };
 
   return (
     <DashboardThemeProvider>
@@ -69,6 +102,7 @@ export const NextRun = () => {
           }
           onClick={() => {
             if (nextRun) {
+              onAddEndTimestamp(currentRun?.id ?? "", Date.now());
               void nodecg.sendMessage("switchToIntermissionWithAnimation");
             }
           }}
@@ -84,6 +118,11 @@ export const NextRun = () => {
               !currentObsScene.includes(cutsceneSceneName ?? ""))
           }
           onClick={() => {
+            onAddStartTimestamp(
+              currentRun?.id ?? "",
+              currentRun?.game ?? "",
+              Date.now(),
+            );
             void nodecg.sendMessage("switchToGame");
           }}
         >
@@ -122,6 +161,7 @@ export const NextRun = () => {
           variant="contained"
           fullWidth
           onClick={() => {
+            console.log(timestamps);
             void nodecg.sendMessage("switchToTechIssues");
           }}
         >

@@ -125,10 +125,10 @@ if (config.enabled) {
 
     void obs.changeToIntermission().then(() => {
       nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
-      nodecg.sendMessageToBundle(
-        "playbackStart",
-        "nodecg-foobar2000-controller",
-      );
+      // nodecg.sendMessageToBundle(
+      //   "playbackStart",
+      //   "nodecg-foobar2000-controller",
+      // );
     });
   });
 
@@ -138,10 +138,10 @@ if (config.enabled) {
     console.log("Changing to game");
 
     void obs.changeToGame().then(() => {
-      nodecg.sendMessageToBundle(
-        "playbackStop",
-        "nodecg-foobar2000-controller",
-      );
+      // nodecg.sendMessageToBundle(
+      //   "playbackStop",
+      //   "nodecg-foobar2000-controller",
+      // );
     });
   });
 
@@ -151,10 +151,10 @@ if (config.enabled) {
     console.log("Changing to intermission with animation");
 
     void obs.changeToIntermission().then(() => {
-      nodecg.sendMessageToBundle(
-        "playbackStart",
-        "nodecg-foobar2000-controller",
-      );
+      // nodecg.sendMessageToBundle(
+      //   "playbackStart",
+      //   "nodecg-foobar2000-controller",
+      // );
     });
   });
 

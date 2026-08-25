@@ -4,9 +4,9 @@ import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
 import useCurrentRun from "../../../hooks/useCurrentRun";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
+import Logo from "../../img/logo-intermission.png";
 import backgroundImage from "../../img/offline2026/offline-background.png";
 import { NoCamera } from "../NoCamera";
-import Logo from "../../img/logo-intermission.png"
 
 export const Sidebar = () => {
   const currentRun = useCurrentRun();

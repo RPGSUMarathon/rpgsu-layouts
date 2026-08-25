@@ -14,3 +14,5 @@ export const commentators = nodecg.Replicant<Commentator[]>("commentators", {
 export const bossDefeatedAnimation = nodecg.Replicant<boolean>(
   "bossDefeatedAnimation",
 );
+
+export const timestamps = nodecg.Replicant<Timestamp[]>("timestamps");
