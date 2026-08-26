@@ -1,5 +1,13 @@
-import { Alert, Button, Stack, styled } from "@mui/material";
+import {
+  Alert,
+  Button,
+  IconButton,
+  Stack,
+  styled,
+  Tooltip,
+} from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
+import { useState } from "react";
 import { type Timer } from "speedcontrol/src/types/schemas";
 import { Helpers } from "../helpers";
 import useCurrentObsScene from "../hooks/useCurrentObsScene";
@@ -20,7 +28,7 @@ export const NextRun = () => {
   const currentObsScene = useCurrentObsScene();
   const currentRun = useCurrentRun();
   const nextRun = useNextRun();
-
+  const [forceEnableAll, setForceEnableAll] = useState(false);
   const [timer] = useReplicant<Timer | undefined>("timer", {
     bundle: "nodecg-speedcontrol",
   });
@@ -31,12 +39,32 @@ export const NextRun = () => {
     defaultValue: [],
   });
 
-  const currentRunIsCutscene =
-    (currentRun?.customData?.layout ?? "").includes("Cutscene") ?? false;
+  const isTimerActive = timer?.state === "running" || timer?.state === "paused";
 
-  const disableChange =
-    (timer && ["running", "paused"].includes(timer.state)) ??
-    currentObsScene === intermissionSceneName;
+  const isIntermissionScene = currentObsScene === intermissionSceneName;
+
+  const isGameScene = currentObsScene === gameSceneName;
+
+  const isCutsceneScene =
+    currentObsScene?.includes(cutsceneSceneName ?? "") ?? false;
+
+  const currentRunIsCutscene = (currentRun?.customData?.layout ?? "").includes(
+    "Cutscene",
+  );
+
+  const cutsceneTransitionPending = currentRunIsCutscene && !isCutsceneScene;
+
+  const buttonDisabled = {
+    intermission:
+      !forceEnableAll &&
+      (isTimerActive || isIntermissionScene || cutsceneTransitionPending),
+
+    game: !forceEnableAll && (isGameScene || cutsceneTransitionPending),
+
+    cutscene: !forceEnableAll && (!currentRunIsCutscene || isCutsceneScene),
+
+    techIssues: false,
+  };
 
   const onAddStartTimestamp = (id: string, name: string, start: number) => {
     const current = timestamps ?? [];
@@ -72,6 +100,28 @@ export const NextRun = () => {
     <DashboardThemeProvider>
       <Stack spacing={2}>
         <h2>Current Scene: {currentObsScene}</h2>
+        <Stack direction="row" justifyContent="flex-end">
+          <Tooltip
+            title={
+              forceEnableAll
+                ? "Disable force enable"
+                : "Force enable all buttons"
+            }
+          >
+            <IconButton
+              size="small"
+              color={forceEnableAll ? "warning" : "default"}
+              onClick={() => setForceEnableAll((enabled) => !enabled)}
+              aria-label={
+                forceEnableAll
+                  ? "Disable force enable"
+                  : "Force enable all buttons"
+              }
+            >
+              {forceEnableAll ? <span>Lock</span> : <span>Unlock</span>}
+            </IconButton>
+          </Tooltip>
+        </Stack>
         <details>
           <summary>
             <i>Explanation</i>
@@ -94,13 +144,7 @@ export const NextRun = () => {
         <Button
           variant="contained"
           fullWidth
-          disabled={
-            disableChange ||
-            (currentRunIsCutscene &&
-              !currentObsScene.includes(cutsceneSceneName ?? "")) ||
-            currentObsScene === intermissionSceneName ||
-            !nextRun
-          }
+          disabled={buttonDisabled.intermission}
           onClick={() => {
             if (nextRun) {
               onAddEndTimestamp(currentRun?.id ?? "", Date.now());
@@ -113,11 +157,7 @@ export const NextRun = () => {
         <Button
           variant="contained"
           fullWidth
-          disabled={
-            currentObsScene === gameSceneName ||
-            (currentRunIsCutscene &&
-              !currentObsScene.includes(cutsceneSceneName ?? ""))
-          }
+          disabled={buttonDisabled.game}
           onClick={() => {
             if (currentRun) {
               onAddStartTimestamp(
@@ -138,12 +178,7 @@ export const NextRun = () => {
         <Button
           variant="contained"
           fullWidth
-          disabled={
-            (disableChange ||
-              !currentRunIsCutscene ||
-              currentObsScene.includes(cutsceneSceneName ?? "")) ??
-            !nextRun
-          }
+          disabled={buttonDisabled.cutscene}
           onClick={() => {
             console.log(nextRun?.customData?.layout);
             if (currentRun?.customData?.layout != null) {
@@ -167,6 +202,7 @@ export const NextRun = () => {
         <Button
           variant="contained"
           fullWidth
+          disabled={buttonDisabled.techIssues}
           onClick={() => {
             console.log(timestamps);
             void nodecg.sendMessage("switchToTechIssues");
@@ -174,7 +210,7 @@ export const NextRun = () => {
         >
           <span>Transition to Tech Issues</span>
         </Button>
-        {disableChange && (
+        {isTimerActive && (
           <Alert variant="filled" severity="error">
             <Paragraph>Be Warned</Paragraph>
             <h2>
