@@ -73,6 +73,7 @@ if (config?.enabled) {
     osc!.send(command);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function onIntermission() {
     const channelsToMute = [
       "Game PC",
@@ -90,6 +91,7 @@ if (config?.enabled) {
     muteChannel("Playlist", false);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function onGame() {
     const channelsToUnmute = [
       "Game PC",
@@ -105,13 +107,25 @@ if (config?.enabled) {
     muteChannel("Playlist", true);
   }
 
+  function onIntermissionDCA() {
+    log.debug(`Muting LIVE DCA, unmuting Playlist DCA`);
+    osc!.send(new OSC.Message(`/dca/1/mix/on`, false));
+    osc!.send(new OSC.Message(`/dca/2/mix/on`, true));
+  }
+
+  function onGameDCA() {
+    log.debug(`Muting Playlist DCA, unmuting LIVE DCA`);
+    osc!.send(new OSC.Message(`/dca/1/mix/on`, true));
+    osc!.send(new OSC.Message(`/dca/2/mix/on`, false));
+  }
+
   nodecg.listenFor("switchToIntermissionWithAnimation", () => {
     log.info(`Muting channels going into intermission`);
-    onIntermission();
+    onIntermissionDCA();
   });
 
   nodecg.listenFor("switchToGame", () => {
     log.info(`Unmuting channels going into game`);
-    onGame();
+    onGameDCA();
   });
 }
