@@ -1,0 +1,18 @@
+.Toastify__close-button {
+    display: none;
+}
+
+.Toastify__toast {
+    width: 725px !important;
+    height: 123px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: white !important;
+    overflow: hidden;
+    border: 5px double black;
+}
+
+.Toastify__toast-container--top-right{
+    top: 4px !important;
+    right: 3px !important;
+}

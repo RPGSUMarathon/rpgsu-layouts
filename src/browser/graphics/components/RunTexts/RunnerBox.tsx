@@ -1,5 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
-import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import Bluesky from "../../img/icons/bluesky.png";
 import MicIcon from "../../img/icons/mic.png";
 import RunnerIcon from "../../img/icons/runner.png";
@@ -14,6 +14,7 @@ type Props = {
   runner: boolean;
   textSize?: string;
   twitch?: string;
+  visibleListItem: number;
   youtube?: string;
 };
 
@@ -26,92 +27,48 @@ export const RunnerBox = ({
   runner,
   youtube,
   bluesky,
+  visibleListItem,
 }: Props) => {
-  const [index, setIndex] = useState(0);
   const [iconToggleOn] = useReplicant<boolean>("iconToggleOn", {
     defaultValue: false,
   });
 
-  const slides = useMemo(() => {
-    const items = [];
-
-    items.push({
-      key: "name",
-      content: (
-        <span className="drop-shadow-xs drop-shadow-black ml-6">{name}</span>
-      ),
-    });
-
-    if (twitch) {
-      items.push({
-        key: "twitch",
-        content: (
-          <>
-            <img
-              className="h-6 ml-2 drop-shadow-xs drop-shadow-black"
-              src={Twitch}
-              alt="Twitch"
-            />
-            <span className="drop-shadow-xs drop-shadow-black">{twitch}</span>
-          </>
-        ),
-      });
-    }
-
-    if (youtube) {
-      items.push({
-        key: "youtube",
-        content: (
-          <>
-            <img
-              className="h-6 ml-2  drop-shadow-xs drop-shadow-black"
-              src={Youtube}
-              alt="YouTube"
-            />
-            <span className="drop-shadow-xs drop-shadow-black">{youtube}</span>
-          </>
-        ),
-      });
-    }
-
-    if (bluesky) {
-      items.push({
-        key: "bluesky",
-        content: (
-          <>
-            <img
-              className="h-6 ml-2  drop-shadow-xs drop-shadow-black"
-              src={Bluesky}
-              alt="Bluesky"
-            />
-            <span className="drop-shadow-xs drop-shadow-black">{bluesky}</span>
-          </>
-        ),
-      });
-    }
-
-    return items;
-  }, [name, twitch, youtube, bluesky]);
-
-  useEffect(() => {
-    if (slides.length <= 1) return;
-
-    const interval = setInterval(() => {
-      if ("startViewTransition" in document) {
-        (document as Document).startViewTransition(() => {
-          setIndex((prev) => (prev + 1) % slides.length);
-        });
-      } else {
-        setIndex((prev) => (prev + 1) % slides.length);
-      }
-    }, 10000);
-
-    return () => clearInterval(interval);
-  }, [slides.length]);
+  const slides = [
+    <span
+      key="runnerBoxNameRef"
+      className="drop-shadow-xs drop-shadow-black ml-6"
+    >
+      {name}
+    </span>,
+    <div key="runnerBoxTwitchRef" className="flex flex-row gap-3 items-center">
+      <img
+        className="h-6 ml-2 drop-shadow-xs drop-shadow-black"
+        src={Twitch}
+        alt="Twitch"
+      />
+      <span className="drop-shadow-xs drop-shadow-black">{twitch}</span>
+    </div>,
+    <div key="runnerBoxYoutubeRef" className="flex flex-row gap-3 items-center">
+      <img
+        className="h-6 ml-2  drop-shadow-xs drop-shadow-black"
+        src={Youtube}
+        alt="YouTube"
+      />
+      <span className="drop-shadow-xs drop-shadow-black">{youtube}</span>
+    </div>,
+    <div key="runnerBoxBluesktRef" className="flex flex-row gap-3 items-center">
+      <img
+        className="h-6 ml-2  drop-shadow-xs drop-shadow-black"
+        src={Bluesky}
+        alt="Bluesky"
+      />
+      <span className="drop-shadow-xs drop-shadow-black">{bluesky}</span>
+    </div>,
+  ];
 
   return (
     <div
-      className={`w-full h-12.5 border-b-3 border-white  relative flex items-center ${className ?? ""}`}
+      className={`w-full h-12.5 theme-border-box theme-border-b bg-(--color-world-main) relative flex items-center ${className ?? ""}`}
     >
       {pronouns && (
         <div className="absolute capitalize bottom-0 right-0 bg-black/70 text-white text-xs px-2 py-0.5">
@@ -131,9 +88,19 @@ export const RunnerBox = ({
         className={`absolute left-14 top-1.25 flex items-center gap-2 text-white drop-shadow ${
           textSize ? `text-${textSize}` : "text-2xl"
         }`}
-        style={{ viewTransitionName: "runner-content" }}
       >
-        {slides[index]?.content}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={visibleListItem}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="block w-full"
+          >
+            {slides[visibleListItem]}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

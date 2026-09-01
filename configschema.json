@@ -35,12 +35,38 @@
             "game2p": {
               "type": "string",
               "default": "Game-2p"
+            },
+            "cutscene": {
+              "type": "string",
+              "default": "Cutscene"
+            },
+            "techissues": {
+              "type": "string",
+              "default": "Tech Issues"
             }
           },
           "additionalProperties": false
         }
       },
       "additionalProperties": false,
+      "required": ["enabled"]
+    },
+    "mixer": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "address": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "default": 10024
+        }
+      },
+      "description": "Info needed to control mixer",
       "required": ["enabled"]
     }
   },

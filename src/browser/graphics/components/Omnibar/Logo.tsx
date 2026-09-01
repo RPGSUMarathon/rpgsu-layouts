@@ -1,4 +1,4 @@
-import Logo from "../../img/base-long-online-logo.png";
+import Logo from "../../img/offline2026/offline26_logo.png";
 
 export const OmnibarLogo = ({ className }: { className?: string }) => {
   return (

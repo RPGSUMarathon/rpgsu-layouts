@@ -3,6 +3,73 @@
 @tailwind components;
 @tailwind utilities;
 
+@theme{
+  --color-offline-main: #80babf;
+
+  --color-offline-info: #ddebe4;
+
+  --color-offline-omnibar: #242a35;
+
+  --color-offline-donations: #113640;
+  --color-offline-donations-light: #322878;
+
+  --color-offline-world1: #739c6e;
+  --color-offline-world1-dark: #53765b;
+  --color-offline-world1-background: #334738;
+  --color-offline-world1-panel-dark: #1a2b24;
+  --color-offline-world1-panel-light: #455749;
+
+
+  --color-offline-world2: #6e9c9c;
+  --color-offline-world2-dark: #537675;
+  --color-offline-world2-background: #2a3434;
+  --color-offline-world2-panel-dark: #828fa3;
+  --color-offline-world2-panel-light: #dee1e1;
+
+  --color-offline-world3: #a02e32;
+  --color-offline-world3-dark: #752426;
+  --color-offline-world3-background: #342a2a;
+  --color-offline-world3-panel-dark: #641912;
+  --color-offline-world3-panel-light: #f79f5c;
+
+  --color-offline-world4: #a58a4d;
+  --color-offline-world4-dark: #796538;
+  --color-offline-world4-background: #34342a;
+  --color-offline-world4-panel-dark: #2a2e3e;
+  --color-offline-world4-panel-light: #5e6c85;
+}
+
+[data-world="1"] {
+  --color-world-main: var(--color-offline-world1);
+  --color-world-dark: var(--color-offline-world1-dark);
+  --color-world-bg: var(--color-offline-world1-background);
+  --color-panel-dark: var(--color-offline-world1-panel-dark);
+  --color-panel-light: var(--color-offline-world1-panel-light);
+}
+
+[data-world="2"] {
+  --color-world-main: var(--color-offline-world2);
+  --color-world-dark: var(--color-offline-world2-dark);
+  --color-world-bg: var(--color-offline-world2-background);
+    --color-panel-dark: var(--color-offline-world2-panel-dark);
+  --color-panel-light: var(--color-offline-world2-panel-light);
+}
+
+[data-world="3"] {
+  --color-world-main: var(--color-offline-world3);
+  --color-world-dark: var(--color-offline-world3-dark);
+  --color-world-bg: var(--color-offline-world3-background);
+    --color-panel-dark: var(--color-offline-world3-panel-dark);
+  --color-panel-light: var(--color-offline-world3-panel-light);
+}
+
+[data-world="4"] {
+  --color-world-main: var(--color-offline-world4);
+  --color-world-dark: var(--color-offline-world4-dark);
+  --color-world-bg: var(--color-offline-world4-background);
+    --color-panel-dark: var(--color-offline-world4-panel-dark);
+  --color-panel-light: var(--color-offline-world4-panel-light);
+}
 
 
 :root {
@@ -28,107 +95,14 @@
 
   --color-bs-hyperlinks: #ff697e;
 
+  --color-bs-music: #3F4D67;
+  --color-bs-music-dark: #161B31;
+
+  /* --color-bs-music: #277178;
+  --color-bs-music-dark: #848A89; */
+  
   background-color: transparent;
-}
 
-.animated-background {
-  background-size: 400%;
-
-  -webkit-animation: animation 5s ease infinite;
-  -moz-animation: animation 5s ease infinite;
-  animation: animation 5s ease infinite;
-}
-
-@keyframes animation {
-
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-
-.onde {
-  position: absolute;
-  width: 100%;
-  height: 500px;
-  bottom: 0;
-}
-
-
-/* Animation */
-
-.parallaxonde>use {
-  animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
-}
-
-.parallaxonde>use:nth-child(1) {
-  animation-delay: -2s;
-  animation-duration: 7s;
-}
-
-.parallaxonde>use:nth-child(2) {
-  animation-delay: -3s;
-  animation-duration: 10s;
-}
-
-.parallaxonde>use:nth-child(3) {
-  animation-delay: -4s;
-  animation-duration: 13s;
-}
-
-.parallaxonde>use:nth-child(4) {
-  animation-delay: -5s;
-  animation-duration: 20s;
-}
-
-@keyframes move-forever {
-  0% {
-    transform: translate3d(-90px, 0, 0);
-  }
-
-  100% {
-    transform: translate3d(85px, 0, 0);
-  }
-}
-
-/*Shrinking for mobile*/
-@media (max-width: 768px) {
-  .onde {
-    height: 40px;
-    min-height: 40px;
-  }
-}
-
-.shine-animation {
-  animation: shine-animation 5s ease;
-  -ms-animation: shine-animation 5s ease;
-  -webkit-animation: shine-animation 5s ease;
-  -moz-animation: shine-animation 5s ease;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-
-
-@keyframes shine-animation {
-  0% {
-    -webkit-mask-image: linear-gradient(90deg, #ffffff 25%, rgba(255, 255, 255, 0.526) 50%, #ffffff 75%);
-    mask-image: linear-gradient(90deg, #ffffff 25%, rgba(255, 255, 255, 0.588) 50%, #ffffff 75%);
-    -webkit-mask-size: 800%;
-    mask-size: 800%;
-    -webkit-mask-position: 0;
-    mask-position: 0;
-  }
-
-  50% {
-    -webkit-mask-position: 120%;
-    mask-position: 120%;
-    opacity: 1;
-  }
 }
 
 .fading-div {
@@ -215,26 +189,48 @@ clip-path: polygon(0% 0%, 88% 0, 100% 51%, 88% 100%, 0% 100%);
   justify-content: center;
 }
 
-::view-transition-old(runner-content),
-::view-transition-new(runner-content) {
-  animation-duration: 500ms;
-  animation-timing-function: ease;
+
+.box2-inverted{
+
+  border: 2px solid #000;
+
+  box-shadow:
+  inset -1px 1px 0 #cfcfcf,
+  inset 1px -1px 0 #1a1a1a,
+  inset -2px 2px 0 #7a7a7a,
+  inset 2px -2px 0 #000;
 }
 
-::view-transition-old(runner-content) {
-  animation-name: fade-out;
+.box2 {
+  border: 2px solid #000;
+
+  box-shadow:
+    inset 1px 1px 0 #cfcfcf,
+    inset -1px -1px 0 #1a1a1a,
+    inset 2px 2px 0 #7a7a7a,
+    inset -2px -2px 0 #000;
 }
 
-::view-transition-new(runner-content) {
-  animation-name: fade-in;
+.ridge-inner {
+  position: relative;
+  box-shadow:
+    inset 1px 1px 0 #cfcfcf,   /* highlight */
+    inset -1px -1px 0 #000,    /* deep shadow */
+    inset 2px 2px 0 #7a7a7a,   /* mid highlight */
+    inset -2px -2px 0 #1a1a1a; /* mid shadow */
 }
 
-@keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+.ridge-inner-dark {
+  position: relative;
+  box-shadow:
+    inset 1px 1px 0 #514a4a,   /* highlight */
+    inset -1px -1px 0 #000,    /* deep shadow */
+    inset 2px 2px 0 #7a7a7a,   /* mid highlight */
+    inset -2px -2px 0 #1a1a1a; /* mid shadow */
 }
 
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.engraved{
+  color: #193c40;
+  font-size:32px;
+  text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
 }

@@ -1,9 +1,11 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { useEffect, useState } from "react";
 import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
 import useCurrentRun from "../../../hooks/useCurrentRun";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
-import backgroundImage from "../../img/online-background.png";
+import Logo from "../../img/logo-intermission.png";
+import backgroundImage from "../../img/offline2026/offline-background.png";
 import { NoCamera } from "../NoCamera";
 
 export const Sidebar = () => {
@@ -13,13 +15,31 @@ export const Sidebar = () => {
   const [backgroundToggleOn] = useReplicant<boolean>("backgroundToggleOn", {
     defaultValue: false,
   });
+  const [runnerBoxContentIndex, setRunnerBoxContentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if ("startViewTransition" in document) {
+        (document as Document).startViewTransition(() => {
+          setRunnerBoxContentIndex((prev) => (prev + 1) % 2);
+        });
+      } else {
+        setRunnerBoxContentIndex((prev) => (prev + 1) % 2);
+      }
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const player = currentRun?.teams[0]?.players[0];
 
   return (
-    <div className="flex h-222.5">
+    <div className="flex h-222.5 theme-border-box bg-(--color-world-bg)/90">
+      <div className="absolute bottom-[100px] left-[70px]">
+        <img src={Logo} />
+      </div>
       <div
-        className="flex flex-col w-112.5 h-full border-r-5 border-white"
+        className="flex flex-col w-112.5 h-full  theme-border-r"
         style={{
           backgroundImage: backgroundToggleOn
             ? `url(${backgroundImage})`
@@ -29,10 +49,10 @@ export const Sidebar = () => {
         {cameraOn && cameraOn ? (
           <div
             id="CameraBox"
-            className="w-full h-84.25  border-b-5 border-white"
+            className="w-full h-84.25 theme-border-box  theme-border-b"
           />
         ) : (
-          <div className="h-84.25  border-b-5 border-white">
+          <div className="h-84.25 theme-border-box theme-border-b">
             <NoCamera />
           </div>
         )}
@@ -43,6 +63,7 @@ export const Sidebar = () => {
             runner
             pronouns={player?.pronouns}
             name={player?.name ?? ""}
+            visibleListItem={runnerBoxContentIndex}
           />
           {commentators.length > 0 && (
             <div className="flex-1 w-full">
@@ -54,6 +75,7 @@ export const Sidebar = () => {
                   key={runner.id}
                   twitch={runner.twitch}
                   bluesky={runner.bluesky}
+                  visibleListItem={runnerBoxContentIndex}
                 />
               ))}
             </div>

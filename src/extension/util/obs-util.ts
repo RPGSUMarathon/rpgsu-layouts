@@ -1,6 +1,11 @@
+import { type SourcePosition } from "@rpgsu-layouts/types";
 import obsWebsocketJs from "obs-websocket-js";
 import { get } from "./nodecg";
-import { commentators, currentOBSScene } from "./replicants";
+import {
+  bossDefeatedAnimation,
+  commentators,
+  currentOBSScene,
+} from "./replicants";
 import { TaggedLogger } from "./tagged-logger";
 
 const nodecg = get();
@@ -25,16 +30,26 @@ export class OBSUtility extends obsWebsocketJs {
     });
 
     this.on("CurrentProgramSceneChanged", (data) => {
-      if (data.sceneName === this.currentScene) return;
-
-      if (
-        data.sceneName === (this.config.scenes?.game ?? "Game") ||
-        data.sceneName === (this.config.scenes?.game2p ?? "Game-2p")
-      ) {
-        void this.startRecording();
-      }
-
       this.currentSceneReplicant.value = data.sceneName;
+    });
+
+    this.on("SceneTransitionVideoEnded", (data) => {
+      //The boss defeated fade animation plays after a run is done, i.e a boss. When a cutscene finishes playing, it goes back to intermission, triggering the same stinger, but we don't want the animation to play on the boss counter.
+      if (data.transitionName === "ToIntermission") {
+        if (!this.currentScene.includes("Cutscene")) {
+          bossDefeatedAnimation.value = true;
+
+          setTimeout(() => {
+            bossDefeatedAnimation.value = false;
+            nodecg.sendMessageToBundle(
+              "changeToNextRun",
+              "nodecg-speedcontrol",
+            );
+          }, 1700);
+        } else {
+          nodecg.sendMessageToBundle("changeToNextRun", "nodecg-speedcontrol");
+        }
+      }
     });
   }
 
@@ -50,6 +65,7 @@ export class OBSUtility extends obsWebsocketJs {
       .then(() => {
         this.log.info("Connected to OBS!");
         this.connected = true;
+        void this.checkIfRecording();
       })
       .catch((err) => {
         this.log.warn("OBS connection error.");
@@ -70,17 +86,57 @@ export class OBSUtility extends obsWebsocketJs {
     }
   }
 
+  /**
+   * Toggle visibility on this obs source
+   * @param sceneName Name of the scene.
+   * @param sourceName Name of the source.
+   * @param visible State of visibility
+   */
+  async changeSource(
+    sceneName: string,
+    sourceName: string,
+    visible: boolean,
+  ): Promise<void> {
+    try {
+      const { sceneItemId } = await this.call("GetSceneItemId", {
+        sceneName,
+        sourceName,
+      });
+
+      console.log(`scene item id ${sceneItemId}.`);
+
+      await this.call("SetSceneItemEnabled", {
+        sceneName,
+        sceneItemId,
+        sceneItemEnabled: visible,
+      });
+    } catch (err) {
+      this.log.warn(`Cannot change OBS source [${sourceName}]: ${err}`);
+      throw err;
+    }
+  }
+
   /** Switches current scene to intermission and enables studio mode if disabled. */
   async changeToIntermission() {
     try {
       await this.changeScene(
         this.config.scenes?.intermission ?? "Intermission",
       );
-      await this.enableStudioMode();
       await this.stopRecording();
       commentators.value = [];
     } catch (err) {
       this.log.warn(`Error switching to intermission ${err}`);
+    }
+  }
+
+  async changeToGame(recordingName: string) {
+    try {
+      await this.changeScene(this.config.scenes?.game ?? "Game");
+
+      await this.startRecording(recordingName);
+      commentators.value = [];
+    } catch (err) {
+      this.log.warn(`Error switching to game ${err}`);
     }
   }
 
@@ -93,9 +149,26 @@ export class OBSUtility extends obsWebsocketJs {
     }
   }
 
-  async startRecording() {
+  async checkIfRecording() {
+    try {
+      const { outputActive } = await this.call("GetRecordStatus");
+      this.isRecording = outputActive;
+    } catch (err) {
+      console.log(`Could not detect recording status ${err}`);
+    }
+  }
+
+  async startRecording(recordingName: string) {
     try {
       if (this.isRecording) return;
+      const filename = `RPGSU Offline 2026 - ${recordingName} - %CCYY-%MM-%DD_%hh-%mm-%ss`;
+
+      await this.call("SetProfileParameter", {
+        parameterCategory: "Output",
+        parameterName: "FilenameFormatting",
+        parameterValue: filename,
+      });
+
       await this.call("StartRecord");
       this.isRecording = true;
       console.log("Starting recording...");
@@ -113,6 +186,41 @@ export class OBSUtility extends obsWebsocketJs {
       console.log("Stopping recording...");
     } catch (err) {
       this.log.warn(`Could not stop recording ${err}`);
+      throw err;
+    }
+  }
+
+  async updateSourcePosition({
+    name,
+    positionX,
+    positionY,
+    width,
+    height,
+  }: SourcePosition) {
+    try {
+      const { sceneItemId } = await this.call("GetSceneItemId", {
+        sceneName: "Game",
+        sourceName: name,
+      });
+
+      void this.call("SetSceneItemTransform", {
+        sceneName: "Game",
+        sceneItemId,
+        sceneItemTransform: {
+          positionX: positionX,
+          positionY: positionY,
+          boundsType: "OBS_BOUNDS_STRETCH",
+          boundsWidth: width,
+          boundsHeight: height,
+          cropTop: 0,
+          cropLeft: 0,
+          cropRight: 0,
+          cropBottom: 0,
+          cropToBounds: true,
+        },
+      });
+    } catch (err) {
+      this.log.warn(`Cannot change OBS scene [${name}]: ${err}`);
       throw err;
     }
   }

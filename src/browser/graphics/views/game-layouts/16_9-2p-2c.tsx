@@ -1,4 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { useEffect, useState } from "react";
 import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
 import useCurrentRun from "../../../hooks/useCurrentRun";
@@ -6,8 +7,7 @@ import { Header } from "../../components/Header/Header";
 import { NoCamera } from "../../components/NoCamera";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
 import { TeamTimer } from "../../components/RunTexts/TeamTimer";
-import { ThemeProvider } from "../../components/theme-provider";
-import backgroundImage from "../../img/online-background.png";
+import backgroundImage from "../../img/offline2026/offline-background.png";
 
 const BottomBar = () => {
   const currentRun = useCurrentRun();
@@ -16,6 +16,21 @@ const BottomBar = () => {
   const [backgroundToggleOn] = useReplicant<boolean>("backgroundToggleOn", {
     defaultValue: false,
   });
+  const [runnerBoxContentIndex, setRunnerBoxContentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if ("startViewTransition" in document) {
+        (document as Document).startViewTransition(() => {
+          setRunnerBoxContentIndex((prev) => (prev + 1) % 2);
+        });
+      } else {
+        setRunnerBoxContentIndex((prev) => (prev + 1) % 2);
+      }
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const player1 = currentRun?.teams[0]?.players[0];
   const player2 = currentRun?.teams[1]?.players[0];
@@ -24,28 +39,29 @@ const BottomBar = () => {
     <div className="h-90.5 w-full inline-flex">
       {/*Camera 1*/}
       {cameraOn && cameraOn ? (
-        <div className="w-124.5 h-full border-white border-r-5" />
+        <div className="w-124.5 h-full theme-border-r theme-border-box" />
       ) : (
-        <div className="w-124.5 h-full border-white border-r-5">
+        <div className="w-124.5 h-full theme-border-r theme-border-box">
           <NoCamera />
         </div>
       )}
 
       <div
-        className="w-231 h-full relative"
+        className="w-231 h-full relative theme-border-box bg-(--color-panel-light)"
         style={{
           backgroundImage: backgroundToggleOn
             ? `url(${backgroundImage})`
             : "none",
         }}
       >
-        <div className="absolute top-0 left-0 w-111.5 border-r-5 border-white">
+        <div className="absolute top-0 left-0 w-111.5 theme-border-r">
           <RunnerBox
             twitch={player1?.social.twitch}
             youtube={player1?.social.youtube}
             runner
             pronouns={player1?.pronouns}
             name={player1?.name ?? ""}
+            visibleListItem={runnerBoxContentIndex}
           />
         </div>
 
@@ -53,31 +69,33 @@ const BottomBar = () => {
           {commentators.map((runner) => (
             <RunnerBox
               key={runner.id}
-              className="border-l-3 border-r-3 border-t-3 border-white"
+              className="theme-border-t theme-border-l theme-border-b border-white"
               runner={false}
               pronouns={runner.pronouns}
               name={runner.name}
               twitch={runner.twitch}
               bluesky={runner.bluesky}
+              visibleListItem={runnerBoxContentIndex}
             />
           ))}
         </div>
 
-        <div className="absolute bottom-0 right-0 w-111.5 border-t-5 border-l-5 border-white">
+        <div className="absolute bottom-0 right-0 w-111.5 theme-border-t theme-border-l">
           <RunnerBox
             twitch={player2?.social.twitch}
             youtube={player2?.social.youtube}
             runner
             pronouns={player2?.pronouns}
             name={player2?.name ?? ""}
+            visibleListItem={0}
           />
         </div>
       </div>
       {/*Camera 2*/}
       {cameraOn && cameraOn ? (
-        <div className="w-124.5 h-full border-white border-l-5 " />
+        <div className="w-124.5 h-full theme-border-l theme-border-box" />
       ) : (
-        <div className="w-124.5 h-full border-white border-l-5">
+        <div className="w-124.5 h-full theme-border-l theme-border-box">
           <NoCamera />
         </div>
       )}
@@ -87,17 +105,17 @@ const BottomBar = () => {
 
 export const L16x9_2P_2C = () => {
   return (
-    <ThemeProvider>
+    <>
       <Header />
       <div className="h-[531px] w-full relative">
-        <div className="h-full w-[944px]  border-white border-r-5 border-b-5 relative">
+        <div className="h-full w-[944px]  theme-border-b theme-border-box theme-border-r relative">
           <TeamTimer slot={0} classname="absolute bottom-0 right-0 mx-2" />
         </div>
-        <div className="h-full w-[944px]  border-white border-l-5 border-b-5 absolute right-0 top-0">
+        <div className="h-full w-[944px]  theme-border-b theme-border-l theme-border-box absolute right-0 top-0">
           <TeamTimer slot={1} classname="absolute bottom-0 left-0 mx-2" />
         </div>
       </div>
       <BottomBar />
-    </ThemeProvider>
+    </>
   );
 };

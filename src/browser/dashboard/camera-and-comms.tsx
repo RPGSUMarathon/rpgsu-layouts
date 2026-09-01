@@ -20,7 +20,7 @@ import {
   FiTrash2,
   FiX,
 } from "react-icons/fi";
-import { type Commentator } from "../../types/generated/commentators";
+import { type Commentator } from "../../types/custom/commentators";
 import Bluesky from "../graphics/img/icons/bluesky.png";
 import Twitch from "../graphics/img/icons/twitch.png";
 import { render } from "../render";

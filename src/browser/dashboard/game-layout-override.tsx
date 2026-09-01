@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
 import { useMemo } from "react";
-import { type LayoutInfo } from "../../types/generated/layoutinfo";
+import { type LayoutInfo } from "../../types/custom/layoutinfo";
 import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
 
@@ -42,6 +42,7 @@ export const GameLayoutOverride = () => {
               <ListItemButton
                 onClick={() => {
                   setCurrentGameLayout(layout.code);
+                  void nodecg.sendMessage("updateSourcePosition", layout.code);
                 }}
               >
                 <ListItemText primary={layout.name} />

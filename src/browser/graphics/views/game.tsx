@@ -1,5 +1,7 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { toast, ToastContainer } from "react-toastify";
 import { render } from "../../render";
+import { GameDonationContainer } from "../components/OfflineEvent/GameDonationContainer";
 import { ThemeProvider } from "../components/theme-provider";
 import * as Layouts from "./game-layouts/index";
 
@@ -14,8 +16,10 @@ const layoutMap: Record<string, React.FC> = {
 };
 
 const flashWarningPosition: Record<string, string> = {
-  "4_3-1p": "top-[415px] left-0 w-112.5 border-t-4 border-b-3 border-r-4",
-  "16_9-2p-2c": "left-[498px] w-[924px] top-[730px] border-t-3 border-b-3",
+  "4_3-1p":
+    "top-[415px] left-0 w-112.5 theme-border-flash-side theme-border-box",
+  "16_9-2p-2c":
+    "left-[498px] w-[924px] top-[730px] theme-border-flash-middle theme-border-box",
 };
 
 export function DynamicLayout({ layoutKey }: { layoutKey: string }) {
@@ -29,7 +33,7 @@ const FlashingLightsWarning = ({ layoutKey }: { layoutKey: string }) => {
 
   return (
     <div
-      className={`z-10 absolute flex ${position}  h-12.5 bg-red-900 border-white justify-center items-center`}
+      className={`z-10 absolute flex ${position}  h-12.5 bg-red-900  justify-center items-center`}
     >
       <span className="font-bold text-2xl">WARNING: FLASHING LIGHTS</span>
     </div>
@@ -41,9 +45,32 @@ const App = () => {
   const [flashWarningOn] = useReplicant<boolean>("flashWarningOn", {
     defaultValue: false,
   });
+  const [world] = useReplicant<string>("currentWorld", {
+    defaultValue: "1",
+  });
+
+  const notify = () => {
+    console.log("notify");
+    toast(GameDonationContainer, {
+      data: {
+        name: "sioneus",
+        amount: "90€",
+        message:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum sapien ut nisi accumsan vehicula. Nam sollicitudin neque enim, eget massa nunc. ",
+      },
+    });
+  };
+
+  nodecg.listenFor("notifyDonation", () => {
+    console.log("received message for notification");
+    notify();
+  });
 
   return (
-    <ThemeProvider>
+    <ThemeProvider world={world} theme="offline">
+      <div>
+        <ToastContainer autoClose={12000} limit={1} />
+      </div>
       <DynamicLayout layoutKey={gameLayout ?? "16_9-1p"} />
       {flashWarningOn && (
         <FlashingLightsWarning layoutKey={gameLayout ?? "4_3-1p"} />

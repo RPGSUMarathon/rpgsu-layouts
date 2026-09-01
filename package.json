@@ -37,8 +37,10 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
     "react-is": "18.2.0",
+    "react-toastify": "^11.1.0",
     "tailwindcss": "^4.1.12",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "osc-js": "2.4.1"
   },
   "devDependencies": {
     "@rpgsu/lint-config": "^1.0.1",
@@ -96,8 +98,14 @@
       },
       {
         "file": "flashing-lights-warning.html",
-        "name": "lashing-lights-warning",
+        "name": "flashing-lights-warning",
         "title": "Flashing Lights Warning",
+        "width": 2
+      },
+      {
+        "file": "current-world-override.html",
+        "name": "current-world-override",
+        "title": "Current World Override",
         "width": 2,
         "workspace": "Scene Editing"
       },
@@ -109,16 +117,31 @@
         "workspace": "Scene Editing"
       },
       {
+        "file": "extension-component.html",
+        "name": "extension-component",
+        "title": "Extension Code Component",
+        "width": 2,
+        "workspace": "Scene Editing"
+      },
+      {
         "file": "omnibar-config.html",
         "name": "omnibar-config",
         "title": "Omnibar Config",
-        "width": 3
+        "width": 3,
+        "workspace": "Scene Editing"
       },
       {
         "file": "countdown.html",
         "name": "countdown",
         "title": "Countdown",
-        "width": 3
+        "width": 3,
+        "workspace": "Scene Editing"
+      },
+      {
+        "file": "timestamps.html",
+        "name": "timestamps",
+        "title": "Timestamps",
+        "width": 4
       }
     ],
     "graphics": [
@@ -136,6 +159,11 @@
         "file": "countdown.html",
         "width": 1920,
         "height": 1020
+      },
+      {
+        "file": "rerun.html",
+        "width": 1160,
+        "height": 60
       },
       {
         "file": "omnibar.html",

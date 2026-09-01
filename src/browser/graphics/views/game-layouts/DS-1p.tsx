@@ -1,12 +1,12 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { useEffect, useState } from "react";
 import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
 import useCurrentRun from "../../../hooks/useCurrentRun";
 import { Header } from "../../components/Header/Header";
 import { NoCamera } from "../../components/NoCamera";
 import { RunnerBox } from "../../components/RunTexts/RunnerBox";
-import { ThemeProvider } from "../../components/theme-provider";
-import backgroundImage from "../../img/online-background.png";
+import backgroundImage from "../../img/offline2026/offline-background.png";
 
 const CenterDS = () => {
   const currentRun = useCurrentRun();
@@ -15,24 +15,36 @@ const CenterDS = () => {
   const [backgroundToggleOn] = useReplicant<boolean>("backgroundToggleOn", {
     defaultValue: false,
   });
+  const [runnerBoxContentIndex, setRunnerBoxContentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if ("startViewTransition" in document) {
+        (document as Document).startViewTransition(() => {
+          setRunnerBoxContentIndex((prev) => (prev + 1) % 2);
+        });
+      } else {
+        setRunnerBoxContentIndex((prev) => (prev + 1) % 2);
+      }
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const player = currentRun?.teams[0]?.players[0];
 
   return (
     <div className="flex h-222.5">
-      <div className="flex-none w-112.5 h-full border-r-5 border-white">
+      <div className="flex-none w-112.5 h-full theme-border-r theme-border-box">
         {cameraOn && cameraOn ? (
-          <div
-            id="CameraBox"
-            className="w-full h-84.25 border-b-5 border-white"
-          />
+          <div id="CameraBox" className="w-full h-84.25 theme-border-b" />
         ) : (
-          <div className="h-84.25  border-b-5 border-white">
+          <div className="h-84.25 theme-border-b">
             <NoCamera />
           </div>
         )}
         <div
-          className="h-54"
+          className="h-54 bg-(--color-world-bg)/90"
           style={{
             backgroundImage: backgroundToggleOn
               ? `url(${backgroundImage})`
@@ -45,6 +57,7 @@ const CenterDS = () => {
             runner
             pronouns={player?.pronouns}
             name={player?.name ?? ""}
+            visibleListItem={runnerBoxContentIndex}
           />
           {commentators.length > 0 && (
             <div className="flex-1 h-47.5 w-full">
@@ -57,24 +70,25 @@ const CenterDS = () => {
                   key={runner.id}
                   twitch={runner.twitch}
                   bluesky={runner.bluesky}
+                  visibleListItem={runnerBoxContentIndex}
                 />
               ))}
             </div>
           )}
         </div>
       </div>
-      <div className="h-84.25 absolute w-112.5 bottom-15 left-0 border-t-5 " />
+      <div className="h-84.25 absolute w-112.5 bottom-15 left-0 theme-border-t theme-border-box" />
       <div
-        className="flex-1 border-r-5 border-l-white"
+        className="flex-1 theme-border-r theme-border-box bg-(--color-panel-light)"
         style={{
           backgroundImage: backgroundToggleOn
             ? `url(${backgroundImage})`
             : "none",
         }}
       />
-      <div className="flex-none h-full aspect-4/3 " />
+      <div className="flex-none h-full aspect-4/3 theme-border-box" />
       <div
-        className="flex-1 border-l-5 border-l-white"
+        className="flex-1 theme-border-l theme-border-box bg-(--color-panel-light)"
         style={{
           backgroundImage: backgroundToggleOn
             ? `url(${backgroundImage})`
@@ -87,9 +101,9 @@ const CenterDS = () => {
 
 export const Lds_1P = () => {
   return (
-    <ThemeProvider>
+    <>
       <Header />
       <CenterDS />
-    </ThemeProvider>
+    </>
   );
 };
