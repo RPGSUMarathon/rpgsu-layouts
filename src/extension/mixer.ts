@@ -6,24 +6,25 @@ const log = new TaggedLogger("mixer");
 const nodecg = get();
 const config = nodecg.bundleConfig.mixer;
 
-const channelIdToName = {
-  "1": "Game PC",
-  "3": "Console",
-  "5": "Runner 1",
-  "6": "Comm 1",
-  "7": "Comm 2",
-  "8": "Comm 3",
-  "9": "Tech",
-  "10": "Loose Mic",
-  "11": "Playlist",
-};
-const channelNameToId = Object.entries(channelIdToName).reduce(
-  (acc, [id, name]) => {
-    acc[name] = id;
-    return acc;
-  },
-  {} as Record<string, string>,
-);
+// const channelIdToName = {
+//   "1": "Game PC",
+//   "3": "Console",
+//   "5": "Runner 1",
+//   "6": "Comm 1",
+//   "7": "Comm 2",
+//   "8": "Comm 3",
+//   "9": "Tech",
+//   "10": "Loose Mic",
+//   "11": "Playlist",
+//   "16": "Videos",
+// };
+// const channelNameToId = Object.entries(channelIdToName).reduce(
+//   (acc, [id, name]) => {
+//     acc[name] = id;
+//     return acc;
+//   },
+//   {} as Record<string, string>,
+// );
 
 if (config?.enabled) {
   const settings = {
@@ -59,64 +60,71 @@ if (config?.enabled) {
     log.info(`Connected to mixer: ${message.args}`);
   });
 
-  function muteChannel(channelName: string, mute: boolean) {
-    const channelId = channelNameToId[channelName];
-    if (channelId === undefined) {
-      log.error(`Can't find channel ${channelName}`);
-      return;
-    }
-    const padded = String(channelId).padStart(2, "0");
-    const muteValue = mute ? 0 : 1;
+  // function muteChannel(channelName: string, mute: boolean) {
+  //   const channelId = channelNameToId[channelName];
+  //   if (channelId === undefined) {
+  //     log.error(`Can't find channel ${channelName}`);
+  //     return;
+  //   }
+  //   const padded = String(channelId).padStart(2, "0");
+  //   const muteValue = mute ? 0 : 1;
 
-    const command = new OSC.Message(`/ch/${padded}/mix/on`, muteValue);
-    log.debug(`Muting ${channelName} (${padded})`);
-    osc!.send(command);
-  }
+  //   const command = new OSC.Message(`/ch/${padded}/mix/on`, muteValue);
+  //   log.debug(`Muting ${channelName} (${padded})`);
+  //   osc!.send(command);
+  // }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function onIntermission() {
-    const channelsToMute = [
-      "Game PC",
-      "Console",
-      "Runner 1",
-      "Comm 1",
-      "Comm 2",
-      "Comm 3",
-      "Tech",
-      "Loose Mic",
-    ];
-    for (const channelName of channelsToMute) {
-      muteChannel(channelName, true);
-    }
-    muteChannel("Playlist", false);
-  }
+  // function onIntermission() {
+  //   const channelsToMute = [
+  //     "Game PC",
+  //     "Console",
+  //     "Runner 1",
+  //     "Comm 1",
+  //     "Comm 2",
+  //     "Comm 3",
+  //     "Tech",
+  //     "Loose Mic",
+  //   ];
+  //   for (const channelName of channelsToMute) {
+  //     muteChannel(channelName, true);
+  //   }
+  //   muteChannel("Playlist", false);
+  // }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function onGame() {
-    const channelsToUnmute = [
-      "Game PC",
-      "Console",
-      "Runner 1",
-      "Comm 1",
-      "Comm 2",
-      "Comm 3",
-    ];
-    for (const channelName of channelsToUnmute) {
-      muteChannel(channelName, false);
-    }
-    muteChannel("Playlist", true);
-  }
+  // function onGame() {
+  //   const channelsToUnmute = [
+  //     "Game PC",
+  //     "Console",
+  //     "Runner 1",
+  //     "Comm 1",
+  //     "Comm 2",
+  //     "Comm 3",
+  //   ];
+  //   for (const channelName of channelsToUnmute) {
+  //     muteChannel(channelName, false);
+  //   }
+  //   muteChannel("Playlist", true);
+  // }
 
   function onIntermissionDCA() {
     log.debug(`Muting LIVE DCA, unmuting Playlist DCA`);
-    osc!.send(new OSC.Message(`/dca/1/mix/on`, false));
-    osc!.send(new OSC.Message(`/dca/2/mix/on`, true));
+    osc!.send(new OSC.Message(`/dca/1/fader`, 0));
+    osc!.send(new OSC.Message(`/dca/2/fader`, 0.75));
+    osc!.send(new OSC.Message(`/dca/3/fader`, 0));
   }
 
   function onGameDCA() {
     log.debug(`Muting Playlist DCA, unmuting LIVE DCA`);
-    osc!.send(new OSC.Message(`/dca/1/mix/on`, true));
-    osc!.send(new OSC.Message(`/dca/2/mix/on`, false));
+    osc!.send(new OSC.Message(`/dca/1/fader`, 0.75));
+    osc!.send(new OSC.Message(`/dca/2/fader`, 0));
+    osc!.send(new OSC.Message(`/dca/3/fader`, 0));
+  }
+
+  function onCutsceneDCA() {
+    log.debug(`Muting everything to play audio from OBS for videos`);
+    osc!.send(new OSC.Message(`/dca/1/fader`, 0));
+    osc!.send(new OSC.Message(`/dca/2/fader`, 0));
+    osc!.send(new OSC.Message(`/dca/3/fader`, 0.75));
   }
 
   nodecg.listenFor("switchToIntermissionWithAnimation", () => {
@@ -127,5 +135,10 @@ if (config?.enabled) {
   nodecg.listenFor("switchToGame", () => {
     log.info(`Unmuting channels going into game`);
     onGameDCA();
+  });
+
+  nodecg.listenFor("switchToCutscene", () => {
+    log.info(`Muting channels going into cutscene`);
+    onCutsceneDCA();
   });
 }
