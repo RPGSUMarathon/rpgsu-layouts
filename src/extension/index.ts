@@ -7,4 +7,5 @@ export default (nodecg: NodeCG.ServerAPI<Configschema>) => {
   require("./obs");
   require("./layouts");
   require("./countdown");
+  require("./mixer");
 };
