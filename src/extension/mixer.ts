@@ -1,3 +1,4 @@
+//Thank you to Gramy Szybko, Pomagamy Skutecznie, who figured out most of this code. Credit goes to them.
 import OSC from "osc-js";
 import { get } from "./util/nodecg";
 import { TaggedLogger } from "./util/tagged-logger";
@@ -6,25 +7,52 @@ const log = new TaggedLogger("mixer");
 const nodecg = get();
 const config = nodecg.bundleConfig.mixer;
 
-// const channelIdToName = {
-//   "1": "Game PC",
-//   "3": "Console",
-//   "5": "Runner 1",
-//   "6": "Comm 1",
-//   "7": "Comm 2",
-//   "8": "Comm 3",
-//   "9": "Tech",
-//   "10": "Loose Mic",
-//   "11": "Playlist",
-//   "16": "Videos",
-// };
-// const channelNameToId = Object.entries(channelIdToName).reduce(
-//   (acc, [id, name]) => {
-//     acc[name] = id;
-//     return acc;
-//   },
-//   {} as Record<string, string>,
-// );
+const channelIdToName = {
+  "1": "Game PC",
+  "3": "Console",
+  "5": "Runner 1",
+  "6": "Comm 1",
+  "7": "Comm 2",
+  "8": "Comm 3",
+  "9": "Tech",
+  "10": "Loose Mic",
+  "11": "Playlist",
+  "16": "Videos",
+};
+const channelNameToId = Object.entries(channelIdToName).reduce(
+  (acc, [id, name]) => {
+    acc[name] = id;
+    return acc;
+  },
+  {} as Record<string, string>,
+);
+
+const mixerSignalLevels = nodecg.Replicant<{
+  [key in keyof typeof channelNameToId]: number;
+}>("mixerSignalLevels", {
+  defaultValue: Object.keys(channelNameToId).reduce(
+    (acc, name) => {
+      acc[name] = -Infinity;
+      return acc;
+    },
+    { "": -Infinity } as Record<string, number>,
+  ),
+});
+
+nodecg.Replicant<{ [key in keyof typeof channelNameToId]: number }>(
+  "mixerThresholdLevels",
+  {
+    defaultValue: Object.keys(channelNameToId).reduce(
+      (acc, name) => {
+        acc[name] = -30;
+        return acc;
+      },
+      { "": +Infinity } as Record<string, number>,
+    ),
+  },
+);
+
+let lastMetersUpdate = 0;
 
 if (config?.enabled) {
   const settings = {
@@ -58,6 +86,36 @@ if (config?.enabled) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   osc.on("/xinfo", function (message: any) {
     log.info(`Connected to mixer: ${message.args}`);
+  });
+
+  osc.on("/meters/2", (message: any) => {
+    const u8Array = message.args[0];
+    const buffer = new DataView(
+      u8Array.buffer,
+      u8Array.byteOffset,
+      u8Array.byteLength,
+    );
+    const i16Array = [];
+    for (let i = 4; i < buffer.byteLength; i += 2) {
+      i16Array.push(buffer.getInt16(i, true));
+    }
+    const analogIn = i16Array.slice(0, 16).map(meterToDb);
+    for (const [i, v] of analogIn.entries()) {
+      const channelId = (i + 1).toString();
+      const inputName =
+        channelIdToName[channelId as keyof typeof channelIdToName] || channelId;
+      if (inputName != channelId) {
+        mixerSignalLevels.value![inputName as Channel] = v;
+      }
+    }
+    lastMetersUpdate = Date.now();
+  });
+
+  osc.on("*", function (message: any) {
+    if (message.address.startsWith("/meters")) {
+      return;
+    }
+    log.debug(`catchall: ${message.address} ${message.args}`);
   });
 
   // function muteChannel(channelName: string, mute: boolean) {
@@ -105,6 +163,10 @@ if (config?.enabled) {
   //   }
   //   muteChannel("Playlist", true);
   // }
+
+  function meterToDb(v: number): number {
+    return v / 256;
+  }
 
   function onIntermissionDCA() {
     log.debug(`Muting LIVE DCA, unmuting Playlist DCA`);

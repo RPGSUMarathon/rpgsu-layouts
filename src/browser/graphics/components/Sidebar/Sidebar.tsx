@@ -22,6 +22,7 @@ export const Sidebar = () => {
       enabled: false,
       room: "RPGSU",
       password: "RPGSU",
+      ids: {},
     },
   });
 
@@ -73,10 +74,12 @@ export const Sidebar = () => {
             name={player?.name ?? ""}
             visibleListItem={runnerBoxContentIndex}
             vdoEnabled={vdoConfig?.enabled}
+            vdoId={vdoConfig?.ids ? vdoConfig?.ids[player?.id ?? ""] : null}
+            channel="Runner 1"
           />
           {commentators.length > 0 && (
             <div className="flex-1 w-full">
-              {commentators.map((runner) => (
+              {commentators.map((runner, index) => (
                 <RunnerBox
                   runner={false}
                   pronouns={runner.pronouns}
@@ -86,6 +89,8 @@ export const Sidebar = () => {
                   bluesky={runner.bluesky}
                   visibleListItem={runnerBoxContentIndex}
                   vdoEnabled={vdoConfig?.enabled}
+                  vdoId={vdoConfig?.ids ? vdoConfig?.ids[runner.id] : null}
+                  channel={`Comm ${index + 1}`}
                 />
               ))}
             </div>

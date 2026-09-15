@@ -26,10 +26,11 @@ export const VDOSetup = () => {
       enabled: false,
       room: "RPGSU",
       password: "RPGSU",
+      ids: {},
     },
   });
-
-  const [vdoEnabled, setVDOEnabled] = useState(false);
+  const [ids, setIds] = useState<Record<string, string>>(vdoConfig?.ids ?? {});
+  const [vdoEnabled, setVDOEnabled] = useState(vdoConfig?.enabled ?? false);
   const [room, setRoom] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,6 +39,16 @@ export const VDOSetup = () => {
       enabled: vdoEnabled,
       room: room,
       password: password,
+      ids: vdoConfig?.ids ?? {},
+    });
+  };
+
+  const saveIDS = () => {
+    setVDOConfig({
+      enabled: vdoConfig?.enabled ?? false,
+      room: vdoConfig?.room ?? "",
+      password: vdoConfig?.password ?? "",
+      ids,
     });
   };
 
@@ -54,6 +65,7 @@ export const VDOSetup = () => {
                     enabled: event.target.checked,
                     room: vdoConfig?.room ?? "",
                     password: vdoConfig?.password ?? "",
+                    ids: vdoConfig?.ids ?? {},
                   });
                 }}
               />
@@ -67,10 +79,13 @@ export const VDOSetup = () => {
             id="outlined-basic"
             label="Runner's ID"
             variant="outlined"
-            value={room}
+            value={ids[player?.id ?? "runner"] ?? ""}
             placeholder="RunnerID"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setRoom(event.target.value);
+              setIds((prev) => ({
+                ...prev,
+                [player?.id ?? "runner"]: event.target.value,
+              }));
             }}
           />
         </Stack>
@@ -82,14 +97,20 @@ export const VDOSetup = () => {
                 id="outlined-basic"
                 label="Commentator's ID"
                 variant="outlined"
-                value={room}
+                value={ids[commentator.id] ?? ""}
                 placeholder="CommentatorID"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setRoom(event.target.value);
+                  setIds((prev) => ({
+                    ...prev,
+                    [commentator.id]: event.target.value,
+                  }));
                 }}
               />
             </Stack>
           ))}
+        <Button variant="contained" fullWidth onClick={saveIDS}>
+          Save VDO.Ninja IDs
+        </Button>
         <details>
           <summary>Advanced Settings</summary>
           <Stack spacing={2}>

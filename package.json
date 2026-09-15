@@ -147,7 +147,8 @@
         "file": "vdo-setup.html",
         "name": "VDO.Ninja Setup",
         "title": "VDO.Ninja Setup",
-        "width": 4
+        "width": 4,
+         "workspace": "Scene Editing"
       }
     ],
     "graphics": [

@@ -1,13 +1,17 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { type Channel } from "@rpgsu-layouts/types/custom/channel";
 import { AnimatePresence, motion } from "motion/react";
 import Bluesky from "../../img/icons/bluesky.png";
-import MicIcon from "../../img/icons/mic.png";
-import RunnerIcon from "../../img/icons/runner.png";
+import CommIdle from "../../img/icons/speaking/comm-idle.png";
+import CommSpeaking from "../../img/icons/speaking/comm-speaking.png";
+import RunnerIdle from "../../img/icons/speaking/runner-idle.png";
+import RunnerSpeaking from "../../img/icons/speaking/runner-speaking.png";
 import Twitch from "../../img/icons/twitch.png";
 import Youtube from "../../img/icons/youtube.png";
 
 type Props = {
   bluesky?: string;
+  channel: Channel;
   className?: string;
   name: string;
   pronouns?: string;
@@ -15,8 +19,48 @@ type Props = {
   textSize?: string;
   twitch?: string;
   vdoEnabled?: boolean;
+  vdoId?: string | null;
   visibleListItem: number;
   youtube?: string;
+};
+
+const SpeakerIcons = {
+  runnerIdle: "https://imgur.com/FU00lok.png",
+  runnerSpeaking: "https://i.imgur.com/Mq6A4L2.png",
+  commIdle: "https://i.imgur.com/dgYkFvR.png",
+  commSpeaking: "https://i.imgur.com/wf2hTbI.png",
+};
+
+const RunnerReactiveIcon = ({
+  signalLevel,
+  thresholdLevel,
+}: {
+  signalLevel: number;
+  thresholdLevel: number;
+}) => {
+  return (
+    <img
+      src={signalLevel < thresholdLevel ? RunnerIdle : RunnerSpeaking}
+      className="ml-3 h-5/6"
+      alt="Icon"
+    />
+  );
+};
+
+const CommReactiveIcon = ({
+  signalLevel,
+  thresholdLevel,
+}: {
+  signalLevel: number;
+  thresholdLevel: number;
+}) => {
+  return (
+    <img
+      src={signalLevel < thresholdLevel ? CommIdle : CommSpeaking}
+      className="ml-3 h-5/6"
+      alt="Icon"
+    />
+  );
 };
 
 export const RunnerBox = ({
@@ -29,11 +73,19 @@ export const RunnerBox = ({
   youtube,
   bluesky,
   visibleListItem,
+  channel,
   vdoEnabled = false,
+  vdoId,
 }: Props) => {
   const [iconToggleOn] = useReplicant<boolean>("iconToggleOn", {
     defaultValue: false,
   });
+  const [mixerSignalLevels] = useReplicant<
+    { [key in Channel]: number } | undefined
+  >("mixerSignalLevels", undefined);
+  const [mixerThresholdLevels] = useReplicant<
+    { [key in Channel]: number } | undefined
+  >("mixerThresholdLevels", undefined);
 
   const slides = [
     <span
@@ -78,23 +130,38 @@ export const RunnerBox = ({
         </div>
       )}
 
-      {vdoEnabled ? (
+      {vdoEnabled && vdoId ? (
         <div className="h-auto w-12.5 overflow-hidden">
           <iframe
             width={50}
             height={103}
-            src="
-        https://vdo.ninja/?view=ZGtjDQC&solo=1&room=RPGSU&password=RPGSU&transparency&meterstyle=5&bgimage=https://imgur.com/dgYkFvR.png&bgimage2=https://i.imgur.com/wf2hTbI.png&bgimage3=https://i.imgur.com/wf2hTbI.png"
+            src={`
+        https://vdo.ninja/?view=${vdoId}&solo=1&room=RPGSU&password=RPGSU&transparency&meterstyle=5&bgimage=${runner ? SpeakerIcons.runnerIdle : SpeakerIcons.commIdle}&bgimage2=${runner ? SpeakerIcons.runnerSpeaking : SpeakerIcons.commSpeaking}&bgimage3=${runner ? SpeakerIcons.runnerSpeaking : SpeakerIcons.commSpeaking}`}
           />
         </div>
       ) : (
-        iconToggleOn && (
-          <img
-            src={runner ? RunnerIcon : MicIcon}
-            className="ml-3 h-5/6"
-            alt="Icon"
+        iconToggleOn &&
+        (runner ? (
+          <RunnerReactiveIcon
+            signalLevel={
+              (mixerSignalLevels && mixerSignalLevels[channel]) ?? -Infinity
+            }
+            thresholdLevel={
+              (mixerThresholdLevels && mixerThresholdLevels[channel]) ??
+              Infinity
+            }
           />
-        )
+        ) : (
+          <CommReactiveIcon
+            signalLevel={
+              (mixerSignalLevels && mixerSignalLevels[channel]) ?? -Infinity
+            }
+            thresholdLevel={
+              (mixerThresholdLevels && mixerThresholdLevels[channel]) ??
+              Infinity
+            }
+          />
+        ))
       )}
 
       <div
