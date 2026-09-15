@@ -1,4 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { type VdoConfig } from "@rpgsu-layouts/types/custom/vdo-config";
 import { useEffect, useState } from "react";
 import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
@@ -16,6 +17,13 @@ export const Sidebar = () => {
     defaultValue: false,
   });
   const [runnerBoxContentIndex, setRunnerBoxContentIndex] = useState(0);
+  const [vdoConfig] = useReplicant<VdoConfig>("vdoConfig", {
+    defaultValue: {
+      enabled: false,
+      room: "RPGSU",
+      password: "RPGSU",
+    },
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,6 +72,7 @@ export const Sidebar = () => {
             pronouns={player?.pronouns}
             name={player?.name ?? ""}
             visibleListItem={runnerBoxContentIndex}
+            vdoEnabled={vdoConfig?.enabled}
           />
           {commentators.length > 0 && (
             <div className="flex-1 w-full">
@@ -76,6 +85,7 @@ export const Sidebar = () => {
                   twitch={runner.twitch}
                   bluesky={runner.bluesky}
                   visibleListItem={runnerBoxContentIndex}
+                  vdoEnabled={vdoConfig?.enabled}
                 />
               ))}
             </div>

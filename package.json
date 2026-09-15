@@ -142,6 +142,12 @@
         "name": "timestamps",
         "title": "Timestamps",
         "width": 4
+      },
+      {
+        "file": "vdo-setup.html",
+        "name": "VDO.Ninja Setup",
+        "title": "VDO.Ninja Setup",
+        "width": 4
       }
     ],
     "graphics": [

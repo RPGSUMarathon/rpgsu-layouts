@@ -14,6 +14,7 @@ type Props = {
   runner: boolean;
   textSize?: string;
   twitch?: string;
+  vdoEnabled?: boolean;
   visibleListItem: number;
   youtube?: string;
 };
@@ -28,6 +29,7 @@ export const RunnerBox = ({
   youtube,
   bluesky,
   visibleListItem,
+  vdoEnabled = false,
 }: Props) => {
   const [iconToggleOn] = useReplicant<boolean>("iconToggleOn", {
     defaultValue: false,
@@ -76,12 +78,23 @@ export const RunnerBox = ({
         </div>
       )}
 
-      {iconToggleOn && (
-        <img
-          src={runner ? RunnerIcon : MicIcon}
-          className="ml-3 h-5/6"
-          alt="Icon"
-        />
+      {vdoEnabled ? (
+        <div className="h-auto w-12.5 overflow-hidden">
+          <iframe
+            width={50}
+            height={103}
+            src="
+        https://vdo.ninja/?view=ZGtjDQC&solo=1&room=RPGSU&password=RPGSU&transparency&meterstyle=5&bgimage=https://imgur.com/dgYkFvR.png&bgimage2=https://i.imgur.com/wf2hTbI.png&bgimage3=https://i.imgur.com/wf2hTbI.png"
+          />
+        </div>
+      ) : (
+        iconToggleOn && (
+          <img
+            src={runner ? RunnerIcon : MicIcon}
+            className="ml-3 h-5/6"
+            alt="Icon"
+          />
+        )
       )}
 
       <div
