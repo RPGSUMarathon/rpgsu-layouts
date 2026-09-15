@@ -79,7 +79,7 @@ export const Sidebar = () => {
           />
           {commentators.length > 0 && (
             <div className="flex-1 w-full">
-              {commentators.map((runner, index) => (
+              {commentators.map((runner) => (
                 <RunnerBox
                   runner={false}
                   pronouns={runner.pronouns}
@@ -90,7 +90,7 @@ export const Sidebar = () => {
                   visibleListItem={runnerBoxContentIndex}
                   vdoEnabled={vdoConfig?.enabled}
                   vdoId={vdoConfig?.ids ? vdoConfig?.ids[runner.id] : null}
-                  channel={`Comm ${index + 1}`}
+                  channel={runner.channel}
                 />
               ))}
             </div>

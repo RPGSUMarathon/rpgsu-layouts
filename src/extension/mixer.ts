@@ -1,3 +1,4 @@
+import { type Channel } from "@rpgsu-layouts/types/custom/channel";
 //Thank you to Gramy Szybko, Pomagamy Skutecznie, who figured out most of this code. Credit goes to them.
 import OSC from "osc-js";
 import { get } from "./util/nodecg";
@@ -39,6 +40,10 @@ const mixerSignalLevels = nodecg.Replicant<{
   ),
 });
 
+function meterToDb(v: number): number {
+  return v / 256;
+}
+
 nodecg.Replicant<{ [key in keyof typeof channelNameToId]: number }>(
   "mixerThresholdLevels",
   {
@@ -71,12 +76,37 @@ if (config?.enabled) {
     plugin: new OSC.DatagramPlugin(settings),
   });
 
+  function scheduleMeters() {
+    /* There are multiple "meters" levels available, see "X AIR Remote Control Protocol.pdf"
+     on our drive https://drive.google.com/drive/folders/1Pmsiciq8zUkp-SP54CvPH52esTP2x7Id
+     for details. `/meters/2` gives us information about input signal levels for all channels.
+     Each activation of `/meters` command will result in 200 responses from the mixer.
+     We have to use the undocumented `/renew` to reset the counter on the device.
+     X AIR Edit does that roughly every 1 second, but that seems excessive. */
+
+    const meters = new OSC.Message("/meters", "/meters/2");
+    osc!.send(meters);
+
+    setInterval(() => {
+      if (Date.now() - lastMetersUpdate > 10000) {
+        osc!.send(meters);
+        log.debug("re-requesting meters");
+      } else {
+        const renewMeters = new OSC.Message("/renew", "/meters/2");
+        log.debug("renewing meters");
+        osc!.send(renewMeters);
+      }
+    }, 2000);
+  }
+
   log.info(`Connecting to Mixer`);
   osc.open();
 
   osc.on("open", function () {
     const xinfo = new OSC.Message("/xinfo");
     osc!.send(xinfo);
+
+    scheduleMeters();
   });
 
   osc.on("error", (message: never) => {
@@ -104,7 +134,7 @@ if (config?.enabled) {
       const channelId = (i + 1).toString();
       const inputName =
         channelIdToName[channelId as keyof typeof channelIdToName] || channelId;
-      if (inputName != channelId) {
+      if (inputName !== channelId) {
         mixerSignalLevels.value![inputName as Channel] = v;
       }
     }
@@ -163,10 +193,6 @@ if (config?.enabled) {
   //   }
   //   muteChannel("Playlist", true);
   // }
-
-  function meterToDb(v: number): number {
-    return v / 256;
-  }
 
   function onIntermissionDCA() {
     log.debug(`Muting LIVE DCA, unmuting Playlist DCA`);

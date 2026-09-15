@@ -1,4 +1,5 @@
 import { useReplicant } from "@nodecg/react-hooks";
+import { type VdoConfig } from "@rpgsu-layouts/types/custom/vdo-config";
 import { useEffect, useState } from "react";
 import useCameraOn from "../../../hooks/useCameraOn";
 import useCommentators from "../../../hooks/useCommentators";
@@ -17,6 +18,14 @@ const BottomBar = () => {
     defaultValue: false,
   });
   const [runnerBoxContentIndex, setRunnerBoxContentIndex] = useState(0);
+  const [vdoConfig] = useReplicant<VdoConfig>("vdoConfig", {
+    defaultValue: {
+      enabled: false,
+      room: "RPGSU",
+      password: "RPGSU",
+      ids: {},
+    },
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,6 +71,9 @@ const BottomBar = () => {
             pronouns={player1?.pronouns}
             name={player1?.name ?? ""}
             visibleListItem={runnerBoxContentIndex}
+            vdoEnabled={vdoConfig?.enabled}
+            vdoId={vdoConfig?.ids ? vdoConfig?.ids[player1?.id ?? ""] : null}
+            channel="Runner 1"
           />
         </div>
 
@@ -76,6 +88,9 @@ const BottomBar = () => {
               twitch={runner.twitch}
               bluesky={runner.bluesky}
               visibleListItem={runnerBoxContentIndex}
+              vdoEnabled={vdoConfig?.enabled}
+              vdoId={vdoConfig?.ids ? vdoConfig?.ids[runner.id] : null}
+              channel={runner.channel}
             />
           ))}
         </div>
@@ -88,6 +103,9 @@ const BottomBar = () => {
             pronouns={player2?.pronouns}
             name={player2?.name ?? ""}
             visibleListItem={0}
+            vdoEnabled={vdoConfig?.enabled}
+            vdoId={vdoConfig?.ids ? vdoConfig?.ids[player2?.id ?? ""] : null}
+            channel="Runner 1"
           />
         </div>
       </div>
