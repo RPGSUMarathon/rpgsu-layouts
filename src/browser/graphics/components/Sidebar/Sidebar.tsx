@@ -76,6 +76,7 @@ export const Sidebar = () => {
             vdoEnabled={vdoConfig?.enabled}
             vdoId={vdoConfig?.ids ? vdoConfig?.ids[player?.id ?? ""] : null}
             channel="Runner 1"
+            remote={currentRun?.customData.remote === "true"}
           />
           {commentators.length > 0 && (
             <div className="flex-1 w-full">
@@ -91,6 +92,7 @@ export const Sidebar = () => {
                   vdoEnabled={vdoConfig?.enabled}
                   vdoId={vdoConfig?.ids ? vdoConfig?.ids[runner.id] : null}
                   channel={runner.channel}
+                  remote={runner.remote}
                 />
               ))}
             </div>

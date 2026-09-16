@@ -7,4 +7,5 @@ export type Commentator = {
   twitch: string;
   bluesky: string;
   channel: Channel;
+  remote: boolean;
 };

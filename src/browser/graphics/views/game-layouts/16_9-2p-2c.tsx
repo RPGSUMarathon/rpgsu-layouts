@@ -74,6 +74,7 @@ const BottomBar = () => {
             vdoEnabled={vdoConfig?.enabled}
             vdoId={vdoConfig?.ids ? vdoConfig?.ids[player1?.id ?? ""] : null}
             channel="Runner 1"
+            remote={currentRun?.customData.remote === "true"}
           />
         </div>
 
@@ -91,6 +92,7 @@ const BottomBar = () => {
               vdoEnabled={vdoConfig?.enabled}
               vdoId={vdoConfig?.ids ? vdoConfig?.ids[runner.id] : null}
               channel={runner.channel}
+              remote={runner.remote}
             />
           ))}
         </div>
@@ -106,6 +108,7 @@ const BottomBar = () => {
             vdoEnabled={vdoConfig?.enabled}
             vdoId={vdoConfig?.ids ? vdoConfig?.ids[player2?.id ?? ""] : null}
             channel="Runner 1"
+            remote={currentRun?.customData.remote === "true"}
           />
         </div>
       </div>

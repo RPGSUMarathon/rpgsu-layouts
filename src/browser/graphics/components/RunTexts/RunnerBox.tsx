@@ -1,6 +1,7 @@
 import { useReplicant } from "@nodecg/react-hooks";
 import { type Channel } from "@rpgsu-layouts/types/custom/channel";
 import { AnimatePresence, motion } from "motion/react";
+import { HiOutlineStatusOnline } from "react-icons/hi";
 import Bluesky from "../../img/icons/bluesky.png";
 import CommIdle from "../../img/icons/speaking/comm-idle.png";
 import CommSpeaking from "../../img/icons/speaking/comm-speaking.png";
@@ -15,6 +16,7 @@ type Props = {
   className?: string;
   name: string;
   pronouns?: string;
+  remote: boolean;
   runner: boolean;
   textSize?: string;
   twitch?: string;
@@ -76,6 +78,7 @@ export const RunnerBox = ({
   channel,
   vdoEnabled = false,
   vdoId,
+  remote,
 }: Props) => {
   const [iconToggleOn] = useReplicant<boolean>("iconToggleOn", {
     defaultValue: false,
@@ -162,6 +165,12 @@ export const RunnerBox = ({
             }
           />
         ))
+      )}
+
+      {remote && (
+        <div className="absolute right-[70px]">
+          <HiOutlineStatusOnline size={30} />
+        </div>
       )}
 
       <div

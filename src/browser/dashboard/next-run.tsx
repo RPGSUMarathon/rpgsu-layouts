@@ -7,6 +7,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
+import { FaUnlock, FaLock } from "react-icons/fa";
 import { useState } from "react";
 import { type Timer } from "speedcontrol/src/types/schemas";
 import { Helpers } from "../helpers";
@@ -100,28 +101,6 @@ export const NextRun = () => {
     <DashboardThemeProvider>
       <Stack spacing={2}>
         <h2>Current Scene: {currentObsScene}</h2>
-        <Stack direction="row" justifyContent="flex-end">
-          <Tooltip
-            title={
-              forceEnableAll
-                ? "Disable force enable"
-                : "Force enable all buttons"
-            }
-          >
-            <IconButton
-              size="small"
-              color={forceEnableAll ? "warning" : "default"}
-              onClick={() => setForceEnableAll((enabled) => !enabled)}
-              aria-label={
-                forceEnableAll
-                  ? "Disable force enable"
-                  : "Force enable all buttons"
-              }
-            >
-              {forceEnableAll ? <span>Lock</span> : <span>Unlock</span>}
-            </IconButton>
-          </Tooltip>
-        </Stack>
         <details>
           <summary>
             <i>Explanation</i>
@@ -219,6 +198,28 @@ export const NextRun = () => {
             </h2>
           </Alert>
         )}
+        <Stack direction="row" justifyContent="flex-start">
+          <Tooltip
+            title={
+              forceEnableAll
+                ? "Disable force enable"
+                : "Force enable all buttons"
+            }
+          >
+            <IconButton
+              size="small"
+              color={forceEnableAll ? "warning" : "default"}
+              onClick={() => setForceEnableAll((enabled) => !enabled)}
+              aria-label={
+                forceEnableAll
+                  ? "Disable force enable"
+                  : "Force enable all buttons"
+              }
+            >
+              {forceEnableAll ? <FaLock /> : <FaUnlock />}
+            </IconButton>
+          </Tooltip>
+        </Stack>
       </Stack>
     </DashboardThemeProvider>
   );

@@ -3,6 +3,7 @@ import {
   Button,
   Divider,
   FormControl,
+  FormControlLabel,
   Grid,
   InputLabel,
   List,
@@ -11,6 +12,7 @@ import {
   Paper,
   Select,
   Stack,
+  Switch,
   TextField,
   Typography,
 } from "@mui/material";
@@ -62,6 +64,7 @@ const CameraDashboard: React.FC = () => {
   const [editTwitch, setEditTwitch] = useState<string>("");
   const [editBluesky, setEditBluesky] = useState<string>("");
   const [channelInput, setChannelInput] = useState<Channel>("");
+  const [remote, setRemote] = useState<boolean>(false);
   const [editChannel, setEditChannel] = useState<Channel>("");
   const [commentators, setCommentators] = useReplicant<Commentator[]>(
     "commentators",
@@ -78,6 +81,7 @@ const CameraDashboard: React.FC = () => {
       twitch: "",
       bluesky: "",
       channel: channelInput,
+      remote: remote,
     };
 
     setCommentators([...(commentators ?? []), newItem]);
@@ -100,6 +104,7 @@ const CameraDashboard: React.FC = () => {
     setEditTwitch(item.twitch ?? "");
     setEditBluesky(item.bluesky ?? "");
     setEditChannel(item.channel ?? "");
+    setRemote(item.remote);
   };
 
   const handleSaveEdit = (): void => {
@@ -115,6 +120,7 @@ const CameraDashboard: React.FC = () => {
               twitch: editTwitch.trim(),
               bluesky: editBluesky.trim(),
               channel: editChannel,
+              remote: remote,
             }
           : item,
       ),
@@ -254,6 +260,19 @@ const CameraDashboard: React.FC = () => {
                               </Stack>
                             </Grid>
                           </Grid>
+
+                          <FormControlLabel
+                            control={
+                              <Switch
+                                onChange={(
+                                  event: React.ChangeEvent<HTMLInputElement>,
+                                ) => {
+                                  setRemote(event.target.checked);
+                                }}
+                              />
+                            }
+                            label="Remote Commentator"
+                          />
 
                           <FormControl fullWidth>
                             <InputLabel id="edit-channel-select-label">
