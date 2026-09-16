@@ -59,6 +59,7 @@ export const VDOSetup = () => {
           <FormControlLabel
             control={
               <Switch
+                checked={vdoConfig?.enabled ?? false}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   setVDOEnabled(event.target.checked);
                   setVDOConfig({

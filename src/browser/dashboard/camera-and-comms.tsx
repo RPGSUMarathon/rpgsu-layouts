@@ -264,6 +264,7 @@ const CameraDashboard: React.FC = () => {
                           <FormControlLabel
                             control={
                               <Switch
+                                checked={remote}
                                 onChange={(
                                   event: React.ChangeEvent<HTMLInputElement>,
                                 ) => {
