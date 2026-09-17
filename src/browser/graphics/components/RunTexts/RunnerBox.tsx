@@ -134,12 +134,13 @@ export const RunnerBox = ({
       )}
 
       {vdoEnabled && vdoId ? (
-        <div className="h-auto w-12.5 overflow-hidden">
+        <div className="h-full w-12.5 ml-3 overflow-hidden">
           <iframe
+            className="relative top-[-33px] left-[-6px]"
             width={50}
-            height={103}
+            height={113}
             src={`
-        https://vdo.ninja/?view=${vdoId}&solo=1&room=RPGSU&password=RPGSU&transparency&meterstyle=5&bgimage=${runner ? SpeakerIcons.runnerIdle : SpeakerIcons.commIdle}&bgimage2=${runner ? SpeakerIcons.runnerSpeaking : SpeakerIcons.commSpeaking}&bgimage3=${runner ? SpeakerIcons.runnerSpeaking : SpeakerIcons.commSpeaking}`}
+        https://vdo.ninja/?view=${vdoId}&solo=1&room=RPGSU&password=RPGSU&transparency&novideo&meterstyle=5&bgimage=${runner ? SpeakerIcons.runnerIdle : SpeakerIcons.commIdle}&bgimage2=${runner ? SpeakerIcons.runnerSpeaking : SpeakerIcons.commSpeaking}&bgimage3=${runner ? SpeakerIcons.runnerSpeaking : SpeakerIcons.commSpeaking}`}
           />
         </div>
       ) : (
