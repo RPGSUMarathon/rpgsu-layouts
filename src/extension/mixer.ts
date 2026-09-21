@@ -77,13 +77,6 @@ if (config?.enabled) {
   });
 
   function scheduleMeters() {
-    /* There are multiple "meters" levels available, see "X AIR Remote Control Protocol.pdf"
-     on our drive https://drive.google.com/drive/folders/1Pmsiciq8zUkp-SP54CvPH52esTP2x7Id
-     for details. `/meters/2` gives us information about input signal levels for all channels.
-     Each activation of `/meters` command will result in 200 responses from the mixer.
-     We have to use the undocumented `/renew` to reset the counter on the device.
-     X AIR Edit does that roughly every 1 second, but that seems excessive. */
-
     const meters = new OSC.Message("/meters", "/meters/2");
     osc!.send(meters);
 
@@ -118,6 +111,7 @@ if (config?.enabled) {
     log.info(`Connected to mixer: ${message.args}`);
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   osc.on("/meters/2", (message: any) => {
     const u8Array = message.args[0];
     const buffer = new DataView(
@@ -141,6 +135,7 @@ if (config?.enabled) {
     lastMetersUpdate = Date.now();
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   osc.on("*", function (message: any) {
     if (message.address.startsWith("/meters")) {
       return;

@@ -7,8 +7,8 @@ import {
   Tooltip,
 } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
-import { FaUnlock, FaLock } from "react-icons/fa";
 import { useState } from "react";
+import { FaLock, FaUnlock } from "react-icons/fa";
 import { type Timer } from "speedcontrol/src/types/schemas";
 import { Helpers } from "../helpers";
 import useCurrentObsScene from "../hooks/useCurrentObsScene";
