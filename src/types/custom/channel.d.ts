@@ -1,0 +1,18 @@
+export type Channel =
+  | ''
+  | 'Game PC'
+  | 'Game PC'
+  | 'Console'
+  | 'Console'
+  | 'Runner 1'
+  | 'Comm 1'
+  | 'Comm 2'
+  | 'Comm 3'
+  | 'Tech'
+  | 'Loose Mic'
+  | ''
+  | ''
+  | 'Playlist'
+  | ''
+  | ''
+  | 'Videos';

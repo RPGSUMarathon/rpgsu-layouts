@@ -2,11 +2,17 @@ import type React from "react";
 import {
   Button,
   Divider,
+  FormControl,
+  FormControlLabel,
   Grid,
+  InputLabel,
   List,
   ListItem,
+  MenuItem,
   Paper,
+  Select,
   Stack,
+  Switch,
   TextField,
   Typography,
 } from "@mui/material";
@@ -20,11 +26,32 @@ import {
   FiTrash2,
   FiX,
 } from "react-icons/fi";
+import { type Channel } from "../../types/custom/channel";
 import { type Commentator } from "../../types/custom/commentators";
 import Bluesky from "../graphics/img/icons/bluesky.png";
 import Twitch from "../graphics/img/icons/twitch.png";
 import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
+
+export const channels: Channel[] = [
+  "",
+  "Game PC",
+  "Game PC",
+  "Console",
+  "Console",
+  "Runner 1",
+  "Comm 1",
+  "Comm 2",
+  "Comm 3",
+  "Tech",
+  "Loose Mic",
+  "",
+  "",
+  "Playlist",
+  "",
+  "",
+  "Videos",
+];
 
 const CameraDashboard: React.FC = () => {
   const [nameInput, setNameInput] = useState<string>("");
@@ -36,6 +63,9 @@ const CameraDashboard: React.FC = () => {
   });
   const [editTwitch, setEditTwitch] = useState<string>("");
   const [editBluesky, setEditBluesky] = useState<string>("");
+  const [channelInput, setChannelInput] = useState<Channel>("");
+  const [remote, setRemote] = useState<boolean>(false);
+  const [editChannel, setEditChannel] = useState<Channel>("");
   const [commentators, setCommentators] = useReplicant<Commentator[]>(
     "commentators",
     { defaultValue: [] },
@@ -50,10 +80,13 @@ const CameraDashboard: React.FC = () => {
       pronouns: "",
       twitch: "",
       bluesky: "",
+      channel: channelInput,
+      remote: remote,
     };
 
     setCommentators([...(commentators ?? []), newItem]);
     setNameInput("");
+    setChannelInput("");
   };
 
   const handleDeleteItem = (id: number): void => {
@@ -70,6 +103,8 @@ const CameraDashboard: React.FC = () => {
     setEditPronouns(item.pronouns ?? "");
     setEditTwitch(item.twitch ?? "");
     setEditBluesky(item.bluesky ?? "");
+    setEditChannel(item.channel ?? "");
+    setRemote(item.remote);
   };
 
   const handleSaveEdit = (): void => {
@@ -84,12 +119,12 @@ const CameraDashboard: React.FC = () => {
               pronouns: editPronouns,
               twitch: editTwitch.trim(),
               bluesky: editBluesky.trim(),
+              channel: editChannel,
+              remote: remote,
             }
           : item,
       ),
     );
-
-    console.log(commentators);
 
     setEditingItem(null);
   };
@@ -131,16 +166,49 @@ const CameraDashboard: React.FC = () => {
               direction="row"
               sx={{ justifyContent: "space-between" }}
             >
-              <Grid>
-                <TextField
-                  fullWidth
-                  placeholder="Enter name"
-                  label="Commentator name"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setNameInput(e.target.value);
-                  }}
-                  onKeyDown={handleKeyPress}
-                />
+              <Grid container spacing={2}>
+                <Grid>
+                  <TextField
+                    fullWidth
+                    placeholder="Enter name"
+                    label="Commentator name"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setNameInput(e.target.value);
+                    }}
+                    onKeyDown={handleKeyPress}
+                  />
+                </Grid>
+
+                <Grid>
+                  <FormControl sx={{ minWidth: 160 }}>
+                    <InputLabel id="channel-select-label">Channel</InputLabel>
+                    <Select
+                      labelId="channel-select-label"
+                      value={channelInput}
+                      label="Channel"
+                      onChange={(e) => {
+                        setChannelInput(e.target.value as Channel);
+                      }}
+                    >
+                      {channels.map((channel) => (
+                        <MenuItem key={channel ?? "none"} value={channel}>
+                          {channel ?? "None"}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid>
+                  <Button
+                    variant="contained"
+                    sx={{ height: "100%" }}
+                    disabled={nameInput.trim() === ""}
+                    onClick={handleAddItem}
+                  >
+                    <FiCheck size={24} />
+                  </Button>
+                </Grid>
               </Grid>
               <Grid>
                 <Button
@@ -173,6 +241,7 @@ const CameraDashboard: React.FC = () => {
                                 onChange={(e) => setEditName(e.target.value)}
                               />
                             </Grid>
+
                             <Grid>
                               <Stack spacing={1}>
                                 <Button
@@ -191,16 +260,56 @@ const CameraDashboard: React.FC = () => {
                               </Stack>
                             </Grid>
                           </Grid>
+
+                          <FormControlLabel
+                            control={
+                              <Switch
+                                checked={remote}
+                                onChange={(
+                                  event: React.ChangeEvent<HTMLInputElement>,
+                                ) => {
+                                  setRemote(event.target.checked);
+                                }}
+                              />
+                            }
+                            label="Remote Commentator"
+                          />
+
+                          <FormControl fullWidth>
+                            <InputLabel id="edit-channel-select-label">
+                              Channel
+                            </InputLabel>
+                            <Select
+                              labelId="edit-channel-select-label"
+                              value={editChannel}
+                              label="Channel"
+                              onChange={(e) => {
+                                setEditChannel(e.target.value as Channel);
+                              }}
+                            >
+                              {channels.map((channel) => (
+                                <MenuItem
+                                  key={channel ?? "none"}
+                                  value={channel}
+                                >
+                                  {channel ?? "None"}
+                                </MenuItem>
+                              ))}
+                            </Select>
+                          </FormControl>
+
                           <TextField
                             value={editPronouns}
                             onChange={(e) => setEditPronouns(e.target.value)}
                             label="Pronouns"
                           />
+
                           <TextField
                             value={editTwitch}
                             onChange={(e) => setEditTwitch(e.target.value)}
                             label="Twitch"
                           />
+
                           <TextField
                             value={editBluesky}
                             onChange={(e) => setEditBluesky(e.target.value)}
