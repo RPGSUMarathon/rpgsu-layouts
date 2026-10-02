@@ -1,7 +1,7 @@
 import { useReplicant } from "@nodecg/react-hooks";
 import { motion } from "motion/react";
-import useCommentators from "../../../browser/hooks/useCommentators";
 import useCurrentRun from "../../hooks/useCurrentRun";
+import useProcessedDonations from "../../hooks/useDonations";
 import useUpcomingRuns from "../../hooks/useUpcomingRuns";
 import { render } from "../../render";
 import { BossCounterContainer } from "../components/OfflineEvent/BossCounterContainer";
@@ -18,15 +18,13 @@ import Logo from "../img/logo-intermission.png";
 
 const Intermission = () => {
   const currentRun = useCurrentRun();
-  const commentators = useCommentators();
   const upcomingRuns = useUpcomingRuns(2, currentRun?.id ?? "");
+  const donations = useProcessedDonations();
 
   const [world] = useReplicant<string>("currentWorld", {
     defaultValue: "1",
   });
 
-  const exampleDonation =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum sapien ut nisi accumsan vehicula. Nam sollicitudin neque enim, eget massa nunc. ";
   return (
     <ThemeProvider
       theme="offline"
@@ -70,11 +68,11 @@ const Intermission = () => {
         <div className="h-full w-[528px] box2 bg-offline-omnibar">
           <div className="w-full ridge-inner text-center">
             <h2 className="text-5xl p-1">Donations</h2>
-            {commentators.length > 0 && (
+            {donations.length > 0 && (
               <div className="w-full space-y-2 px-3 overflow-y-hidden">
-                {commentators.map((runner) => (
+                {donations.map((donation) => (
                   <motion.div
-                    key={runner.id}
+                    key={donation.id}
                     layout
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -86,9 +84,10 @@ const Intermission = () => {
                     }}
                   >
                     <DonationContainer
-                      name={runner.name}
-                      amount="9999"
-                      message={exampleDonation}
+                      name={donation.name}
+                      amount={donation.amount}
+                      currency={donation.currency}
+                      message={donation.comment}
                     />
                   </motion.div>
                 ))}

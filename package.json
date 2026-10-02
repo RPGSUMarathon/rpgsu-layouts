@@ -26,12 +26,15 @@
     "@nodecg/react-hooks": "^1.0.3",
     "@tailwindcss/vite": "^4.1.12",
     "auto-text-size": "^0.2.3",
+    "axios": "^1.20.0",
     "humanize-duration": "^3.33.2",
     "json-schema-to-typescript": "^15.0.4",
+    "klona": "^2.0.6",
     "luxon": "^3.7.2",
     "motion": "^12.38.0",
     "nodecg": "^2.6.1",
     "obs-websocket-js": "^5.0.6",
+    "osc-js": "2.4.1",
     "parse-ms": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -39,8 +42,7 @@
     "react-is": "18.2.0",
     "react-toastify": "^11.1.0",
     "tailwindcss": "^4.1.12",
-    "uuid": "^13.0.0",
-    "osc-js": "2.4.1"
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@rpgsu/lint-config": "^1.0.1",
@@ -71,6 +73,12 @@
   "nodecg": {
     "compatibleRange": "^2.0.0",
     "dashboardPanels": [
+      {
+        "file": "tiltify-donations.html",
+        "name": "tiltify-donations",
+        "title": "Tiltify Donations",
+        "width": 3
+      },
       {
         "file": "next-run.html",
         "name": "next-run",
@@ -148,7 +156,7 @@
         "name": "VDO.Ninja Setup",
         "title": "VDO.Ninja Setup",
         "width": 4,
-         "workspace": "Scene Editing"
+        "workspace": "Scene Editing"
       }
     ],
     "graphics": [

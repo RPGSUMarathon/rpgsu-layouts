@@ -11,6 +11,17 @@ export class Helpers {
         .join(" vs. ") || "No players"
     );
   }
+
+  public static formatAmount(amount: number, currency: string) {
+    try {
+      return new Intl.NumberFormat(undefined, {
+        style: "currency",
+        currency,
+      }).format(amount);
+    } catch {
+      return `${amount.toFixed(2)} ${currency}`;
+    }
+  }
 }
 
 export const TimeHelper = {
