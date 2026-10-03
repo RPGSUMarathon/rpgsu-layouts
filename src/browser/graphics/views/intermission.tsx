@@ -9,9 +9,9 @@ import { render } from "../../render";
 import { BossCounterContainer } from "../components/OfflineEvent/BossCounterContainer";
 import { RunContainer } from "../components/OfflineEvent/CurrentRunContainer";
 import { DonationContainer } from "../components/OfflineEvent/DonationContainer";
+import { IncentiveContainer } from "../components/OfflineEvent/IncentiveContainer";
 import { IntermissionInfoContainer } from "../components/OfflineEvent/IntermissionInfoContainer";
 import { MusicPlayerContainer } from "../components/OfflineEvent/MusicPlayerContainer";
-import { PollContainer } from "../components/OfflineEvent/PollContainer";
 import {
   UpcomingCutsceneContainer,
   UpcomingRunContainer,
@@ -121,11 +121,11 @@ const Intermission = () => {
                 </div>
               ) : (
                 <div className="h-full w-full ridge-inner text-center">
-                  <h2 className="text-5xl p-1">Polls</h2>
+                  <h2 className="text-5xl p-1">Incentives</h2>
                   {polls.length > 0 && (
                     <div className="w-full space-y-2 px-3 overflow-y-hidden">
                       {polls.map((poll) => (
-                        <PollContainer key={poll.id} poll={poll} />
+                        <IncentiveContainer key={poll.id} poll={poll} />
                       ))}
                     </div>
                   )}

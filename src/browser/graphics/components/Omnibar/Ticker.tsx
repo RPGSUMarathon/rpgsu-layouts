@@ -28,9 +28,13 @@ export const OmnibarTicker = ({ className }: { className?: string }) => {
     if (!elements.length) return;
 
     const visibleElements = elements.filter((el) => {
-      const isHidden =
+      const isHiddenOnCountdown =
         (el.hideOnCountdown ?? false) && currentOBSScene === scenes?.countdown;
-      return !isHidden;
+      const isHiddenOnIntermission =
+        (el.hideOnIntermission ?? false) &&
+        currentOBSScene === scenes?.intermission;
+
+      return !isHiddenOnCountdown && !isHiddenOnIntermission;
     });
 
     if (!visibleElements.length) return;

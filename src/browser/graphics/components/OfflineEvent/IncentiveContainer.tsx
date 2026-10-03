@@ -2,7 +2,7 @@ import type { TiltifyPoll } from "@rpgsu-layouts/types";
 import { AutoTextSize } from "auto-text-size";
 import { Helpers } from "../../../helpers";
 
-export const PollContainer = ({ poll }: { poll: TiltifyPoll }) => {
+export const IncentiveContainer = ({ poll }: { poll: TiltifyPoll }) => {
   return (
     <div className="flex w-full flex-col">
       <div className="auto-text-size-override ridge-inner flex min-h-10 items-center justify-center bg-(--color-world-dark)">

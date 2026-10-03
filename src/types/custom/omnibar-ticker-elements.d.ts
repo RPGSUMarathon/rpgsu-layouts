@@ -13,4 +13,5 @@ export type OmnibarTickerElement = { id: string } & (
 ) & {
     timeout: number;
     hideOnCountdown: boolean;
+    hideOnIntermission: boolean;
   };
