@@ -11,6 +11,7 @@ import {
 import { useReplicant } from "@nodecg/react-hooks";
 import { FaChevronDown } from "react-icons/fa";
 import type { DonationQueueItem } from "../../types/custom/tiltify";
+import useDonationTotal from "../hooks/useDonationTotal";
 import { render } from "../render";
 import { DashboardThemeProvider } from "./components/DashboardThemeProvider";
 
@@ -34,6 +35,7 @@ const TiltifyDonations = () => {
   const [donationQueue] = useReplicant<DonationQueueItem[]>("donationQueue", {
     defaultValue: [],
   });
+  const donationTotal = useDonationTotal();
 
   const processDonation = (donation: DonationQueueItem) => {
     void nodecg.sendMessage("processTiltifyDonation", donation.id);
@@ -42,6 +44,15 @@ const TiltifyDonations = () => {
   return (
     <DashboardThemeProvider>
       <Stack spacing={1.5}>
+        <Box>
+          <Typography variant="caption" color="text.secondary">
+            Donation total
+          </Typography>
+          <Typography variant="h5" color="success.main" fontWeight={700}>
+            {formatAmount(donationTotal.amount, donationTotal.currency)}
+          </Typography>
+        </Box>
+
         {(donationQueue ?? []).length === 0 ? (
           <Alert severity="info">There are no donations to process.</Alert>
         ) : (
