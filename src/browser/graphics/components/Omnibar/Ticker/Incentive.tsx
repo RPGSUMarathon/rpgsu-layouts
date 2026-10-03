@@ -22,8 +22,8 @@ const escapeHtml = (value: string) =>
   );
 
 export const Incentive = ({ timeout, onEnd, containerRef }: Props) => {
-  const { allPolls } = usePolls();
-  const incentive = allPolls[0];
+  const { activePolls } = usePolls();
+  const incentive = activePolls[0];
 
   useEffect(() => {
     if (!incentive) {
