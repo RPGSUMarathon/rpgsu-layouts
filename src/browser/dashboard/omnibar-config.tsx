@@ -43,6 +43,10 @@ const elementTypeSelectOptions: {
     label: "Next Runs",
     value: "next-run",
   },
+  {
+    label: "Incentive",
+    value: "incentive",
+  },
 ];
 
 const numbersOnlyRegex = /^\d+$/;
@@ -85,6 +89,18 @@ const OmnibarConfig = () => {
     }
 
     if (newTickerElementType === "next-run") {
+      const newTickerElement = {
+        id: uuidv4(),
+        type: newTickerElementType,
+        timeout: parseInt(newTickerElementTimeout),
+        hideOnCountdown: newTickerElementHideOnCountdown,
+        hideOnIntermission: newTickerElementHideOnIntermission,
+      };
+
+      setLocalTickerElements([...localTickerElements, newTickerElement]);
+    }
+
+    if (newTickerElementType === "incentive") {
       const newTickerElement = {
         id: uuidv4(),
         type: newTickerElementType,

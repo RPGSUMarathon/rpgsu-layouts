@@ -7,9 +7,14 @@ export type NextRun = {
   type: "next-run";
 };
 
+export type Incentive = {
+  type: "incentive";
+};
+
 export type OmnibarTickerElement = { id: string } & (
   | GenericMessage
   | NextRun
+  | Incentive
 ) & {
     timeout: number;
     hideOnCountdown: boolean;
