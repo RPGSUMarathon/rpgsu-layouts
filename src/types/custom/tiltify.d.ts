@@ -93,6 +93,8 @@ export interface TiltifyPoll {
         amount: number
         currency: string
     }[]
+    updated_at: string
+    created_at: string
 }
 
 export interface DonationQueueItem {

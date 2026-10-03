@@ -91,13 +91,19 @@ export class TiltifyClient {
    * Fetches the total amount of raised money.
    * @returns amount of money.
    */
-  public async fetchCampaignTotal(): Promise<number> {
+  public async fetchCampaignTotal(): Promise<{
+    amount: number;
+    currency: string;
+  }> {
     const token = await this.getValidToken();
     const { data } = await axios.get<TiltifyCampaignData>(
       `https://v5api.tiltify.com/api/public/campaigns/${this.campaignId}`,
       { headers: { Authorization: `Bearer ${token}` } },
     );
-    return Number.parseFloat(data.data.total_amount_raised.value);
+    return {
+      amount: Number.parseFloat(data.data.total_amount_raised.value),
+      currency: data.data.total_amount_raised.currency,
+    };
   }
 
   /**
@@ -158,6 +164,8 @@ export class TiltifyClient {
           active: goal.active,
           amount: Number.parseFloat(goal.amount_raised.value),
           currency: goal.amount_raised.currency,
+          updated_at: goal.updated_at,
+          created_at: goal.inserted_at,
           options: goal.options
             .map((option) => {
               return {

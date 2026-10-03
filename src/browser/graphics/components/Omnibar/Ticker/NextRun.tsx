@@ -59,11 +59,11 @@ export function NextRun({
           const timeToRun = timeToRunFunc(nextRun);
           if (timeToRun.length > 0) {
             setMsg(
-              `Next run <span class="text-[#bbeee8ff] font-bold">${timeToRun}</span> - ${nextRun.customData.gameShort ?? nextRun.game} ${nextRun.category} by <span class="text-[#bbeee8ff] font-bold">${Helpers.formatPlayers(nextRun)}</span>`,
+              `Next run <span class="text-[#bbeee8ff] font-bold">${timeToRun}</span> - ${nextRun.customData.gameShort ?? nextRun.game ?? ""} ${nextRun.category ?? ""} by <span class="text-[#bbeee8ff] font-bold">${Helpers.formatPlayers(nextRun)}</span>`,
             );
           } else {
             setMsg(
-              `Next run - ${nextRun.customData.gameShort ?? nextRun.game} ${nextRun.category} by <span class="text-[#bbeee8ff] font-bold">${Helpers.formatPlayers(nextRun)}</span>`,
+              `Next run - ${nextRun.customData.gameShort ?? nextRun.game ?? ""} ${nextRun.category ?? ""} by <span class="text-[#bbeee8ff] font-bold">${Helpers.formatPlayers(nextRun)}</span>`,
             );
           }
         } else {

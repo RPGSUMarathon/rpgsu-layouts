@@ -46,8 +46,11 @@ export const polls = nodecg.Replicant<TiltifyPoll[]>("polls", {
   persistent: true,
 });
 
-export const donationTotal = nodecg.Replicant<number>("donationTotal", {
-  defaultValue: 0,
+export const donationTotal = nodecg.Replicant<{
+  amount: number;
+  currency: string;
+}>("donationTotal", {
+  defaultValue: { amount: 0, currency: "EUR" },
   persistent: false,
 });
 

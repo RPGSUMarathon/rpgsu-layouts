@@ -22,7 +22,7 @@ async function updateDonationTotal(client: TiltifyClient): Promise<void> {
   try {
     nodecg.log.debug("[Tiltify] Updating donation total");
     const total = await client.fetchCampaignTotal();
-    if (donationTotal.value !== total) {
+    if (donationTotal.value.amount !== total.amount) {
       donationTotal.value = total;
     }
   } catch (error) {
