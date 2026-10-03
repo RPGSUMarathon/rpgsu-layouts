@@ -25,16 +25,21 @@ const Intermission = () => {
   const currentRun = useCurrentRun();
   const upcomingRuns = useUpcomingRuns(2, currentRun?.id ?? "");
   const donations = useProcessedDonations();
-  const polls = usePolls();
+  const { activePolls } = usePolls();
   const [panelIndex, setPanelIndex] = useState(0);
+  const visiblePanelIndex = activePolls.length > 0 ? panelIndex : 0;
 
   useEffect(() => {
+    if (activePolls.length === 0) {
+      return;
+    }
+
     const interval = setInterval(() => {
       setPanelIndex((currentIndex) => (currentIndex + 1) % 2);
     }, PANEL_INTERVAL_MS);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [activePolls.length]);
 
   const [world] = useReplicant<string>("currentWorld", {
     defaultValue: "1",
@@ -83,14 +88,14 @@ const Intermission = () => {
         <div className="relative h-full w-[528px] overflow-hidden box2 bg-offline-omnibar">
           <AnimatePresence initial={false}>
             <motion.div
-              key={panelIndex}
+              key={visiblePanelIndex}
               className="absolute inset-0 overflow-hidden"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
             >
-              {panelIndex === 0 ? (
+              {visiblePanelIndex === 0 ? (
                 <div className="h-full w-full ridge-inner text-center">
                   <h2 className="text-5xl p-1">Donations</h2>
                   {donations.length > 0 && (
@@ -122,9 +127,9 @@ const Intermission = () => {
               ) : (
                 <div className="h-full w-full ridge-inner text-center">
                   <h2 className="text-5xl p-1">Incentives</h2>
-                  {polls.length > 0 && (
+                  {activePolls.length > 0 && (
                     <div className="w-full space-y-2 px-3 overflow-y-hidden">
-                      {polls.map((poll) => (
+                      {activePolls.map((poll) => (
                         <IncentiveContainer key={poll.id} poll={poll} />
                       ))}
                     </div>

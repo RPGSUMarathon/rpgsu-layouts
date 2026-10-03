@@ -7,7 +7,7 @@ export default function () {
     bundle: "rpgsu-layouts",
   });
 
-  return useMemo(
+  const allPolls = useMemo(
     () =>
       [...(polls ?? [])].sort(
         (a, b) =>
@@ -15,4 +15,11 @@ export default function () {
       ),
     [polls],
   );
+
+  const activePolls = useMemo(
+    () => allPolls.filter((poll) => poll.active),
+    [allPolls],
+  );
+
+  return { allPolls, activePolls };
 }
