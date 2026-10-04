@@ -6,6 +6,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { OmnibarGenericMessage } from "./Ticker/GenericMessage";
+import { Incentive } from "./Ticker/Incentive";
 import { NextRun } from "./Ticker/NextRun";
 
 const { scenes } = nodecg.bundleConfig.obs;
@@ -28,9 +29,13 @@ export const OmnibarTicker = ({ className }: { className?: string }) => {
     if (!elements.length) return;
 
     const visibleElements = elements.filter((el) => {
-      const isHidden =
+      const isHiddenOnCountdown =
         (el.hideOnCountdown ?? false) && currentOBSScene === scenes?.countdown;
-      return !isHidden;
+      const isHiddenOnIntermission =
+        (el.hideOnIntermission ?? false) &&
+        currentOBSScene === scenes?.intermission;
+
+      return !isHiddenOnCountdown && !isHiddenOnIntermission;
     });
 
     if (!visibleElements.length) return;
@@ -73,6 +78,13 @@ export const OmnibarTicker = ({ className }: { className?: string }) => {
           )}
           {currentElement?.type === "next-run" && (
             <NextRun
+              onEnd={showNextElement}
+              timeout={currentElement.timeout}
+              containerRef={tickerContainerRef}
+            />
+          )}
+          {currentElement?.type === "incentive" && (
+            <Incentive
               onEnd={showNextElement}
               timeout={currentElement.timeout}
               containerRef={tickerContainerRef}

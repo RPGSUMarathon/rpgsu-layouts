@@ -1,5 +1,6 @@
 import { type DonationProps } from "@rpgsu-layouts/types/custom/intermission-elements";
 import { AutoTextSize } from "auto-text-size";
+import { Helpers } from "../../../helpers";
 
 export type GameDonationContainerProps = {
   data: DonationProps;
@@ -7,7 +8,7 @@ export type GameDonationContainerProps = {
 
 export const GameDonationContainer = ({ data }: GameDonationContainerProps) => {
   return (
-    <div className="flex flex-col m-auto w-full">
+    <div className="flex h-full w-full flex-col">
       <div className="h-[35px] auto-text-size-override bg-(--color-world-dark)">
         <AutoTextSize
           mode="oneline"
@@ -15,11 +16,11 @@ export const GameDonationContainer = ({ data }: GameDonationContainerProps) => {
           maxFontSizePx={28}
           className="px-2"
         >
-          {data.name} donated {data.amount}
+          {data.name} donated {Helpers.formatAmount(data.amount, data.currency)}
         </AutoTextSize>
       </div>
       {data.message != null ? (
-        <div className="h-[85px] mx-auto bg-(--color-world-bg) text-clip">
+        <div className="h-[85px] w-full bg-(--color-world-bg) text-clip">
           <AutoTextSize
             className="font-light px-1"
             mode="box"

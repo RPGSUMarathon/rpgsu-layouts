@@ -8,25 +8,31 @@
 
 export interface Configschema {
 	obs: {
-    enabled: boolean;
-    url?: string;
-    password?: string;
-    scenes?: {
-      countdown?: string;
-      intermission?: string;
-      game?: string;
-      game2p?: string;
-      cutscene?: string;
-      techissues?: string;
-    };
-  };
-  /**
-   * Info needed to control mixer
-   */
-  mixer?: {
-    enabled: boolean;
-    address?: string;
-    port?: number;
-    [k: string]: unknown;
-  };
+		enabled: boolean;
+		url?: string;
+		password?: string;
+		scenes?: {
+			countdown?: string;
+			intermission?: string;
+			game?: string;
+			game2p?: string;
+			cutscene?: string;
+			techissues?: string;
+		};
+	};
+	/**
+	 * Info needed to control mixer
+	 */
+	mixer?: {
+		enabled: boolean;
+		address?: string;
+		port?: number;
+		[k: string]: unknown;
+	};
+	tiltify?: {
+		enabled?: boolean;
+		clientId?: string;
+		clientSecret?: string;
+		campaign?: string;
+	};
 }

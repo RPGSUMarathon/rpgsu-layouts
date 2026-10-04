@@ -68,6 +68,28 @@
       },
       "description": "Info needed to control mixer",
       "required": ["enabled"]
+    },
+    "tiltify": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecret": {
+          "type": "string"
+        },
+        "campaign": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
     }
   },
   "required": ["obs"]

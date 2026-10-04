@@ -1,4 +1,5 @@
-import { useReplicant } from "@nodecg/react-hooks";
+import type { DonationQueueItem } from "@rpgsu-layouts/types";
+import { useListenFor, useReplicant } from "@nodecg/react-hooks";
 import { toast, ToastContainer } from "react-toastify";
 import { render } from "../../render";
 import { GameDonationContainer } from "../components/OfflineEvent/GameDonationContainer";
@@ -27,6 +28,17 @@ export function DynamicLayout({ layoutKey }: { layoutKey: string }) {
   return <LayoutComponent />;
 }
 
+const notifyDonation = (donation: DonationQueueItem) => {
+  toast(GameDonationContainer, {
+    data: {
+      name: donation.name,
+      amount: donation.amount,
+      currency: donation.currency,
+      message: donation.comment,
+    },
+  });
+};
+
 const FlashingLightsWarning = ({ layoutKey }: { layoutKey: string }) => {
   const position =
     flashWarningPosition[layoutKey] ?? flashWarningPosition["4_3-1p"];
@@ -49,22 +61,7 @@ const App = () => {
     defaultValue: "1",
   });
 
-  const notify = () => {
-    console.log("notify");
-    toast(GameDonationContainer, {
-      data: {
-        name: "sioneus",
-        amount: "90€",
-        message:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum sapien ut nisi accumsan vehicula. Nam sollicitudin neque enim, eget massa nunc. ",
-      },
-    });
-  };
-
-  nodecg.listenFor("notifyDonation", () => {
-    console.log("received message for notification");
-    notify();
-  });
+  useListenFor<DonationQueueItem>("notifyDonation", notifyDonation);
 
   return (
     <ThemeProvider world={world} theme="offline">

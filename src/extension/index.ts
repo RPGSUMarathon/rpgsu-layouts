@@ -8,4 +8,5 @@ export default (nodecg: NodeCG.ServerAPI<Configschema>) => {
   require("./layouts");
   require("./countdown");
   require("./mixer");
+  require("./tiltify");
 };

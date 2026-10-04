@@ -43,6 +43,10 @@ const elementTypeSelectOptions: {
     label: "Next Runs",
     value: "next-run",
   },
+  {
+    label: "Incentive",
+    value: "incentive",
+  },
 ];
 
 const numbersOnlyRegex = /^\d+$/;
@@ -65,6 +69,10 @@ const OmnibarConfig = () => {
     useState<GenericMessage["message"]>("");
   const [newTickerElementHideOnCountdown, setNewTickerElementHideOnCountdown] =
     useState<OmnibarTickerElement["hideOnCountdown"]>(false);
+  const [
+    newTickerElementHideOnIntermission,
+    setNewTickerElementHideOnIntermission,
+  ] = useState<OmnibarTickerElement["hideOnCountdown"]>(false);
 
   const saveNewElement = useCallback(() => {
     if (newTickerElementType === "generic-message") {
@@ -74,6 +82,7 @@ const OmnibarConfig = () => {
         message: newGenericMessageText,
         timeout: parseInt(newTickerElementTimeout),
         hideOnCountdown: newTickerElementHideOnCountdown,
+        hideOnIntermission: newTickerElementHideOnIntermission,
       };
 
       setLocalTickerElements([...localTickerElements, newTickerElement]);
@@ -85,6 +94,19 @@ const OmnibarConfig = () => {
         type: newTickerElementType,
         timeout: parseInt(newTickerElementTimeout),
         hideOnCountdown: newTickerElementHideOnCountdown,
+        hideOnIntermission: newTickerElementHideOnIntermission,
+      };
+
+      setLocalTickerElements([...localTickerElements, newTickerElement]);
+    }
+
+    if (newTickerElementType === "incentive") {
+      const newTickerElement = {
+        id: uuidv4(),
+        type: newTickerElementType,
+        timeout: parseInt(newTickerElementTimeout),
+        hideOnCountdown: newTickerElementHideOnCountdown,
+        hideOnIntermission: newTickerElementHideOnIntermission,
       };
 
       setLocalTickerElements([...localTickerElements, newTickerElement]);
@@ -96,11 +118,13 @@ const OmnibarConfig = () => {
     setNewGenericMessageText("");
     setNewTickerElementTimeout("1000");
     setNewTickerElementHideOnCountdown(false);
+    setNewTickerElementHideOnIntermission(false);
   }, [
     newTickerElementTimeout,
     newTickerElementType,
     newGenericMessageText,
     newTickerElementHideOnCountdown,
+    newTickerElementHideOnIntermission,
     localTickerElements,
   ]);
 
@@ -125,6 +149,13 @@ const OmnibarConfig = () => {
   const handleNewElementHideOnCountdownChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       setNewTickerElementHideOnCountdown(event.target.checked);
+    },
+    [],
+  );
+
+  const handleNewElementHideOnIntermissionChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setNewTickerElementHideOnIntermission(event.target.checked);
     },
     [],
   );
@@ -238,6 +269,19 @@ const OmnibarConfig = () => {
               />
             </FormGroup>
 
+            {/** Hide on intermission */}
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={newTickerElementHideOnIntermission}
+                    onChange={handleNewElementHideOnIntermissionChange}
+                  />
+                }
+                label="Hide on intermission"
+              />
+            </FormGroup>
+
             <Button
               variant="contained"
               disabled={!timeoutOnlyIncludesNumbers}
@@ -274,6 +318,10 @@ const OmnibarConfig = () => {
                 </span>
                 <span>
                   <b>Hide on countdown: </b> {String(element.hideOnCountdown)}
+                </span>
+                <span>
+                  <b>Hide on intermission: </b>{" "}
+                  {String(element.hideOnIntermission)}
                 </span>
               </Stack>
             </Grid>

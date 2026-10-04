@@ -1,12 +1,15 @@
 import { useReplicant } from "@nodecg/react-hooks";
-import { motion } from "motion/react";
-import useCommentators from "../../../browser/hooks/useCommentators";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import useCurrentRun from "../../hooks/useCurrentRun";
+import useProcessedDonations from "../../hooks/useDonations";
+import usePolls from "../../hooks/usePolls";
 import useUpcomingRuns from "../../hooks/useUpcomingRuns";
 import { render } from "../../render";
 import { BossCounterContainer } from "../components/OfflineEvent/BossCounterContainer";
 import { RunContainer } from "../components/OfflineEvent/CurrentRunContainer";
 import { DonationContainer } from "../components/OfflineEvent/DonationContainer";
+import { IncentiveContainer } from "../components/OfflineEvent/IncentiveContainer";
 import { IntermissionInfoContainer } from "../components/OfflineEvent/IntermissionInfoContainer";
 import { MusicPlayerContainer } from "../components/OfflineEvent/MusicPlayerContainer";
 import {
@@ -16,17 +19,32 @@ import {
 import { ThemeProvider } from "../components/theme-provider";
 import Logo from "../img/logo-intermission.png";
 
+const PANEL_INTERVAL_MS = 15_000;
+
 const Intermission = () => {
   const currentRun = useCurrentRun();
-  const commentators = useCommentators();
   const upcomingRuns = useUpcomingRuns(2, currentRun?.id ?? "");
+  const donations = useProcessedDonations();
+  const { activePolls } = usePolls();
+  const [panelIndex, setPanelIndex] = useState(0);
+  const visiblePanelIndex = activePolls.length > 0 ? panelIndex : 0;
+
+  useEffect(() => {
+    if (activePolls.length === 0) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setPanelIndex((currentIndex) => (currentIndex + 1) % 2);
+    }, PANEL_INTERVAL_MS);
+
+    return () => clearInterval(interval);
+  }, [activePolls.length]);
 
   const [world] = useReplicant<string>("currentWorld", {
     defaultValue: "1",
   });
 
-  const exampleDonation =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum sapien ut nisi accumsan vehicula. Nam sollicitudin neque enim, eget massa nunc. ";
   return (
     <ThemeProvider
       theme="offline"
@@ -67,34 +85,59 @@ const Intermission = () => {
             </>
           )}
         </div>
-        <div className="h-full w-[528px] box2 bg-offline-omnibar">
-          <div className="w-full ridge-inner text-center">
-            <h2 className="text-5xl p-1">Donations</h2>
-            {commentators.length > 0 && (
-              <div className="w-full space-y-2 px-3 overflow-y-hidden">
-                {commentators.map((runner) => (
-                  <motion.div
-                    key={runner.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                      layout: { duration: 0.3 },
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 20,
-                    }}
-                  >
-                    <DonationContainer
-                      name={runner.name}
-                      amount="9999"
-                      message={exampleDonation}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            )}
-          </div>
+        <div className="relative h-full w-[528px] overflow-hidden box2 bg-offline-omnibar">
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={visiblePanelIndex}
+              className="absolute inset-0 overflow-hidden"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+            >
+              {visiblePanelIndex === 0 ? (
+                <div className="h-full w-full ridge-inner text-center">
+                  <h2 className="text-5xl p-1">Donations</h2>
+                  {donations.length > 0 && (
+                    <div className="w-full space-y-2 px-3 overflow-y-hidden">
+                      {donations.map((donation) => (
+                        <motion.div
+                          key={donation.id}
+                          layout
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{
+                            layout: { duration: 0.3 },
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 20,
+                          }}
+                        >
+                          <DonationContainer
+                            name={donation.name}
+                            amount={donation.amount}
+                            currency={donation.currency}
+                            message={donation.comment}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="h-full w-full ridge-inner text-center">
+                  <h2 className="text-5xl p-1">Incentives</h2>
+                  {activePolls.length > 0 && (
+                    <div className="w-full space-y-2 px-3 overflow-y-hidden">
+                      {activePolls.map((poll) => (
+                        <IncentiveContainer key={poll.id} poll={poll} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </ThemeProvider>
