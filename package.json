@@ -80,6 +80,12 @@
         "width": 3
       },
       {
+        "file": "latest-donation.html",
+        "name": "latest-donation",
+        "title": "Latest Approved Donation",
+        "width": 4
+      },
+      {
         "file": "next-run.html",
         "name": "next-run",
         "title": "Switch to next run",
