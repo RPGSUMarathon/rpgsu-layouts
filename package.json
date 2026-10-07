@@ -77,7 +77,15 @@
         "file": "tiltify-donations.html",
         "name": "tiltify-donations",
         "title": "Tiltify Donations",
-        "width": 3
+        "width": 3,
+        "workspace": "Donation Dashboard"
+      },
+      {
+        "file": "latest-donation.html",
+        "name": "latest-donation",
+        "title": "Latest Approved Donation",
+        "width": 4,
+        "workspace": "Donation Dashboard"
       },
       {
         "file": "next-run.html",
