@@ -1,4 +1,5 @@
 import { klona } from "klona/json";
+import type { ProcessTiltifyDonationRequest } from "../types/custom/tiltify";
 import type { Configschema } from "../types/generated/configschema";
 import { get } from "./util/nodecg";
 import {
@@ -76,30 +77,40 @@ async function updateRecentDonations(client: TiltifyClient): Promise<void> {
   }
 }
 
-nodecg.listenFor("processTiltifyDonation", (donationId: string) => {
-  const donation = donationQueue.value.find((item) => item.id === donationId);
+nodecg.listenFor(
+  "processTiltifyDonation",
+  (request: string | ProcessTiltifyDonationRequest) => {
+    const donationId =
+      typeof request === "string" ? request : request.donationId;
+    const donation = donationQueue.value.find((item) => item.id === donationId);
 
-  if (!donation) {
-    return;
-  }
+    if (!donation) {
+      return;
+    }
 
-  const alreadyProcessed = processedDonations.value.some((item) =>
-    typeof item === "string" ? item === donationId : item.id === donationId,
-  );
+    const alreadyProcessed = processedDonations.value.some((item) =>
+      typeof item === "string" ? item === donationId : item.id === donationId,
+    );
 
-  if (!alreadyProcessed) {
-    processedDonations.value = [
-      klona(donation),
-      ...processedDonations.value,
-    ].slice(0, 100);
-  }
+    const processedDonation = klona(donation);
+    if (typeof request !== "string" && request.includeComment === false) {
+      delete processedDonation.comment;
+    }
 
-  donationQueue.value = donationQueue.value.filter(
-    (item) => item.id !== donationId,
-  );
+    if (!alreadyProcessed) {
+      processedDonations.value = [
+        processedDonation,
+        ...processedDonations.value,
+      ].slice(0, 100);
+    }
 
-  void nodecg.sendMessage("notifyDonation", donation);
-});
+    donationQueue.value = donationQueue.value.filter(
+      (item) => item.id !== donationId,
+    );
+
+    void nodecg.sendMessage("notifyDonation", processedDonation);
+  },
+);
 
 /**
  * Updates polls.

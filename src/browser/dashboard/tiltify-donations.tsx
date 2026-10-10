@@ -37,8 +37,14 @@ const TiltifyDonations = () => {
   });
   const donationTotal = useDonationTotal();
 
-  const processDonation = (donation: DonationQueueItem) => {
-    void nodecg.sendMessage("processTiltifyDonation", donation.id);
+  const processDonation = (
+    donation: DonationQueueItem,
+    includeComment: boolean,
+  ) => {
+    void nodecg.sendMessage("processTiltifyDonation", {
+      donationId: donation.id,
+      includeComment,
+    });
   };
 
   return (
@@ -82,7 +88,9 @@ const TiltifyDonations = () => {
                       Comment
                     </Typography>
                     <Typography sx={{ whiteSpace: "pre-wrap" }}>
-                      {donation.comment || "No comment provided"}
+                      {donation.comment?.trim()
+                        ? donation.comment
+                        : "No comment provided"}
                     </Typography>
                   </Box>
 
@@ -111,9 +119,17 @@ const TiltifyDonations = () => {
                     variant="contained"
                     color="success"
                     fullWidth
-                    onClick={() => processDonation(donation)}
+                    onClick={() => processDonation(donation, true)}
                   >
-                    Mark as verified
+                    Verify with comment
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="success"
+                    fullWidth
+                    onClick={() => processDonation(donation, false)}
+                  >
+                    Verify without comment
                   </Button>
                 </Stack>
               </AccordionDetails>

@@ -101,7 +101,12 @@ export interface DonationQueueItem {
     id: string
     name: string
     amount: number
-    comment: string
+    comment?: string
     currency: string
     timestamp: Date | string
+}
+
+export interface ProcessTiltifyDonationRequest {
+    donationId: string
+    includeComment?: boolean
 }
