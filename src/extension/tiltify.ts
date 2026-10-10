@@ -93,8 +93,16 @@ nodecg.listenFor(
     );
 
     const processedDonation = klona(donation);
-    if (typeof request !== "string" && request.includeComment === false) {
-      delete processedDonation.comment;
+    if (typeof request !== "string") {
+      if (request.includeComment === false) {
+        delete processedDonation.comment;
+      } else if (request.comment !== undefined) {
+        if (request.comment.trim()) {
+          processedDonation.comment = request.comment;
+        } else {
+          delete processedDonation.comment;
+        }
+      }
     }
 
     if (!alreadyProcessed) {

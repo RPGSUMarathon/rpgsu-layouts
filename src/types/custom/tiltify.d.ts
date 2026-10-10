@@ -109,4 +109,5 @@ export interface DonationQueueItem {
 export interface ProcessTiltifyDonationRequest {
     donationId: string
     includeComment?: boolean
+    comment?: string
 }
