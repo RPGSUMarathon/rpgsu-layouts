@@ -1,9 +1,11 @@
+import { IconButton, Stack, Tooltip } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
+import { FaRegTrashAlt } from "react-icons/fa";
 import TimeHelper from "../helpers";
 import { render } from "../render";
 
 const TimestampTable = () => {
-  const [timestamps] = useReplicant<Timestamp[]>("timestamps", {
+  const [timestamps, setTimestamps] = useReplicant<Timestamp[]>("timestamps", {
     defaultValue: [],
   });
 
@@ -71,6 +73,19 @@ const TimestampTable = () => {
           );
         })}
       </div>
+
+      <Stack direction="row" justifyContent="flex-end" className="mt-2">
+        <Tooltip title="Clear all Timestamps">
+          <IconButton
+            size="small"
+            color="warning"
+            onClick={() => setTimestamps([])}
+            aria-label="Clear all Timestamps"
+          >
+            <FaRegTrashAlt />
+          </IconButton>
+        </Tooltip>
+      </Stack>
     </div>
   );
 };
