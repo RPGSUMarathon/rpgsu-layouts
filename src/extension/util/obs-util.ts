@@ -134,7 +134,6 @@ export class OBSUtility extends obsWebsocketJs {
       await this.changeScene(this.config.scenes?.game ?? "Game");
 
       await this.startRecording(recordingName);
-      commentators.value = [];
     } catch (err) {
       this.log.warn(`Error switching to game ${err}`);
     }
