@@ -176,6 +176,12 @@ async function initializeTiltify(): Promise<void> {
       pollsInterval,
     );
 
+    nodecg.listenFor("refreshDonations", () => {
+      updateRecentDonations(client).catch(() => {
+        /* empty */
+      });
+    });
+
     nodecg.log.info("[Tiltify] Integration initialized successfully");
   } catch (error) {
     nodecg.log.error("[Tiltify] Initialization failed:", error);

@@ -1,5 +1,6 @@
-import { Alert, Box, Stack, Typography } from "@mui/material";
+import { Alert, Box, IconButton, Stack, Typography } from "@mui/material";
 import { useReplicant } from "@nodecg/react-hooks";
+import { IoRefreshOutline } from "react-icons/io5";
 import type { DonationQueueItem } from "../../types/custom/tiltify";
 import { Helpers } from "../helpers";
 import useDonationTotal from "../hooks/useDonationTotal";
@@ -13,17 +14,42 @@ const TiltifyDonations = () => {
   });
   const donationTotal = useDonationTotal();
 
+  const refreshDonation = () => {
+    void nodecg.sendMessage("refreshDonations");
+  };
+
   return (
     <DashboardThemeProvider>
       <Stack spacing={1.5}>
-        <Box>
-          <Typography variant="caption" color="text.secondary">
-            Donation total
-          </Typography>
-          <Typography variant="h5" color="success.main" fontWeight={700}>
-            {Helpers.formatAmount(donationTotal.amount, donationTotal.currency)}
-          </Typography>
-        </Box>
+        <Stack
+          spacing={0.5}
+          direction="row"
+          sx={{
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Donation total
+            </Typography>
+            <Typography variant="h5" color="success.main" fontWeight={700}>
+              {Helpers.formatAmount(
+                donationTotal.amount,
+                donationTotal.currency,
+              )}
+            </Typography>
+          </Box>
+
+          <IconButton
+            size="small"
+            color="default"
+            onClick={() => refreshDonation()}
+            aria-label="Refresh Donantions"
+          >
+            <IoRefreshOutline />
+          </IconButton>
+        </Stack>
 
         {(donationQueue ?? []).length === 0 ? (
           <Alert severity="info">There are no donations to process.</Alert>
